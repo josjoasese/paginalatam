@@ -3,346 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VolarPro Colombia | Agencia de Viajes Premium</title>
+<title>AeroNova LATAM | Cotiza tu vuelo</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#f4f6f9;color:#1a1a1a;scroll-behavior:smooth}
-
-header{
-position:absolute;
-width:100%;
-padding:20px 60px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-color:white;
-z-index:10;
-}
-
-.logo{font-weight:700;font-size:20px;letter-spacing:1px}
-header nav a{
-margin-left:30px;
-text-decoration:none;
-color:white;
-font-weight:500;
-transition:.3s;
-}
-header nav a:hover{opacity:.7}
-
-.hero{
+body{
 height:100vh;
-background:url('https://images.unsplash.com/photo-1502920917128-1aa500764b6f?q=80&w=2000') center/cover no-repeat;
 display:flex;
-align-items:center;
+flex-direction:column;
 justify-content:center;
-position:relative;
-text-align:center;
+align-items:center;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
 }
 
-.overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-}
+h1{font-size:42px;margin-bottom:10px}
+p{margin-bottom:40px;opacity:.9}
 
-.hero-content{
-position:relative;
-z-index:2;
-max-width:900px;
-padding:20px;
-}
-
-.hero h1{
-font-size:52px;
-margin-bottom:15px;
-font-weight:600;
-}
-
-.hero p{
-font-size:18px;
-opacity:.9;
-margin-bottom:40px;
-}
-
-.search-box{
+.card{
 background:white;
-padding:30px;
-border-radius:18px;
-box-shadow:0 25px 60px rgba(0,0,0,.25);
-color:#333;
+color:#222;
+padding:40px;
+border-radius:20px;
+width:420px;
+box-shadow:0 30px 60px rgba(0,0,0,.3);
 }
 
-.form-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-gap:15px;
+.card h2{
+text-align:center;
+margin-bottom:25px;
 }
 
-.form-grid input,
-.form-grid select{
+input, select{
+width:100%;
 padding:14px;
-border-radius:12px;
+margin-bottom:15px;
+border-radius:10px;
 border:1px solid #ddd;
 font-size:14px;
 }
 
-.search-btn{
-background:#0d1b2a;
-color:white;
+button{
+width:100%;
+padding:14px;
 border:none;
-border-radius:12px;
-cursor:pointer;
+border-radius:10px;
+background:#0066ff;
+color:white;
 font-weight:600;
+cursor:pointer;
 transition:.3s;
 }
 
-.search-btn:hover{
-background:#1b263b;
-}
-
-section{
-padding:100px 60px;
-}
-
-.section-title{
-text-align:center;
-font-size:34px;
-margin-bottom:60px;
-font-weight:600;
-}
-
-.cards{
-display:flex;
-gap:30px;
-justify-content:center;
-flex-wrap:wrap;
-}
-
-.card{
-background:white;
-border-radius:20px;
-overflow:hidden;
-width:320px;
-box-shadow:0 20px 50px rgba(0,0,0,.08);
-transition:.4s;
-}
-
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 30px 70px rgba(0,0,0,.15);
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.card-content{
-padding:25px;
-}
-
-.price{
-margin-top:12px;
-font-weight:700;
-color:#0d1b2a;
-}
-
-.testimonials{
-background:#0d1b2a;
-color:white;
-text-align:center;
-}
-
-.testimonial{
-max-width:700px;
-margin:0 auto 40px auto;
-font-size:18px;
-}
-
-.faq-item{
-background:white;
-margin-bottom:15px;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,.05);
-}
-
-.faq-question{
-padding:20px;
-cursor:pointer;
-font-weight:600;
-}
-
-.faq-answer{
-padding:0 20px 20px 20px;
-display:none;
-color:#555;
-}
-
-.contact{
-background:#eef1f5;
-text-align:center;
-}
-
-.contact form{
-max-width:600px;
-margin:0 auto;
-display:grid;
-gap:15px;
-}
-
-.contact input,
-.contact textarea{
-padding:14px;
-border-radius:12px;
-border:1px solid #ccc;
+button:hover{
+background:#004bcc;
 }
 
 footer{
-background:#111;
-color:white;
-text-align:center;
-padding:40px 20px;
-font-size:14px;
+position:absolute;
+bottom:15px;
+font-size:13px;
+opacity:.7;
 }
 
-@media(max-width:768px){
-header{padding:20px}
-.hero h1{font-size:32px}
-section{padding:80px 20px}
+datalist option{
+font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">VolarPro</div>
-<nav>
-<a href="#destinos">Destinos</a>
-<a href="#experiencias">Experiencias</a>
-<a href="#faq">FAQ</a>
-<a href="#contacto">Contacto</a>
-</nav>
-</header>
+<h1>✈ AeroNova LATAM</h1>
+<p>Cotiza tu vuelo en segundos</p>
 
-<section class="hero">
-<div class="overlay"></div>
-<div class="hero-content">
-<h1>Descubre Colombia con Experiencias Premium</h1>
-<p>Paquetes exclusivos, atención personalizada y viajes inolvidables</p>
+<div class="card">
+<h2>Buscar Vuelo</h2>
 
-<div class="search-box">
-<div class="form-grid">
-<input type="text" placeholder="Origen">
-<input type="text" placeholder="Destino">
-<input type="date">
+<input list="ciudades" id="origen" placeholder="Ciudad de origen">
+<input list="ciudades" id="destino" placeholder="Ciudad de destino">
+
 <select>
-<option>1 Pasajero</option>
-<option>2 Pasajeros</option>
-<option>3 Pasajeros</option>
-<option>4+ Pasajeros</option>
+<option>Clase Económica</option>
+<option>Premium Economy</option>
+<option>Business</option>
 </select>
-<button class="search-btn" onclick="buscar()">Buscar</button>
-</div>
+
+<button onclick="cotizar()">Cotizar Ahora</button>
 </div>
 
-</div>
-</section>
-
-<section id="destinos">
-<h2 class="section-title">Destinos Destacados</h2>
-<div class="cards">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1580710509327-1a3e58db6a0e?q=80&w=1000">
-<div class="card-content">
-<h3>San Andrés</h3>
-<p>Playas paradisíacas y mar cristalino.</p>
-<div class="price">Desde $499.000 COP</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1579586337278-3f436f25d4d3?q=80&w=1000">
-<div class="card-content">
-<h3>Guatapé</h3>
-<p>Colores vibrantes y naturaleza única.</p>
-<div class="price">Desde $189.000 COP</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1558980394-0c4b51a19d15?q=80&w=1000">
-<div class="card-content">
-<h3>Amazonas</h3>
-<p>Aventura en la selva colombiana.</p>
-<div class="price">Desde $399.000 COP</div>
-</div>
-</div>
-
-</div>
-</section>
-
-<section class="testimonials" id="experiencias">
-<h2 class="section-title">Lo que dicen nuestros viajeros</h2>
-<div class="testimonial">
-"Organización impecable y servicio de lujo."
-<br><strong>- Laura M.</strong>
-</div>
-<div class="testimonial">
-"Una experiencia inolvidable con atención personalizada."
-<br><strong>- Andrés P.</strong>
-</div>
-</section>
-
-<section id="faq">
-<h2 class="section-title">Preguntas Frecuentes</h2>
-
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFAQ(this)">¿Qué incluyen los paquetes?</div>
-<div class="faq-answer">Incluyen hospedaje, traslados, actividades guiadas y asistencia personalizada.</div>
-</div>
-
-<div class="faq-item">
-<div class="faq-question" onclick="toggleFAQ(this)">¿Puedo personalizar mi viaje?</div>
-<div class="faq-answer">Sí, diseñamos experiencias a medida según tus preferencias.</div>
-</div>
-
-</section>
-
-<section class="contact" id="contacto">
-<h2 class="section-title">Solicita tu Cotización</h2>
-<form>
-<input type="text" placeholder="Nombre completo">
-<input type="email" placeholder="Correo electrónico">
-<textarea rows="4" placeholder="Mensaje"></textarea>
-<button type="button" class="search-btn" onclick="enviar()">Enviar Solicitud</button>
-</form>
-</section>
+<datalist id="ciudades">
+<option value="Bogotá (BOG)">
+<option value="Medellín (MDE)">
+<option value="Cali (CLO)">
+<option value="Cartagena (CTG)">
+<option value="San Andrés (ADZ)">
+<option value="Lima (LIM)">
+<option value="Cusco (CUZ)">
+<option value="Santiago (SCL)">
+<option value="Buenos Aires - EZE (EZE)">
+<option value="Buenos Aires - AEP (AEP)">
+<option value="São Paulo - GRU (GRU)">
+<option value="Rio de Janeiro - GIG (GIG)">
+<option value="Montevideo (MVD)">
+<option value="Quito (UIO)">
+<option value="Guayaquil (GYE)">
+<option value="La Paz (LPB)">
+<option value="Santa Cruz (VVI)">
+<option value="Miami (MIA)">
+<option value="Orlando (MCO)">
+<option value="Nueva York - JFK (JFK)">
+<option value="Los Ángeles (LAX)">
+<option value="Madrid (MAD)">
+<option value="Barcelona (BCN)">
+<option value="París (CDG)">
+<option value="Frankfurt (FRA)">
+<option value="Roma (FCO)">
+<option value="Lisboa (LIS)">
+<option value="Auckland (AKL)">
+<option value="Sydney (SYD)">
+<option value="Melbourne (MEL)">
+<option value="Cancún (CUN)">
+<option value="Punta Cana (PUJ)">
+</datalist>
 
 <footer>
-© 2026 VolarPro Colombia. Todos los derechos reservados.
+© 2026 AeroNova LATAM - Todos los derechos reservados
 </footer>
 
 <script>
-function toggleFAQ(element){
-const answer = element.nextElementSibling;
-answer.style.display = answer.style.display === "block" ? "none" : "block";
+function cotizar(){
+let origen=document.getElementById("origen").value;
+let destino=document.getElementById("destino").value;
+
+if(origen===""||destino===""){
+alert("Por favor completa origen y destino");
+return;
 }
 
-function buscar(){
-alert("Simulación de búsqueda activada.");
-}
-
-function enviar(){
-alert("Solicitud enviada correctamente.");
+alert("Simulación de cotización:\n\nOrigen: "+origen+"\nDestino: "+destino+"\n\nTe contactaremos pronto.");
 }
 </script>
 
