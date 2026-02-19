@@ -3,233 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LATAM Travel Assistance</title>
-
+<title>LATAM Travel Assistance - Estilo Oficial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-* { box-sizing:border-box; font-family:"Inter",sans-serif; margin:0; padding:0; }
-body { background:#f2f2f2; color:#333; }
-a { text-decoration:none; color:inherit; }
-
-/* Header */
-header { background:#003b71; color:white; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; }
-header h1 { font-weight:700; font-size:24px; }
-nav a { margin-left:20px; font-weight:500; transition:.3s; }
-nav a:hover { opacity:.8; }
-
-/* Hero / Buscador */
-.hero { background:url('https://images.unsplash.com/photo-1607548332529-2b3e4a19d671?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; color:white; padding:80px 20px; text-align:center; }
-.hero h2 { font-size:36px; margin-bottom:20px; }
-
-.search-form { background:rgba(255,255,255,0.95); color:#333; max-width:1000px; margin:0 auto; padding:20px; border-radius:12px; display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:15px; position:relative; }
-.search-form input, .search-form select, .search-form button { padding:12px; border-radius:8px; border:1px solid #ccc; font-size:16px; }
-.search-form button { background:#d7001c; color:white; border:none; font-weight:600; cursor:pointer; transition:.3s; }
-.search-form button:hover { background:#a50015; }
-
-/* Autocomplete */
-.autocomplete-suggestions { position:absolute; top:50px; left:0; right:0; background:white; border:1px solid #ccc; border-radius:8px; max-height:200px; overflow-y:auto; z-index:10; }
-.autocomplete-suggestions div { padding:8px; cursor:pointer; }
-.autocomplete-suggestions div:hover { background:#f2f2f2; }
-
-/* Selector pasajeros */
-.passenger-selector { display:flex; align-items:center; gap:10px; }
-.passenger-selector button { padding:6px 12px; border:none; border-radius:6px; background:#003b71; color:white; cursor:pointer; transition:.3s; }
-.passenger-selector button:hover { background:#d7001c; }
-
-/* Ofertas y servicios */
-section { padding:60px 20px; }
-.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
-.card { background:white; padding:20px; border-radius:12px; box-shadow:0px 4px 10px rgba(0,0,0,.1); transition:.3s; }
-.card:hover { transform:translateY(-5px); }
-.card img { width:100%; border-radius:12px; margin-bottom:15px; }
-
-/* Modal resultados */
-#results-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,.5); justify-content:center; align-items:center; z-index:20; animation:fadeIn .3s; }
-#results-modal .modal-content { background:white; padding:30px; border-radius:12px; max-width:900px; width:90%; max-height:80%; overflow-y:auto; position:relative; animation:slideIn .3s; }
-#results-modal .close { position:absolute; top:10px; right:15px; cursor:pointer; font-size:24px; font-weight:700; color:#d7001c; }
-#results-list table { width:100%; border-collapse:collapse; margin-top:20px; }
-#results-list th, #results-list td { padding:12px; border-bottom:1px solid #ddd; text-align:center; }
-#results-list th { background:#003b71; color:white; cursor:pointer; }
-#results-list tr:hover { background:#f2f2f2; transition:.2s; }
-.reserve-btn { background:#003b71; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; transition:.3s; }
-.reserve-btn:hover { background:#d7001c; }
-
-/* Animaciones */
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-@keyframes slideIn { from {transform:translateY(-50px);} to {transform:translateY(0);} }
-
-/* Footer */
-footer { background:#222; color:#ccc; padding:40px 20px; text-align:center; }
-footer a { color:#f2f2f2; margin:0 10px; font-weight:500; }
-footer p { margin-top:20px; font-size:14px; }
-
-/* Responsive */
-@media(max-width:768px){ header { flex-direction:column; align-items:flex-start; } .search-form { grid-template-columns:1fr; } table, th, td { font-size:14px; } }
+/* Reset y tipografía */
+*{box-sizing:border-box;font-family:"Inter",sans-serif;margin:0;padding:0;}
+body{background:#f9f9f9;color:#1b1b1b;}
+a{text-decoration:none;color:inherit;}
+header{background:#003b71;color:white;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
+header h1{font-weight:700;font-size:24px;margin-bottom:10px;}
+nav a{margin-left:20px;font-weight:500;transition:.3s;display:inline-block;margin-bottom:5px;}
+nav a:hover{opacity:.8;}
+.hero{background:url('https://images.unsplash.com/photo-1607548332529-2b3e4a19d671?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;color:white;padding:80px 20px;text-align:center;position:relative;}
+.hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);}
+.hero h2{position:relative;font-size:36px;margin-bottom:20px;z-index:1;}
+.search-form{background:white;color:#1b1b1b;max-width:1000px;margin:0 auto;padding:25px;border-radius:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;position:relative;align-items:end;z-index:2;box-shadow:0 8px 25px rgba(0,0,0,0.15);}
+.search-form input,.search-form select,.search-form button{padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px;}
+.search-form button{background:#d7001c;color:white;border:none;font-weight:600;cursor:pointer;transition:.3s;}
+.search-form button:hover{background:#a50015;}
+.autocomplete-suggestions{position:absolute;top:50px;left:0;right:0;background:white;border:1px solid #ccc;border-radius:8px;max-height:200px;overflow-y:auto;z-index:10;}
+.autocomplete-suggestions div{padding:8px;cursor:pointer;}
+.autocomplete-suggestions div:hover{background:#f2f2f2;}
+.passenger-selector{display:flex;align-items:center;gap:10px;}
+.passenger-selector button{padding:6px 12px;border:none;border-radius:6px;background:#003b71;color:white;cursor:pointer;transition:.3s;}
+.passenger-selector button:hover{background:#d7001c;}
+section{padding:60px 20px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.card{background:white;padding:20px;border-radius:12px;box-shadow:0px 8px 20px rgba(0,0,0,.1);transition:.3s;border-top:4px solid #d7001c;}
+.card:hover{transform:translateY(-5px);}
+.card img{width:100%;border-radius:12px;margin-bottom:15px;object-fit:cover;height:180px;}
+#results-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);justify-content:center;align-items:center;z-index:20;animation:fadeIn .3s;}
+#results-modal .modal-content{background:white;padding:30px;border-radius:12px;max-width:900px;width:95%;max-height:85%;overflow-y:auto;position:relative;animation:slideIn .3s;box-shadow:0 8px 25px rgba(0,0,0,.25);}
+#results-modal .close{position:absolute;top:10px;right:15px;cursor:pointer;font-size:28px;font-weight:700;color:#d7001c;}
+#results-list table{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px;}
+#results-list th,#results-list td{padding:12px;border-bottom:1px solid #ddd;text-align:center;}
+#results-list th{background:#003b71;color:white;cursor:pointer;}
+#results-list tr:hover{background:#f9f9f9;transition:.2s;}
+.reserve-btn{background:#003b71;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;transition:.3s;font-weight:600;}
+.reserve-btn:hover{background:#d7001c;}
+#trip-summary{margin-top:20px;font-weight:600;font-size:16px;color:#003b71;}
+#filters label{margin-right:15px;font-weight:500;}
+#filters input{padding:6px;border-radius:6px;border:1px solid #ccc;margin-left:5px;}
+#filters button{padding:6px 12px;background:#d7001c;color:white;border:none;border-radius:6px;cursor:pointer;transition:.3s;margin-left:10px;}
+#filters button:hover{background:#a50015;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideIn{from{transform:translateY(-50px);}to{transform:translateY(0);}}
+footer{background:#222;color:#ccc;padding:40px 20px;text-align:center;}
+footer a{color:#f2f2f2;margin:0 10px;font-weight:500;}
+footer p{margin-top:20px;font-size:14px;}
+@media(max-width:768px){header{flex-direction:column;align-items:flex-start;}nav a{margin-left:0;margin-right:10px;}.search-form{grid-template-columns:1fr;gap:10px;}table,th,td{font-size:14px;}}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>LATAM Travel Assistance</h1>
-  <nav>
-    <a href="#buscar">Buscar Vuelos</a>
-    <a href="#ofertas">Ofertas</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
+<h1>LATAM Travel Assistance</h1>
+<nav>
+<a href="#buscar">Buscar Vuelos</a>
+<a href="#ofertas">Ofertas</a>
+<a href="#servicios">Servicios</a>
+<a href="#contacto">Contacto</a>
+</nav>
 </header>
 
 <section class="hero" id="buscar">
-  <h2>Encuentra tu vuelo ideal con LATAM</h2>
-  <form class="search-form" id="flight-form">
-    <div style="position:relative;">
-      <input type="text" placeholder="Origen" id="origin" required autocomplete="off">
-      <div class="autocomplete-suggestions" id="origin-suggestions"></div>
-    </div>
-    <div style="position:relative;">
-      <input type="text" placeholder="Destino" id="destination" required autocomplete="off">
-      <div class="autocomplete-suggestions" id="destination-suggestions"></div>
-    </div>
-    <input type="date" id="departure" required>
-    <input type="date" id="return">
-    <div class="passenger-selector">
-      <button type="button" id="minus-passenger">-</button>
-      <input type="text" id="passengers" value="1 Adulto" readonly style="width:80px; text-align:center;">
-      <button type="button" id="plus-passenger">+</button>
-    </div>
-    <button type="submit">Buscar Vuelos</button>
-  </form>
+<h2>Encuentra tu vuelo ideal con LATAM</h2>
+<form class="search-form" id="flight-form">
+<div style="position:relative;">
+<input type="text" placeholder="Origen" id="origin" required autocomplete="off">
+<div class="autocomplete-suggestions" id="origin-suggestions"></div>
+</div>
+<div style="position:relative;">
+<input type="text" placeholder="Destino" id="destination" required autocomplete="off">
+<div class="autocomplete-suggestions" id="destination-suggestions"></div>
+</div>
+<input type="date" id="departure" required>
+<input type="date" id="return">
+<div class="passenger-selector">
+<button type="button" id="minus-passenger">-</button>
+<input type="text" id="passengers" value="1 Adulto" readonly style="width:90px;text-align:center;">
+<button type="button" id="plus-passenger">+</button>
+</div>
+<button type="submit">Buscar Vuelos</button>
+</form>
 </section>
 
 <section id="ofertas">
-  <h2>Ofertas Especiales LATAM</h2>
-  <div class="cards">
-    <div class="card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Oferta"><h3>Vuelo Santiago - Miami</h3><p>Desde $480 USD.</p></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=600&q=80" alt="Oferta"><h3>Vuelo Lima - Madrid</h3><p>Desde $720 USD.</p></div>
-    <div class="card"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Oferta"><h3>Vuelo Bogotá - Santiago</h3><p>Desde $650 USD.</p></div>
-  </div>
+<h2>Ofertas Especiales LATAM</h2>
+<div class="cards">
+<div class="card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Oferta"><h3>Vuelo Santiago - Miami</h3><p>Desde $1.920.000 COP</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=600&q=80" alt="Oferta"><h3>Vuelo Lima - Madrid</h3><p>Desde $2.880.000 COP</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Oferta"><h3>Vuelo Bogotá - Santiago</h3><p>Desde $2.080.000 COP</p></div>
+</div>
 </section>
 
 <section id="servicios">
-  <h2>Servicios Adicionales</h2>
-  <div class="cards">
-    <div class="card"><h3>Equipaje Adicional</h3><p>Compra equipaje extra fácilmente.</p></div>
-    <div class="card"><h3>Check-in Online</h3><p>Realiza tu check-in desde cualquier lugar.</p></div>
-    <div class="card"><h3>Seguro de Viaje</h3><p>Protege tu viaje con nuestro seguro flexible.</p></div>
-    <div class="card"><h3>LATAM Pass</h3><p>Acumula puntos y disfruta beneficios.</p></div>
-  </div>
+<h2>Servicios Adicionales</h2>
+<div class="cards">
+<div class="card"><h3>Equipaje Adicional</h3><p>Compra equipaje extra fácilmente.</p></div>
+<div class="card"><h3>Check-in Online</h3><p>Realiza tu check-in desde cualquier lugar.</p></div>
+<div class="card"><h3>Seguro de Viaje</h3><p>Protege tu viaje con nuestro seguro flexible.</p></div>
+<div class="card"><h3>LATAM Pass</h3><p>Acumula puntos y disfruta beneficios.</p></div>
+</div>
 </section>
 
 <footer id="contacto">
-  <p>© 2026 LATAM Travel Assistance. Todos los derechos reservados.</p>
-  <p><a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
-  <p>Contacto: soporte@latam.com | +56 2 234 5678</p>
+<p>© 2026 LATAM Travel Assistance. Todos los derechos reservados.</p>
+<p><a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a></p>
+<p>Contacto: soporte@latam.com | +57 1 234 5678</p>
 </footer>
 
 <div id="results-modal">
-  <div class="modal-content">
-    <span class="close" id="close-modal">&times;</span>
-    <h2>Resultados de Vuelos</h2>
-    <div id="filters">
-      <label>Filtrar por precio: <input type="number" id="max-price" placeholder="USD"></label>
-      <label>Filtrar por hora (HH:MM): <input type="time" id="max-hour"></label>
-      <button id="apply-filters">Aplicar filtros</button>
-    </div>
-    <div id="results-list"></div>
-  </div>
+<div class="modal-content">
+<span class="close" id="close-modal">&times;</span>
+<h2>Resultados de Vuelos Ida y Vuelta</h2>
+<div id="filters">
+<label>Filtrar por precio: <input type="number" id="max-price" placeholder="COP"></label>
+<label>Filtrar por hora (HH:MM): <input type="time" id="max-hour"></label>
+<button id="apply-filters">Aplicar filtros</button>
+</div>
+<div id="results-list"></div>
+<div id="trip-summary"></div>
+</div>
 </div>
 
 <script>
-// Lista extensa de aeropuertos LATAM
-const airports = [
-"Santiago (SCL)","Antofagasta (ANF)","Arica (ARI)","Balmaceda (BBA)","Calama (CJC)","Concepción (CCP)",
-"Iquique (IQQ)","La Serena (LSC)","Puerto Montt (PMC)","Punta Arenas (PUQ)","Copiapó (CPO)","Valdivia (ZAL)",
-"Buenos Aires – Ezeiza (EZE)","Buenos Aires – Aeroparque (AEP)","Mendoza (MDZ)","Rosario (ROS)","Salta (SLA)","Bariloche (BRC)","Ushuaia (USH)",
-"São Paulo – Guarulhos (GRU)","São Paulo – Congonhas (CGH)","Campinas – Viracopos (VCP)","Rio de Janeiro – Galeão (GIG)","Rio de Janeiro – Santos Dumont (SDU)","Brasília (BSB)","Belo Horizonte (CNF)","Fortaleza (FOR)","Curitiba (CWB)","Florianópolis (FLN)","Recife (REC)","Porto Alegre (POA)",
-"Bogotá – El Dorado (BOG)","Cali (CLO)","Medellín – José María Córdova (MDE)","Barranquilla (BAQ)","Cartagena (CTG)","Bucaramanga (BGA)","Armenia (AXM)",
-"Lima – Jorge Chávez (LIM)","Cusco (CUZ)","Arequipa (AQP)","Quito – Mariscal Sucre (UIO)","Guayaquil – José Joaquín de Olmedo (GYE)","Manta (MEC)","Galápagos – Baltra (GPS)",
-"Cancún (CUN)","Punta Cana (PUJ)","Ciudad de México (MEX)","San José – Costa Rica (SJO)","La Habana (HAV)","Aruba – Oranjestad (AUA)","Panamá – Ciudad de Panamá (PTY)",
-"Miami (MIA)","New York – JFK (JFK)","Orlando (MCO)","Los Ángeles (LAX)","Boston (BOS)","Atlanta (ATL)","Houston (IAH)","Chicago – O’Hare (ORD)","Washington – Dulles (IAD)",
-"Madrid (MAD)","Barcelona (BCN)","París – Charles de Gaulle (CDG)","Lisboa (LIS)","Roma (FCO)","Ámsterdam (AMS)","Bruselas (BRU)","Frankfurt (FRA)","Londres (LHR)",
-"Johannesburgo (JNB)","Dakar (DSS)","Auckland (AKL)","Sydney (SYD)","Melbourne (MEL)"
-];
-
-// Autocomplete
-function autocomplete(input, suggestionsId){
-  input.addEventListener("input",function(){
-    const value=this.value.toLowerCase();
-    const suggestions=document.getElementById(suggestionsId);
-    suggestions.innerHTML="";
-    if(!value) return;
-    airports.filter(a=>a.toLowerCase().includes(value)).forEach(a=>{
-      const div=document.createElement("div");
-      div.textContent=a;
-      div.onclick=()=>{input.value=a; suggestions.innerHTML="";}
-      suggestions.appendChild(div);
-    });
-  });
+// Aeropuertos
+const airports=["Santiago (SCL)","Bogotá (BOG)","Lima (LIM)","Buenos Aires (EZE)","São Paulo (GRU)","Miami (MIA)","Madrid (MAD)","New York – JFK (JFK)","Rio de Janeiro (GIG)","Cusco (CUZ)","Quito (UIO)","Panamá (PTY)","Cancún (CUN)","Barcelona (BCN)"];
+function autocomplete(input,suggestionsId){
+input.addEventListener("input",function(){
+const value=this.value.toLowerCase();
+const suggestions=document.getElementById(suggestionsId);
+suggestions.innerHTML="";
+if(!value)return;
+airports.filter(a=>a.toLowerCase().includes(value)).forEach(a=>{
+const div=document.createElement("div");div.textContent=a;div.onclick=()=>{input.value=a;suggestions.innerHTML="";};suggestions.appendChild(div);
+});
+});
 }
-autocomplete(document.getElementById("origin"), "origin-suggestions");
-autocomplete(document.getElementById("destination"), "destination-suggestions");
+autocomplete(document.getElementById("origin"),"origin-suggestions");
+autocomplete(document.getElementById("destination"),"destination-suggestions");
 
-// Passenger selector
+// Pasajeros
 let passengerCount=1;
-document.getElementById("plus-passenger").onclick=()=>{
-  if(passengerCount<10) passengerCount++;
-  document.getElementById("passengers").value=passengerCount + " Adulto" + (passengerCount>1?"s":"");
-};
-document.getElementById("minus-passenger").onclick=()=>{
-  if(passengerCount>1) passengerCount--;
-  document.getElementById("passengers").value=passengerCount + " Adulto" + (passengerCount>1?"s":"");
-};
+const passengersInput=document.getElementById("passengers");
+document.getElementById("plus-passenger").onclick=()=>{if(passengerCount<10)passengerCount++;passengersInput.value=passengerCount+" Adulto"+(passengerCount>1?"s":"");};
+document.getElementById("minus-passenger").onclick=()=>{if(passengerCount>1)passengerCount--;passengersInput.value=passengerCount+" Adulto"+(passengerCount>1?"s":"");};
 
-// Flights data
-let flights=[];
+// Generar vuelos
+let flights=[],returnFlights=[];
 function generateFlights(origin,destination){
-  flights=[];
-  for(let i=1;i<=10;i++){
-    const hour=`${Math.floor(Math.random()*12+6)}:${Math.random()>0.5?'00':'30'}`;
-    const price=Math.floor(Math.random()*500+300);
-    const duration=`${Math.floor(Math.random()*5+2)}h ${Math.floor(Math.random()*60)}m`;
-    flights.push({origin,destination,hour,price,duration});
-  }
+flights=[];returnFlights=[];
+for(let i=0;i<10;i++){
+const hour=`${Math.floor(Math.random()*12+6)}:${Math.random()>0.5?'00':'30'}`;
+let distance=Math.floor(Math.random()*4000+200);
+let price,durationH;
+if(distance<1000){price=Math.floor(Math.random()*240250+159750);durationH=Math.floor(distance/300)+1;}
+else if(distance<2500){price=Math.floor(Math.random()*500000+400000);durationH=Math.floor(distance/500)+2;}
+else{price=Math.floor(Math.random()*600000+900000);durationH=Math.floor(distance/700)+3;}
+const duration=`${durationH}h ${Math.floor(Math.random()*60)}m`;
+flights.push({origin,destination,hour,price,duration});
+returnFlights.push({origin:destination,destination:origin,hour,price,duration});
 }
-function showFlights(flightsArray){
-  let html="<table><tr><th onclick='sortBy(\"hour\")'>Vuelo</th><th onclick='sortBy(\"hour\")'>Horario</th><th onclick='sortBy(\"price\")'>Precio USD</th><th>Duración</th><th>Acción</th></tr>";
-  flightsArray.forEach(f=>{
-    html+=`<tr><td>${f.origin} → ${f.destination}</td><td>${f.hour}</td><td>${f.price}</td><td>${f.duration}</td><td><button class="reserve-btn" onclick='alert("Vuelo reservado: ${f.origin} → ${f.destination} a las ${f.hour}")'>Reservar</button></td></tr>`;
-  });
-  html+="</table>";
-  document.getElementById("results-list").innerHTML=html;
-}
-function sortBy(field){
-  flights.sort((a,b)=>field==='price'?a.price-b.price:parseInt(a.hour.replace(':',''))-parseInt(b.hour.replace(':','')));
-  showFlights(flights);
 }
 
-// Form submit
+// Mostrar vuelos y calcular total pasajeros
+function showFlights(flightsArray){
+let html="<table><tr><th>Vuelo</th><th>Horario</th><th>Precio Total COP</th><th>Duración</th><th>Acción</th></tr>";
+let total=0;
+flightsArray.forEach((f,i)=>{
+let rf=returnFlights[i];
+let tripTotal=(f.price+rf.price)*passengerCount;
+total+=tripTotal;
+html+=`<tr>
+<td>${f.origin} → ${f.destination} / ${rf.origin} → ${rf.destination}</td>
+<td>${f.hour} / ${rf.hour}</td>
+<td>$${tripTotal.toLocaleString()}</td>
+<td>${f.duration} / ${rf.duration}</td>
+<td><button class="reserve-btn" onclick='alert("Vuelo reservado: ${f.origin} → ${f.destination} y regreso ${rf.origin} → ${rf.destination}, Total $${tripTotal.toLocaleString()} COP")'>Reservar</button></td>
+</tr>`;
+});
+html+="</table>";
+document.getElementById("results-list").innerHTML=html;
+document.getElementById("trip-summary").innerText=`Total aproximado para ${passengerCount} pasajero(s): $${total.toLocaleString()} COP`;
+}
+
+// Submit
 document.getElementById("flight-form").addEventListener("submit",function(e){
-  e.preventDefault();
-  const origin=document.getElementById("origin").value;
-  const destination=document.getElementById("destination").value;
-  generateFlights(origin,destination);
-  showFlights(flights);
-  document.getElementById("results-modal").style.display="flex";
+e.preventDefault();
+const origin=document.getElementById("origin").value;
+const destination=document.getElementById("destination").value;
+generateFlights(origin,destination);
+showFlights(flights);
+document.getElementById("results-modal").style.display="flex";
 });
 
-// Filters
+// Filtros
 document.getElementById("apply-filters").onclick=function(){
-  const maxPrice=parseInt(document.getElementById("max-price").value)||Infinity;
-  const maxHour=document.getElementById("max-hour").value;
-  let filtered=flights.filter(f=>f.price<=maxPrice);
-  if(maxHour) filtered=filtered.filter(f=>f.hour<=maxHour);
-  showFlights(filtered);
+const maxPrice=parseInt(document.getElementById("max-price").value)||Infinity;
+const maxHour=document.getElementById("max-hour").value;
+let filtered=flights.filter((f,i)=>(f.price+returnFlights[i].price)*passengerCount<=maxPrice);
+if(maxHour) filtered=filtered.filter((f,i)=>f.hour<=maxHour && returnFlights[i].hour<=maxHour);
+showFlights(filtered);
 }
 
-// Close modal
+// Cerrar modal
 document.getElementById("close-modal").onclick=()=>{document.getElementById("results-modal").style.display="none";}
 window.onclick=e=>{if(e.target.id==="results-modal")document.getElementById("results-modal").style.display="none";}
 </script>
