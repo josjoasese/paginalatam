@@ -19,14 +19,15 @@ nav a:hover{opacity:.8;}
 .hero{background:url('https://images.unsplash.com/photo-1607548332529-2b3e4a19d671?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;color:white;padding:80px 20px;text-align:center;position:relative;}
 .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);}
 .hero h2{position:relative;font-size:36px;margin-bottom:20px;z-index:1;}
-.search-form{background:white;color:#1b1b1b;max-width:1000px;margin:0 auto;padding:25px;border-radius:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;position:relative;align-items:end;z-index:2;box-shadow:0 8px 25px rgba(0,0,0,0.15);}
+.search-form{background:white;color:#1b1b1b;max-width:1000px;margin:0 auto;padding:25px;border-radius:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;position:relative;align-items:end;z-index:2;box-shadow:0 8px 25px rgba(0,0,0,0.15);}
 .search-form input,.search-form select,.search-form button{padding:12px;border-radius:8px;border:1px solid #ccc;font-size:16px;}
 .search-form button{background:#d7001c;color:white;border:none;font-weight:600;cursor:pointer;transition:.3s;}
 .search-form button:hover{background:#a50015;}
+.search-btn-container{grid-column:1/-1;text-align:center;}
 .autocomplete-suggestions{position:absolute;top:50px;left:0;right:0;background:white;border:1px solid #ccc;border-radius:8px;max-height:200px;overflow-y:auto;z-index:10;}
 .autocomplete-suggestions div{padding:8px;cursor:pointer;}
 .autocomplete-suggestions div:hover{background:#f2f2f2;}
-.passenger-selector{display:flex;align-items:center;gap:10px;}
+.passenger-selector{display:flex;align-items:center;gap:10px;justify-content:center;}
 .passenger-selector button{padding:6px 12px;border:none;border-radius:6px;background:#003b71;color:white;cursor:pointer;transition:.3s;}
 .passenger-selector button:hover{background:#d7001c;}
 section{padding:60px 20px;}
@@ -86,7 +87,9 @@ footer p{margin-top:20px;font-size:14px;}
 <input type="text" id="passengers" value="1 Adulto" readonly style="width:90px;text-align:center;">
 <button type="button" id="plus-passenger">+</button>
 </div>
+<div class="search-btn-container">
 <button type="submit">Buscar Vuelos</button>
+</div>
 </form>
 </section>
 
@@ -130,8 +133,12 @@ footer p{margin-top:20px;font-size:14px;}
 </div>
 
 <script>
-// Aeropuertos
-const airports=["Santiago (SCL)","Bogotá (BOG)","Lima (LIM)","Buenos Aires (EZE)","São Paulo (GRU)","Miami (MIA)","Madrid (MAD)","New York – JFK (JFK)","Rio de Janeiro (GIG)","Cusco (CUZ)","Quito (UIO)","Panamá (PTY)","Cancún (CUN)","Barcelona (BCN)"];
+// Aeropuertos LATAM
+const airports=[
+"São Paulo - Guarulhos (GRU)","São Paulo - Congonhas (CGH)","Campinas - Viracopos (VCP)","Rio de Janeiro - Galeão (GIG)","Rio de Janeiro - Santos Dumont (SDU)","Belo Horizonte - Tancredo Neves (CNF)","Brasília (BSB)","Recife (REC)","Porto Alegre (POA)","Fortaleza (FOR)","Manaus (MAO)","Curitiba (CWB)","Florianópolis (FLN)","Salvador (SSA)","Belém (BEL)","Boa Vista (BVB)","Cuiabá (CGB)","Campo Grande (CGR)","Goiania (GYN)","João Pessoa (JPA)","Maceió (MCZ)","Juazeiro do Norte (JDO)","Passo Fundo (PFB)","Parnaíba (PHB)","Aracaju (AJU)","Caxias do Sul (CXJ)","Chapecó (XAP)","Marabá (MAB)","Santiago (SCL)","Antofagasta (ANF)","Arica (ARI)","Balmaceda (BBA)","Calama (CJC)","Concepción (CCP)","Iquique (IQQ)","La Serena (LSC)","Puerto Montt (PMC)","Temuco (ZCO)","Valdivia (ZAL)","Isla de Pascua (IPC)","Buenos Aires - Ezeiza (EZE)","Buenos Aires - Aeroparque (AEP)","Córdoba (COR)","Mendoza (MDZ)","Rio Gallegos (RGL)","Salta (SLA)","Bariloche (BRC)","Montevideo (MVD)","Asunción (ASU)","Lima (LIM)","Cuzco (CUZ)","Quito (UIO)","Guayaquil (GYE)","Baltra - Galápagos (GPS)","Bogotá (BOG)","Medellín (MDE)","Cali (CLO)","Cartagena (CTG)","Bucaramanga (BGA)","Barranquilla (BAQ)","Ibagué (IBE)","Leticia (LET)","Cúcuta (CUC)","San Andrés (ADZ)","Santa Marta (SMR)","Pereira (PEI)","Valledupar (VUP)","Montería (MTR)","Londrina (LDB)","Miami (MIA)","New York - JFK (JFK)","Los Angeles (LAX)","Orlando (MCO)","Atlanta (ATL)","Chicago - ORD (ORD)","Dallas - DFW (DFW)","Houston (IAH)","Toronto (YYZ)","Madrid (MAD)","Barcelona (BCN)","Brussels (BRU)","Johannesburg (JNB)","Frankfurt (FRA)"
+];
+
+// Autocomplete
 function autocomplete(input,suggestionsId){
 input.addEventListener("input",function(){
 const value=this.value.toLowerCase();
@@ -169,7 +176,7 @@ returnFlights.push({origin:destination,destination:origin,hour,price,duration});
 }
 }
 
-// Mostrar vuelos y calcular total pasajeros
+// Mostrar vuelos
 function showFlights(flightsArray){
 let html="<table><tr><th>Vuelo</th><th>Horario</th><th>Precio Total COP</th><th>Duración</th><th>Acción</th></tr>";
 let total=0;
