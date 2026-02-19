@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroNova LATAM | Cotiza tu vuelo</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
+    text-align:center;
+}
+
+header{
+    padding:40px 20px;
+}
+
+h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:18px;
+    opacity:0.9;
+}
+
+.container{
+    background:white;
+    color:#333;
+    max-width:600px;
+    margin:40px auto;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+button{
+    background:#0077ff;
+    color:white;
+    border:none;
+    padding:15px;
+    width:100%;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#005fcc;
+}
+
+.result{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+footer{
+    margin-top:40px;
+    padding:20px;
+    font-size:14px;
+    opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>✈️ AeroNova LATAM</h1>
+<p>Cotiza tu vuelo en segundos</p>
+</header>
+
+<div class="container">
+
+<h2>Buscar Vuelo</h2>
+
+<input type="text" id="origen" placeholder="Ciudad de origen">
+<input type="text" id="destino" placeholder="Ciudad de destino">
+
+<select id="clase">
+<option value="economica">Clase Económica</option>
+<option value="ejecutiva">Clase Ejecutiva</option>
+<option value="primera">Primera Clase</option>
+</select>
+
+<button onclick="cotizar()">Cotizar Ahora</button>
+
+<div class="result" id="resultado"></div>
+
+</div>
+
+<footer>
+© 2026 AeroNova LATAM - Todos los derechos reservados
+</footer>
+
+<script>
+function cotizar(){
+
+let origen = document.getElementById("origen").value;
+let destino = document.getElementById("destino").value;
+let clase = document.getElementById("clase").value;
+
+if(origen === "" || destino === ""){
+    alert("Por favor completa todos los campos");
+    return;
+}
+
+let precioBase = 200;
+let multiplicador = 1;
+
+if(clase === "ejecutiva"){
+    multiplicador = 1.8;
+}
+
+if(clase === "primera"){
+    multiplicador = 2.5;
+}
+
+let precioFinal = Math.floor(precioBase * multiplicador + Math.random()*150);
+
+document.getElementById("resultado").innerHTML =
+"Vuelo de <b>" + origen + "</b> a <b>" + destino + "</b><br>" +
+"Clase: " + clase + "<br><br>" +
+"Precio estimado: $" + precioFinal + " USD";
+
+}
+</script>
+
+</body>
+</html>
 
