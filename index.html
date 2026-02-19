@@ -3,325 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AirNova Airlines</title>
+<title>Avianca Travel Assistance</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#f4f6f9;color:#1c1e21}
-.container{width:90%;max-width:1200px;margin:auto}
-
-/* HEADER */
-header{
-background:#fff;
-padding:15px 0;
-box-shadow:0 4px 20px rgba(0,0,0,0.05);
-position:sticky;top:0;z-index:1000
+/* Reset y tipografía */
+* {
+  box-sizing: border-box;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
 }
-.nav{display:flex;justify-content:space-between;align-items:center}
-.logo img{height:45px}
-.nav-links a{
-margin-left:30px;
-text-decoration:none;
-color:#1c1e21;
-font-weight:500;
-transition:.3s
+body {
+  background: #f2f2f2;
+  color: #333;
 }
-.nav-links a:hover{opacity:.6}
-
-/* HERO */
-.hero{
-background:url('https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=2000') center/cover no-repeat;
-height:520px;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative
-}
-.hero::after{
-content:'';
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.55)
-}
-.hero-content{
-position:relative;
-color:white;
-text-align:center
-}
-.hero h1{font-size:50px;margin-bottom:15px}
-.hero p{font-size:18px}
-
-/* SEARCH BOX */
-.search-wrapper{
-margin-top:-110px;
-position:relative;
-z-index:10
-}
-.search-box{
-background:#fff;
-padding:35px;
-border-radius:20px;
-box-shadow:0 25px 70px rgba(0,0,0,0.15)
-}
-.tabs{
-display:flex;
-gap:25px;
-margin-bottom:25px
-}
-.tab{
-cursor:pointer;
-font-weight:600;
-padding-bottom:6px;
-border-bottom:3px solid transparent;
-transition:.3s
-}
-.tab.active{
-border-color:#0066ff;
-color:#0066ff
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-form{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px
+/* Header */
+header {
+  background-color: #d50000; /* color rojo Avianca */
+  color: white;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  font-weight: 700;
+  font-size: 24px;
+}
+nav a {
+  margin-left: 20px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+nav a:hover {
+  opacity: 0.8;
 }
 
-input,select{
-padding:14px;
-border-radius:10px;
-border:1px solid #ddd;
-font-size:14px
+/* Hero / Buscador de vuelos */
+.hero {
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+.hero h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.search-form {
+  background: rgba(255,255,255,0.95);
+  color: #333;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+.search-form input,
+.search-form select,
+.search-form button {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+.search-form button {
+  background-color: #d50000;
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.search-form button:hover {
+  background-color: #a30000;
 }
 
-.passenger-box{
-position:relative
+/* Ofertas y servicios */
+section {
+  padding: 60px 20px;
 }
-.passenger-dropdown{
-position:absolute;
-top:55px;
-left:0;
-background:#fff;
-border-radius:12px;
-box-shadow:0 10px 40px rgba(0,0,0,.15);
-padding:15px;
-display:none;
-width:100%;
-z-index:20
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }
-.passenger-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:10px
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
-.counter button{
-padding:5px 10px;
-border:none;
-background:#0066ff;
-color:#fff;
-border-radius:5px;
-cursor:pointer
+.card:hover {
+  transform: translateY(-5px);
+}
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
 }
 
-button.search-btn{
-background:#0066ff;
-color:white;
-border:none;
-padding:15px;
-border-radius:12px;
-font-weight:600;
-cursor:pointer;
-transition:.3s
+/* Footer */
+footer {
+  background: #222;
+  color: #ccc;
+  padding: 40px 20px;
+  text-align: center;
 }
-button.search-btn:hover{background:#004ecc}
-
-/* RESULTS */
-.results{
-margin-top:30px;
-display:none
+footer a {
+  color: #f2f2f2;
+  margin: 0 10px;
+  font-weight: 500;
 }
-.result-card{
-background:white;
-padding:20px;
-border-radius:15px;
-box-shadow:0 10px 40px rgba(0,0,0,.08);
-margin-bottom:15px
+footer p {
+  margin-top: 20px;
+  font-size: 14px;
 }
 
-/* DESTINOS */
-.section{padding:90px 0}
-.section h2{text-align:center;margin-bottom:40px;font-size:32px}
-.cards{display:flex;gap:30px;flex-wrap:wrap;justify-content:center}
-.card{
-background:white;
-width:300px;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 15px 40px rgba(0,0,0,0.1);
-transition:.3s
-}
-.card:hover{transform:translateY(-5px)}
-.card img{width:100%;height:200px;object-fit:cover}
-.card-content{padding:20px}
-
-/* FOOTER */
-footer{
-background:#111827;
-color:white;
-text-align:center;
-padding:30px 0;
-margin-top:50px
-}
-
+/* Responsive */
 @media(max-width:768px){
-.hero h1{font-size:32px}
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-form {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
-
 <body>
 
+<!-- Header -->
 <header>
-<div class="container nav">
-<div class="logo">
-<img src="logo.png" alt="Tu Logo">
-</div>
-<div class="nav-links">
-<a href="#">Vuelos</a>
-<a href="#">Ofertas</a>
-<a href="#">Check-in</a>
-<a href="#">Contacto</a>
-</div>
-</div>
+  <h1>Avianca Travel Assistance</h1>
+  <nav>
+    <a href="#buscar">Buscar Vuelos</a>
+    <a href="#ofertas">Ofertas</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 </header>
 
-<section class="hero">
-<div class="hero-content">
-<h1>Vuela más lejos</h1>
-<p>Experiencia premium desde el primer clic</p>
-</div>
+<!-- Hero y Buscador -->
+<section class="hero" id="buscar">
+  <h2>Encuentra tu vuelo ideal</h2>
+  <form class="search-form">
+    <input type="text" placeholder="Origen" required>
+    <input type="text" placeholder="Destino" required>
+    <input type="date" placeholder="Salida" required>
+    <input type="date" placeholder="Regreso">
+    <select>
+      <option>1 Adulto</option>
+      <option>2 Adultos</option>
+      <option>3 Adultos</option>
+      <option>Niños</option>
+    </select>
+    <button type="submit">Buscar Vuelos</button>
+  </form>
 </section>
 
-<div class="container search-wrapper">
-<div class="search-box">
-
-<div class="tabs">
-<div class="tab active" onclick="setTrip('round')">Ida y vuelta</div>
-<div class="tab" onclick="setTrip('one')">Solo ida</div>
-</div>
-
-<form onsubmit="searchFlights(event)">
-<input type="text" id="origin" placeholder="Origen" required>
-<input type="text" id="destination" placeholder="Destino" required>
-<input type="date" required>
-<input type="date" id="returnDate" required>
-
-<div class="passenger-box">
-<input type="text" id="passengerInput" value="1 Adulto" readonly onclick="togglePassengers()">
-<div class="passenger-dropdown" id="passengerDropdown">
-<div class="passenger-row">
-<span>Adultos</span>
-<div class="counter">
-<button type="button" onclick="changePassenger(1)">+</button>
-</div>
-</div>
-</div>
-</div>
-
-<select>
-<option>Clase Económica</option>
-<option>Premium</option>
-<option>Business</option>
-</select>
-
-<button class="search-btn">Buscar vuelos</button>
-</form>
-
-<div class="results" id="results"></div>
-
-</div>
-</div>
-
-<section class="section container">
-<h2>Destinos destacados</h2>
-<div class="cards">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800">
-<div class="card-content">
-<h3>Caribe</h3>
-<p>Playas paradisíacas.</p>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800">
-<div class="card-content">
-<h3>Europa</h3>
-<p>Ciudades históricas.</p>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?q=80&w=800">
-<div class="card-content">
-<h3>Estados Unidos</h3>
-<p>Experiencias únicas.</p>
-</div>
-</div>
-</div>
+<!-- Ofertas -->
+<section id="ofertas">
+  <h2>Ofertas Especiales</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Oferta 1">
+      <h3>Vuelo Bogotá - Miami</h3>
+      <p>Desde $450 USD. Reserva ahora y ahorra.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=600&q=80" alt="Oferta 2">
+      <h3>Vuelo Bogotá - Madrid</h3>
+      <p>Desde $700 USD. ¡Plazas limitadas!</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Oferta 3">
+      <h3>Vuelo Bogotá - Nueva York</h3>
+      <p>Desde $600 USD. Reserva fácil y rápido.</p>
+    </div>
+  </div>
 </section>
 
-<footer>
-© 2026 AirNova Airlines - Todos los derechos reservados
+<!-- Servicios -->
+<section id="servicios">
+  <h2>Servicios Adicionales</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Equipaje Adicional</h3>
+      <p>Compra equipaje extra fácilmente desde tu reserva.</p>
+    </div>
+    <div class="card">
+      <h3>Check-in Online</h3>
+      <p>Realiza tu check-in desde cualquier lugar y ahorra tiempo.</p>
+    </div>
+    <div class="card">
+      <h3>Seguro de Viaje</h3>
+      <p>Protege tu viaje con nuestro seguro flexible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contacto">
+  <p>© 2026 Avianca Travel Assistance. Todos los derechos reservados.</p>
+  <p>
+    <a href="#">Facebook</a> |
+    <a href="#">Instagram</a> |
+    <a href="#">Twitter</a>
+  </p>
+  <p>Contacto: soporte@avianca.com | +57 1 234 5678</p>
 </footer>
-
-<script>
-let passengers=1;
-
-function setTrip(type){
-document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-if(type==='one'){
-document.querySelectorAll('.tab')[1].classList.add('active');
-document.getElementById('returnDate').style.display='none';
-}else{
-document.querySelectorAll('.tab')[0].classList.add('active');
-document.getElementById('returnDate').style.display='block';
-}
-}
-
-function togglePassengers(){
-let box=document.getElementById('passengerDropdown');
-box.style.display=box.style.display==='block'?'none':'block';
-}
-
-function changePassenger(val){
-passengers+=val;
-if(passengers<1)passengers=1;
-document.getElementById('passengerInput').value=passengers+" Adulto(s)";
-}
-
-function searchFlights(e){
-e.preventDefault();
-let o=document.getElementById('origin').value;
-let d=document.getElementById('destination').value;
-let results=document.getElementById('results');
-results.style.display="block";
-results.innerHTML=`
-<div class="result-card">
-<strong>${o} → ${d}</strong><br>
-Salida 08:00 - Llegada 12:00<br>
-Desde $450 USD
-</div>
-<div class="result-card">
-<strong>${o} → ${d}</strong><br>
-Salida 14:00 - Llegada 18:00<br>
-Desde $520 USD
-</div>
-`;
-}
-</script>
 
 </body>
 </html>
