@@ -3,147 +3,323 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AeroNova LATAM | Cotiza tu vuelo</title>
+<title>AirNova Airlines</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{
-height:100vh;
+body{background:#f4f6f9;color:#1c1e21}
+.container{width:90%;max-width:1200px;margin:auto}
+
+/* HEADER */
+header{
+background:#fff;
+padding:15px 0;
+box-shadow:0 4px 20px rgba(0,0,0,0.05);
+position:sticky;top:0;z-index:1000
+}
+.nav{display:flex;justify-content:space-between;align-items:center}
+.logo img{height:45px}
+.nav-links a{
+margin-left:30px;
+text-decoration:none;
+color:#1c1e21;
+font-weight:500;
+transition:.3s
+}
+.nav-links a:hover{opacity:.6}
+
+/* HERO */
+.hero{
+background:url('https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=2000') center/cover no-repeat;
+height:520px;
 display:flex;
-flex-direction:column;
-justify-content:center;
 align-items:center;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+justify-content:center;
+position:relative
+}
+.hero::after{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.55)
+}
+.hero-content{
+position:relative;
 color:white;
+text-align:center
 }
+.hero h1{font-size:50px;margin-bottom:15px}
+.hero p{font-size:18px}
 
-h1{font-size:42px;margin-bottom:10px}
-p{margin-bottom:40px;opacity:.9}
-
-.card{
-background:white;
-color:#222;
-padding:40px;
+/* SEARCH BOX */
+.search-wrapper{
+margin-top:-110px;
+position:relative;
+z-index:10
+}
+.search-box{
+background:#fff;
+padding:35px;
 border-radius:20px;
-width:420px;
-box-shadow:0 30px 60px rgba(0,0,0,.3);
+box-shadow:0 25px 70px rgba(0,0,0,0.15)
+}
+.tabs{
+display:flex;
+gap:25px;
+margin-bottom:25px
+}
+.tab{
+cursor:pointer;
+font-weight:600;
+padding-bottom:6px;
+border-bottom:3px solid transparent;
+transition:.3s
+}
+.tab.active{
+border-color:#0066ff;
+color:#0066ff
 }
 
-.card h2{
-text-align:center;
-margin-bottom:25px;
+form{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px
 }
 
-input, select{
-width:100%;
+input,select{
 padding:14px;
-margin-bottom:15px;
 border-radius:10px;
 border:1px solid #ddd;
-font-size:14px;
+font-size:14px
 }
 
-button{
+.passenger-box{
+position:relative
+}
+.passenger-dropdown{
+position:absolute;
+top:55px;
+left:0;
+background:#fff;
+border-radius:12px;
+box-shadow:0 10px 40px rgba(0,0,0,.15);
+padding:15px;
+display:none;
 width:100%;
-padding:14px;
+z-index:20
+}
+.passenger-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px
+}
+.counter button{
+padding:5px 10px;
 border:none;
-border-radius:10px;
+background:#0066ff;
+color:#fff;
+border-radius:5px;
+cursor:pointer
+}
+
+button.search-btn{
 background:#0066ff;
 color:white;
+border:none;
+padding:15px;
+border-radius:12px;
 font-weight:600;
 cursor:pointer;
-transition:.3s;
+transition:.3s
+}
+button.search-btn:hover{background:#004ecc}
+
+/* RESULTS */
+.results{
+margin-top:30px;
+display:none
+}
+.result-card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 40px rgba(0,0,0,.08);
+margin-bottom:15px
 }
 
-button:hover{
-background:#004bcc;
+/* DESTINOS */
+.section{padding:90px 0}
+.section h2{text-align:center;margin-bottom:40px;font-size:32px}
+.cards{display:flex;gap:30px;flex-wrap:wrap;justify-content:center}
+.card{
+background:white;
+width:300px;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 15px 40px rgba(0,0,0,0.1);
+transition:.3s
 }
+.card:hover{transform:translateY(-5px)}
+.card img{width:100%;height:200px;object-fit:cover}
+.card-content{padding:20px}
 
+/* FOOTER */
 footer{
-position:absolute;
-bottom:15px;
-font-size:13px;
-opacity:.7;
+background:#111827;
+color:white;
+text-align:center;
+padding:30px 0;
+margin-top:50px
 }
 
-datalist option{
-font-size:14px;
+@media(max-width:768px){
+.hero h1{font-size:32px}
 }
 </style>
 </head>
 
 <body>
 
-<h1>✈ AeroNova LATAM</h1>
-<p>Cotiza tu vuelo en segundos</p>
+<header>
+<div class="container nav">
+<div class="logo">
+<img src="logo.png" alt="Tu Logo">
+</div>
+<div class="nav-links">
+<a href="#">Vuelos</a>
+<a href="#">Ofertas</a>
+<a href="#">Check-in</a>
+<a href="#">Contacto</a>
+</div>
+</div>
+</header>
 
-<div class="card">
-<h2>Buscar Vuelo</h2>
+<section class="hero">
+<div class="hero-content">
+<h1>Vuela más lejos</h1>
+<p>Experiencia premium desde el primer clic</p>
+</div>
+</section>
 
-<input list="ciudades" id="origen" placeholder="Ciudad de origen">
-<input list="ciudades" id="destino" placeholder="Ciudad de destino">
+<div class="container search-wrapper">
+<div class="search-box">
+
+<div class="tabs">
+<div class="tab active" onclick="setTrip('round')">Ida y vuelta</div>
+<div class="tab" onclick="setTrip('one')">Solo ida</div>
+</div>
+
+<form onsubmit="searchFlights(event)">
+<input type="text" id="origin" placeholder="Origen" required>
+<input type="text" id="destination" placeholder="Destino" required>
+<input type="date" required>
+<input type="date" id="returnDate" required>
+
+<div class="passenger-box">
+<input type="text" id="passengerInput" value="1 Adulto" readonly onclick="togglePassengers()">
+<div class="passenger-dropdown" id="passengerDropdown">
+<div class="passenger-row">
+<span>Adultos</span>
+<div class="counter">
+<button type="button" onclick="changePassenger(1)">+</button>
+</div>
+</div>
+</div>
+</div>
 
 <select>
 <option>Clase Económica</option>
-<option>Premium Economy</option>
+<option>Premium</option>
 <option>Business</option>
 </select>
 
-<button onclick="cotizar()">Cotizar Ahora</button>
+<button class="search-btn">Buscar vuelos</button>
+</form>
+
+<div class="results" id="results"></div>
+
+</div>
 </div>
 
-<datalist id="ciudades">
-<option value="Bogotá (BOG)">
-<option value="Medellín (MDE)">
-<option value="Cali (CLO)">
-<option value="Cartagena (CTG)">
-<option value="San Andrés (ADZ)">
-<option value="Lima (LIM)">
-<option value="Cusco (CUZ)">
-<option value="Santiago (SCL)">
-<option value="Buenos Aires - EZE (EZE)">
-<option value="Buenos Aires - AEP (AEP)">
-<option value="São Paulo - GRU (GRU)">
-<option value="Rio de Janeiro - GIG (GIG)">
-<option value="Montevideo (MVD)">
-<option value="Quito (UIO)">
-<option value="Guayaquil (GYE)">
-<option value="La Paz (LPB)">
-<option value="Santa Cruz (VVI)">
-<option value="Miami (MIA)">
-<option value="Orlando (MCO)">
-<option value="Nueva York - JFK (JFK)">
-<option value="Los Ángeles (LAX)">
-<option value="Madrid (MAD)">
-<option value="Barcelona (BCN)">
-<option value="París (CDG)">
-<option value="Frankfurt (FRA)">
-<option value="Roma (FCO)">
-<option value="Lisboa (LIS)">
-<option value="Auckland (AKL)">
-<option value="Sydney (SYD)">
-<option value="Melbourne (MEL)">
-<option value="Cancún (CUN)">
-<option value="Punta Cana (PUJ)">
-</datalist>
+<section class="section container">
+<h2>Destinos destacados</h2>
+<div class="cards">
+<div class="card">
+<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800">
+<div class="card-content">
+<h3>Caribe</h3>
+<p>Playas paradisíacas.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800">
+<div class="card-content">
+<h3>Europa</h3>
+<p>Ciudades históricas.</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?q=80&w=800">
+<div class="card-content">
+<h3>Estados Unidos</h3>
+<p>Experiencias únicas.</p>
+</div>
+</div>
+</div>
+</section>
 
 <footer>
-© 2026 AeroNova LATAM - Todos los derechos reservados
+© 2026 AirNova Airlines - Todos los derechos reservados
 </footer>
 
 <script>
-function cotizar(){
-let origen=document.getElementById("origen").value;
-let destino=document.getElementById("destino").value;
+let passengers=1;
 
-if(origen===""||destino===""){
-alert("Por favor completa origen y destino");
-return;
+function setTrip(type){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+if(type==='one'){
+document.querySelectorAll('.tab')[1].classList.add('active');
+document.getElementById('returnDate').style.display='none';
+}else{
+document.querySelectorAll('.tab')[0].classList.add('active');
+document.getElementById('returnDate').style.display='block';
+}
 }
 
-alert("Simulación de cotización:\n\nOrigen: "+origen+"\nDestino: "+destino+"\n\nTe contactaremos pronto.");
+function togglePassengers(){
+let box=document.getElementById('passengerDropdown');
+box.style.display=box.style.display==='block'?'none':'block';
+}
+
+function changePassenger(val){
+passengers+=val;
+if(passengers<1)passengers=1;
+document.getElementById('passengerInput').value=passengers+" Adulto(s)";
+}
+
+function searchFlights(e){
+e.preventDefault();
+let o=document.getElementById('origin').value;
+let d=document.getElementById('destination').value;
+let results=document.getElementById('results');
+results.style.display="block";
+results.innerHTML=`
+<div class="result-card">
+<strong>${o} → ${d}</strong><br>
+Salida 08:00 - Llegada 12:00<br>
+Desde $450 USD
+</div>
+<div class="result-card">
+<strong>${o} → ${d}</strong><br>
+Salida 14:00 - Llegada 18:00<br>
+Desde $520 USD
+</div>
+`;
 }
 </script>
 
