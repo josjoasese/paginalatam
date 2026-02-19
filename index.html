@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LATAM Travel Assistance - Estilo Oficial</title>
+<title>LATAM Travel Assistance - Checkout Premium</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* Reset y tipografía */
 *{box-sizing:border-box;font-family:"Inter",sans-serif;margin:0;padding:0;}
 body{background:#f9f9f9;color:#1b1b1b;}
 a{text-decoration:none;color:inherit;}
@@ -55,6 +54,21 @@ footer{background:#222;color:#ccc;padding:40px 20px;text-align:center;}
 footer a{color:#f2f2f2;margin:0 10px;font-weight:500;}
 footer p{margin-top:20px;font-size:14px;}
 @media(max-width:768px){header{flex-direction:column;align-items:flex-start;}nav a{margin-left:0;margin-right:10px;}.search-form{grid-template-columns:1fr;gap:10px;}table,th,td{font-size:14px;}}
+
+/* Passenger Modal Premium */
+#passenger-modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:30;animation:fadeIn .3s;}
+#passenger-modal .modal-content {max-width:900px;width:95%;background:white;padding:25px 35px;border-radius:12px;max-height:90%;overflow-y:auto;animation:slideIn .3s;box-shadow:0 8px 25px rgba(0,0,0,0.25);}
+#passenger-modal h2 {text-align:center;color:#003b71;margin-bottom:15px;}
+.passenger-summary {background:#f1f5f9;padding:15px;border-radius:12px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;box-shadow:0 4px 12px rgba(0,0,0,0.05);}
+.passenger-summary div {font-weight:500;color:#003b71;}
+.passenger-card {border:1px solid #ccc;border-radius:12px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,0.05);background:#f9f9f9;display:grid;gap:10px;}
+.passenger-card h3 {color:#003b71;margin-bottom:10px;}
+.passenger-card label {font-weight:500;margin-bottom:5px;}
+.passenger-card input,.passenger-card select {padding:10px;border-radius:6px;border:1px solid #ccc;font-size:14px;width:100%;}
+#passenger-form button {background:#d7001c;color:white;border:none;padding:12px 25px;border-radius:8px;font-weight:600;cursor:pointer;font-size:16px;margin-top:15px;transition:.3s;width:100%;}
+#passenger-form button:hover {background:#a50015;}
+.ticket-summary {background:#eaf1fc;padding:15px;margin-bottom:15px;border-radius:10px;color:#003b71;font-weight:600;}
+@media(max-width:768px){.passenger-card{padding:15px;}.passenger-summary{grid-template-columns:1fr;gap:5px;}}
 </style>
 </head>
 <body>
@@ -118,6 +132,7 @@ footer p{margin-top:20px;font-size:14px;}
 <p>Contacto: soporte@latam.com | +57 1 234 5678</p>
 </footer>
 
+<!-- Modal Resultados -->
 <div id="results-modal">
 <div class="modal-content">
 <span class="close" id="close-modal">&times;</span>
@@ -132,24 +147,41 @@ footer p{margin-top:20px;font-size:14px;}
 </div>
 </div>
 
+<!-- Modal Pasajeros -->
+<div id="passenger-modal">
+  <div class="modal-content">
+    <span class="close" id="close-passenger-modal">&times;</span>
+    <h2>Formulario de Pasajeros</h2>
+    <div class="passenger-summary" id="flight-summary"></div>
+    <form id="passenger-form">
+      <div id="passenger-fields"></div>
+      <button type="submit">Confirmar Reserva</button>
+    </form>
+  </div>
+</div>
+
 <script>
-// Aeropuertos LATAM
-const airports=[
-"São Paulo - Guarulhos (GRU)","São Paulo - Congonhas (CGH)","Campinas - Viracopos (VCP)","Rio de Janeiro - Galeão (GIG)","Rio de Janeiro - Santos Dumont (SDU)","Belo Horizonte - Tancredo Neves (CNF)","Brasília (BSB)","Recife (REC)","Porto Alegre (POA)","Fortaleza (FOR)","Manaus (MAO)","Curitiba (CWB)","Florianópolis (FLN)","Salvador (SSA)","Belém (BEL)","Boa Vista (BVB)","Cuiabá (CGB)","Campo Grande (CGR)","Goiania (GYN)","João Pessoa (JPA)","Maceió (MCZ)","Juazeiro do Norte (JDO)","Passo Fundo (PFB)","Parnaíba (PHB)","Aracaju (AJU)","Caxias do Sul (CXJ)","Chapecó (XAP)","Marabá (MAB)","Santiago (SCL)","Antofagasta (ANF)","Arica (ARI)","Balmaceda (BBA)","Calama (CJC)","Concepción (CCP)","Iquique (IQQ)","La Serena (LSC)","Puerto Montt (PMC)","Temuco (ZCO)","Valdivia (ZAL)","Isla de Pascua (IPC)","Buenos Aires - Ezeiza (EZE)","Buenos Aires - Aeroparque (AEP)","Córdoba (COR)","Mendoza (MDZ)","Rio Gallegos (RGL)","Salta (SLA)","Bariloche (BRC)","Montevideo (MVD)","Asunción (ASU)","Lima (LIM)","Cuzco (CUZ)","Quito (UIO)","Guayaquil (GYE)","Baltra - Galápagos (GPS)","Bogotá (BOG)","Medellín (MDE)","Cali (CLO)","Cartagena (CTG)","Bucaramanga (BGA)","Barranquilla (BAQ)","Ibagué (IBE)","Leticia (LET)","Cúcuta (CUC)","San Andrés (ADZ)","Santa Marta (SMR)","Pereira (PEI)","Valledupar (VUP)","Montería (MTR)","Londrina (LDB)","Miami (MIA)","New York - JFK (JFK)","Los Angeles (LAX)","Orlando (MCO)","Atlanta (ATL)","Chicago - ORD (ORD)","Dallas - DFW (DFW)","Houston (IAH)","Toronto (YYZ)","Madrid (MAD)","Barcelona (BCN)","Brussels (BRU)","Johannesburg (JNB)","Frankfurt (FRA)"
+// === JavaScript completo ===
+
+// Lista completa de aeropuertos LATAM
+const airports = [
+"Santiago (SCL)","Antofagasta (ANF)","Arica (ARI)","Balmaceda (BBA)","Calama (CJC)","Concepción (CCP)","Copiapó (CPO)",
+"Iquique (IQQ)","Isla de Pascua (IPC)","La Serena (LSC)","Osorno (ZOS)","Puerto Montt (PMC)","Punta Arenas (PUQ)","Temuco (ZCO)",
+"Valdivia (ZAL)","Buenos Aires – Ezeiza (EZE)","Buenos Aires – Aeroparque (AEP)","Bariloche (BRC)","Mendoza (MDZ)","Salta (SLA)",
+"Rosario (ROS)","Ushuaia (USH)","Lima (LIM)","Cusco (CUZ)","Arequipa (AQP)","Iquitos (IQT)","Tacna (TCQ)","Guayaquil (GYE)",
+"Quito (UIO)","Baltra – Galápagos (GPS)","Bogotá (BOG)","Medellín (MDE)","Cali (CLO)","Cartagena (CTG)","Barranquilla (BAQ)",
+"Bucaramanga (BGA)","Leticia (LET)","Cúcuta (CUC)","Pereira (PEI)","Asunción (ASU)","São Paulo – Guarulhos (GRU)","São Paulo – Congonhas (CGH)",
+"Campinas – Viracopos (VCP)","Rio de Janeiro – Galeão (GIG)","Rio de Janeiro – Santos Dumont (SDU)","Belo Horizonte (CNF)","Brasília (BSB)",
+"Fortaleza (FOR)","Recife (REC)","Porto Alegre (POA)","Salvador (SSA)","Manaus (MAO)","Curitiba (CWB)","Florianópolis (FLN)",
+"Belém (BEL)","Boa Vista (BVB)","Campo Grande (CGR)","Goiania (GYN)","Maceió (MCZ)","João Pessoa (JPA)","Navegantes (NVT)","Foz do Iguaçu (IGU)",
+"Natal (NAT)","Palmas (PMW)","São Luís (SLZ)","Miami (MIA)","Orlando (MCO)","Atlanta (ATL)","Chicago – ORD (ORD)","Los Angeles (LAX)",
+"New York – JFK (JFK)","Cancún (CUN)","Ciudad de México (MEX)","Punta Cana (PUJ)","San José – CRC (SJO)","La Habana (HAV)","Oranjestad – Aruba (AUA)",
+"Madrid (MAD)","Barcelona (BCN)","Brussels (BRU)","Lisbon (LIS)","Paris (CDG)","Rome (FCO)","Milan (MXP)","Frankfurt (FRA)",
+"Auckland (AKL)","Melbourne (MEL)","Sydney (SYD)"
 ];
 
-// Autocomplete
-function autocomplete(input,suggestionsId){
-input.addEventListener("input",function(){
-const value=this.value.toLowerCase();
-const suggestions=document.getElementById(suggestionsId);
-suggestions.innerHTML="";
-if(!value)return;
-airports.filter(a=>a.toLowerCase().includes(value)).forEach(a=>{
-const div=document.createElement("div");div.textContent=a;div.onclick=()=>{input.value=a;suggestions.innerHTML="";};suggestions.appendChild(div);
-});
-});
-}
+// === Autocomplete ===
+function autocomplete(input,suggestionsId){input.addEventListener("input",function(){const value=this.value.toLowerCase();const suggestions=document.getElementById(suggestionsId);suggestions.innerHTML="";if(!value)return;airports.filter(a=>a.toLowerCase().includes(value)).forEach(a=>{const div=document.createElement("div");div.textContent=a;div.onclick=()=>{input.value=a;suggestions.innerHTML="";};suggestions.appendChild(div);});});}
 autocomplete(document.getElementById("origin"),"origin-suggestions");
 autocomplete(document.getElementById("destination"),"destination-suggestions");
 
@@ -159,24 +191,11 @@ const passengersInput=document.getElementById("passengers");
 document.getElementById("plus-passenger").onclick=()=>{if(passengerCount<10)passengerCount++;passengersInput.value=passengerCount+" Adulto"+(passengerCount>1?"s":"");};
 document.getElementById("minus-passenger").onclick=()=>{if(passengerCount>1)passengerCount--;passengersInput.value=passengerCount+" Adulto"+(passengerCount>1?"s":"");};
 
-// Generar vuelos
+// === Generar vuelos ===
 let flights=[],returnFlights=[];
-function generateFlights(origin,destination){
-flights=[];returnFlights=[];
-for(let i=0;i<10;i++){
-const hour=`${Math.floor(Math.random()*12+6)}:${Math.random()>0.5?'00':'30'}`;
-let distance=Math.floor(Math.random()*4000+200);
-let price,durationH;
-if(distance<1000){price=Math.floor(Math.random()*240250+159750);durationH=Math.floor(distance/300)+1;}
-else if(distance<2500){price=Math.floor(Math.random()*500000+400000);durationH=Math.floor(distance/500)+2;}
-else{price=Math.floor(Math.random()*600000+900000);durationH=Math.floor(distance/700)+3;}
-const duration=`${durationH}h ${Math.floor(Math.random()*60)}m`;
-flights.push({origin,destination,hour,price,duration});
-returnFlights.push({origin:destination,destination:origin,hour,price,duration});
-}
-}
+function generateFlights(origin,destination){flights=[];returnFlights=[];for(let i=0;i<10;i++){const hour=`${Math.floor(Math.random()*12+6)}:${Math.random()>0.5?'00':'30'}`;let distance=Math.floor(Math.random()*4000+200);let price,durationH;if(distance<1000){price=Math.floor(Math.random()*240250+159750);durationH=Math.floor(distance/300)+1;}else if(distance<2500){price=Math.floor(Math.random()*500000+400000);durationH=Math.floor(distance/500)+2;}else{price=Math.floor(Math.random()*600000+900000);durationH=Math.floor(distance/700)+3;}const duration=`${durationH}h ${Math.floor(Math.random()*60)}m`;flights.push({origin,destination,hour,price,duration});returnFlights.push({origin:destination,destination:origin,hour,price,duration});}}
 
-// Mostrar vuelos
+// === Mostrar vuelos ===
 function showFlights(flightsArray){
 let html="<table><tr><th>Vuelo</th><th>Horario</th><th>Precio Total COP</th><th>Duración</th><th>Acción</th></tr>";
 let total=0;
@@ -189,7 +208,7 @@ html+=`<tr>
 <td>${f.hour} / ${rf.hour}</td>
 <td>$${tripTotal.toLocaleString()}</td>
 <td>${f.duration} / ${rf.duration}</td>
-<td><button class="reserve-btn" onclick='alert("Vuelo reservado: ${f.origin} → ${f.destination} y regreso ${rf.origin} → ${rf.destination}, Total $${tripTotal.toLocaleString()} COP")'>Reservar</button></td>
+<td><button class="reserve-btn" onclick='openPassengerForm(${passengerCount},"${f.origin} → ${f.destination}","${rf.origin} → ${rf.destination}",${tripTotal})'>Reservar</button></td>
 </tr>`;
 });
 html+="</table>";
@@ -197,7 +216,7 @@ document.getElementById("results-list").innerHTML=html;
 document.getElementById("trip-summary").innerText=`Total aproximado para ${passengerCount} pasajero(s): $${total.toLocaleString()} COP`;
 }
 
-// Submit
+// Submit vuelo
 document.getElementById("flight-form").addEventListener("submit",function(e){
 e.preventDefault();
 const origin=document.getElementById("origin").value;
@@ -216,9 +235,56 @@ if(maxHour) filtered=filtered.filter((f,i)=>f.hour<=maxHour && returnFlights[i].
 showFlights(filtered);
 }
 
-// Cerrar modal
+// Cerrar modal resultados
 document.getElementById("close-modal").onclick=()=>{document.getElementById("results-modal").style.display="none";}
 window.onclick=e=>{if(e.target.id==="results-modal")document.getElementById("results-modal").style.display="none";}
+
+// === Modal Pasajeros ===
+const passengerModal = document.getElementById("passenger-modal");
+const closePassengerModal = document.getElementById("close-passenger-modal");
+const passengerFieldsContainer = document.getElementById("passenger-fields");
+const passengerForm = document.getElementById("passenger-form");
+const flightSummary = document.getElementById("flight-summary");
+
+function openPassengerForm(count, outbound, inbound, total){
+  passengerFieldsContainer.innerHTML="";
+  flightSummary.innerHTML=`<div class="ticket-summary">Ida: ${outbound}</div><div class="ticket-summary">Regreso: ${inbound}</div><div class="ticket-summary">Pasajeros: ${count}</div><div class="ticket-summary">Total aproximado: $${total.toLocaleString()} COP</div>`;
+  for(let i=1;i<=count;i++){
+    const card=document.createElement("div");
+    card.className="passenger-card";
+    card.innerHTML=`
+      <h3>Pasajero ${i}</h3>
+      <label>Nombre completo:</label>
+      <input type="text" name="fullName${i}" required placeholder="Nombre y Apellidos">
+      <label>Tipo de identificación:</label>
+      <select name="idType${i}" required>
+        <option value="">Seleccione</option>
+        <option value="CC">Cédula de ciudadanía</option>
+        <option value="CE">Cédula de extranjería</option>
+        <option value="Passport">Pasaporte</option>
+      </select>
+      <label>Número de identificación:</label>
+      <input type="text" name="idNumber${i}" pattern="[0-9A-Za-z]+" required placeholder="Número de identificación">
+      <label>Fecha de nacimiento:</label>
+      <input type="date" name="birthDate${i}" required>
+      <label>Email:</label>
+      <input type="email" name="email${i}" required placeholder="correo@ejemplo.com">
+      <label>Teléfono:</label>
+      <input type="tel" name="phone${i}" pattern="[0-9+]{7,15}" required placeholder="+57 300 1234567">
+    `;
+    passengerFieldsContainer.appendChild(card);
+  }
+  passengerModal.style.display="flex";
+  passengerForm.onsubmit = function(e){ 
+    e.preventDefault(); 
+    alert(`Reserva confirmada para ${count} pasajero(s)!`); 
+    passengerModal.style.display = "none"; 
+  }
+}
+
+// Cerrar modal pasajeros
+closePassengerModal.onclick = () => { passengerModal.style.display = "none"; }
+window.onclick = (e) => { if(e.target === passengerModal) passengerModal.style.display = "none"; }
 </script>
 
 </body>
