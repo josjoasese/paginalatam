@@ -4,126 +4,86 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LATAM Travel Assistance</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
-body{background:#f4f6f9;color:#111}
+body{background:#f3f5f9;color:#111}
 
-/* ===== STEP PROGRESS ===== */
+/* STEP BAR */
 .stepper{
-display:flex;justify-content:center;gap:40px;
-padding:18px;background:#fff;border-bottom:1px solid #eee;
-font-weight:500;position:sticky;top:0;z-index:1000
+display:flex;justify-content:center;gap:30px;
+padding:16px;background:#fff;border-bottom:1px solid #eee;
+position:sticky;top:0;z-index:1000;font-size:14px
 }
-.step{opacity:.3;transition:.3s}
+.step{opacity:.3;transition:.3s;font-weight:500}
 .step.active{opacity:1;color:#d71920;font-weight:600}
 
-/* ===== SCREENS ===== */
-section{display:none;padding:50px 20px;min-height:calc(100vh - 70px)}
+/* SCREENS */
+section{display:none;padding:60px 20px;min-height:calc(100vh - 60px)}
 section.active{display:block}
 
-/* ===== HERO ===== */
-.hero{text-align:center;margin-bottom:40px}
-.hero h1{font-size:36px;margin-bottom:10px}
-
-.search-card{
-max-width:1000px;margin:auto;background:#fff;
-padding:30px;border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,.08)
+/* CARD */
+.card{
+background:#fff;border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+padding:30px;margin:auto;max-width:1100px
 }
 
-.search-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:20px
+/* INPUTS */
+input,select{
+padding:13px;border-radius:10px;border:1px solid #ddd;width:100%
 }
+input:focus{border-color:#d71920;outline:none}
 
-.search-grid input{
-padding:13px;border-radius:8px;border:1px solid #ddd
-}
-
-.search-btn{
-margin-top:25px;width:100%;padding:15px;
-border:none;border-radius:10px;
+/* BUTTON */
+.btn{
+padding:14px;border:none;border-radius:12px;
 background:linear-gradient(135deg,#d71920,#8b0000);
-color:#fff;font-weight:600;font-size:16px;
+color:#fff;font-weight:600;cursor:pointer;
+transition:.3s
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(215,25,32,.3)}
+
+.grid{display:grid;gap:20px}
+.grid-5{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+
+/* RESULTS */
+.flight-card{
+background:#fff;padding:20px;border-radius:16px;
+box-shadow:0 6px 20px rgba(0,0,0,.05);
+display:flex;justify-content:space-between;
 cursor:pointer;transition:.3s
 }
-.search-btn:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 25px rgba(215,25,32,.4)
+.flight-card:hover{transform:translateY(-3px)}
+.flight-card.selected{border:2px solid #d71920}
+
+/* LOADER */
+.loader{text-align:center;font-weight:600;animation:pulse 1s infinite}
+@keyframes pulse{0%{opacity:.3}50%{opacity:1}100%{opacity:.3}}
+
+/* SEAT MAP */
+.seat-map{
+display:grid;
+grid-template-columns:repeat(6,40px);
+gap:10px;justify-content:center;margin-top:20px
 }
-
-/* ===== RESULTS ===== */
-.results-container{max-width:1100px;margin:auto}
-.results-header{
-display:flex;justify-content:space-between;align-items:center;margin-bottom:25px
+.seat{
+width:40px;height:40px;border-radius:6px;
+background:#ddd;cursor:pointer;display:flex;
+align-items:center;justify-content:center;font-size:12px
 }
+.seat.selected{background:#d71920;color:#fff}
+.seat.occupied{background:#999;cursor:not-allowed}
 
-.flight-list{display:flex;flex-direction:column;gap:20px}
+/* SUMMARY */
+.summary{background:#f7f7f7;padding:20px;border-radius:12px}
 
-.flight-card{
-background:#fff;padding:22px;border-radius:16px;
-box-shadow:0 6px 20px rgba(0,0,0,.05);
-display:flex;justify-content:space-between;align-items:center;
-transition:.3s;cursor:pointer
-}
-
-.flight-card:hover{transform:translateY(-4px)}
-
-.flight-card.selected{
-border:2px solid #d71920;
-box-shadow:0 10px 25px rgba(215,25,32,.2)
-}
-
-.flight-info strong{font-size:18px}
-.flight-price{font-size:18px;font-weight:600;margin-bottom:8px}
-
-.select-btn{
-padding:9px 16px;border-radius:8px;border:none;
-background:#d71920;color:#fff;cursor:pointer
-}
-
-/* ===== PASSENGERS ===== */
-.passenger-layout{
-max-width:1100px;margin:auto;
-display:grid;grid-template-columns:320px 1fr;
-gap:40px
-}
-
-.summary-box{
-background:#fff;padding:20px;border-radius:12px;
-box-shadow:0 6px 20px rgba(0,0,0,.05)
-}
-
-.passenger-form{
-background:#fff;padding:30px;border-radius:12px;
-box-shadow:0 6px 20px rgba(0,0,0,.05)
-}
-
-.passenger-form input{
-width:100%;padding:12px;margin-bottom:15px;
-border-radius:8px;border:1px solid #ddd
-}
-
-.confirm-btn{
-width:100%;padding:14px;border:none;
-border-radius:10px;background:#d71920;
-color:#fff;font-weight:600;cursor:pointer
-}
-
-/* ===== CONFIRMATION ===== */
-.confirmation-box{
-max-width:600px;margin:80px auto;text-align:center;
-background:#fff;padding:40px;border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,.08)
-}
-.code{font-size:22px;font-weight:600;margin:20px 0}
-.home-btn{
-margin-top:20px;padding:12px 25px;
-border:none;border-radius:8px;background:#111;
-color:#fff;cursor:pointer
+/* CONFIRM */
+.confirm-box{
+text-align:center;max-width:600px;margin:auto;
+background:#fff;padding:40px;border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.08)
 }
 </style>
 </head>
@@ -132,62 +92,83 @@ color:#fff;cursor:pointer
 <div class="stepper">
 <div class="step active" id="step1">1 Buscar</div>
 <div class="step" id="step2">2 Elegir</div>
-<div class="step" id="step3">3 Pasajeros</div>
-<div class="step" id="step4">4 Confirmación</div>
+<div class="step" id="step3">3 Asientos</div>
+<div class="step" id="step4">4 Pago</div>
+<div class="step" id="step5">5 Confirmación</div>
 </div>
 
 <!-- HOME -->
 <section id="home-screen" class="active">
-<div class="hero">
-<h1>Reserva tu próximo vuelo</h1>
-</div>
-
-<div class="search-card">
-<div class="search-grid">
-<input id="origin" placeholder="Origen">
-<input id="destination" placeholder="Destino">
+<div class="card">
+<h2>Reserva tu vuelo</h2><br>
+<div class="grid grid-5">
+<input id="origin" list="airports" placeholder="Origen">
+<input id="destination" list="airports" placeholder="Destino">
 <input id="departure" type="date">
 <input id="returnDate" type="date">
 <input id="passengers" type="number" min="1" value="1">
-</div>
-<button class="search-btn" onclick="generateFlights()">Buscar vuelos</button>
+</div><br>
+<button class="btn" onclick="searchFlights()">Buscar vuelos</button>
 </div>
 </section>
+
+<datalist id="airports">
+<option value="BOG - Bogotá">
+<option value="SCL - Santiago">
+<option value="MIA - Miami">
+<option value="MAD - Madrid">
+<option value="LIM - Lima">
+<option value="GRU - São Paulo">
+</datalist>
 
 <!-- RESULTS -->
 <section id="results-screen">
-<div class="results-container">
-<div class="results-header">
-<h2 id="results-title">Selecciona vuelo</h2>
-<button onclick="goHome()">Modificar búsqueda</button>
-</div>
-<div class="flight-list" id="flight-list"></div>
+<div class="card">
+<h3 id="results-title"></h3><br>
+<div id="loader" class="loader">Buscando vuelos...</div>
+<div id="flight-list" class="grid"></div>
 </div>
 </section>
 
-<!-- PASSENGERS -->
-<section id="passenger-screen">
-<div class="passenger-layout">
-<div class="summary-box" id="summary-box"></div>
-<div class="passenger-form" id="passenger-form"></div>
+<!-- SEATS -->
+<section id="seat-screen">
+<div class="card">
+<h3>Selecciona tus asientos</h3>
+<div class="seat-map" id="seat-map"></div><br>
+<button class="btn" onclick="goToPayment()">Continuar al pago</button>
 </div>
 </section>
 
-<!-- CONFIRMATION -->
-<section id="confirmation-screen">
-<div class="confirmation-box">
+<!-- PAYMENT -->
+<section id="payment-screen">
+<div class="card grid" style="grid-template-columns:1fr 1fr;gap:40px">
+<div>
+<h3>Datos de pago</h3><br>
+<input placeholder="Nombre en tarjeta"><br><br>
+<input placeholder="Número tarjeta"><br><br>
+<input placeholder="MM/AA"><br><br>
+<input placeholder="CVV"><br><br>
+<button class="btn" onclick="confirmBooking()">Pagar ahora</button>
+</div>
+<div class="summary" id="payment-summary"></div>
+</div>
+</section>
+
+<!-- CONFIRM -->
+<section id="confirm-screen">
+<div class="confirm-box">
 <h2>✔ Reserva confirmada</h2>
-<div class="code" id="reservation-code"></div>
-<p>Tu vuelo ha sido reservado exitosamente.</p>
-<button class="home-btn" onclick="goHome()">Volver al inicio</button>
+<p id="reservation-code"></p>
+<p>Gracias por confiar en nosotros.</p><br>
+<button class="btn" onclick="goHome()">Volver al inicio</button>
 </div>
 </section>
 
 <script>
-let selectedDeparture=null;
-let selectedReturn=null;
+let flights=[];
+let selectedFlight=null;
+let seatsSelected=[];
 let searchData={};
-let phase="departure";
 
 function showScreen(id){
 document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
@@ -200,96 +181,110 @@ document.getElementById("step"+n).classList.add("active");
 }
 
 function goHome(){
-phase="departure";
-selectedDeparture=null;
-selectedReturn=null;
 showScreen("home-screen");
 updateStep(1);
 }
 
-function generateFlights(){
+function searchFlights(){
+if(!origin.value||!destination.value||!departure.value){
+alert("Completa los campos obligatorios.");
+return;
+}
 searchData={
 origin:origin.value,
 destination:destination.value,
-departure:departure.value,
-returnDate:returnDate.value,
 passengers:parseInt(passengers.value)
 };
-phase="departure";
 showScreen("results-screen");
 updateStep(2);
+document.getElementById("loader").style.display="block";
+document.getElementById("flight-list").innerHTML="";
+setTimeout(()=>{
+generateFlights();
 renderFlights();
+document.getElementById("loader").style.display="none";
+},1000);
+}
+
+function generateFlights(){
+flights=[];
+for(let i=0;i<5;i++){
+flights.push({
+time:8+i,
+price:Math.floor(Math.random()*400)+200
+});
+}
 }
 
 function renderFlights(){
-const list=document.getElementById("flight-list");
+document.getElementById("results-title").innerText="Selecciona tu vuelo";
+let list=document.getElementById("flight-list");
 list.innerHTML="";
-document.getElementById("results-title").innerText=
-phase==="departure"?"Selecciona vuelo de ida":"Selecciona vuelo de regreso";
-
-for(let i=0;i<5;i++){
-let price=Math.floor(Math.random()*300)+200;
-let card=document.createElement("div");
-card.className="flight-card";
-card.innerHTML=`
-<div class="flight-info">
-<strong>${8+i}:00 → ${12+i}:00</strong>
-<span>Duración: 4h</span>
-<span>Directo</span>
-</div>
-<div>
-<div class="flight-price">$${price} USD</div>
-<button class="select-btn">Seleccionar</button>
-</div>
+flights.forEach(f=>{
+let div=document.createElement("div");
+div.className="flight-card";
+div.innerHTML=`
+<div><strong>${f.time}:00 → ${f.time+4}:00</strong><br>Directo · 4h</div>
+<div>$${f.price} USD</div>
 `;
-
-card.querySelector("button").onclick=()=>{
-if(phase==="departure"){
-selectedDeparture={time:`${8+i}:00`,price};
-if(searchData.returnDate){
-phase="return";
-renderFlights();
-}else{
-goToPassengers();
+div.onclick=()=>{
+selectedFlight=f;
+goToSeats();
+};
+list.appendChild(div);
+});
 }
-}else{
-selectedReturn={time:`${8+i}:00`,price};
-goToPassengers();
+
+function goToSeats(){
+showScreen("seat-screen");
+updateStep(3);
+createSeatMap();
+}
+
+function createSeatMap(){
+let map=document.getElementById("seat-map");
+map.innerHTML="";
+seatsSelected=[];
+for(let i=1;i<=30;i++){
+let seat=document.createElement("div");
+seat.className="seat";
+seat.innerText=i;
+if(Math.random()<0.2){seat.classList.add("occupied");}
+seat.onclick=()=>{
+if(seat.classList.contains("occupied"))return;
+if(seat.classList.contains("selected")){
+seat.classList.remove("selected");
+seatsSelected=seatsSelected.filter(s=>s!=i);
+}else if(seatsSelected.length<searchData.passengers){
+seat.classList.add("selected");
+seatsSelected.push(i);
 }
 };
-
-list.appendChild(card);
+map.appendChild(seat);
 }
 }
 
-function goToPassengers(){
-showScreen("passenger-screen");
-updateStep(3);
-
-let total=(selectedDeparture.price+(selectedReturn?selectedReturn.price:0))*searchData.passengers;
-
-summary-box.innerHTML=`
-<h3>Resumen</h3>
+function goToPayment(){
+if(seatsSelected.length<searchData.passengers){
+alert("Selecciona todos los asientos.");
+return;
+}
+showScreen("payment-screen");
+updateStep(4);
+let total=selectedFlight.price*searchData.passengers;
+document.getElementById("payment-summary").innerHTML=`
+<h4>Resumen</h4><br>
 <p>${searchData.origin} → ${searchData.destination}</p>
 <p>Pasajeros: ${searchData.passengers}</p>
-<p>Total: $${total} USD</p>
+<p>Asientos: ${seatsSelected.join(", ")}</p>
+<p><strong>Total: $${total} USD</strong></p>
 `;
-
-let formHTML="<h3>Datos pasajeros</h3>";
-for(let i=1;i<=searchData.passengers;i++){
-formHTML+=`
-<input placeholder="Nombre pasajero ${i}">
-<input placeholder="Documento pasajero ${i}">
-`;
-}
-formHTML+=`<button class="confirm-btn" onclick="confirmBooking()">Confirmar reserva</button>`;
-passenger-form.innerHTML=formHTML;
 }
 
 function confirmBooking(){
-showScreen("confirmation-screen");
-updateStep(4);
-reservation-code.innerText="Código: LA"+Math.floor(Math.random()*100000);
+showScreen("confirm-screen");
+updateStep(5);
+document.getElementById("reservation-code").innerText="Código: LA"+Math.floor(Math.random()*100000);
 }
 </script>
 
