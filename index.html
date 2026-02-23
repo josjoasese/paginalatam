@@ -10,19 +10,19 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
 
-body { background:#f5f6f8; overflow:hidden; }
+body { background:#f5f6f8; }
 
 .screen {
   width:100%;
   height:100vh;
   display:none;
   padding:40px;
+  overflow-y:auto;
 }
 
 .screen.active {
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
 }
 
@@ -189,6 +189,8 @@ a.city.toLowerCase().includes(value)||
 a.iata.toLowerCase().includes(value)
 );
 
+if(matches.length===0){dropdown.style.display="none";return;}
+
 matches.slice(0,8).forEach(match=>{
 const option=document.createElement("div");
 option.className="autocomplete-option";
@@ -202,8 +204,11 @@ dropdown.appendChild(option);
 dropdown.style.display="block";
 dropdown.style.width=input.offsetWidth+"px";
 });
+
 document.addEventListener("click",e=>{
-if(!wrapper.contains(e.target)){dropdown.style.display="none";}
+if(!wrapper.contains(e.target)){
+dropdown.style.display="none";
+}
 });
 }
 
@@ -211,7 +216,6 @@ setupAutocomplete("origin");
 setupAutocomplete("destination");
 
 /* Toggle ida/regreso */
-
 document.querySelectorAll("input[name='tripType']").forEach(radio=>{
 radio.addEventListener("change",function(){
 const returnInput=document.getElementById("returnDate");
@@ -224,7 +228,6 @@ returnInput.style.display="none";
 });
 
 /* Generador 10-25 vuelos */
-
 function generateFlights(date, passengers, classType){
 const count=Math.floor(Math.random()*16)+10;
 const flights=[];
@@ -246,6 +249,9 @@ return flights;
 }
 
 function searchFlights(){
+appState.selectedDeparture=null;
+appState.selectedReturn=null;
+
 const tripType=document.querySelector("input[name='tripType']:checked").value;
 const origin=document.getElementById("origin").value;
 const destination=document.getElementById("destination").value;
