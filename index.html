@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LATAM Travel System - Módulo 1</title>
+<title>LATAM Travel System - Módulo 1 Pro</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
 
 body { background:#f5f6f8; overflow:hidden; }
 
@@ -17,7 +17,6 @@ body { background:#f5f6f8; overflow:hidden; }
   height:100vh;
   display:none;
   padding:40px;
-  position:relative;
 }
 
 .screen.active {
@@ -33,29 +32,22 @@ body { background:#f5f6f8; overflow:hidden; }
   border-radius:16px;
   box-shadow:0 20px 40px rgba(0,0,0,0.08);
   width:100%;
-  max-width:900px;
-  position:relative;
+  max-width:1000px;
 }
 
-h1 {
-  margin-bottom:30px;
-  font-weight:700;
-}
+h1 { margin-bottom:20px; }
 
 .form-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
   margin-bottom:20px;
-  position:relative;
 }
 
 input, select {
   padding:14px;
   border-radius:8px;
   border:1px solid #ddd;
-  font-size:14px;
-  width:100%;
 }
 
 button {
@@ -72,10 +64,10 @@ button {
 }
 
 .flight-card {
-  padding:20px;
+  padding:18px;
   border:1px solid #eee;
-  border-radius:12px;
-  margin-bottom:15px;
+  border-radius:10px;
+  margin-bottom:10px;
   cursor:pointer;
   transition:0.2s;
 }
@@ -84,7 +76,6 @@ button {
   box-shadow:0 10px 20px rgba(0,0,0,0.1);
 }
 
-/* Autocomplete dropdown */
 .autocomplete-dropdown {
   position:absolute;
   background:#fff;
@@ -108,220 +99,221 @@ button {
 </head>
 <body>
 
-<!-- SCREEN 1 SEARCH -->
+<!-- SEARCH -->
 <div id="searchScreen" class="screen active">
-  <div class="card">
-    <h1>Buscar vuelo</h1>
+<div class="card">
+<h1>Buscar vuelo</h1>
 
-    <div class="form-grid">
-      <div style="position:relative;">
-        <input id="origin" placeholder="Origen (Ciudad o IATA)">
-      </div>
-      <div style="position:relative;">
-        <input id="destination" placeholder="Destino (Ciudad o IATA)">
-      </div>
-      <input type="date" id="departureDate">
-      <input type="date" id="returnDate">
-      <select id="passengers">
-        <option value="1">1 Pasajero</option>
-        <option value="2">2 Pasajeros</option>
-        <option value="3">3 Pasajeros</option>
-        <option value="4">4 Pasajeros</option>
-      </select>
-      <select id="classType">
-        <option value="economy">Economy</option>
-        <option value="premium">Premium Economy</option>
-      </select>
-    </div>
-
-    <button class="btn-primary" onclick="searchFlights()">Buscar vuelos</button>
-  </div>
+<div style="margin-bottom:20px;">
+<label><input type="radio" name="tripType" value="oneway" checked> Solo ida</label>
+<label style="margin-left:20px;"><input type="radio" name="tripType" value="roundtrip"> Ida y regreso</label>
 </div>
 
-<!-- SCREEN 2 RESULTS -->
+<div class="form-grid">
+<div style="position:relative;">
+<input id="origin" placeholder="Origen">
+</div>
+
+<div style="position:relative;">
+<input id="destination" placeholder="Destino">
+</div>
+
+<input type="date" id="departureDate">
+<input type="date" id="returnDate" style="display:none;">
+
+<select id="passengers">
+<option value="1">1 Pasajero</option>
+<option value="2">2 Pasajeros</option>
+<option value="3">3 Pasajeros</option>
+<option value="4">4 Pasajeros</option>
+</select>
+
+<select id="classType">
+<option value="economy">Economy</option>
+<option value="premium">Premium Economy</option>
+</select>
+</div>
+
+<button class="btn-primary" onclick="searchFlights()">Buscar vuelos</button>
+</div>
+</div>
+
+<!-- RESULTS -->
 <div id="resultsScreen" class="screen">
-  <div class="card">
-    <h1>Selecciona tu vuelo</h1>
-    <div id="flightsContainer"></div>
-    <button onclick="goBack()">Volver</button>
-  </div>
+<div class="card">
+<h1 id="resultsTitle">Selecciona tu vuelo</h1>
+<div id="flightsContainer"></div>
+<button onclick="goBack()">Volver</button>
+</div>
 </div>
 
 <script>
 
-/* =========================
-   ESTADO CENTRAL
-========================= */
-
 const appState = {
-  search: {},
-  flights: [],
-  selectedFlight: null
+  search:{},
+  departureFlights:[],
+  returnFlights:[],
+  selectedDeparture:null,
+  selectedReturn:null
 };
 
-/* =========================
-   BASE AMPLIADA AEROPUERTOS
-========================= */
-
 const AIRPORTS_DB = [
-  {city:"Bogotá", iata:"BOG", country:"Colombia"},
-  {city:"Medellín", iata:"MDE", country:"Colombia"},
-  {city:"Cali", iata:"CLO", country:"Colombia"},
-  {city:"Cartagena", iata:"CTG", country:"Colombia"},
-  {city:"Lima", iata:"LIM", country:"Perú"},
-  {city:"Santiago", iata:"SCL", country:"Chile"},
-  {city:"São Paulo", iata:"GRU", country:"Brasil"},
-  {city:"Rio de Janeiro", iata:"GIG", country:"Brasil"},
-  {city:"Buenos Aires", iata:"EZE", country:"Argentina"},
-  {city:"Quito", iata:"UIO", country:"Ecuador"},
-  {city:"Miami", iata:"MIA", country:"Estados Unidos"},
-  {city:"Madrid", iata:"MAD", country:"España"}
+{city:"Bogotá", iata:"BOG", country:"Colombia"},
+{city:"Medellín", iata:"MDE", country:"Colombia"},
+{city:"Cali", iata:"CLO", country:"Colombia"},
+{city:"Cartagena", iata:"CTG", country:"Colombia"},
+{city:"Lima", iata:"LIM", country:"Perú"},
+{city:"Santiago", iata:"SCL", country:"Chile"},
+{city:"São Paulo", iata:"GRU", country:"Brasil"},
+{city:"Rio de Janeiro", iata:"GIG", country:"Brasil"},
+{city:"Buenos Aires", iata:"EZE", country:"Argentina"},
+{city:"Quito", iata:"UIO", country:"Ecuador"},
+{city:"Miami", iata:"MIA", country:"Estados Unidos"},
+{city:"Madrid", iata:"MAD", country:"España"}
 ];
 
-/* =========================
-   AUTOCOMPLETE REAL
-========================= */
+function setupAutocomplete(id){
+const input=document.getElementById(id);
+const wrapper=input.parentElement;
+const dropdown=document.createElement("div");
+dropdown.className="autocomplete-dropdown";
+wrapper.appendChild(dropdown);
 
-function setupAutocomplete(inputId) {
-  const input = document.getElementById(inputId);
-  const wrapper = input.parentElement;
+input.addEventListener("input",function(){
+const value=this.value.toLowerCase();
+dropdown.innerHTML="";
+if(value.length<1){dropdown.style.display="none";return;}
 
-  const dropdown = document.createElement("div");
-  dropdown.className = "autocomplete-dropdown";
-  wrapper.appendChild(dropdown);
+const matches=AIRPORTS_DB.filter(a=>
+a.city.toLowerCase().includes(value)||
+a.iata.toLowerCase().includes(value)
+);
 
-  input.addEventListener("input", function () {
-    const value = this.value.toLowerCase();
-    dropdown.innerHTML = "";
-
-    if (value.length < 1) {
-      dropdown.style.display = "none";
-      return;
-    }
-
-    const matches = AIRPORTS_DB.filter(a =>
-      a.city.toLowerCase().includes(value) ||
-      a.iata.toLowerCase().includes(value)
-    );
-
-    if (matches.length === 0) {
-      dropdown.style.display = "none";
-      return;
-    }
-
-    matches.slice(0,8).forEach(match => {
-      const option = document.createElement("div");
-      option.className = "autocomplete-option";
-      option.innerHTML = `${match.city} (${match.iata}) - ${match.country}`;
-
-      option.onclick = function() {
-        input.value = `${match.city} (${match.iata})`;
-        dropdown.style.display = "none";
-      };
-
-      dropdown.appendChild(option);
-    });
-
-    dropdown.style.display = "block";
-    dropdown.style.width = input.offsetWidth + "px";
-  });
-
-  document.addEventListener("click", function(e){
-    if(!wrapper.contains(e.target)){
-      dropdown.style.display = "none";
-    }
-  });
+matches.slice(0,8).forEach(match=>{
+const option=document.createElement("div");
+option.className="autocomplete-option";
+option.innerHTML=`${match.city} (${match.iata}) - ${match.country}`;
+option.onclick=function(){
+input.value=`${match.city} (${match.iata})`;
+dropdown.style.display="none";
+};
+dropdown.appendChild(option);
+});
+dropdown.style.display="block";
+dropdown.style.width=input.offsetWidth+"px";
+});
+document.addEventListener("click",e=>{
+if(!wrapper.contains(e.target)){dropdown.style.display="none";}
+});
 }
 
 setupAutocomplete("origin");
 setupAutocomplete("destination");
 
-/* =========================
-   GENERADOR DE VUELOS
-========================= */
+/* Toggle ida/regreso */
 
-function generateFlights(origin, destination, date, passengers, classType) {
-  const basePrice = 250000 + Math.floor(Math.random() * 200000);
-  const multiplier = classType === "premium" ? 1.8 : 1;
+document.querySelectorAll("input[name='tripType']").forEach(radio=>{
+radio.addEventListener("change",function(){
+const returnInput=document.getElementById("returnDate");
+if(this.value==="roundtrip"){
+returnInput.style.display="block";
+}else{
+returnInput.style.display="none";
+}
+});
+});
 
-  let flights = [];
+/* Generador 10-25 vuelos */
 
-  for(let i=0; i<3; i++) {
-    flights.push({
-      id: i,
-      flightNumber: "LA" + (1000 + Math.floor(Math.random()*9000)),
-      departure: date + " 0" + (8+i*3) + ":00",
-      arrival: date + " 1" + (1+i*3) + ":30",
-      price: Math.floor(basePrice * multiplier * passengers)
-    });
-  }
+function generateFlights(date, passengers, classType){
+const count=Math.floor(Math.random()*16)+10;
+const flights=[];
+const basePrice=200000+Math.random()*250000;
+const multiplier=classType==="premium"?1.8:1;
 
-  return flights;
+for(let i=0;i<count;i++){
+const hour=5+i;
+const price=Math.floor((basePrice+(i*8000))*multiplier*passengers);
+flights.push({
+id:i,
+flightNumber:"LA"+(1000+Math.floor(Math.random()*8000)),
+departure:hour+":00",
+arrival:(hour+2)+":30",
+price:price
+});
+}
+return flights;
 }
 
-/* =========================
-   SEARCH
-========================= */
+function searchFlights(){
+const tripType=document.querySelector("input[name='tripType']:checked").value;
+const origin=document.getElementById("origin").value;
+const destination=document.getElementById("destination").value;
+const departureDate=document.getElementById("departureDate").value;
+const returnDate=document.getElementById("returnDate").value;
+const passengers=parseInt(document.getElementById("passengers").value);
+const classType=document.getElementById("classType").value;
 
-function searchFlights() {
-  const origin = document.getElementById("origin").value;
-  const destination = document.getElementById("destination").value;
-  const departureDate = document.getElementById("departureDate").value;
-  const passengers = parseInt(document.getElementById("passengers").value);
-  const classType = document.getElementById("classType").value;
-
-  if(!origin || !destination || !departureDate) {
-    alert("Completa todos los campos obligatorios.");
-    return;
-  }
-
-  appState.search = {origin, destination, departureDate, passengers, classType};
-  appState.flights = generateFlights(origin, destination, departureDate, passengers, classType);
-
-  renderFlights();
-  goToScreen("resultsScreen");
+if(!origin||!destination||!departureDate){
+alert("Completa campos obligatorios");
+return;
+}
+if(tripType==="roundtrip"&&!returnDate){
+alert("Selecciona fecha de regreso");
+return;
 }
 
-/* =========================
-   RENDER
-========================= */
+appState.search={tripType,origin,destination,departureDate,returnDate,passengers,classType};
+appState.departureFlights=generateFlights(departureDate,passengers,classType);
 
-function renderFlights() {
-  const container = document.getElementById("flightsContainer");
-  container.innerHTML = "";
-
-  appState.flights.forEach(flight => {
-    const div = document.createElement("div");
-    div.className = "flight-card";
-    div.innerHTML = `
-      <strong>${flight.flightNumber}</strong><br>
-      ${flight.departure} → ${flight.arrival}<br>
-      Precio total: $${flight.price.toLocaleString("es-CO")} COP
-    `;
-    div.onclick = () => selectFlight(flight);
-    container.appendChild(div);
-  });
+renderFlights(appState.departureFlights,"Selecciona vuelo de ida");
+goToScreen("resultsScreen");
 }
 
-function selectFlight(flight) {
-  appState.selectedFlight = flight;
-  alert("Vuelo seleccionado: " + flight.flightNumber);
+function renderFlights(flights,title){
+document.getElementById("resultsTitle").innerText=title;
+const container=document.getElementById("flightsContainer");
+container.innerHTML="";
+flights.forEach(flight=>{
+const div=document.createElement("div");
+div.className="flight-card";
+div.innerHTML=`
+<strong>${flight.flightNumber}</strong><br>
+${flight.departure} → ${flight.arrival}<br>
+$${flight.price.toLocaleString("es-CO")} COP
+`;
+div.onclick=()=>selectFlight(flight);
+container.appendChild(div);
+});
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+function selectFlight(flight){
+if(!appState.selectedDeparture){
+appState.selectedDeparture=flight;
 
-function goToScreen(id) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+if(appState.search.tripType==="roundtrip"){
+appState.returnFlights=generateFlights(appState.search.returnDate,appState.search.passengers,appState.search.classType);
+renderFlights(appState.returnFlights,"Selecciona vuelo de regreso");
+}else{
+alert("Vuelo seleccionado correctamente");
+}
+}else{
+appState.selectedReturn=flight;
+alert("Ida y regreso seleccionados correctamente");
+}
 }
 
-function goBack() {
-  goToScreen("searchScreen");
+function goToScreen(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function goBack(){
+appState.selectedDeparture=null;
+appState.selectedReturn=null;
+goToScreen("searchScreen");
 }
 
 </script>
-
 </body>
 </html>
