@@ -5,303 +5,561 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LATAM Travel Assistance</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
-body{background:#f4f6fa;}
-
-.container{
-max-width:1200px;
-margin:60px auto;
-background:white;
-padding:50px;
-border-radius:24px;
-box-shadow:0 30px 60px rgba(0,0,0,0.08);
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
 }
 
-h1{margin-bottom:25px;font-weight:700;}
+body{
+background:#f5f6f8;
+overflow:hidden;
+}
 
-.trip-toggle{
+/* PANTALLAS */
+.screen{
+position:absolute;
+width:100%;
+height:100vh;
 display:flex;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+opacity:0;
+pointer-events:none;
+transform:translateX(40px);
+transition:.6s cubic-bezier(.22,1,.36,1);
+}
+
+.screen.active{
+opacity:1;
+pointer-events:all;
+transform:translateX(0);
+}
+
+.container{
+background:white;
+width:100%;
+max-width:1100px;
+border-radius:24px;
+padding:50px;
+box-shadow:0 30px 80px rgba(0,0,0,.08);
+}
+
+h1{
+color:#7A003C;
+margin-bottom:30px;
+font-weight:800;
+}
+
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:30px;
+}
+
+.tab{
+padding:12px 22px;
+border-radius:30px;
+border:1px solid #ddd;
+cursor:pointer;
+font-weight:600;
+}
+
+.tab.active{
+background:#7A003C;
+color:white;
+border-color:#7A003C;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
 gap:20px;
 margin-bottom:25px;
 }
 
-.trip-toggle label{
-cursor:pointer;
-font-weight:500;
+.field{
+display:flex;
+flex-direction:column;
 }
 
-.search-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:18px;
-align-items:end;
+label{
+font-size:13px;
+font-weight:600;
+margin-bottom:6px;
 }
 
-.search-grid input{
+input{
 padding:14px;
 border-radius:14px;
 border:1px solid #ddd;
-transition:0.2s;
-}
-
-.search-grid input:focus{
-border:1px solid #d40000;
 outline:none;
+transition:.3s;
 }
 
-.search-btn{
-grid-column:1/-1;
-padding:18px;
+input:focus{
+border-color:#7A003C;
+box-shadow:0 0 0 3px rgba(122,0,60,.1);
+}
+
+.primary-btn{
+background:#E30613;
+color:white;
 border:none;
-border-radius:16px;
+padding:16px;
+border-radius:18px;
 font-weight:700;
-font-size:16px;
-background:linear-gradient(135deg,#d40000,#7a0000);
-color:white;
 cursor:pointer;
-transition:0.3s;
-box-shadow:0 15px 30px rgba(212,0,0,0.35);
-}
-
-.search-btn:hover{
-transform:translateY(-3px);
-box-shadow:0 20px 40px rgba(212,0,0,0.45);
-}
-
-.error{
-color:#d40000;
-margin-top:15px;
-display:none;
-font-weight:500;
-}
-
-.modal{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.55);
-display:none;
-justify-content:center;
-align-items:center;
-animation:fadeIn .2s ease-in-out;
-}
-
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
-
-.modal-content{
-background:white;
-padding:35px;
-border-radius:24px;
-width:90%;
-max-width:650px;
-max-height:90vh;
-overflow:auto;
-animation:scaleIn .2s ease-in-out;
-}
-
-@keyframes scaleIn{
-from{transform:scale(.95);opacity:0}
-to{transform:scale(1);opacity:1}
-}
-
-.flight-option{
-padding:18px;
-border:1px solid #eee;
-border-radius:16px;
-margin-bottom:15px;
-cursor:pointer;
-transition:0.2s;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.flight-option:hover{
-border:1px solid #d40000;
-background:#fff5f5;
-}
-
-.selected{
-border:2px solid #d40000 !important;
-background:#fff0f0;
-}
-
-.passenger-form input{
 width:100%;
-padding:12px;
-margin-bottom:12px;
-border-radius:12px;
-border:1px solid #ddd;
+transition:.3s;
+box-shadow:0 10px 30px rgba(227,6,19,.4);
 }
 
-.btn-primary{
-background:#d40000;
-color:white;
-padding:15px;
+.primary-btn:hover{
+transform:translateY(-4px);
+box-shadow:0 15px 40px rgba(227,6,19,.6);
+}
+
+.secondary-btn{
+margin-top:15px;
+background:#eee;
 border:none;
+padding:14px;
 border-radius:14px;
 cursor:pointer;
 width:100%;
-font-weight:600;
-margin-top:10px;
 }
-</style>
-</head>
 
+/* AUTOCOMPLETE */
+.autocomplete-wrapper{position:relative;}
+.autocomplete-list{
+position:absolute;
+top:105%;
+left:0;
+width:100%;
+background:white;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+max-height:260px;
+overflow-y:auto;
+z-index:1000;
+display:none;
+}
+.autocomplete-item{
+padding:12px 15px;
+cursor:pointer;
+}
+.autocomplete-item:hover{
+background:#f2f2f2;
+}
+.autocode{
+font-weight:700;
+color:#7A003C;
+margin-right:6px;
+}
+
+/* FLIGHT CARD */
+.flight-card{
+border:1px solid #eee;
+border-radius:18px;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:15px;
+cursor:pointer;
+transition:.3s;
+}
+.flight-card:hover{
+border-color:#7A003C;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+transform:scale(1.02);
+}
+
+/* ASIENTOS */
+.seat-map{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:10px;
+justify-items:center;
+margin-top:20px;
+}
+
+.seat{
+width:40px;
+height:40px;
+border-radius:8px;
+cursor:pointer;
+background:#e0e0e0;
+}
+
+.seat.selected{
+background:#7A003C;
+}
+
+.seat.occupied{
+background:#999;
+cursor:not-allowed;
+}
+
+.aisle{
+visibility:hidden;
+}
+
+  </style>
+</head>
 <body>
 
+  <div class="screen active" id="screen1">
 <div class="container">
 <h1>Reserva tu vuelo</h1>
 
-<div class="trip-toggle">
-<label><input type="radio" name="tipoViaje" value="idaVuelta" checked onchange="toggleRegreso()"> Ida y Regreso</label>
-<label><input type="radio" name="tipoViaje" value="soloIda" onchange="toggleRegreso()"> Solo Ida</label>
+<div class="tabs">
+<div class="tab active" onclick="setTipo('ida')">Solo ida</div>
+<div class="tab" onclick="setTipo('ida_vuelta')">Ida y regreso</div>
 </div>
 
-<div class="search-grid">
-<input type="text" id="origen" placeholder="Origen (Ej: MAD - Madrid)">
-<input type="text" id="destino" placeholder="Destino (Ej: SCL - Santiago)">
-<input type="date" id="fechaSalida">
-<input type="date" id="fechaRegreso">
+<div class="grid">
+
+<div class="field">
+<label>Origen</label>
+<div class="autocomplete-wrapper">
+<input type="text" id="origen" autocomplete="off">
+<div class="autocomplete-list" id="origen-list"></div>
+</div>
+</div>
+
+<div class="field">
+<label>Destino</label>
+<div class="autocomplete-wrapper">
+<input type="text" id="destino" autocomplete="off">
+<div class="autocomplete-list" id="destino-list"></div>
+</div>
+</div>
+
+<div class="field">
+<label>Fecha ida</label>
+<input type="date" id="fechaIda">
+</div>
+
+<div class="field" id="fechaVueltaField" style="display:none">
+<label>Fecha regreso</label>
+<input type="date" id="fechaVuelta">
+</div>
+
+<div class="field">
+<label>Pasajeros</label>
 <input type="number" id="pasajeros" min="1" value="1">
-<button class="search-btn" onclick="buscarVuelos()">Buscar vuelos</button>
 </div>
 
-<div class="error" id="errorMensaje"></div>
 </div>
 
-<!-- RESULTADOS -->
-<div class="modal" id="modalResultados">
-<div class="modal-content">
-<h2>Selecciona tu vuelo</h2>
-<div id="listaVuelos"></div>
-<button class="btn-primary" onclick="continuarPasajeros()">Continuar</button>
+<button class="primary-btn" onclick="buscarVuelos()">Buscar vuelos</button>
+
 </div>
 </div>
 
-<!-- PASAJEROS -->
-<div class="modal" id="modalPasajeros">
-<div class="modal-content">
-<h2>Datos de pasajeros</h2>
-<div id="formulariosPasajeros"></div>
-<button class="btn-primary" onclick="generarTicket()">Confirmar Reserva</button>
+  <!-- PANTALLA 2 - SELECCIÓN IDA -->
+<div class="screen" id="screen2">
+<div class="container">
+<h1>Selecciona tu vuelo de ida</h1>
+<div id="vuelosIda"></div>
+<button class="secondary-btn" onclick="volver(1)">Volver</button>
 </div>
 </div>
 
-<script>
-let vueloSeleccionado=null;
+<!-- PANTALLA 3 - SELECCIÓN REGRESO -->
+<div class="screen" id="screen3">
+<div class="container">
+<h1>Selecciona tu vuelo de regreso</h1>
+<div id="vuelosVuelta"></div>
+<button class="secondary-btn" onclick="volver(2)">Volver</button>
+</div>
+</div>
 
-function toggleRegreso(){
-const tipo=document.querySelector('input[name="tipoViaje"]:checked').value;
-const regreso=document.getElementById("fechaRegreso");
-regreso.disabled = (tipo==="soloIda");
-if(tipo==="soloIda"){regreso.value="";}
-}
+<!-- PANTALLA 4 - ASIENTOS -->
+<div class="screen" id="screen4">
+<div class="container">
+<h1>Selecciona tus asientos</h1>
+<div class="seat-map" id="seatMap"></div>
+<button class="primary-btn" onclick="confirmarAsientos()">Continuar</button>
+<button class="secondary-btn" onclick="volver(3)">Volver</button>
+</div>
+</div>
 
-function mostrarError(msg){
-const box=document.getElementById("errorMensaje");
-box.innerText=msg;
-box.style.display="block";
-}
+<!-- PANTALLA 5 - PASAJEROS -->
+<div class="screen" id="screen5">
+<div class="container">
+<h1>Datos de pasajeros</h1>
+<div id="formPasajeros"></div>
+<button class="primary-btn" onclick="confirmarReserva()">Confirmar reserva</button>
+<button class="secondary-btn" onclick="volver(4)">Volver</button>
+</div>
+</div>
 
-function buscarVuelos(){
-const origen=document.getElementById("origen").value.trim();
-const destino=document.getElementById("destino").value.trim();
-const fechaSalida=document.getElementById("fechaSalida").value;
-const tipo=document.querySelector('input[name="tipoViaje"]:checked').value;
-const fechaRegreso=document.getElementById("fechaRegreso").value;
-const pasajeros=document.getElementById("pasajeros").value;
+<!-- PANTALLA 6 - CONFIRMACIÓN -->
+<div class="screen" id="screen6">
+<div class="container">
+<h1>Reserva confirmada</h1>
+<div id="resumenFinal"></div>
+<button class="primary-btn" onclick="reiniciar()">Nueva reserva</button>
+</div>
+</div>
 
-if(!origen || !destino || !fechaSalida || !pasajeros){
-mostrarError("Completa los campos obligatorios.");
-return;
-}
+  <script>
+/* =========================
+   CONFIGURACIÓN GLOBAL
+========================= */
+let tipoViaje = "ida";
+let vueloIdaSeleccionado = null;
+let vueloVueltaSeleccionado = null;
+let asientosSeleccionados = [];
+let pasajerosData = [];
 
-if(tipo==="idaVuelta" && !fechaRegreso){
-mostrarError("Selecciona fecha de regreso.");
-return;
-}
-
-if(origen===destino){
-mostrarError("Origen y destino no pueden ser iguales.");
-return;
-}
-
-document.getElementById("errorMensaje").style.display="none";
-
-const basePrice=400+Math.floor(Math.random()*300);
-const vuelos=[
-{hora:"08:00",precio:basePrice},
-{hora:"13:30",precio:basePrice+50},
-{hora:"19:45",precio:basePrice+120}
+/* =========================
+   BASE AEROPUERTOS LATAM
+   (Red operada directamente)
+========================= */
+const aeropuertos = [
+{c:"BOG",n:"Bogotá"},
+{c:"MDE",n:"Medellín"},
+{c:"CTG",n:"Cartagena"},
+{c:"CLO",n:"Cali"},
+{c:"SMR",n:"Santa Marta"},
+{c:"ADZ",n:"San Andrés"},
+{c:"BAQ",n:"Barranquilla"},
+{c:"PEI",n:"Pereira"},
+{c:"AXM",n:"Armenia"},
+{c:"BGA",n:"Bucaramanga"},
+{c:"LIM",n:"Lima"},
+{c:"CUZ",n:"Cusco"},
+{c:"AQP",n:"Arequipa"},
+{c:"PIU",n:"Piura"},
+{c:"SCL",n:"Santiago"},
+{c:"ANF",n:"Antofagasta"},
+{c:"PMC",n:"Puerto Montt"},
+{c:"EZE",n:"Buenos Aires"},
+{c:"AEP",n:"Buenos Aires Aeroparque"},
+{c:"COR",n:"Córdoba"},
+{c:"MDZ",n:"Mendoza"},
+{c:"GRU",n:"São Paulo"},
+{c:"GIG",n:"Rio de Janeiro"},
+{c:"BSB",n:"Brasilia"},
+{c:"SSA",n:"Salvador"},
+{c:"UIO",n:"Quito"},
+{c:"GYE",n:"Guayaquil"},
+{c:"MIA",n:"Miami"},
+{c:"MAD",n:"Madrid"},
+{c:"JFK",n:"New York"},
+{c:"CDG",n:"Paris"}
 ];
 
-const lista=document.getElementById("listaVuelos");
-lista.innerHTML="";
-vueloSeleccionado=null;
+/* =========================
+   AUTOCOMPLETE
+========================= */
+function activarAutocomplete(idInput,idList){
+const input=document.getElementById(idInput);
+const list=document.getElementById(idList);
 
-vuelos.forEach(v=>{
+input.addEventListener("input",()=>{
+const val=input.value.toLowerCase();
+list.innerHTML="";
+if(!val){list.style.display="none";return;}
+
+aeropuertos
+.filter(a=>a.c.toLowerCase().includes(val)||a.n.toLowerCase().includes(val))
+.forEach(a=>{
 const div=document.createElement("div");
-div.className="flight-option";
-div.innerHTML=`<div>${v.hora}</div><div><strong>$${v.precio}</strong></div>`;
+div.className="autocomplete-item";
+div.innerHTML=`<span class="autocode">${a.c}</span>${a.n}`;
 div.onclick=()=>{
-document.querySelectorAll(".flight-option").forEach(el=>el.classList.remove("selected"));
-div.classList.add("selected");
-vueloSeleccionado=v;
+input.value=`${a.n} (${a.c})`;
+list.style.display="none";
 };
-lista.appendChild(div);
+list.appendChild(div);
+});
+list.style.display="block";
 });
 
-document.getElementById("modalResultados").style.display="flex";
+document.addEventListener("click",e=>{
+if(!input.contains(e.target)) list.style.display="none";
+});
+}
+activarAutocomplete("origen","origen-list");
+activarAutocomplete("destino","destino-list");
+
+/* =========================
+   TIPO VIAJE
+========================= */
+function setTipo(tipo){
+tipoViaje=tipo;
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+event.target.classList.add("active");
+document.getElementById("fechaVueltaField").style.display =
+tipo==="ida_vuelta" ? "block":"none";
 }
 
-function continuarPasajeros(){
-if(!vueloSeleccionado){
-alert("Selecciona un vuelo.");
+/* =========================
+   CAMBIO PANTALLA
+========================= */
+function cambiarPantalla(n){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById("screen"+n).classList.add("active");
+}
+
+/* =========================
+   PRICING DINÁMICO
+========================= */
+function calcularPrecio(fecha){
+const hoy=new Date();
+const fechaVuelo=new Date(fecha);
+const diffDias=Math.ceil((fechaVuelo-hoy)/(1000*60*60*24));
+
+let base=300000;
+let anticipacion = diffDias < 7 ? 200000 :
+diffDias < 30 ? 120000 : 50000;
+
+let diaSemana=fechaVuelo.getDay();
+let demanda = (diaSemana===5||diaSemana===0)?100000:0;
+
+let temporada=(fechaVuelo.getMonth()===5||fechaVuelo.getMonth()===11)?150000:0;
+
+return base+anticipacion+demanda+temporada+Math.floor(Math.random()*50000);
+}
+
+/* =========================
+   BUSCAR VUELOS
+========================= */
+function buscarVuelos(){
+const origen=document.getElementById("origen").value;
+const destino=document.getElementById("destino").value;
+const fechaIda=document.getElementById("fechaIda").value;
+
+if(!origen||!destino||origen===destino){
+alert("Selecciona origen y destino válidos");
 return;
 }
-document.getElementById("modalResultados").style.display="none";
 
-const cantidad=document.getElementById("pasajeros").value;
-const cont=document.getElementById("formulariosPasajeros");
+generarVuelos("vuelosIda",fechaIda,"ida");
+cambiarPantalla(2);
+}
+
+function generarVuelos(containerId,fecha,tipo){
+const cont=document.getElementById(containerId);
 cont.innerHTML="";
+for(let i=0;i<4;i++){
+let precio=calcularPrecio(fecha);
+let card=document.createElement("div");
+card.className="flight-card";
+card.innerHTML=`
+<div>
+<strong>Salida ${8+i}:00</strong><br>
+Duración 2h 10m
+</div>
+<div><strong>$${precio.toLocaleString()} COP</strong></div>
+`;
+card.onclick=()=>{
+if(tipo==="ida"){
+vueloIdaSeleccionado={precio};
+if(tipoViaje==="ida_vuelta"){
+generarVuelos("vuelosVuelta",
+document.getElementById("fechaVuelta").value,"vuelta");
+cambiarPantalla(3);
+}else{
+cargarAsientos();
+cambiarPantalla(4);
+}
+}else{
+vueloVueltaSeleccionado={precio};
+cargarAsientos();
+cambiarPantalla(4);
+}
+};
+cont.appendChild(card);
+}
+}
 
+/* =========================
+   ASIENTOS A320
+========================= */
+function cargarAsientos(){
+const map=document.getElementById("seatMap");
+map.innerHTML="";
+asientosSeleccionados=[];
+for(let fila=1;fila<=30;fila++){
+["A","B","C","aisle","D","E","F"].forEach(col=>{
+if(col==="aisle"){
+let div=document.createElement("div");
+div.className="aisle";
+map.appendChild(div);
+}else{
+let seat=document.createElement("div");
+seat.className="seat";
+if(Math.random()<0.2){
+seat.classList.add("occupied");
+}else{
+seat.onclick=()=>{
+if(seat.classList.contains("occupied"))return;
+seat.classList.toggle("selected");
+};
+}
+map.appendChild(seat);
+}
+});
+}
+}
+
+function confirmarAsientos(){
+cambiarPantalla(5);
+cargarFormulario();
+}
+
+/* =========================
+   FORM PASAJEROS
+========================= */
+function cargarFormulario(){
+const cantidad=document.getElementById("pasajeros").value;
+const cont=document.getElementById("formPasajeros");
+cont.innerHTML="";
 for(let i=1;i<=cantidad;i++){
 cont.innerHTML+=`
-<div class="passenger-form">
-<h4>Pasajero ${i}</h4>
-<input type="text" placeholder="Nombre completo" required>
-<input type="text" placeholder="Documento" required>
-</div>`;
+<div style="margin-bottom:15px">
+<label>Nombre pasajero ${i}</label>
+<input type="text" id="p${i}">
+</div>
+`;
+}
 }
 
-document.getElementById("modalPasajeros").style.display="flex";
+function confirmarReserva(){
+const cantidad=document.getElementById("pasajeros").value;
+pasajerosData=[];
+for(let i=1;i<=cantidad;i++){
+let val=document.getElementById("p"+i).value;
+if(!val){alert("Completa todos los nombres");return;}
+pasajerosData.push(val);
 }
 
-function generarTicket(){
-const { jsPDF } = window.jspdf;
-const doc=new jsPDF();
+let total=vueloIdaSeleccionado.precio +
+(tipoViaje==="ida_vuelta"?vueloVueltaSeleccionado.precio:0);
 
-doc.setFontSize(18);
-doc.text("LATAM Ticket Electrónico",20,20);
+document.getElementById("resumenFinal").innerHTML=`
+<h2>Total: $${total.toLocaleString()} COP</h2>
+<p>Pasajeros: ${pasajerosData.join(", ")}</p>
+<p>Código reserva: LAT${Math.floor(Math.random()*100000)}</p>
+`;
 
-doc.setFontSize(12);
-doc.text("Hora: "+vueloSeleccionado.hora,20,40);
-doc.text("Precio: $"+vueloSeleccionado.precio,20,50);
-doc.text("Pasajeros: "+document.getElementById("pasajeros").value,20,60);
-
-doc.save("ticket_latam.pdf");
-
-document.getElementById("modalPasajeros").style.display="none";
-alert("Reserva confirmada ✔");
+cambiarPantalla(6);
 }
+
+/* ========================= */
+function volver(n){cambiarPantalla(n);}
+function reiniciar(){location.reload();}
 </script>
 
 </body>
