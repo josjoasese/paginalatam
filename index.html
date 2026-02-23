@@ -17,6 +17,7 @@ body { background:#f5f6f8; overflow:hidden; }
   height:100vh;
   display:none;
   padding:40px;
+  position:relative;
 }
 
 .screen.active {
@@ -33,6 +34,7 @@ body { background:#f5f6f8; overflow:hidden; }
   box-shadow:0 20px 40px rgba(0,0,0,0.08);
   width:100%;
   max-width:900px;
+  position:relative;
 }
 
 h1 {
@@ -45,6 +47,7 @@ h1 {
   grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:20px;
   margin-bottom:20px;
+  position:relative;
 }
 
 input, select {
@@ -52,6 +55,7 @@ input, select {
   border-radius:8px;
   border:1px solid #ddd;
   font-size:14px;
+  width:100%;
 }
 
 button {
@@ -79,6 +83,27 @@ button {
 .flight-card:hover {
   box-shadow:0 10px 20px rgba(0,0,0,0.1);
 }
+
+/* Autocomplete dropdown */
+.autocomplete-dropdown {
+  position:absolute;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:8px;
+  max-height:200px;
+  overflow-y:auto;
+  z-index:1000;
+  display:none;
+}
+
+.autocomplete-option {
+  padding:10px;
+  cursor:pointer;
+}
+
+.autocomplete-option:hover {
+  background:#f2f2f2;
+}
 </style>
 </head>
 <body>
@@ -89,8 +114,12 @@ button {
     <h1>Buscar vuelo</h1>
 
     <div class="form-grid">
-      <input id="origin" placeholder="Origen (Ciudad o IATA)">
-      <input id="destination" placeholder="Destino (Ciudad o IATA)">
+      <div style="position:relative;">
+        <input id="origin" placeholder="Origen (Ciudad o IATA)">
+      </div>
+      <div style="position:relative;">
+        <input id="destination" placeholder="Destino (Ciudad o IATA)">
+      </div>
       <input type="date" id="departureDate">
       <input type="date" id="returnDate">
       <select id="passengers">
@@ -150,20 +179,56 @@ const AIRPORTS_DB = [
 ];
 
 /* =========================
-   AUTOCOMPLETE
+   AUTOCOMPLETE REAL
 ========================= */
 
 function setupAutocomplete(inputId) {
   const input = document.getElementById(inputId);
+  const wrapper = input.parentElement;
 
-  input.addEventListener("input", function() {
+  const dropdown = document.createElement("div");
+  dropdown.className = "autocomplete-dropdown";
+  wrapper.appendChild(dropdown);
+
+  input.addEventListener("input", function () {
     const value = this.value.toLowerCase();
-    const match = AIRPORTS_DB.find(a =>
+    dropdown.innerHTML = "";
+
+    if (value.length < 1) {
+      dropdown.style.display = "none";
+      return;
+    }
+
+    const matches = AIRPORTS_DB.filter(a =>
       a.city.toLowerCase().includes(value) ||
       a.iata.toLowerCase().includes(value)
     );
-    if(match) {
-      this.value = `${match.city} (${match.iata})`;
+
+    if (matches.length === 0) {
+      dropdown.style.display = "none";
+      return;
+    }
+
+    matches.slice(0,8).forEach(match => {
+      const option = document.createElement("div");
+      option.className = "autocomplete-option";
+      option.innerHTML = `${match.city} (${match.iata}) - ${match.country}`;
+
+      option.onclick = function() {
+        input.value = `${match.city} (${match.iata})`;
+        dropdown.style.display = "none";
+      };
+
+      dropdown.appendChild(option);
+    });
+
+    dropdown.style.display = "block";
+    dropdown.style.width = input.offsetWidth + "px";
+  });
+
+  document.addEventListener("click", function(e){
+    if(!wrapper.contains(e.target)){
+      dropdown.style.display = "none";
     }
   });
 }
@@ -211,7 +276,6 @@ function searchFlights() {
   }
 
   appState.search = {origin, destination, departureDate, passengers, classType};
-
   appState.flights = generateFlights(origin, destination, departureDate, passengers, classType);
 
   renderFlights();
