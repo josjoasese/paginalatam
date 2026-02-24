@@ -5,471 +5,659 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LATAM Travel Assistance</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+
+/* ============================= */
+/* RESET */
+/* ============================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', sans-serif;
+}
 
 body{
-background:#f4f7fb;
-overflow:hidden;
+    background:#f4f8fc;
+    color:#1c1c1c;
+    overflow:hidden;
 }
 
-/* ================= SCREENS ================= */
+/* ============================= */
+/* VARIABLES LATAM STYLE */
+/* ============================= */
+
+:root{
+    --latam-blue:#003B8E;
+    --latam-light:#0051C3;
+    --latam-white:#ffffff;
+    --latam-gray:#e9eef4;
+    --latam-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+/* ============================= */
+/* PANTALLAS FULL */
+/* ============================= */
 
 .screen{
-width:100%;
-height:100vh;
-position:absolute;
-top:0;
-left:0;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-transition:all .4s ease;
-background:linear-gradient(180deg,#ffffff,#eef4ff);
+    width:100%;
+    height:100vh;
+    position:absolute;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:all .5s ease;
+    opacity:0;
+    pointer-events:none;
 }
 
-.hidden{
-transform:translateX(100%);
-opacity:0;
-pointer-events:none;
+.screen.active{
+    opacity:1;
+    pointer-events:auto;
 }
 
-/* ================= CARD ================= */
+/* ============================= */
+/* TARJETAS PRINCIPALES */
+/* ============================= */
 
 .card{
-width:95%;
-max-width:1000px;
-background:#fff;
-padding:40px;
-border-radius:20px;
-box-shadow:0 15px 40px rgba(0,0,0,.1);
-animation:fadeIn .6s ease;
+    width:90%;
+    max-width:1100px;
+    background:var(--latam-white);
+    border-radius:20px;
+    box-shadow:var(--latam-shadow);
+    padding:40px;
+    animation:fadeIn .6s ease;
 }
 
 @keyframes fadeIn{
-from{opacity:0;transform:translateY(30px)}
-to{opacity:1;transform:translateY(0)}
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-h1{color:#002b7f;margin-bottom:25px;}
+/* ============================= */
+/* TITULOS */
+/* ============================= */
 
-/* ================= TOGGLE ================= */
-
-.toggle{
-display:flex;
-gap:15px;
-margin-bottom:20px;
+h1{
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:25px;
+    color:var(--latam-blue);
 }
 
-.toggle button{
-flex:1;
-padding:12px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-font-weight:600;
-background:#e6ecff;
-color:#002b7f;
-transition:.3s;
+/* ============================= */
+/* BOTONES PREMIUM */
+/* ============================= */
+
+.btn{
+    padding:15px 25px;
+    border-radius:12px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
 }
 
-.toggle button.active{
-background:#002b7f;
-color:#fff;
+.btn-primary{
+    background:var(--latam-blue);
+    color:white;
 }
 
-/* ================= INPUTS ================= */
-
-.input-group{margin-bottom:18px;position:relative;}
-
-input{
-width:100%;
-padding:14px;
-border-radius:10px;
-border:1px solid #ccc;
+.btn-primary:hover{
+    background:var(--latam-light);
+    transform:translateY(-2px);
 }
 
-.suggestions{
-position:absolute;
-background:#fff;
-width:100%;
-max-height:200px;
-overflow:auto;
-border-radius:10px;
-box-shadow:0 8px 20px rgba(0,0,0,.15);
-z-index:10;
-display:none;
+.btn-secondary{
+    background:#eef2f8;
 }
 
-.suggestions div{
-padding:10px;
-cursor:pointer;
+/* ============================= */
+/* INPUTS */
+/* ============================= */
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
 }
 
-.suggestions div:hover{background:#f0f4ff;}
-
-/* ================= BUTTON ================= */
-
-.search-btn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:12px;
-font-weight:700;
-background:#002b7f;
-color:#fff;
-cursor:pointer;
-transition:.3s;
+input, select{
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #d5dbe3;
+    margin-top:5px;
+    font-size:14px;
 }
 
-.search-btn:hover{background:#001c4d;}
+input:focus{
+    outline:none;
+    border-color:var(--latam-blue);
+}
 
-/* ================= RESULTS ================= */
+/* ============================= */
+/* AUTOCOMPLETE */
+/* ============================= */
+
+.autocomplete-list{
+    position:absolute;
+    background:white;
+    width:100%;
+    max-height:220px;
+    overflow-y:auto;
+    border-radius:10px;
+    box-shadow:var(--latam-shadow);
+    z-index:1000;
+}
+
+.autocomplete-item{
+    padding:10px;
+    cursor:pointer;
+}
+
+.autocomplete-item:hover{
+    background:var(--latam-gray);
+}
+
+/* ============================= */
+/* RESULTADOS SCROLL */
+/* ============================= */
 
 .results-container{
-width:95%;
-max-width:1100px;
-height:85vh;
-overflow-y:auto;
-padding:20px;
+    max-height:60vh;
+    overflow-y:auto;
+    margin-top:20px;
 }
 
 .flight-card{
-background:#fff;
-border-radius:15px;
-padding:20px;
-margin-bottom:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-display:flex;
-justify-content:space-between;
-align-items:center;
-transition:.3s;
+    padding:20px;
+    border-radius:15px;
+    border:1px solid #e4e8ef;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:.3s;
 }
 
-.flight-card:hover{transform:translateY(-3px);}
-
-.price{font-weight:700;color:#002b7f;font-size:18px;}
-
-.select-btn{
-background:#002b7f;
-color:#fff;
-border:none;
-padding:10px 18px;
-border-radius:8px;
-cursor:pointer;
+.flight-card:hover{
+    box-shadow:var(--latam-shadow);
 }
 
-/* ================= BACK ================= */
-
-.back-btn{
-position:absolute;
-top:20px;
-left:20px;
-background:#002b7f;
-color:#fff;
-border:none;
-padding:8px 15px;
-border-radius:8px;
-cursor:pointer;
-}
-
-/* ================= SEAT MAP ================= */
+/* ============================= */
+/* ASIENTOS */
+/* ============================= */
 
 .seat-map{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:8px;
-margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:8px;
+    margin-top:20px;
 }
 
 .seat{
-padding:10px;
-text-align:center;
-border-radius:6px;
-cursor:pointer;
-font-size:12px;
-font-weight:600;
+    padding:10px;
+    text-align:center;
+    border-radius:6px;
+    background:#dfe6f2;
+    cursor:pointer;
+    font-size:12px;
 }
 
-.seat.available{background:#e6ecff;color:#002b7f;}
-.seat.selected{background:#002b7f;color:#fff;}
-.seat.occupied{background:#ccc;color:#666;cursor:not-allowed;}
+.seat.selected{
+    background:var(--latam-blue);
+    color:white;
+}
+
+.seat.occupied{
+    background:#9aa7bd;
+    cursor:not-allowed;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+.footer{
+    position:absolute;
+    bottom:20px;
+    font-size:12px;
+    color:#6b7a99;
+}
 
 </style>
 </head>
 <body>
+  <!-- ============================= -->
+<!-- PANTALLA 1 - BUSCADOR -->
+<!-- ============================= -->
 
-<!-- SCREEN 1 -->
-<div class="screen" id="screen1">
-<div class="card">
-<h1>Buscar vuelos</h1>
+<div class="screen active" id="screen1">
+    <div class="card">
+        <h1>Reservar vuelo</h1>
 
-<div class="toggle">
-<button id="oneWayBtn" class="active">Solo ida</button>
-<button id="roundTripBtn">Ida y regreso</button>
+        <div style="display:flex; gap:15px; margin-bottom:25px;">
+            <button class="btn btn-secondary" id="oneWayBtn">Solo ida</button>
+            <button class="btn btn-primary" id="roundTripBtn">Ida y regreso</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; position:relative;">
+            
+            <div class="input-group">
+                <label>Origen</label>
+                <input type="text" id="originInput" autocomplete="off">
+                <div id="originList" class="autocomplete-list"></div>
+            </div>
+
+            <div class="input-group">
+                <label>Destino</label>
+                <input type="text" id="destinationInput" autocomplete="off">
+                <div id="destinationList" class="autocomplete-list"></div>
+            </div>
+
+            <div class="input-group">
+                <label>Fecha ida</label>
+                <input type="date" id="departureDate">
+            </div>
+
+            <div class="input-group" id="returnGroup">
+                <label>Fecha regreso</label>
+                <input type="date" id="returnDate">
+            </div>
+
+        </div>
+
+        <div style="margin-top:30px;">
+            <button class="btn btn-primary" style="width:100%; font-size:18px;" id="searchBtn">
+                Buscar vuelos
+            </button>
+        </div>
+    </div>
 </div>
 
-<div class="input-group">
-<input type="text" id="origin" placeholder="Origen">
-<div class="suggestions" id="originSuggestions"></div>
+
+<!-- ============================= -->
+<!-- PANTALLA 2 - RESULTADOS -->
+<!-- ============================= -->
+
+<div class="screen" id="screen2">
+    <div class="card">
+        <h1>Selecciona tu vuelo</h1>
+        <div class="results-container" id="resultsContainer"></div>
+    </div>
 </div>
 
-<div class="input-group">
-<input type="text" id="destination" placeholder="Destino">
-<div class="suggestions" id="destinationSuggestions"></div>
+
+<!-- ============================= -->
+<!-- PANTALLA 3 - ASIENTOS -->
+<!-- ============================= -->
+
+<div class="screen" id="screen3">
+    <div class="card">
+        <h1>Selecciona tu asiento - Airbus A320</h1>
+        <div class="seat-map" id="seatMap"></div>
+        <div style="margin-top:25px;">
+            <button class="btn btn-primary" id="continuePassenger">
+                Continuar
+            </button>
+        </div>
+    </div>
 </div>
 
-<div class="input-group">
-<input type="date" id="departureDate">
+
+<!-- ============================= -->
+<!-- PANTALLA 4 - PASAJERO -->
+<!-- ============================= -->
+
+<div class="screen" id="screen4">
+    <div class="card">
+        <h1>Datos del pasajero</h1>
+
+        <div class="input-group">
+            <label>Nombre completo</label>
+            <input type="text" id="passengerName">
+        </div>
+
+        <div class="input-group">
+            <label>Equipaje adicional</label>
+            <select id="extraBaggage">
+                <option value="0">Sin equipaje extra</option>
+                <option value="80000">1 maleta adicional (+80.000 COP)</option>
+                <option value="150000">2 maletas adicionales (+150.000 COP)</option>
+            </select>
+        </div>
+
+        <div style="margin-top:20px; font-weight:700;" id="totalPrice">
+            Total: 0 COP
+        </div>
+
+        <div style="margin-top:25px;">
+            <button class="btn btn-primary" id="confirmBtn">
+                Confirmar reserva
+            </button>
+        </div>
+    </div>
 </div>
 
-<div class="input-group" id="returnGroup" style="display:none;">
-<input type="date" id="returnDate">
+<div class="footer">
+    © 2026 LATAM Travel Assistance - Sistema simulado
 </div>
-
-<button class="search-btn" id="searchBtn">Buscar vuelos</button>
-</div>
-</div>
-
-<!-- SCREEN 2 -->
-<div class="screen hidden" id="screen2">
-<button class="back-btn" id="backToSearch">Volver</button>
-<div class="results-container" id="results"></div>
-</div>
-
-<!-- SCREEN 3 -->
-<div class="screen hidden" id="screen3">
-<button class="back-btn" id="backToResults">Volver</button>
-
-<div class="card" style="max-width:1100px;height:90vh;overflow:auto;">
-<h1>Selecciona tu asiento - Airbus A320</h1>
-
-<div id="seatMap" class="seat-map"></div>
-
-<div style="margin-top:25px;text-align:right;">
-<h2>Total adicional: <span id="seatTotal">$0</span></h2>
-<button class="search-btn" id="confirmSeatBtn">Confirmar asiento</button>
-</div>
-
-</div>
-</div>
-
 <script>
 
-/* ================= ELEMENTOS ================= */
+/* ============================= */
+/* BASE AMPLIADA AEROPUERTOS LATAM */
+/* ============================= */
 
-const screen1=document.getElementById("screen1");
-const screen2=document.getElementById("screen2");
-const screen3=document.getElementById("screen3");
-
-const originInput=document.getElementById("origin");
-const destinationInput=document.getElementById("destination");
-const departureInput=document.getElementById("departureDate");
-const returnInput=document.getElementById("returnDate");
-const returnGroup=document.getElementById("returnGroup");
-
-const resultsContainer=document.getElementById("results");
-const seatMap=document.getElementById("seatMap");
-const seatTotal=document.getElementById("seatTotal");
-
-/* ================= AEROPUERTOS ================= */
-
-const airports=[
-"BOG - Bogotá","MDE - Medellín","CLO - Cali","CTG - Cartagena",
-"SMR - Santa Marta","ADZ - San Andrés","LIM - Lima",
-"SCL - Santiago","GRU - São Paulo","EZE - Buenos Aires",
-"MIA - Miami","MAD - Madrid","JFK - Nueva York",
-"LAX - Los Ángeles","CDG - París","FCO - Roma",
-"CUN - Cancún","PTY - Panamá"
+const airports = [
+"BOG - Bogotá - Colombia",
+"MDE - Medellín - Colombia",
+"CLO - Cali - Colombia",
+"CTG - Cartagena - Colombia",
+"SMR - Santa Marta - Colombia",
+"LIM - Lima - Perú",
+"SCL - Santiago - Chile",
+"EZE - Buenos Aires - Argentina",
+"AEP - Buenos Aires Aeroparque - Argentina",
+"GRU - São Paulo - Brasil",
+"GIG - Río de Janeiro - Brasil",
+"UIO - Quito - Ecuador",
+"GYE - Guayaquil - Ecuador",
+"ASU - Asunción - Paraguay",
+"MIA - Miami - Estados Unidos",
+"JFK - New York - Estados Unidos",
+"LAX - Los Ángeles - Estados Unidos",
+"MAD - Madrid - España",
+"BCN - Barcelona - España",
+"CDG - París - Francia"
 ];
 
-/* ================= AUTOCOMPLETE ================= */
+/* ============================= */
+/* VARIABLES GLOBALES */
+/* ============================= */
 
-function setupAutocomplete(input, boxId){
-const box=document.getElementById(boxId);
+let selectedFlightPrice = 0;
+let selectedSeat = null;
+let tripType = "round";
 
-input.addEventListener("input",function(){
-const val=this.value.toLowerCase();
-box.innerHTML="";
-if(val.length<1){box.style.display="none";return;}
-const filtered=airports.filter(a=>a.toLowerCase().includes(val));
-filtered.forEach(a=>{
-const div=document.createElement("div");
-div.textContent=a;
-div.onclick=()=>{
-input.value=a;
-box.style.display="none";
-};
-box.appendChild(div);
-});
-box.style.display="block";
-});
+/* ============================= */
+/* NAVEGACION ENTRE PANTALLAS */
+/* ============================= */
+
+function goToScreen(screenId){
+    document.querySelectorAll(".screen").forEach(s=>{
+        s.classList.remove("active");
+    });
+    document.getElementById(screenId).classList.add("active");
 }
 
-setupAutocomplete(originInput,"originSuggestions");
-setupAutocomplete(destinationInput,"destinationSuggestions");
+/* ============================= */
+/* TOGGLE SOLO IDA / IDA REGRESO */
+/* ============================= */
 
-/* ================= TOGGLE ================= */
+const oneWayBtn = document.getElementById("oneWayBtn");
+const roundTripBtn = document.getElementById("roundTripBtn");
+const returnGroup = document.getElementById("returnGroup");
 
-let isRoundTrip=false;
-
-document.getElementById("oneWayBtn").addEventListener("click",()=>{
-isRoundTrip=false;
-returnGroup.style.display="none";
-oneWayBtn.classList.add("active");
-roundTripBtn.classList.remove("active");
-});
-
-document.getElementById("roundTripBtn").addEventListener("click",()=>{
-isRoundTrip=true;
-returnGroup.style.display="block";
-roundTripBtn.classList.add("active");
-oneWayBtn.classList.remove("active");
-});
-
-/* ================= GENERAR VUELOS ================= */
-
-function randomTime(){
-let h=Math.floor(Math.random()*24);
-let m=Math.floor(Math.random()*60);
-return h.toString().padStart(2,"0")+":"+m.toString().padStart(2,"0");
-}
-
-function generateFlights(){
-let flights=[];
-let count=Math.floor(Math.random()*16)+10;
-for(let i=0;i<count;i++){
-flights.push({
-time:randomTime(),
-price:Math.floor(Math.random()*800000)+200000
-});
-}
-flights.sort((a,b)=>a.time.localeCompare(b.time));
-return flights;
-}
-
-/* ================= BUSCAR ================= */
-
-document.getElementById("searchBtn").addEventListener("click",()=>{
-
-if(!originInput.value||!destinationInput.value||!departureInput.value){
-alert("Completa todos los campos");
-return;
-}
-
-resultsContainer.innerHTML="";
-const flights=generateFlights();
-
-flights.forEach(f=>{
-const card=document.createElement("div");
-card.className="flight-card";
-card.innerHTML=`
-<div>
-<strong>${originInput.value} → ${destinationInput.value}</strong>
-<div>Salida: ${f.time}</div>
-</div>
-<div>
-<div class="price">$${f.price.toLocaleString("es-CO")}</div>
-<button class="select-btn">Seleccionar</button>
-</div>
-`;
-resultsContainer.appendChild(card);
-});
-
-screen1.classList.add("hidden");
-screen2.classList.remove("hidden");
-
-});
-
-/* ================= BACK ================= */
-
-document.getElementById("backToSearch").onclick=()=>{
-screen2.classList.add("hidden");
-screen1.classList.remove("hidden");
+oneWayBtn.onclick = () => {
+    tripType = "oneway";
+    returnGroup.style.display = "none";
+    oneWayBtn.classList.add("btn-primary");
+    oneWayBtn.classList.remove("btn-secondary");
+    roundTripBtn.classList.add("btn-secondary");
+    roundTripBtn.classList.remove("btn-primary");
 };
 
-/* ================= SEAT MAP ================= */
-
-let selectedSeat=null;
-let selectedSeatPrice=0;
-
-function generateSeatMap(){
-seatMap.innerHTML="";
-const rows=30;
-const letters=["A","B","C"," ","D","E","F"];
-
-for(let r=1;r<=rows;r++){
-letters.forEach(l=>{
-if(l===" "){
-seatMap.appendChild(document.createElement("div"));
-return;
-}
-
-const seat=document.createElement("div");
-seat.classList.add("seat");
-
-const occupied=Math.random()<0.25;
-if(occupied) seat.classList.add("occupied");
-else seat.classList.add("available");
-
-seat.textContent=r+l;
-
-seat.onclick=()=>{
-if(seat.classList.contains("occupied")) return;
-
-document.querySelectorAll(".seat.selected").forEach(s=>{
-s.classList.remove("selected");
-s.classList.add("available");
-});
-
-seat.classList.remove("available");
-seat.classList.add("selected");
-
-selectedSeat=r+l;
-
-if(l==="A"||l==="F") selectedSeatPrice=40000;
-else if(l==="C"||l==="D") selectedSeatPrice=30000;
-else selectedSeatPrice=15000;
-
-seatTotal.textContent="$"+selectedSeatPrice.toLocaleString("es-CO");
+roundTripBtn.onclick = () => {
+    tripType = "round";
+    returnGroup.style.display = "block";
+    roundTripBtn.classList.add("btn-primary");
+    roundTripBtn.classList.remove("btn-secondary");
+    oneWayBtn.classList.add("btn-secondary");
+    oneWayBtn.classList.remove("btn-primary");
 };
 
-seatMap.appendChild(seat);
-});
+/* ============================= */
+/* AUTOCOMPLETE REAL */
+/* ============================= */
+
+function setupAutocomplete(inputId, listId){
+    const input = document.getElementById(inputId);
+    const list = document.getElementById(listId);
+
+    input.addEventListener("input", ()=>{
+        const value = input.value.toLowerCase();
+        list.innerHTML = "";
+
+        if(!value) return;
+
+        const filtered = airports.filter(a => 
+            a.toLowerCase().includes(value)
+        );
+
+        filtered.forEach(item=>{
+            const div = document.createElement("div");
+            div.classList.add("autocomplete-item");
+            div.textContent = item;
+            div.onclick = ()=>{
+                input.value = item;
+                list.innerHTML = "";
+            };
+            list.appendChild(div);
+        });
+    });
+
+    document.addEventListener("click", (e)=>{
+        if(e.target !== input){
+            list.innerHTML = "";
+        }
+    });
 }
+
+setupAutocomplete("originInput","originList");
+setupAutocomplete("destinationInput","destinationList");
+
+</script>
+<script>
+
+/* ============================= */
+/* GENERADOR DE HORAS ORDENADAS */
+/* ============================= */
+
+function generateFlightTimes(count){
+    let times = [];
+
+    while(times.length < count){
+        let hour = Math.floor(Math.random()*24);
+        let minute = Math.floor(Math.random()*60);
+
+        let formatted = 
+            (hour < 10 ? "0"+hour : hour) + ":" +
+            (minute < 10 ? "0"+minute : minute);
+
+        if(!times.includes(formatted)){
+            times.push(formatted);
+        }
+    }
+
+    return times.sort();
 }
 
-/* ================= IR A ASIENTOS ================= */
+/* ============================= */
+/* PRECIO DINAMICO POR FECHA */
+/* ============================= */
 
-document.addEventListener("click",(e)=>{
-if(e.target.classList.contains("select-btn")){
-screen2.classList.add("hidden");
-screen3.classList.remove("hidden");
-generateSeatMap();
+function calculateDynamicPrice(date){
+    if(!date) return 300000;
+
+    const selectedDate = new Date(date);
+    const today = new Date();
+    const diffDays = Math.ceil((selectedDate - today)/(1000*60*60*24));
+
+    let base = 250000 + Math.random()*150000;
+
+    if(diffDays < 7){
+        base += 120000;
+    } else if(diffDays < 20){
+        base += 60000;
+    }
+
+    return Math.round(base);
 }
-});
 
-/* ================= BACK RESULTADOS ================= */
+/* ============================= */
+/* BUSCAR VUELOS */
+/* ============================= */
 
-document.getElementById("backToResults").onclick=()=>{
-screen3.classList.add("hidden");
-screen2.classList.remove("hidden");
-};
+document.getElementById("searchBtn").onclick = ()=>{
 
-/* ================= CONFIRMAR ================= */
+    const origin = document.getElementById("originInput").value;
+    const destination = document.getElementById("destinationInput").value;
+    const departureDate = document.getElementById("departureDate").value;
 
-document.getElementById("confirmSeatBtn").onclick=()=>{
-if(!selectedSeat){
-alert("Selecciona un asiento");
-return;
-}
-alert("Asiento "+selectedSeat+
-"\nCosto adicional: $"+selectedSeatPrice.toLocaleString("es-CO"));
+    if(!origin || !destination || !departureDate){
+        alert("Completa todos los campos.");
+        return;
+    }
+
+    const container = document.getElementById("resultsContainer");
+    container.innerHTML = "";
+
+    const flightCount = Math.floor(Math.random()*16)+10; // 10-25 vuelos
+    const times = generateFlightTimes(flightCount);
+
+    times.forEach(time=>{
+        const price = calculateDynamicPrice(departureDate);
+
+        const div = document.createElement("div");
+        div.classList.add("flight-card");
+
+        div.innerHTML = `
+            <div>
+                <strong>${origin.split(" - ")[0]} → ${destination.split(" - ")[0]}</strong><br>
+                Salida: ${time}
+            </div>
+            <div>
+                <strong>${price.toLocaleString()} COP</strong><br>
+                <button class="btn btn-primary selectFlightBtn">Seleccionar</button>
+            </div>
+        `;
+
+        div.querySelector(".selectFlightBtn").onclick = ()=>{
+            selectedFlightPrice = price;
+            goToScreen("screen3");
+            generateSeats();
+        };
+
+        container.appendChild(div);
+    });
+
+    goToScreen("screen2");
 };
 
 </script>
+<script>
+
+/* ============================= */
+/* GENERAR ASIENTOS A320 */
+/* ============================= */
+
+function generateSeats(){
+
+    const seatMap = document.getElementById("seatMap");
+    seatMap.innerHTML = "";
+    selectedSeat = null;
+
+    const rows = 30;
+    const letters = ["A","B","C","D","E","F"];
+
+    for(let r=1; r<=rows; r++){
+        letters.forEach(letter=>{
+            const seat = document.createElement("div");
+            seat.classList.add("seat");
+            seat.textContent = r+letter;
+
+            // algunos asientos ocupados aleatorios
+            if(Math.random() < 0.2){
+                seat.classList.add("occupied");
+            }
+
+            seat.onclick = ()=>{
+                if(seat.classList.contains("occupied")) return;
+
+                document.querySelectorAll(".seat").forEach(s=>{
+                    s.classList.remove("selected");
+                });
+
+                seat.classList.add("selected");
+                selectedSeat = seat.textContent;
+            };
+
+            seatMap.appendChild(seat);
+        });
+    }
+}
+
+/* ============================= */
+/* CONTINUAR A PASAJERO */
+/* ============================= */
+
+document.getElementById("continuePassenger").onclick = ()=>{
+
+    if(!selectedSeat){
+        alert("Selecciona un asiento.");
+        return;
+    }
+
+    updateTotal();
+    goToScreen("screen4");
+};
+
+/* ============================= */
+/* ACTUALIZAR TOTAL */
+/* ============================= */
+
+function updateTotal(){
+    const baggage = parseInt(document.getElementById("extraBaggage").value);
+    const total = selectedFlightPrice + baggage;
+    document.getElementById("totalPrice").textContent =
+        "Total: " + total.toLocaleString() + " COP";
+}
+
+document.getElementById("extraBaggage").onchange = updateTotal;
+
+/* ============================= */
+/* CONFIRMAR RESERVA */
+/* ============================= */
+
+document.getElementById("confirmBtn").onclick = ()=>{
+
+    const name = document.getElementById("passengerName").value;
+
+    if(!name){
+        alert("Ingresa el nombre del pasajero.");
+        return;
+    }
+
+    const bookingCode = "LA" + Math.floor(Math.random()*1000000);
+
+    alert(
+        "Reserva confirmada\n\n" +
+        "Pasajero: " + name +
+        "\nAsiento: " + selectedSeat +
+        "\nCódigo: " + bookingCode
+    );
+
+    location.reload();
+};
+
+</script>
+
 </body>
 </html>
