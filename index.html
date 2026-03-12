@@ -1,479 +1,603 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LATAM Travel Assistance</title>
+<title>Travel Assistance</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Inter,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 
-body{
-background:#f5f8fd;
-}
+body{background:#f4f6fb;color:#333}
 
 /* HEADER */
 
-.header{
-height:70px;
+header{
 background:white;
+padding:18px 70px;
 display:flex;
-align-items:center;
 justify-content:space-between;
-padding:0 40px;
-box-shadow:0 3px 10px rgba(0,0,0,0.08);
+align-items:center;
+box-shadow:0 2px 10px rgba(0,0,0,0.06)
 }
 
 .logo{
+font-weight:700;
 font-size:22px;
-font-weight:800;
-color:#2d2d8f;
+color:#2E1A47
 }
+
+nav{display:flex;gap:28px}
+
+nav a{
+text-decoration:none;
+color:#333;
+font-size:14px;
+font-weight:500
+}
+
+nav a:hover{color:#5A2D82}
 
 /* HERO */
 
 .hero{
-height:500px;
-background:url("https://images.unsplash.com/photo-1504198266285-165a4dd67c0c") center/cover;
+height:560px;
+background-image:url("https://images.unsplash.com/photo-1504198453319-5ce911bafcde");
+background-size:cover;
+background-position:center;
 display:flex;
 align-items:center;
 justify-content:center;
+position:relative
 }
 
+.hero::after{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45)
+}
+
+/* SEARCH */
+
 .search-box{
-width:1000px;
+position:relative;
+z-index:2;
 background:white;
+width:980px;
 padding:30px;
-border-radius:16px;
-box-shadow:0 30px 70px rgba(0,0,0,0.25);
+border-radius:14px;
+box-shadow:0 20px 50px rgba(0,0,0,0.25)
+}
+
+.trip-type{
+display:flex;
+gap:25px;
+margin-bottom:20px;
+font-size:14px
 }
 
 .grid{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:15px;
+gap:12px
 }
 
-label{
-font-size:12px;
-font-weight:700;
-}
-
-input{
-padding:10px;
+input,select{
+padding:14px;
 border-radius:8px;
-border:1px solid #d8e0ea;
-width:100%;
-}
-
-button{
-cursor:pointer;
+border:1px solid #ddd;
+font-size:14px
 }
 
 .search-btn{
-grid-column:1/-1;
-padding:14px;
-background:#2d2d8f;
+grid-column:span 5;
+background:#5A2D82;
 color:white;
 border:none;
-border-radius:10px;
-font-weight:700;
+padding:16px;
+border-radius:8px;
+font-weight:600;
+font-size:16px;
+cursor:pointer
 }
+
+.search-btn:hover{background:#472267}
 
 /* AUTOCOMPLETE */
 
-.autocomplete{
+.autocomplete-list{
 position:absolute;
 background:white;
 border-radius:8px;
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 max-height:200px;
 overflow:auto;
-z-index:50;
+width:100%;
+z-index:10
 }
 
-.autocomplete div{
-padding:8px;
-cursor:pointer;
+.autocomplete-item{
+padding:10px;
+cursor:pointer
 }
 
-.autocomplete div:hover{
-background:#f0f4ff;
+.autocomplete-item:hover{
+background:#f2f2f2
 }
 
-/* RESULTS */
+/* PASSENGERS */
 
-.results{
-padding:60px;
-display:none;
-}
-
-.flight-card{
+.passenger-dropdown{
+position:absolute;
 background:white;
 padding:20px;
-border-radius:12px;
-margin-bottom:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 10px 25px rgba(0,0,0,0.07);
-}
-
-.price{
-font-size:22px;
-font-weight:800;
-color:#2d2d8f;
-}
-
-/* FARE */
-
-.fares{
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 display:none;
-padding:60px;
-text-align:center;
+margin-top:5px
 }
 
-.fare-grid{
+.counter{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+/* DESTINATIONS */
+
+.section{padding:70px 90px}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:25px
+}
+
+.card{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.08)
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover
+}
+
+.card-body{padding:20px}
+
+.price{color:#5A2D82;font-weight:700;margin-top:8px}
+
+/* SERVICES */
+
+.services{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:20px;
-max-width:900px;
-margin:auto;
+gap:25px;
+text-align:center
 }
 
-.fare{
+.service{
 background:white;
-padding:20px;
-border-radius:14px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-cursor:pointer;
-}
-
-.fare:hover{
-transform:scale(1.04);
-}
-
-/* CABIN */
-
-.seats{
-display:none;
-padding:60px;
-text-align:center;
-}
-
-.aircraft{
-width:330px;
-background:white;
-margin:auto;
 padding:25px;
-border-radius:150px 150px 25px 25px;
-box-shadow:0 20px 60px rgba(0,0,0,0.15);
-max-height:520px;
-overflow:auto;
+border-radius:12px;
+box-shadow:0 10px 20px rgba(0,0,0,0.05)
+}
+
+/* MODAL */
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center
+}
+
+.modal-box{
+background:white;
+width:820px;
+padding:30px;
+border-radius:10px;
+max-height:80vh;
+overflow:auto
+}
+
+/* FLIGHTS */
+
+.flight{
+display:flex;
+justify-content:space-between;
+padding:15px;
+border-bottom:1px solid #eee
+}
+
+.flight button{
+background:#5A2D82;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer
+}
+
+/* SEAT MAP */
+
+.airplane{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:6px;
+margin-top:20px
 }
 
 .row{
 display:flex;
-justify-content:center;
+gap:6px;
+align-items:center
 }
 
 .seat{
-width:30px;
-height:30px;
-margin:4px;
+width:32px;
+height:32px;
+background:#ddd;
 border-radius:6px;
-background:#dfe6f2;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:10px;
-cursor:pointer;
+cursor:pointer
 }
 
-.business{background:#bcd3ff}
-.exit{background:#ffe2a8}
-.occupied{background:#999;cursor:not-allowed}
-.selected{background:#2d2d8f;color:white}
+.seat.selected{background:#5A2D82}
 
-.aisle{width:18px}
+.aisle{width:20px}
 
-/* PASSENGER */
+/* FOOTER */
 
-.passenger{
-display:none;
-padding:60px;
-max-width:600px;
-margin:auto;
-}
-
-.summary{
-background:white;
-padding:20px;
-border-radius:12px;
-margin-top:20px;
-}
-
-.confirm-btn{
-background:#2d2d8f;
+footer{
+background:#2E1A47;
 color:white;
-padding:12px;
-border:none;
-border-radius:8px;
-width:100%;
-font-weight:700;
+padding:60px 90px;
+margin-top:60px
+}
+
+.footer-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:30px
+}
+
+footer a{
+display:block;
+color:#ddd;
+text-decoration:none;
+margin-bottom:8px;
+font-size:14px
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header class="header">
-<div class="logo">LATAM</div>
+<header>
+
+<div class="logo">TRAVEL</div>
+
+<nav>
+<a>Vuelos</a>
+<a>Mis viajes</a>
+<a>Check-in</a>
+<a>Estado de vuelo</a>
+<a>LATAM Pass</a>
+</nav>
+
 </header>
 
 <section class="hero">
 
 <div class="search-box">
 
+<div class="trip-type">
+<label><input type="radio" checked> Ida y vuelta</label>
+<label><input type="radio"> Solo ida</label>
+</div>
+
 <div class="grid">
 
-<div>
-<label>Origen</label>
-<input id="origin">
+<div style="position:relative">
+<input id="origin" placeholder="Origen">
 </div>
 
-<div>
-<label>Destino</label>
-<input id="destination">
+<div style="position:relative">
+<input id="dest" placeholder="Destino">
 </div>
 
-<div>
-<label>Fecha ida</label>
 <input type="date">
-</div>
-
-<div>
-<label>Fecha regreso</label>
 <input type="date">
+
+<div style="position:relative">
+
+<input id="passengerInput" readonly value="1 pasajero">
+
+<div class="passenger-dropdown" id="passengerMenu">
+
+Adultos
+
+<div class="counter">
+
+<button onclick="changePassengers(-1)">-</button>
+
+<span id="pax">1</span>
+
+<button onclick="changePassengers(1)">+</button>
+
 </div>
 
-<div>
-<label>Pasajeros</label>
-<input id="passengers" value="1">
+</div>
+
 </div>
 
 <button class="search-btn" onclick="searchFlights()">Buscar vuelos</button>
 
 </div>
-</div>
-</section>
-
-<section class="results" id="results"></section>
-
-<section class="fares" id="fares">
-
-<h2>Selecciona tu tarifa</h2>
-
-<div class="fare-grid">
-
-<div class="fare" onclick="selectFare('Basic',0)">
-<h3>Basic</h3>
-<p>Equipaje de mano</p>
-</div>
-
-<div class="fare" onclick="selectFare('Light',50000)">
-<h3>Light</h3>
-<p>Equipaje 23kg</p>
-</div>
-
-<div class="fare" onclick="selectFare('Plus',100000)">
-<h3>Plus</h3>
-<p>Equipaje + selección asiento</p>
-</div>
-
-<div class="fare" onclick="selectFare('Top',200000)">
-<h3>Top</h3>
-<p>Premium + cambios</p>
-</div>
 
 </div>
 
 </section>
 
-<section class="seats" id="seats">
+<section class="section">
+
+<h2>Ofertas destacadas</h2>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1533105079780-92b9be482077">
+<div class="card-body">
+<h3>Bogotá</h3>
+<div class="price">Desde $320.000</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505765050516-f72dcac9c60b">
+<div class="card-body">
+<h3>Lima</h3>
+<div class="price">Desde $450.000</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad">
+<div class="card-body">
+<h3>Miami</h3>
+<div class="price">Desde $1.200.000</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+<h4>Ayuda</h4>
+<a>Centro de ayuda</a>
+<a>Cambios</a>
+</div>
+
+<div>
+<h4>Sobre nosotros</h4>
+<a>Quiénes somos</a>
+<a>Prensa</a>
+</div>
+
+<div>
+<h4>Legal</h4>
+<a>Términos</a>
+<a>Privacidad</a>
+</div>
+
+<div>
+<h4>Contacto</h4>
+<a>Soporte</a>
+</div>
+
+</div>
+
+</footer>
+
+<div class="modal" id="resultsModal">
+
+<div class="modal-box">
+
+<h2>Vuelos disponibles</h2>
+
+<div class="flight">
+<div>Medellín → Bogotá | 08:00 - 09:00</div>
+<div>$320.000 <button onclick="openSeats()">Seleccionar</button></div>
+</div>
+
+<div class="flight">
+<div>Medellín → Bogotá | 14:00 - 15:10</div>
+<div>$350.000 <button onclick="openSeats()">Seleccionar</button></div>
+</div>
+
+</div>
+
+</div>
+
+<div class="modal" id="seatModal">
+
+<div class="modal-box">
 
 <h2>Selecciona tu asiento</h2>
 
-<div class="aircraft" id="seatMap"></div>
+<div class="airplane" id="seatMap"></div>
 
-<br>
+<button class="search-btn" onclick="openPassenger()">Continuar</button>
 
-<button class="confirm-btn" onclick="goPassenger()">Continuar</button>
+</div>
 
-</section>
+</div>
 
-<section class="passenger" id="passenger">
+<div class="modal" id="passengerModal">
+
+<div class="modal-box">
 
 <h2>Datos del pasajero</h2>
 
-<input placeholder="Nombre completo" id="name">
+<input placeholder="Nombre"><br><br>
+<input placeholder="Apellido"><br><br>
+<input placeholder="Documento"><br><br>
 
-<div class="summary" id="summary"></div>
+<button class="search-btn">Finalizar</button>
 
-<br>
+</div>
 
-<button class="confirm-btn" onclick="generateTicket()">Descargar Boarding Pass</button>
-
-</section>
+</div>
 
 <script>
 
-let basePrice=0
-let farePrice=0
-let selectedSeat=""
+/* AUTOCOMPLETE */
 
-function randomTime(){
-let h=Math.floor(Math.random()*24)
-let m=Math.floor(Math.random()*60)
-return h.toString().padStart(2,"0")+":"+m.toString().padStart(2,"0")
+const airports=[
+"Medellín (MDE)",
+"Bogotá (BOG)",
+"Lima (LIM)",
+"Santiago (SCL)",
+"Miami (MIA)",
+"Quito (UIO)",
+"Cusco (CUZ)",
+"Cartagena (CTG)"
+]
+
+function setupAutocomplete(input){
+
+input.addEventListener("input",function(){
+
+let list=document.createElement("div")
+list.className="autocomplete-list"
+
+this.parentNode.appendChild(list)
+
+list.innerHTML=""
+
+airports
+.filter(a=>a.toLowerCase().includes(this.value.toLowerCase()))
+.forEach(a=>{
+
+let item=document.createElement("div")
+item.className="autocomplete-item"
+item.innerText=a
+
+item.onclick=()=>{
+input.value=a
+list.remove()
 }
+
+list.appendChild(item)
+
+})
+
+})
+
+}
+
+setupAutocomplete(document.getElementById("origin"))
+setupAutocomplete(document.getElementById("dest"))
+
+/* PASSENGERS */
+
+let passengers=1
+
+document.getElementById("passengerInput").onclick=()=>{
+document.getElementById("passengerMenu").style.display="block"
+}
+
+function changePassengers(n){
+
+passengers+=n
+if(passengers<1)passengers=1
+
+document.getElementById("pax").innerText=passengers
+document.getElementById("passengerInput").value=passengers+" pasajero(s)"
+
+}
+
+/* FLIGHTS */
 
 function searchFlights(){
-
-results.style.display="block"
-results.innerHTML=""
-
-for(let i=0;i<20;i++){
-
-let price=Math.floor(Math.random()*400000)+200000
-
-let card=document.createElement("div")
-card.className="flight-card"
-
-card.innerHTML=`
-<div>
-${origin.value} → ${destination.value}<br>
-${randomTime()}
-</div>
-
-<div>
-<div class="price">$${price.toLocaleString()}</div>
-<button onclick="selectFlight(${price})">Seleccionar</button>
-</div>
-`
-
-results.appendChild(card)
-
+document.getElementById("resultsModal").style.display="flex"
 }
 
-}
+/* SEATS */
 
-function selectFlight(price){
+function openSeats(){
 
-basePrice=price
+document.getElementById("seatModal").style.display="flex"
 
-fares.style.display="block"
+const map=document.getElementById("seatMap")
+map.innerHTML=""
 
-}
-
-function selectFare(name,price){
-
-farePrice=price
-
-showSeats()
-
-}
-
-function showSeats(){
-
-seats.style.display="block"
-
-const letters=["A","B","C","D","E","F"]
-
-for(let r=1;r<=30;r++){
+for(let r=0;r<20;r++){
 
 let row=document.createElement("div")
 row.className="row"
 
-letters.forEach(l=>{
-
-if(l==="D"){
-let aisle=document.createElement("div")
-aisle.className="aisle"
-row.appendChild(aisle)
-}
+for(let s=0;s<3;s++){
 
 let seat=document.createElement("div")
 seat.className="seat"
 
-if(r<=3) seat.classList.add("business")
-if(r==10||r==11) seat.classList.add("exit")
-
-seat.textContent=r+l
-
-if(Math.random()<0.2) seat.classList.add("occupied")
-
-seat.onclick=()=>{
-
-if(seat.classList.contains("occupied")) return
-
-document.querySelectorAll(".seat").forEach(s=>s.classList.remove("selected"))
-
-seat.classList.add("selected")
-
-selectedSeat=r+l
-
-}
+seat.onclick=()=>seat.classList.toggle("selected")
 
 row.appendChild(seat)
 
-})
+}
 
-seatMap.appendChild(row)
+let aisle=document.createElement("div")
+aisle.className="aisle"
+
+row.appendChild(aisle)
+
+for(let s=0;s<3;s++){
+
+let seat=document.createElement("div")
+seat.className="seat"
+
+seat.onclick=()=>seat.classList.toggle("selected")
+
+row.appendChild(seat)
+
+}
+
+map.appendChild(row)
 
 }
 
 }
 
-function goPassenger(){
+/* PASSENGER FORM */
 
-passenger.style.display="block"
-
-let total=basePrice+farePrice
-
-summary.innerHTML=`
-Ruta: ${origin.value} → ${destination.value}<br>
-Asiento: ${selectedSeat}<br>
-Precio total: $${total.toLocaleString()}
-`
-
-}
-
-function generateTicket(){
-
-const { jsPDF } = window.jspdf
-
-let doc=new jsPDF()
-
-doc.text("BOARDING PASS",20,20)
-doc.text("Pasajero: "+name.value,20,40)
-doc.text("Ruta: "+origin.value+" → "+destination.value,20,50)
-doc.text("Asiento: "+selectedSeat,20,60)
-
-doc.save("boardingpass.pdf")
-
+function openPassenger(){
+document.getElementById("passengerModal").style.display="flex"
 }
 
 </script>
