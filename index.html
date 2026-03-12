@@ -1,7 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -29,11 +29,14 @@ color:#333;
 
 header{
 background:white;
-padding:16px 70px;
+padding:18px 60px;
 display:flex;
 align-items:center;
 justify-content:space-between;
 box-shadow:0 2px 10px rgba(0,0,0,0.05);
+position:sticky;
+top:0;
+z-index:100;
 }
 
 .logo img{
@@ -58,14 +61,14 @@ color:#5A2D82;
 
 .header-right{
 display:flex;
-gap:20px;
+gap:18px;
 font-size:14px;
 }
 
 /* HERO */
 
 .hero{
-height:560px;
+height:520px;
 background-image:url("https://images.unsplash.com/photo-1504198453319-5ce911bafcde");
 background-size:cover;
 background-position:center;
@@ -89,16 +92,16 @@ background:rgba(0,0,0,0.45);
 position:relative;
 z-index:2;
 background:white;
-width:1050px;
-padding:30px;
+width:980px;
+padding:28px;
 border-radius:16px;
 box-shadow:0 20px 60px rgba(0,0,0,0.25);
 }
 
 .trip-tabs{
 display:flex;
-gap:25px;
-margin-bottom:20px;
+gap:20px;
+margin-bottom:18px;
 font-size:14px;
 }
 
@@ -115,13 +118,13 @@ position:relative;
 .field i{
 position:absolute;
 left:12px;
-top:14px;
+top:15px;
 color:#888;
 }
 
 .field input{
 width:100%;
-padding:14px 14px 14px 36px;
+padding:13px 13px 13px 36px;
 border-radius:8px;
 border:1px solid #ddd;
 font-size:14px;
@@ -132,28 +135,25 @@ grid-column:span 5;
 background:#5A2D82;
 color:white;
 border:none;
-padding:16px;
+padding:15px;
 border-radius:10px;
 font-size:16px;
 font-weight:600;
 cursor:pointer;
 }
 
-.search-btn:hover{
-background:#472267;
-}
-
 /* AUTOCOMPLETE */
 
 .autocomplete{
 position:absolute;
+top:45px;
 background:white;
 border-radius:8px;
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 width:100%;
 max-height:200px;
-overflow:auto;
-z-index:20;
+overflow-y:auto;
+z-index:50;
 }
 
 .autocomplete div{
@@ -168,13 +168,18 @@ background:#f2f2f2;
 /* DESTINATIONS */
 
 .section{
-padding:80px 100px;
+padding:70px 90px;
+}
+
+.section h2{
+margin-bottom:25px;
+color:#2E1A47;
 }
 
 .destinations{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:25px;
+gap:20px;
 }
 
 .card{
@@ -182,16 +187,21 @@ background:white;
 border-radius:14px;
 overflow:hidden;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
 }
 
 .card img{
 width:100%;
-height:170px;
+height:160px;
 object-fit:cover;
 }
 
 .card-body{
-padding:18px;
+padding:16px;
 }
 
 .price{
@@ -205,20 +215,39 @@ margin-top:6px;
 .services{
 display:grid;
 grid-template-columns:repeat(5,1fr);
-gap:25px;
+gap:20px;
 text-align:center;
 }
 
 .service{
 background:white;
 border-radius:12px;
-padding:30px;
+padding:25px;
 box-shadow:0 10px 20px rgba(0,0,0,0.05);
 }
 
 .service i{
 font-size:26px;
 color:#5A2D82;
+margin-bottom:10px;
+}
+
+/* RESULTS */
+
+.results{
+padding:60px 90px;
+display:none;
+}
+
+.flight{
+background:white;
+border-radius:12px;
+padding:20px;
+margin-bottom:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 10px 20px rgba(0,0,0,0.08);
 }
 
 /* FOOTER */
@@ -226,14 +255,14 @@ color:#5A2D82;
 footer{
 background:#2E1A47;
 color:white;
-padding:70px 100px;
-margin-top:80px;
+padding:60px 90px;
+margin-top:70px;
 }
 
 .footer-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:40px;
+gap:35px;
 }
 
 footer a{
@@ -246,7 +275,7 @@ font-size:14px;
 
 .copy{
 text-align:center;
-margin-top:40px;
+margin-top:30px;
 opacity:0.7;
 }
 
@@ -263,11 +292,11 @@ opacity:0.7;
 </div>
 
 <nav>
-<a>Vuelos</a>
-<a>Mis viajes</a>
-<a>Check-in</a>
-<a>Estado de vuelo</a>
-<a>LATAM Pass</a>
+<a href="#">Vuelos</a>
+<a href="#">Mis viajes</a>
+<a href="#">Check-in</a>
+<a href="#">Estado de vuelo</a>
+<a href="#">LATAM Pass</a>
 </nav>
 
 <div class="header-right">
@@ -282,9 +311,9 @@ opacity:0.7;
 <div class="search-box">
 
 <div class="trip-tabs">
-<label><input type="radio" checked> Ida y vuelta</label>
-<label><input type="radio"> Solo ida</label>
-<label><input type="radio"> Multidestino</label>
+<label><input type="radio" name="trip" checked> Ida y vuelta</label>
+<label><input type="radio" name="trip"> Solo ida</label>
+<label><input type="radio" name="trip"> Multidestino</label>
 </div>
 
 <div class="search-grid">
@@ -314,7 +343,7 @@ opacity:0.7;
 <input placeholder="1 pasajero">
 </div>
 
-<button class="search-btn">Buscar vuelos</button>
+<button class="search-btn" onclick="searchFlights()">Buscar vuelos</button>
 
 </div>
 
@@ -364,37 +393,23 @@ opacity:0.7;
 
 </section>
 
-<section class="section">
+<section class="results" id="results">
 
-<h2>Servicios para tu viaje</h2>
+<h2>Vuelos disponibles</h2>
 
-<div class="services">
-
-<div class="service">
-<i class="fa-solid fa-suitcase"></i>
-<h4>Equipaje</h4>
+<div class="flight">
+<span>LATAM LA401 — 08:00 → 10:30</span>
+<button>Seleccionar</button>
 </div>
 
-<div class="service">
-<i class="fa-solid fa-chair"></i>
-<h4>Asientos</h4>
+<div class="flight">
+<span>LATAM LA405 — 12:40 → 15:10</span>
+<button>Seleccionar</button>
 </div>
 
-<div class="service">
-<i class="fa-solid fa-hotel"></i>
-<h4>Hoteles</h4>
-</div>
-
-<div class="service">
-<i class="fa-solid fa-car"></i>
-<h4>Autos</h4>
-</div>
-
-<div class="service">
-<i class="fa-solid fa-map"></i>
-<h4>Experiencias</h4>
-</div>
-
+<div class="flight">
+<span>LATAM LA410 — 18:00 → 20:25</span>
+<button>Seleccionar</button>
 </div>
 
 </section>
@@ -405,27 +420,27 @@ opacity:0.7;
 
 <div>
 <h4>Ayuda</h4>
-<a>Centro de ayuda</a>
-<a>Cambios</a>
-<a>Reembolsos</a>
+<a href="#">Centro de ayuda</a>
+<a href="#">Cambios</a>
+<a href="#">Reembolsos</a>
 </div>
 
 <div>
 <h4>Sobre nosotros</h4>
-<a>Quiénes somos</a>
-<a>Prensa</a>
+<a href="#">Quiénes somos</a>
+<a href="#">Prensa</a>
 </div>
 
 <div>
 <h4>Legal</h4>
-<a>Términos</a>
-<a>Privacidad</a>
+<a href="#">Términos</a>
+<a href="#">Privacidad</a>
 </div>
 
 <div>
 <h4>Contacto</h4>
-<a>Soporte</a>
-<a>Redes sociales</a>
+<a href="#">Soporte</a>
+<a href="#">Redes sociales</a>
 </div>
 
 </div>
@@ -438,10 +453,7 @@ opacity:0.7;
 
 <script>
 
-/* LISTA GRANDE DE AEROPUERTOS */
-
-const airports = [
-
+const airports=[
 "Bogotá (BOG)",
 "Medellín (MDE)",
 "Cali (CLO)",
@@ -450,7 +462,7 @@ const airports = [
 "Lima (LIM)",
 "Santiago (SCL)",
 "Buenos Aires (EZE)",
-"São Paulo (GRU)",
+"Sao Paulo (GRU)",
 "Rio de Janeiro (GIG)",
 "Miami (MIA)",
 "New York (JFK)",
@@ -463,26 +475,31 @@ const airports = [
 "Frankfurt (FRA)",
 "Rome (FCO)",
 "Lisbon (LIS)"
-
 ]
 
-function autocomplete(input){
+function setupAutocomplete(input){
+
+let list
 
 input.addEventListener("input",function(){
 
-let list=document.createElement("div")
+if(list) list.remove()
+
+list=document.createElement("div")
 list.className="autocomplete"
 
 this.parentNode.appendChild(list)
 
-list.innerHTML=""
+let value=this.value.toLowerCase()
 
 airports
-.filter(a=>a.toLowerCase().includes(this.value.toLowerCase()))
+.filter(a=>a.toLowerCase().includes(value))
+.slice(0,8)
 .forEach(a=>{
 
 let item=document.createElement("div")
-item.innerText=a
+
+item.textContent=a
 
 item.onclick=()=>{
 input.value=a
@@ -495,10 +512,21 @@ list.appendChild(item)
 
 })
 
+document.addEventListener("click",(e)=>{
+if(e.target!==input && list){
+list.remove()
+}
+})
+
 }
 
-autocomplete(document.getElementById("origin"))
-autocomplete(document.getElementById("destination"))
+setupAutocomplete(document.getElementById("origin"))
+setupAutocomplete(document.getElementById("destination"))
+
+function searchFlights(){
+document.getElementById("results").style.display="block"
+window.scrollTo({top:900,behavior:"smooth"})
+}
 
 </script>
 
