@@ -1,534 +1,668 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>LATAM Travel Assistance</title>
-
+<title>LATAM Airlines - Checkout y Pago</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
-body{
-background:#f5f6fb;
-color:#333;
+body {
+    background: #f5f7fa;
+    color: #1a1a2e;
 }
 
 /* HEADER */
-
-header{
-background:white;
-padding:18px 60px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
-position:sticky;
-top:0;
-z-index:100;
+header {
+    background: white;
+    padding: 16px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.logo img{
-height:32px;
+.logo img {
+    height: 32px;
 }
 
-nav{
-display:flex;
-gap:30px;
+nav a {
+    text-decoration: none;
+    color: #4a4a6a;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 16px;
+    transition: color 0.2s;
 }
 
-nav a{
-text-decoration:none;
-color:#333;
-font-size:14px;
-font-weight:500;
+nav a:hover {
+    color: #D71920;
 }
 
-nav a:hover{
-color:#5A2D82;
+.header-right {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #4a4a6a;
+    font-weight: 500;
 }
 
-.header-right{
-display:flex;
-gap:18px;
-font-size:14px;
+/* CHECKOUT CONTAINER */
+.checkout-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 32px;
 }
 
-/* HERO */
-
-.hero{
-height:520px;
-background-image:url("https://images.unsplash.com/photo-1504198453319-5ce911bafcde");
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
+/* FLIGHT SUMMARY */
+.flight-summary {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
 }
 
-.hero::after{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.45);
+.flight-summary h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* SEARCH BOX */
-
-.search-box{
-position:relative;
-z-index:2;
-background:white;
-width:980px;
-padding:28px;
-border-radius:16px;
-box-shadow:0 20px 60px rgba(0,0,0,0.25);
+.flight-summary h3 i {
+    color: #D71920;
 }
 
-.trip-tabs{
-display:flex;
-gap:20px;
-margin-bottom:18px;
-font-size:14px;
+.flight-detail {
+    padding: 16px 0;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.search-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:12px;
+.flight-detail:last-child {
+    border-bottom: none;
 }
 
-.field{
-position:relative;
+.flight-route {
+    font-weight: 600;
+    font-size: 16px;
 }
 
-.field i{
-position:absolute;
-left:12px;
-top:15px;
-color:#888;
+.flight-time {
+    color: #666;
+    font-size: 14px;
+    margin-top: 4px;
 }
 
-.field input{
-width:100%;
-padding:13px 13px 13px 36px;
-border-radius:8px;
-border:1px solid #ddd;
-font-size:14px;
+.flight-price {
+    font-weight: 700;
+    color: #D71920;
+    font-size: 18px;
 }
 
-.search-btn{
-grid-column:span 5;
-background:#5A2D82;
-color:white;
-border:none;
-padding:15px;
-border-radius:10px;
-font-size:16px;
-font-weight:600;
-cursor:pointer;
+.total-price {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 2px solid #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* AUTOCOMPLETE */
-
-.autocomplete{
-position:absolute;
-top:45px;
-background:white;
-border-radius:8px;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-width:100%;
-max-height:200px;
-overflow-y:auto;
-z-index:50;
+.total-label {
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.autocomplete div{
-padding:10px;
-cursor:pointer;
+.total-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: #D71920;
 }
 
-.autocomplete div:hover{
-background:#f2f2f2;
+/* PASENGER FORM */
+.passenger-form {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
 }
 
-/* DESTINATIONS */
-
-.section{
-padding:70px 90px;
+.passenger-form h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #1a1a2e;
 }
 
-.section h2{
-margin-bottom:25px;
-color:#2E1A47;
+.form-group {
+    margin-bottom: 16px;
 }
 
-.destinations{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:20px;
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #4a4a6a;
 }
 
-.card{
-background:white;
-border-radius:14px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-transition:0.3s;
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 14px;
+    transition: all 0.2s;
 }
 
-.card:hover{
-transform:translateY(-5px);
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #D71920;
+    box-shadow: 0 0 0 3px rgba(215,25,32,0.1);
 }
 
-.card img{
-width:100%;
-height:160px;
-object-fit:cover;
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 }
 
-.card-body{
-padding:16px;
+/* PAYMENT METHODS */
+.payment-methods {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.price{
-color:#5A2D82;
-font-weight:700;
-margin-top:6px;
+.payment-methods h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #1a1a2e;
 }
 
-/* SERVICES */
-
-.services{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:20px;
-text-align:center;
+.method-option {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-.service{
-background:white;
-border-radius:12px;
-padding:25px;
-box-shadow:0 10px 20px rgba(0,0,0,0.05);
+.method-option:hover {
+    border-color: #D71920;
 }
 
-.service i{
-font-size:26px;
-color:#5A2D82;
-margin-bottom:10px;
+.method-option.selected {
+    border-color: #D71920;
+    background: #fff5f5;
 }
 
-/* RESULTS */
-
-.results{
-padding:60px 90px;
-display:none;
+.method-header {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.flight{
-background:white;
-border-radius:12px;
-padding:20px;
-margin-bottom:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 10px 20px rgba(0,0,0,0.08);
+.method-header i {
+    font-size: 24px;
+    color: #D71920;
+    width: 32px;
+}
+
+.method-header span {
+    font-weight: 600;
+}
+
+.method-content {
+    padding: 0 16px 16px 60px;
+    display: none;
+}
+
+.method-option.selected .method-content {
+    display: block;
+}
+
+/* CARD FORM */
+.card-input {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.card-input i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.card-input input {
+    width: 100%;
+    padding: 12px 12px 12px 36px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* PSE BANK SELECT */
+.bank-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+/* CHECKOUT SIDEBAR */
+.checkout-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.price-breakdown {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.price-breakdown h4 {
+    margin-bottom: 16px;
+    color: #1a1a2e;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.price-row.total {
+    border-top: 1px solid #e8e8e8;
+    margin-top: 8px;
+    padding-top: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #1a1a2e;
+}
+
+.price-row.total span:last-child {
+    color: #D71920;
+}
+
+.pay-button {
+    width: 100%;
+    background: #D71920;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 16px;
+}
+
+.pay-button:hover {
+    background: #b8151c;
+}
+
+.pay-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.security-badge {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #888;
+}
+
+.security-badge i {
+    color: #4CAF50;
+    margin-right: 4px;
+}
+
+/* SUCCESS MODAL */
+.success-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-content {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+}
+
+.success-content i {
+    font-size: 64px;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.success-content h2 {
+    margin-bottom: 12px;
+    color: #1a1a2e;
+}
+
+.success-content p {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.transaction-id {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 12px;
+    margin: 20px 0;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.back-home {
+    background: #D71920;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
 }
 
 /* FOOTER */
-
-footer{
-background:#2E1A47;
-color:white;
-padding:60px 90px;
-margin-top:70px;
+footer {
+    background: #1a1a2e;
+    color: white;
+    padding: 48px 80px;
+    margin-top: 60px;
 }
 
-.footer-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:35px;
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
 }
 
-footer a{
-display:block;
-color:#ddd;
-text-decoration:none;
-margin-bottom:6px;
-font-size:14px;
+footer h4 {
+    margin-bottom: 16px;
+    font-size: 16px;
 }
 
-.copy{
-text-align:center;
-margin-top:30px;
-opacity:0.7;
+footer a {
+    display: block;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-size: 13px;
 }
 
+.copy {
+    text-align: center;
+    margin-top: 40px;
+    opacity: 0.6;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkout-sidebar {
+        position: static;
+    }
+    
+    header {
+        padding: 16px 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    nav a {
+        margin: 0 8px;
+    }
+    
+    footer {
+        padding: 40px 20px;
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
-
 </head>
-
 <body>
-
 <header>
-
-<div class="logo">
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/LATAM_Airlines_logo.svg">
-</div>
-
-<nav>
-<a href="#">Vuelos</a>
-<a href="#">Mis viajes</a>
-<a href="#">Check-in</a>
-<a href="#">Estado de vuelo</a>
-<a href="#">LATAM Pass</a>
-</nav>
-
-<div class="header-right">
-<span>ES</span>
-<span>Iniciar sesión</span>
-</div>
-
+    <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/LATAM_Airlines_logo.svg" alt="LATAM">
+    </div>
+    <nav>
+        <a href="#">Vuelos</a>
+        <a href="#">Mis viajes</a>
+        <a href="#">Check-in</a>
+        <a href="#">Estado de vuelo</a>
+        <a href="#">LATAM Pass</a>
+    </nav>
+    <div class="header-right">
+        <span>ES</span>
+        <span>Iniciar sesión</span>
+    </div>
 </header>
 
-<section class="hero">
-
-<div class="search-box">
-
-<div class="trip-tabs">
-<label><input type="radio" name="trip" checked> Ida y vuelta</label>
-<label><input type="radio" name="trip"> Solo ida</label>
-<label><input type="radio" name="trip"> Multidestino</label>
-</div>
-
-<div class="search-grid">
-
-<div class="field">
-<i class="fa-solid fa-plane-departure"></i>
-<input id="origin" placeholder="Origen">
-</div>
-
-<div class="field">
-<i class="fa-solid fa-plane-arrival"></i>
-<input id="destination" placeholder="Destino">
-</div>
-
-<div class="field">
-<i class="fa-solid fa-calendar"></i>
-<input type="date">
-</div>
-
-<div class="field">
-<i class="fa-solid fa-calendar"></i>
-<input type="date">
-</div>
-
-<div class="field">
-<i class="fa-solid fa-user"></i>
-<input placeholder="1 pasajero">
-</div>
-
-<button class="search-btn" onclick="searchFlights()">Buscar vuelos</button>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2>Ofertas de destinos</h2>
-
-<div class="destinations">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1533105079780-92b9be482077">
-<div class="card-body">
-<h3>Bogotá</h3>
-<div class="price">Desde $320.000</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505765050516-f72dcac9c60b">
-<div class="card-body">
-<h3>Lima</h3>
-<div class="price">Desde $450.000</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad">
-<div class="card-body">
-<h3>Miami</h3>
-<div class="price">Desde $1.200.000</div>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-<div class="card-body">
-<h3>Santiago</h3>
-<div class="price">Desde $800.000</div>
-</div>
-</div>
-
-</div>
-
-</section>
-
-<section class="results" id="results">
-
-<h2>Vuelos disponibles</h2>
-
-<div class="flight">
-<span>LATAM LA401 — 08:00 → 10:30</span>
-<button>Seleccionar</button>
-</div>
-
-<div class="flight">
-<span>LATAM LA405 — 12:40 → 15:10</span>
-<button>Seleccionar</button>
-</div>
-
-<div class="flight">
-<span>LATAM LA410 — 18:00 → 20:25</span>
-<button>Seleccionar</button>
-</div>
-
-</section>
-
-<footer>
-
-<div class="footer-grid">
-
-<div>
-<h4>Ayuda</h4>
-<a href="#">Centro de ayuda</a>
-<a href="#">Cambios</a>
-<a href="#">Reembolsos</a>
-</div>
-
-<div>
-<h4>Sobre nosotros</h4>
-<a href="#">Quiénes somos</a>
-<a href="#">Prensa</a>
-</div>
-
-<div>
-<h4>Legal</h4>
-<a href="#">Términos</a>
-<a href="#">Privacidad</a>
-</div>
-
-<div>
-<h4>Contacto</h4>
-<a href="#">Soporte</a>
-<a href="#">Redes sociales</a>
-</div>
-
-</div>
-
-<div class="copy">
-© 2026 LATAM Travel Assistance
-</div>
-
-</footer>
-
-<script>
-
-const airports=[
-"Bogotá (BOG)",
-"Medellín (MDE)",
-"Cali (CLO)",
-"Cartagena (CTG)",
-"Bucaramanga (BGA)",
-"Lima (LIM)",
-"Santiago (SCL)",
-"Buenos Aires (EZE)",
-"Sao Paulo (GRU)",
-"Rio de Janeiro (GIG)",
-"Miami (MIA)",
-"New York (JFK)",
-"Los Angeles (LAX)",
-"Madrid (MAD)",
-"Barcelona (BCN)",
-"Paris (CDG)",
-"London (LHR)",
-"Amsterdam (AMS)",
-"Frankfurt (FRA)",
-"Rome (FCO)",
-"Lisbon (LIS)"
-]
-
-function setupAutocomplete(input){
-
-let list
-
-input.addEventListener("input",function(){
-
-if(list) list.remove()
-
-list=document.createElement("div")
-list.className="autocomplete"
-
-this.parentNode.appendChild(list)
-
-let value=this.value.toLowerCase()
-
-airports
-.filter(a=>a.toLowerCase().includes(value))
-.slice(0,8)
-.forEach(a=>{
-
-let item=document.createElement("div")
-
-item.textContent=a
-
-item.onclick=()=>{
-input.value=a
-list.remove()
-}
-
-list.appendChild(item)
-
-})
-
-})
-
-document.addEventListener("click",(e)=>{
-if(e.target!==input && list){
-list.remove()
-}
-})
-
-}
-
-setupAutocomplete(document.getElementById("origin"))
-setupAutocomplete(document.getElementById("destination"))
-
-function searchFlights(){
-document.getElementById("results").style.display="block"
-window.scrollTo({top:900,behavior:"smooth"})
-}
-
-</script>
-
-</body>
-</html>
+<div class="checkout-container">
+    <!-- Columna izquierda: Formulario -->
+    <div class="checkout-form">
+        <!-- Resumen del vuelo -->
+        <div class="flight-summary" id="flightSummary"></div>
+        
+        <!-- Datos del pasajero -->
+        <div class="passenger-form">
+            <h3><i class="fa-solid fa-user"></i> Datos del pasajero principal</h3>
+            <form id="passengerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tipo de documento</label>
+                        <select id="docType">
+                            <option value="CC">Cédula de Ciudadanía</option>
+                            <option value="CE">Cédula de Extranjería</option>
+                            <option value="PAS">Pasaporte</option>
+                            <option value="NIT">NIT</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Número de documento</label>
+                        <input type="text" id="docNumber" placeholder="Ej: 12345678">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombres</label>
+                        <input type="text" id="firstName" placeholder="Nombres completos">
+                    </div>
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <input type="text" id="lastName" placeholder="Apellidos completos">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" id="email" placeholder="correo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" id="phone" placeholder="3001234567">
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Métodos de pago -->
+        <div class="payment-methods">
+            <h3><i class="fa-solid fa-credit-card"></i> Método de pago</h3>
+            
+            <div class="method-option" data-method="card">
+                <div class="method-header">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Tarjeta de crédito / débito</span>
+                </div>
+                <div class="method-content">
+                    <div class="card-input">
+                        <i class="fa-regular fa-credit-card"></i>
+                        <input type="text" id="cardNumber" placeholder="Número de tarjeta" maxlength="19">
+                    </div>
+                    <div class="card-row">
+                        <div class="card-input">
+                            <i class="fa-regular fa-calendar"></i>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA">
+                        </div>
+                        <div class="card-input">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="text" id="cardCvv" placeholder="CVV" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="card-input">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="cardName" placeholder="Nombre en la tarjeta">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="method-option" data-method="pse">
+                <div class="method-header">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>PSE - Débito en línea</span>
+                </div>
+                <div class="method-content">
+                    <select class="bank-select" id="bankSelect">
+                        <option value="">Selecciona tu banco</option>
+                        <option value="bancolombia">Bancolombia</option>
+                        <option value="davivienda">Davivienda</option>
+                        <option value="bbva">BBVA</option>
+                        <option value="occidente">Banco de Occidente</option>
+                        <option value="popular">Banco Popular</option>
+                        <option value="avillas">Banco Av Villas</option>
+                        <option value="gnb">GNB Sudameris</option>
+                        <option value="cajaSocial">Caja Social</option>
+                        <option value="coopcentral">Coopcentral</option>
+                    </select>
+                    <div class="form-group" style="margin-top: 12px;">
+                        <label>Tipo de documento</label>
+                        <select id="pseDocType">
+                            <option value="CC">Cédula de Ciudadanía</option>
+                            <option value="CE">Cédula de Extranjería</option>
+                            <option value="NIT">NIT</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Número de documento</label>
+                        <input type="text" id="pseDocNumber" placeholder="Número de documento">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="method-option" data-method="nequi">
+                <div class="method-header">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>Nequi</span>
+                </div>
+                <div class="method-content">
+                    <div class="form-group">
+                        <label>Número de celular</label>
+                        <input type="tel" id="nequiPhone" placeholder="Ej: 3001234567">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo asociado a Nequi</label>
+                        <input type="email" id="nequiEmail" placeholder="correo@ejemplo.com">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="method-option" data-method="daviplata">
+                <div class="method-header">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <span>Daviplata</span>
+                </div>
+                <div class="method-content">
+                    <div class="form-group">
+                        <label>Número de celular</label>
+                        <input type="tel" id="daviplataPhone" placeholder="Ej: 3001234567">
+                    </div>
+                    <div class="form-group">
+                        <label>Documento de identidad</label>
+                        <input type="text" id="daviplataDoc" placeholder="Número de documento">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Columna derecha: Resumen y pago -->
+    <div class="checkout-sidebar">
+        <div class="price-breakdown">
+            <h4>Resumen del viaje</h4>
+            <div id="priceBreakdown"></div>
+            <button class="pay-button" id="payButton" onclick="processPayment()">
+                <i class="fa-solid fa-lock"></i> Pagar ahora
+            </button>
+            <div class="security-badge">
+                <i class="fa-solid fa-shield-h
