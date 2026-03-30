@@ -439,6 +439,9 @@ nav a:hover, nav a.active { color: #D71920; }
 .card-input i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #999; }
 .card-input input { width: 100%; padding: 12px 12px 12px 36px; border: 1px solid #e0e0e0; border-radius: 10px; }
 .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bank-info { background: #f8f9fa; padding: 16px; border-radius: 12px; margin-top: 12px; }
+.bank-info p { margin: 8px 0; font-size: 13px; }
+.bank-info .bank-detail { font-family: monospace; font-weight: 600; color: #D71920; }
 .checkout-sidebar { position: sticky; top: 100px; }
 .price-breakdown { background: white; border-radius: 20px; padding: 24px; margin-bottom: 20px; }
 .price-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; color: #666; }
@@ -456,30 +459,6 @@ nav a:hover, nav a.active { color: #D71920; }
     cursor: pointer;
     margin-top: 16px;
 }
-
-/* SUCCESS MODAL */
-.success-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-}
-.success-content {
-    background: white;
-    border-radius: 24px;
-    padding: 40px;
-    text-align: center;
-    max-width: 450px;
-}
-.success-content i { font-size: 64px; color: #4CAF50; margin-bottom: 20px; }
-.transaction-id { background: #f5f5f5; padding: 12px; border-radius: 12px; margin: 20px 0; font-family: monospace; }
-.back-home { background: #D71920; color: white; border: none; padding: 12px 24px; border-radius: 40px; cursor: pointer; margin-top: 16px; }
 
 /* FOOTER */
 footer {
@@ -594,20 +573,36 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
                 <div class="form-row"><div class="form-group"><label>Email</label><input type="email" id="email" placeholder="correo@ejemplo.com"></div><div class="form-group"><label>Teléfono</label><input id="phone" placeholder="3001234567"></div></div>
             </div>
             <div class="payment-methods"><h3><i class="fa-solid fa-credit-card"></i> Método de pago</h3>
-                <div class="method-option" data-method="card" onclick="selectPaymentMethod('card')"><div class="method-header"><i class="fa-regular fa-credit-card"></i><span>Tarjeta crédito/débito</span></div><div class="method-content"><div class="card-input"><i class="fa-regular fa-credit-card"></i><input id="cardNumber" placeholder="Número tarjeta"></div><div class="card-row"><div class="card-input"><i class="fa-regular fa-calendar"></i><input id="cardExpiry" placeholder="MM/AA"></div><div class="card-input"><i class="fa-solid fa-lock"></i><input id="cardCvv" placeholder="CVV"></div></div><div class="card-input"><i class="fa-regular fa-user"></i><input id="cardName" placeholder="Nombre tarjeta"></div></div></div>
-                <div class="method-option" data-method="pse" onclick="selectPaymentMethod('pse')"><div class="method-header"><i class="fa-solid fa-building-columns"></i><span>PSE</span></div><div class="method-content"><select class="bank-select" id="bankSelect"><option>Bancolombia</option><option>Davivienda</option><option>BBVA</option></select><div class="form-group"><label>Documento</label><input id="pseDocNumber" placeholder="Número documento"></div></div></div>
-                <div class="method-option" data-method="nequi" onclick="selectPaymentMethod('nequi')"><div class="method-header"><i class="fa-solid fa-mobile-screen-button"></i><span>Nequi</span></div><div class="method-content"><div class="form-group"><label>Celular</label><input id="nequiPhone" placeholder="3001234567"></div></div></div>
+                <div class="method-option" data-method="card" onclick="selectPaymentMethod('card')">
+                    <div class="method-header"><i class="fa-regular fa-credit-card"></i><span>Tarjeta crédito/débito</span></div>
+                    <div class="method-content">
+                        <div class="card-input"><i class="fa-regular fa-credit-card"></i><input id="cardNumber" placeholder="Número tarjeta"></div>
+                        <div class="card-row"><div class="card-input"><i class="fa-regular fa-calendar"></i><input id="cardExpiry" placeholder="MM/AA"></div><div class="card-input"><i class="fa-solid fa-lock"></i><input id="cardCvv" placeholder="CVV"></div></div>
+                        <div class="card-input"><i class="fa-regular fa-user"></i><input id="cardName" placeholder="Nombre tarjeta"></div>
+                    </div>
+                </div>
+                <div class="method-option" data-method="transfer" onclick="selectPaymentMethod('transfer')">
+                    <div class="method-header"><i class="fa-solid fa-building-columns"></i><span>Transferencia bancaria</span></div>
+                    <div class="method-content">
+                        <div class="bank-info">
+                            <p><strong>Datos para transferencia:</strong></p>
+                            <p>Banco: <span class="bank-detail">Bancolombia</span></p>
+                            <p>Tipo: <span class="bank-detail">Cuenta de ahorros</span></p>
+                            <p>Número: <span class="bank-detail">123-456789-01</span></p>
+                            <p>Titular: <span class="bank-detail">LATAM Airlines Colombia</span></p>
+                            <p>NIT: <span class="bank-detail">900.123.456-7</span></p>
+                            <p style="margin-top:12px; font-size:12px; color:#666;"><i class="fa-solid fa-info-circle"></i> Después de realizar la transferencia, confirma tu pago a través de WhatsApp con tu comprobante.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="checkout-sidebar"><div class="price-breakdown"><h4>Resumen</h4><div id="checkoutPriceBreakdown"></div><button class="pay-button" onclick="processPayment()"><i class="fa-solid fa-lock"></i> Pagar ahora</button><div class="security-badge"><i class="fa-solid fa-shield"></i> Pago seguro</div></div></div>
+        <div class="checkout-sidebar"><div class="price-breakdown"><h4>Resumen</h4><div id="checkoutPriceBreakdown"></div><button class="pay-button" onclick="processPayment()"><i class="fa-solid fa-lock"></i> Realiza tu pago</button><div class="security-badge"><i class="fa-solid fa-shield"></i> Pago seguro</div></div></div>
     </div>
 </div>
 
 <!-- Modal de pasajeros -->
 <div id="passengerModal" class="passenger-modal"><div class="modal-content"><h3>Pasajeros</h3><div class="passenger-type"><div><div class="passenger-type-name">Adultos</div><div class="passenger-type-age">Mayores 12 años</div></div><div class="passenger-controls"><button onclick="changePassenger('adults',-1)">-</button><span id="adultsCount">1</span><button onclick="changePassenger('adults',1)">+</button></div></div><div class="passenger-type"><div><div class="passenger-type-name">Niños</div><div class="passenger-type-age">2-11 años</div></div><div class="passenger-controls"><button onclick="changePassenger('children',-1)">-</button><span id="childrenCount">0</span><button onclick="changePassenger('children',1)">+</button></div></div><div class="modal-buttons"><button class="btn-cancel" onclick="closePassengerModal()">Cancelar</button><button class="btn-apply" onclick="applyPassengers()">Aplicar</button></div></div></div>
-
-<!-- Modal de éxito -->
-<div id="successModal" class="success-modal"><div class="success-content"><i class="fa-solid fa-circle-check"></i><h2>¡Pago exitoso!</h2><p>Reserva confirmada</p><div class="transaction-id" id="transactionId"></div><button class="back-home" onclick="goToHome()">Volver al inicio</button></div></div>
 
 <script>
 // ============================================
@@ -626,18 +621,18 @@ const airports = [
 // PRECIOS REALISTAS POR DISTANCIA
 // ============================================
 const priceMatrix = {
-    'BOG-MDE': { min: 86910, max: 149000, distance: 'short' },
-    'BOG-CLO': { min: 69160, max: 129000, distance: 'short' },
-    'BOG-CTG': { min: 152500, max: 279000, distance: 'medium' },
-    'BOG-SMR': { min: 172500, max: 299000, distance: 'medium' },
-    'BOG-ADZ': { min: 545000, max: 789000, distance: 'long' },
-    'BOG-LIM': { min: 1050000, max: 1800000, distance: 'regional' },
-    'BOG-SCL': { min: 1700000, max: 2800000, distance: 'longRegional' },
-    'BOG-EZE': { min: 1800000, max: 2900000, distance: 'longRegional' },
-    'BOG-GRU': { min: 1900000, max: 3200000, distance: 'longRegional' },
-    'BOG-MIA': { min: 1800000, max: 3200000, distance: 'northAmerica' },
-    'BOG-JFK': { min: 2200000, max: 3800000, distance: 'northAmerica' },
-    'BOG-MAD': { min: 2500000, max: 4500000, distance: 'europe' }
+    'BOG-MDE': { min: 86910, max: 149000 },
+    'BOG-CLO': { min: 69160, max: 129000 },
+    'BOG-CTG': { min: 152500, max: 279000 },
+    'BOG-SMR': { min: 172500, max: 299000 },
+    'BOG-ADZ': { min: 545000, max: 789000 },
+    'BOG-LIM': { min: 1050000, max: 1800000 },
+    'BOG-SCL': { min: 1700000, max: 2800000 },
+    'BOG-EZE': { min: 1800000, max: 2900000 },
+    'BOG-GRU': { min: 1900000, max: 3200000 },
+    'BOG-MIA': { min: 1800000, max: 3200000 },
+    'BOG-JFK': { min: 2200000, max: 3800000 },
+    'BOG-MAD': { min: 2500000, max: 4500000 }
 };
 
 const durations = {
@@ -823,11 +818,6 @@ function quickSearch(origin, destination) {
 }
 function goBack() {
     document.getElementById('resultsPage').style.display = 'none';
-    document.getElementById('mainPage').style.display = 'block';
-}
-function goToHome() {
-    document.getElementById('successModal').style.display = 'none';
-    document.getElementById('checkoutPage').style.display = 'none';
     document.getElementById('mainPage').style.display = 'block';
 }
 
@@ -1054,11 +1044,15 @@ function selectPaymentMethod(method) {
 function processPayment() {
     const doc = document.getElementById('docNumber').value;
     const name = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
     const email = document.getElementById('email').value;
-    if (!doc || !name || !email) { alert('Completa los datos del pasajero'); return; }
-    const btn = document.querySelector('.pay-button');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando...';
+    const phone = document.getElementById('phone').value;
+    
+    if (!doc || !name || !lastName || !email || !phone) {
+        alert('Completa todos los datos del pasajero');
+        return;
+    }
+    
     const tripType = document.querySelector('input[name="trip"]:checked').value;
     const isRound = tripType !== 'oneway';
     const totalFlights = (selectedOutboundFlight?.price || 0) + (selectedReturnFlight?.price || 0);
@@ -1068,40 +1062,83 @@ function processPayment() {
     }, 0);
     const total = totalFlights + totalSeats + baggagePrice;
     
+    // Generar código de reserva
+    const reservationCode = 'LTM-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+    
+    // Guardar en localStorage
+    const reservationData = {
+        fecha: new Date().toLocaleString(),
+        codigo_reserva: reservationCode,
+        nombre: `${name} ${lastName}`,
+        documento: doc,
+        email: email,
+        telefono: phone,
+        vuelo_ida: `${selectedOutboundFlight.flightNumber} - ${selectedOutboundFlight.time}`,
+        vuelo_regreso: selectedReturnFlight ? `${selectedReturnFlight.flightNumber} - ${selectedReturnFlight.time}` : 'Solo ida',
+        ruta_ida: `${currentOrigin} → ${currentDestination}`,
+        ruta_regreso: selectedReturnFlight ? `${currentDestination} → ${currentOrigin}` : 'No aplica',
+        fecha_ida: new Date(currentDepartureDate).toLocaleDateString('es-ES'),
+        fecha_regreso: currentReturnDate ? new Date(currentReturnDate).toLocaleDateString('es-ES') : 'No aplica',
+        asientos: selectedOutboundSeats.join(', ') || 'No seleccionados',
+        equipaje: BAGGAGE_OPTIONS.find(o => o.id === selectedBaggage)?.name || 'Ligero',
+        total: total.toLocaleString(),
+        metodo_pago: selectedMethod === 'card' ? 'Tarjeta crédito/débito' : 'Transferencia bancaria'
+    };
+    
+    let reservas = JSON.parse(localStorage.getItem('reservas_latam') || '[]');
+    reservas.push(reservationData);
+    localStorage.setItem('reservas_latam', JSON.stringify(reservas));
+    
+    // Construir mensaje para WhatsApp
+    let whatsappMessage = `🛫 *RESERVA LATAM AIRLINES* 🛬%0A%0A`;
+    whatsappMessage += `📋 *CÓDIGO DE RESERVA:* ${reservationCode}%0A%0A`;
+    whatsappMessage += `👤 *DATOS DEL PASAJERO*%0A`;
+    whatsappMessage += `Nombre: ${name} ${lastName}%0A`;
+    whatsappMessage += `Documento: ${doc}%0A`;
+    whatsappMessage += `Email: ${email}%0A`;
+    whatsappMessage += `Teléfono: ${phone}%0A%0A`;
+    whatsappMessage += `✈️ *DETALLES DEL VUELO*%0A`;
+    whatsappMessage += `🛫 *IDA:* ${selectedOutboundFlight.flightNumber} - ${selectedOutboundFlight.time}%0A`;
+    whatsappMessage += `📍 Ruta: ${currentOrigin} → ${currentDestination}%0A`;
+    whatsappMessage += `📅 Fecha: ${new Date(currentDepartureDate).toLocaleDateString('es-ES')}%0A`;
+    if (isRound && selectedReturnFlight) {
+        whatsappMessage += `%0A🛬 *REGRESO:* ${selectedReturnFlight.flightNumber} - ${selectedReturnFlight.time}%0A`;
+        whatsappMessage += `📍 Ruta: ${currentDestination} → ${currentOrigin}%0A`;
+        whatsappMessage += `📅 Fecha: ${new Date(currentReturnDate).toLocaleDateString('es-ES')}%0A`;
+    }
+    whatsappMessage += `%0A💺 *ASIENTOS:* ${selectedOutboundSeats.join(', ') || 'No seleccionados'}%0A`;
+    whatsappMessage += `🧳 *EQUIPAJE:* ${BAGGAGE_OPTIONS.find(o => o.id === selectedBaggage)?.name || 'Ligero'}%0A`;
+    whatsappMessage += `💰 *TOTAL A PAGAR:* $${total.toLocaleString()} COP%0A%0A`;
+    whatsappMessage += `💳 *MÉTODO DE PAGO:* ${selectedMethod === 'card' ? 'Tarjeta crédito/débito' : 'Transferencia bancaria'}%0A%0A`;
+    whatsappMessage += `✅ *ESTADO:* Reserva pendiente de pago%0A%0A`;
+    whatsappMessage += `📲 *PARA REALIZAR EL PAGO:*%0A`;
+    if (selectedMethod === 'transfer') {
+        whatsappMessage += `Banco: Bancolombia%0A`;
+        whatsappMessage += `Cuenta de ahorros: 123-456789-01%0A`;
+        whatsappMessage += `Titular: LATAM Airlines Colombia%0A`;
+        whatsappMessage += `NIT: 900.123.456-7%0A`;
+        whatsappMessage += `%0A📌 *ENVIAR COMPROBANTE DE PAGO A ESTE WHATSAPP*%0A`;
+    } else {
+        whatsappMessage += `💳 Los datos de tu tarjeta serán procesados de forma segura%0A`;
+        whatsappMessage += `📌 *CONFIRMAR PAGO A TRAVÉS DE ESTE WHATSAPP*%0A`;
+    }
+    whatsappMessage += `%0A🎉 ¡Gracias por viajar con LATAM Airlines! 🎉`;
+    
+    // Redirigir a WhatsApp
+    const whatsappUrl = `https://wa.me/573241813748?text=${whatsappMessage}`;
+    window.open(whatsappUrl, '_blank');
+    
+    // Mostrar alerta de confirmación
+    alert(`✅ Reserva generada con éxito!\n\nCódigo de reserva: ${reservationCode}\n\nTotal a pagar: $${total.toLocaleString()}\n\nSerás redirigido a WhatsApp para completar el pago.`);
+    
+    // Resetear y volver al inicio
     setTimeout(() => {
-        const transId = 'LTM-' + Math.random().toString(36).substring(2, 10).toUpperCase();
-        document.getElementById('transactionId').innerHTML = `Transacción: ${transId}`;
-        
-        // Guardar en Google Sheets (configuración)
-        const reservationData = {
-            fecha: new Date().toISOString(),
-            transaccion: transId,
-            nombre: name,
-            documento: doc,
-            email: email,
-            telefono: document.getElementById('phone').value,
-            vuelo_ida: `${selectedOutboundFlight.flightNumber} - ${selectedOutboundFlight.time}`,
-            vuelo_regreso: selectedReturnFlight ? `${selectedReturnFlight.flightNumber} - ${selectedReturnFlight.time}` : 'Solo ida',
-            asientos: selectedOutboundSeats.join(', '),
-            equipaje: BAGGAGE_OPTIONS.find(o => o.id === selectedBaggage)?.name || 'Ligero',
-            total: total.toLocaleString(),
-            metodo_pago: selectedMethod === 'card' ? 'Tarjeta' : (selectedMethod === 'pse' ? 'PSE' : 'Nequi')
-        };
-        
-        // Guardar en localStorage para el panel de administración
-        let reservas = JSON.parse(localStorage.getItem('reservas_latam') || '[]');
-        reservas.push(reservationData);
-        localStorage.setItem('reservas_latam', JSON.stringify(reservas));
-        
-        // Mostrar modal de éxito
-        document.getElementById('successModal').style.display = 'flex';
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-lock"></i> Pagar ahora';
-        
-        // Limpiar selecciones
+        document.getElementById('checkoutPage').style.display = 'none';
+        document.getElementById('mainPage').style.display = 'block';
+        selectedOutboundFlight = null;
+        selectedReturnFlight = null;
         selectedOutboundSeats = [];
-        selectedReturnSeats = [];
-    }, 2000);
+    }, 1000);
 }
 
 function goBackFromSeats() {
