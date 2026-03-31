@@ -6,6 +6,10 @@
 <title>LATAM Airlines Colombia - Reserva de Vuelos</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <style>
 /* ============================================
    LOGO LATAM AIRLINES COLOMBIA (CSS)
@@ -153,6 +157,7 @@
     align-items: center;
     z-index: 9999;
     animation: fadeOutSplash 0.8s cubic-bezier(0.2, 0.8, 0.4, 1) 2.2s forwards;
+    cursor: pointer;
 }
 
 .splash-content {
@@ -242,6 +247,187 @@ nav a.active::after {
 }
 .header-right { display: flex; gap: 20px; font-size: 14px; cursor: pointer; color: var(--gray); font-weight: 500; }
 .header-right span:hover { color: var(--latam-blue); }
+
+/* User Menu */
+.user-menu {
+    position: relative;
+    cursor: pointer;
+}
+.user-avatar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--latam-blue-bg);
+    border-radius: 40px;
+    transition: var(--transition);
+}
+.user-avatar i {
+    font-size: 18px;
+    color: var(--latam-blue);
+}
+.user-avatar span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray);
+}
+.user-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 220px;
+    display: none;
+    z-index: 100;
+    overflow: hidden;
+}
+.user-menu:hover .user-dropdown {
+    display: block;
+}
+.user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 14px;
+    transition: var(--transition);
+}
+.user-dropdown a:hover {
+    background: var(--latam-blue-bg);
+    color: var(--latam-blue);
+}
+.user-dropdown hr {
+    margin: 8px 0;
+    border-color: var(--border);
+}
+
+/* Auth Modal */
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.auth-content {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    width: 420px;
+    max-width: 90%;
+    animation: scaleIn 0.3s ease;
+}
+.auth-content h2 {
+    margin-bottom: 24px;
+    color: var(--dark);
+    font-size: 24px;
+}
+.auth-tabs {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--border);
+}
+.auth-tab {
+    padding: 8px 0;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--gray);
+    transition: var(--transition);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+.auth-tab.active {
+    color: var(--latam-blue);
+    border-bottom-color: var(--latam-blue);
+}
+.auth-form {
+    display: none;
+}
+.auth-form.active {
+    display: block;
+}
+.auth-form input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+.auth-form button {
+    width: 100%;
+    background: var(--latam-blue);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+.auth-error {
+    color: #f44336;
+    font-size: 12px;
+    margin-top: -12px;
+    margin-bottom: 12px;
+    display: none;
+}
+
+/* Progress Bar */
+.progress-bar {
+    background: white;
+    padding: 16px 60px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+.progress-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gray-light);
+    font-size: 14px;
+    font-weight: 500;
+}
+.progress-step.active {
+    color: var(--latam-blue);
+}
+.progress-step.completed {
+    color: #4CAF50;
+}
+.step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-light);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+.progress-step.active .step-number {
+    border-color: var(--latam-blue);
+    background: var(--latam-blue);
+    color: white;
+}
+.progress-step.completed .step-number {
+    border-color: #4CAF50;
+    background: #4CAF50;
+    color: white;
+}
 
 /* HERO */
 .hero {
@@ -524,16 +710,8 @@ nav a.active::after {
 }
 .continue-button:disabled { background: #ccc; cursor: not-allowed; }
 
-/* ============================================
-   SEAT SELECTION - DISEÑO PREMIUM (EL QUE TE GUSTÓ)
-============================================ */
-.seat-selection-page { 
-    display: none; 
-    min-height: 100vh; 
-    background: linear-gradient(135deg, #0A1428 0%, #0F1A30 100%);
-    position: relative; 
-    overflow-x: auto;
-}
+/* SEAT SELECTION */
+.seat-selection-page { display: none; min-height: 100vh; background: linear-gradient(135deg, #0A1428 0%, #0F1A30 100%); position: relative; overflow-x: auto; }
 .seat-selection-page::before {
     content: '';
     position: absolute;
@@ -760,6 +938,7 @@ nav a.active::after {
     box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
 }
 
+/* Seat Colors */
 .seat.available {
     background: linear-gradient(145deg, #2e7d32, #1b5e20);
     border-color: #4caf50;
@@ -1078,6 +1257,17 @@ nav a.active::after {
     cursor: pointer;
     margin-top: 16px;
 }
+.back-to-home {
+    text-align: center;
+    margin-top: 20px;
+}
+.back-to-home button {
+    background: none;
+    border: none;
+    color: var(--latam-blue);
+    cursor: pointer;
+    font-weight: 500;
+}
 
 /* FOOTER */
 footer {
@@ -1098,6 +1288,7 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
     .checkout-container { grid-template-columns: 1fr; }
     .seat-selection-container { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .progress-bar { padding: 12px 20px; gap: 20px; flex-wrap: wrap; }
 }
 @media (max-width: 768px) {
     header { padding: 12px 20px; flex-direction: column; gap: 12px; }
@@ -1113,12 +1304,15 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
     .seat { width: 48px; height: 48px; font-size: 13px; }
     .seat-group:first-child::after { display: none; }
     .seats { flex-wrap: wrap; gap: 12px; }
+    .seat-row { flex-direction: column; align-items: flex-start; }
+    .row-number { margin-bottom: 8px; }
+    .progress-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
 }
 </style>
 </head>
 <body>
 <!-- SPLASH SCREEN -->
-<div class="splash-screen" id="splashScreen">
+<div class="splash-screen" id="splashScreen" onclick="skipSplash()">
     <div class="splash-content">
         <div class="splash-logo-css">
             <div class="splash-icon-css">
@@ -1148,9 +1342,55 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
                 </div>
             </div>
         </div>
-        <nav><a href="#" class="active">Vuelos</a><a href="#">Mis viajes</a><a href="#">Check-in</a><a href="#">Estado de vuelo</a><a href="#">LATAM Pass</a></nav>
-        <div class="header-right"><span>ES</span><span>Iniciar sesión</span></div>
+        <nav>
+            <a href="#" class="active">Vuelos</a>
+            <a href="#">Mis viajes</a>
+            <a href="#">Check-in</a>
+            <a href="#">Estado de vuelo</a>
+            <a href="#">LATAM Pass</a>
+        </nav>
+        <div class="header-right">
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar">
+                    <i class="fa-regular fa-user"></i>
+                    <span id="userNameDisplay">Iniciar sesión</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown" id="userDropdown">
+                    <div id="userInfo" style="padding: 12px 16px; border-bottom: 1px solid var(--border);">
+                        <div style="font-weight: 600;" id="dropdownUserName">Usuario</div>
+                        <div style="font-size: 12px; color: var(--gray-light);" id="dropdownUserEmail"></div>
+                    </div>
+                    <a href="#" onclick="viewMyReservations()"><i class="fa-solid fa-ticket"></i> Mis reservas</a>
+                    <a href="#" onclick="viewProfile()"><i class="fa-solid fa-user"></i> Mi perfil</a>
+                    <hr>
+                    <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i> Cerrar sesión</a>
+                </div>
+            </div>
+            <span>ES</span>
+        </div>
     </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar" style="display: none;">
+        <div class="progress-step" data-step="1">
+            <div class="step-number">1</div>
+            <span>Vuelos</span>
+        </div>
+        <div class="progress-step" data-step="2">
+            <div class="step-number">2</div>
+            <span>Asientos</span>
+        </div>
+        <div class="progress-step" data-step="3">
+            <div class="step-number">3</div>
+            <span>Equipaje</span>
+        </div>
+        <div class="progress-step" data-step="4">
+            <div class="step-number">4</div>
+            <span>Pago</span>
+        </div>
+    </div>
+
     <section class="hero">
         <div class="search-box">
             <div class="trip-tabs">
@@ -1184,6 +1424,31 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
     <footer><div class="footer-grid"><div><h4>Ayuda</h4><a href="#">Centro de ayuda</a><a href="#">Cambios</a></div><div><h4>Sobre LATAM</h4><a href="#">Quiénes somos</a><a href="#">Prensa</a></div><div><h4>Legal</h4><a href="#">Términos</a><a href="#">Privacidad</a></div><div><h4>Contacto</h4><a href="#">Soporte</a><a href="#">Redes sociales</a></div></div><div class="copy">© 2026 LATAM Airlines Colombia</div></footer>
 </div>
 
+<!-- Auth Modal -->
+<div id="authModal" class="auth-modal">
+    <div class="auth-content">
+        <h2>Bienvenido a LATAM</h2>
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Iniciar sesión</div>
+            <div class="auth-tab" data-tab="register">Registrarse</div>
+        </div>
+        <div id="loginForm" class="auth-form active">
+            <input type="email" id="loginEmail" placeholder="Correo electrónico">
+            <input type="password" id="loginPassword" placeholder="Contraseña">
+            <div id="loginError" class="auth-error"></div>
+            <button onclick="login()">Iniciar sesión</button>
+        </div>
+        <div id="registerForm" class="auth-form">
+            <input type="text" id="registerName" placeholder="Nombre completo">
+            <input type="email" id="registerEmail" placeholder="Correo electrónico">
+            <input type="password" id="registerPassword" placeholder="Contraseña">
+            <input type="password" id="registerConfirmPassword" placeholder="Confirmar contraseña">
+            <div id="registerError" class="auth-error"></div>
+            <button onclick="register()">Crear cuenta</button>
+        </div>
+    </div>
+</div>
+
 <!-- Página de resultados de vuelos -->
 <div id="resultsPage" class="results-page">
     <div class="results-header"><div class="results-header-left"><button class="back-button" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i></button><div class="route-info" id="routeInfo"></div></div><div class="results-stats" id="resultsStats"></div></div>
@@ -1213,8 +1478,8 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
                 <div id="seatMapContainer"></div>
             </div>
             <div class="seat-legend">
-                <div class="legend-item"><div class="legend-color" style="background: #2e7d32;"></div><span>Disponible ($49,900)</span></div>
-                <div class="legend-item"><div class="legend-color" style="background: #f57c00;"></div><span>Premium ($69,900)</span></div>
+                <div class="legend-item"><div class="legend-color" style="background: #2e7d32;"></div><span>Economy ($49,900)</span></div>
+                <div class="legend-item"><div class="legend-color" style="background: #f57c00;"></div><span>Premium Economy ($69,900)</span></div>
                 <div class="legend-item"><div class="legend-color" style="background: #7b1fa2;"></div><span>Business ($99,900)</span></div>
                 <div class="legend-item"><div class="legend-color" style="background: #0033A0;"></div><span>Seleccionado</span></div>
                 <div class="legend-item"><div class="legend-color" style="background: #8b0000;"></div><span>Ocupado</span></div>
@@ -1247,12 +1512,23 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
     <div class="checkout-container">
         <div class="checkout-form">
             <div class="flight-summary" id="checkoutFlightSummary"></div>
-            <div class="passenger-form"><h3><i class="fa-solid fa-user"></i> Datos del pasajero principal</h3>
-                <div class="form-row"><div class="form-group"><label>Tipo documento</label><select id="docType"><option>CC</option><option>CE</option><option>Pasaporte</option></select></div><div class="form-group"><label>Número documento</label><input id="docNumber" placeholder="12345678"></div></div>
-                <div class="form-row"><div class="form-group"><label>Nombres</label><input id="firstName" placeholder="Nombres"></div><div class="form-group"><label>Apellidos</label><input id="lastName" placeholder="Apellidos"></div></div>
-                <div class="form-row"><div class="form-group"><label>Email</label><input type="email" id="email" placeholder="correo@ejemplo.com"></div><div class="form-group"><label>Teléfono</label><input id="phone" placeholder="3001234567"></div></div>
-                <div class="extra-passengers-info" id="extraPassengersInfo" style="display: none; margin-top: 16px; padding: 12px; background: #E8F0FE; border-radius: 12px;">
-                    <p><i class="fa-solid fa-users"></i> Esta reserva incluye <strong id="extraPassengersCount">0</strong> pasajero(s) adicional(es). Los datos se solicitarán en el siguiente paso.</p>
+            <div class="passenger-form">
+                <h3><i class="fa-solid fa-user"></i> Datos del pasajero principal</h3>
+                <div class="form-row">
+                    <div class="form-group"><label>Tipo documento</label><select id="docType"><option>CC</option><option>CE</option><option>Pasaporte</option></select></div>
+                    <div class="form-group"><label>Número documento</label><input id="docNumber" placeholder="12345678"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Nombres</label><input id="firstName" placeholder="Nombres"></div>
+                    <div class="form-group"><label>Apellidos</label><input id="lastName" placeholder="Apellidos"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="correo@ejemplo.com"></div>
+                    <div class="form-group"><label>Teléfono</label><input id="phone" placeholder="3001234567"></div>
+                </div>
+                <div id="extraPassengersForm" style="display: none; margin-top: 24px;">
+                    <h3><i class="fa-solid fa-users"></i> Datos de pasajeros adicionales</h3>
+                    <div id="extraPassengersFields"></div>
                 </div>
             </div>
             <div class="payment-methods"><h3><i class="fa-solid fa-credit-card"></i> Método de pago</h3>
@@ -1279,6 +1555,9 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
                     </div>
                 </div>
             </div>
+            <div class="back-to-home">
+                <button onclick="resetAndGoHome()">← Volver al inicio</button>
+            </div>
         </div>
         <div class="checkout-sidebar"><div class="price-breakdown"><h4>Resumen</h4><div id="checkoutPriceBreakdown"></div><button class="pay-button" onclick="processPayment()"><i class="fa-brands fa-whatsapp"></i> Realiza tu pago</button><div class="security-badge"><i class="fa-solid fa-shield"></i> Pago seguro</div></div></div>
     </div>
@@ -1287,138 +1566,90 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 8p
 <!-- Modal de pasajeros -->
 <div id="passengerModal" class="passenger-modal"><div class="modal-content"><h3>Pasajeros</h3><div class="passenger-type"><div><div class="passenger-type-name">Adultos</div><div class="passenger-type-age">Mayores 12 años</div></div><div class="passenger-controls"><button onclick="changePassenger('adults',-1)">-</button><span id="adultsCount">1</span><button onclick="changePassenger('adults',1)">+</button></div></div><div class="passenger-type"><div><div class="passenger-type-name">Niños</div><div class="passenger-type-age">2-11 años</div></div><div class="passenger-controls"><button onclick="changePassenger('children',-1)">-</button><span id="childrenCount">0</span><button onclick="changePassenger('children',1)">+</button></div></div><div class="modal-buttons"><button class="btn-cancel" onclick="closePassengerModal()">Cancelar</button><button class="btn-apply" onclick="applyPassengers()">Aplicar</button></div></div></div>
 
+<!-- Modal de reservas -->
+<div id="reservationsModal" class="auth-modal" style="display: none;">
+    <div class="auth-content" style="width: 800px; max-width: 90%;">
+        <h2>Mis reservas</h2>
+        <div id="reservationsList" style="max-height: 500px; overflow-y: auto;"></div>
+        <div style="margin-top: 20px; text-align: center;">
+            <button class="btn-cancel" onclick="closeReservationsModal()">Cerrar</button>
+        </div>
+    </div>
+</div>
+
 <script>
 // ============================================
-// SPLASH SCREEN - OCULTAR DESPUÉS DE 2.5 SEGUNDOS
+// FIREBASE CONFIGURACIÓN (REEMPLAZA CON TU CONFIGURACIÓN)
 // ============================================
-setTimeout(function() {
-    const splash = document.getElementById('splashScreen');
-    if (splash) {
-        splash.style.display = 'none';
-    }
-}, 2500);
-
-// ============================================
-// LISTA COMPLETA DE AEROPUERTOS LATAM (150+ destinos)
-// ============================================
-const airports = [
-    // Colombia (21)
-    "Bogotá (BOG) - El Dorado International Airport", "Medellín (MDE) - José María Córdova International Airport",
-    "Cali (CLO) - Alfonso Bonilla Aragón International Airport", "Cartagena (CTG) - Rafael Núñez International Airport",
-    "Barranquilla (BAQ) - Ernesto Cortissoz International Airport", "Bucaramanga (BGA) - Palonegro International Airport",
-    "Santa Marta (SMR) - Simón Bolívar International Airport", "San Andrés (ADZ) - Gustavo Rojas Pinilla International Airport",
-    "Pereira (PEI) - Matecaña International Airport", "Cúcuta (CUC) - Camilo Daza International Airport",
-    "Armenia (AXM) - El Edén International Airport", "Montería (MTR) - Los Garzones Airport",
-    "Leticia (LET) - Alfredo Vásquez Cobo International Airport", "Valledupar (VUP) - Alfonso López Pumarejo Airport",
-    "Popayán (PPN) - Guillermo León Valencia Airport", "Neiva (NVA) - Benito Salas Airport",
-    "Villavicencio (VVC) - Vanguardia Airport", "Yopal (EYP) - El Alcaraván Airport",
-    "Pasto (PSO) - Antonio Nariño Airport", "Riohacha (RCH) - Almirante Padilla Airport", "Ibagué (IBE) - Perales Airport",
-    // Perú (11)
-    "Lima (LIM) - Jorge Chávez International Airport", "Cusco (CUZ) - Alejandro Velasco Astete International Airport",
-    "Arequipa (AQP) - Rodríguez Ballón International Airport", "Trujillo (TRU) - Capitán FAP Carlos Martínez de Pinillos",
-    "Piura (PIU) - Capitán FAP Guillermo Concha Iberico", "Iquitos (IQT) - Coronel FAP Francisco Secada Vignetta",
-    "Tarapoto (TPP) - Cadete FAP Guillermo del Castillo Paredes", "Pucallpa (PCL) - Capitán FAP David Abensur Rengifo",
-    "Chiclayo (CIX) - Capitán FAP José A. Quiñones González", "Juliaca (JUL) - Inca Manco Cápac International Airport",
-    "Tacna (TCQ) - Coronel FAP Carlos Ciriani Santa Rosa",
-    // Chile (14)
-    "Santiago (SCL) - Arturo Merino Benítez International Airport", "Concepción (CCP) - Carriel Sur International Airport",
-    "Antofagasta (ANF) - Cerro Moreno International Airport", "Iquique (IQQ) - Diego Aracena International Airport",
-    "Puerto Montt (PMC) - El Tepual International Airport", "Punta Arenas (PUQ) - Presidente Carlos Ibáñez del Campo",
-    "La Serena (LSC) - La Florida Airport", "Temuco (ZCO) - Maquehue Airport", "Calama (CJC) - El Loa Airport",
-    "Arica (ARI) - Chacalluta International Airport", "Copiapo (CPO) - Desierto de Atacama Airport",
-    "Valdivia (ZAL) - Pichoy Airport", "Osorno (ZOS) - Cañal Bajo Carlos Hott Siebert", "Balmaceda (BBA) - Balmaceda Airport",
-    // Argentina (13)
-    "Buenos Aires (EZE) - Ministro Pistarini International Airport", "Buenos Aires (AEP) - Aeroparque Jorge Newbery",
-    "Córdoba (COR) - Ingeniero Aeronáutico Ambrosio Taravella", "Mendoza (MDZ) - Governor Francisco Gabrielli International",
-    "Rosario (ROS) - Islas Malvinas International Airport", "Bariloche (BRC) - Teniente Luis Candelaria Airport",
-    "Salta (SLA) - Martín Miguel de Güemes International", "Iguazú (IGR) - Cataratas del Iguazú International Airport",
-    "El Calafate (FTE) - Comandante Armando Tola Airport", "Ushuaia (USH) - Malvinas Argentinas International Airport",
-    "Tucumán (TUC) - Teniente Benjamín Matienzo Airport", "Neuquén (NQN) - Presidente Perón International Airport",
-    "Trelew (REL) - Almirante Marco Andrés Zar Airport",
-    // Brasil (22)
-    "São Paulo (GRU) - Guarulhos International Airport", "São Paulo (CGH) - Congonhas Airport",
-    "Rio de Janeiro (GIG) - Galeão International Airport", "Rio de Janeiro (SDU) - Santos Dumont Airport",
-    "Brasília (BSB) - Presidente Juscelino Kubitschek", "Belo Horizonte (CNF) - Tancredo Neves International",
-    "Porto Alegre (POA) - Salgado Filho International Airport", "Curitiba (CWB) - Afonso Pena International Airport",
-    "Florianópolis (FLN) - Hercílio Luz International Airport", "Salvador (SSA) - Deputado Luís Eduardo Magalhães",
-    "Recife (REC) - Guararapes International Airport", "Fortaleza (FOR) - Pinto Martins International Airport",
-    "Manaus (MAO) - Eduardo Gomes International Airport", "Belém (BEL) - Val de Cans International Airport",
-    "Cuiabá (CGB) - Marechal Rondon International Airport", "Goiânia (GYN) - Santa Genoveva Airport",
-    "Campinas (VCP) - Viracopos International Airport", "Natal (NAT) - Aluízio Alves International Airport",
-    "Maceió (MCZ) - Zumbi dos Palmares International Airport", "João Pessoa (JPA) - Presidente Castro Pinto Airport",
-    "Aracaju (AJU) - Santa Maria Airport", "São Luís (SLZ) - Marechal Cunha Machado International",
-    // Ecuador, Bolivia, Paraguay, Uruguay
-    "Quito (UIO) - Mariscal Sucre International Airport", "Guayaquil (GYE) - José Joaquín de Olmedo International",
-    "Cuenca (CUE) - Mariscal Lamar Airport", "Santa Cruz (VVI) - Viru Viru International Airport",
-    "La Paz (LPB) - El Alto International Airport", "Cochabamba (CBB) - Jorge Wilstermann International Airport",
-    "Asunción (ASU) - Silvio Pettirossi International Airport", "Montevideo (MVD) - Carrasco International Airport",
-    "Punta del Este (PDP) - Capitán de Corbeta Carlos A. Curbelo",
-    // Estados Unidos (12)
-    "Miami (MIA) - Miami International Airport", "New York (JFK) - John F. Kennedy International Airport",
-    "Los Angeles (LAX) - Los Angeles International Airport", "Orlando (MCO) - Orlando International Airport",
-    "Atlanta (ATL) - Hartsfield-Jackson Atlanta International", "Dallas (DFW) - Dallas/Fort Worth International Airport",
-    "Chicago (ORD) - O'Hare International Airport", "Houston (IAH) - George Bush Intercontinental Airport",
-    "Boston (BOS) - Logan International Airport", "Washington (IAD) - Dulles International Airport",
-    "San Francisco (SFO) - San Francisco International Airport", "Las Vegas (LAS) - McCarran International Airport",
-    // México (7)
-    "Ciudad de México (MEX) - Benito Juárez International Airport", "Cancún (CUN) - Cancún International Airport",
-    "Guadalajara (GDL) - Miguel Hidalgo y Costilla International", "Monterrey (MTY) - Mariano Escobedo International Airport",
-    "Tijuana (TIJ) - Tijuana International Airport", "Los Cabos (SJD) - Los Cabos International Airport",
-    "Puerto Vallarta (PVR) - Licenciado Gustavo Díaz Ordaz",
-    // Europa (11)
-    "Madrid (MAD) - Adolfo Suárez Madrid-Barajas Airport", "Barcelona (BCN) - Josep Tarradellas Barcelona-El Prat",
-    "Paris (CDG) - Charles de Gaulle Airport", "London (LHR) - Heathrow Airport",
-    "Frankfurt (FRA) - Frankfurt Airport", "Amsterdam (AMS) - Amsterdam Airport Schiphol",
-    "Rome (FCO) - Leonardo da Vinci International Airport", "Milan (MXP) - Malpensa International Airport",
-    "Lisbon (LIS) - Humberto Delgado Airport", "Zurich (ZRH) - Zurich Airport", "Munich (MUC) - Munich Airport",
-    // Oceanía (5)
-    "Sydney (SYD) - Sydney Kingsford Smith Airport", "Melbourne (MEL) - Melbourne Airport",
-    "Auckland (AKL) - Auckland Airport", "Papeete (PPT) - Faa'a International Airport (Tahití)",
-    "Easter Island (IPC) - Mataveri International Airport",
-    // Caribe (8)
-    "Panamá (PTY) - Tocumen International Airport", "Punta Cana (PUJ) - Punta Cana International Airport",
-    "Santo Domingo (SDQ) - Las Américas International Airport", "La Habana (HAV) - José Martí International Airport",
-    "Aruba (AUA) - Queen Beatrix International Airport", "Curazao (CUR) - Hato International Airport",
-    "San Juan (SJU) - Luis Muñoz Marín International Airport", "Nassau (NAS) - Lynden Pindling International Airport",
-    // África (2)
-    "Johannesburg (JNB) - O.R. Tambo International Airport", "Cape Town (CPT) - Cape Town International Airport"
-];
-
-// ============================================
-// PRECIOS REALISTAS POR RUTA
-// ============================================
-const priceMatrix = {
-    // Nacionales Colombia
-    'BOG-MDE': { min: 86910, max: 149000 }, 'BOG-CLO': { min: 69160, max: 129000 },
-    'BOG-CTG': { min: 152500, max: 279000 }, 'BOG-SMR': { min: 172500, max: 299000 },
-    'BOG-ADZ': { min: 545000, max: 789000 }, 'MDE-BOG': { min: 86910, max: 149000 },
-    // Internacionales Sudamérica
-    'BOG-LIM': { min: 1401000, max: 1800000 }, 'BOG-SCL': { min: 1723000, max: 2200000 },
-    'BOG-EZE': { min: 1800000, max: 2300000 }, 'BOG-GRU': { min: 1900000, max: 2400000 },
-    'BOG-UIO': { min: 1200000, max: 1600000 }, 'BOG-ASU': { min: 1300000, max: 1700000 },
-    // Norteamérica
-    'BOG-MIA': { min: 1314000, max: 1800000 }, 'BOG-JFK': { min: 1850000, max: 2400000 },
-    'BOG-MCO': { min: 1295000, max: 1700000 }, 'BOG-LAX': { min: 2100000, max: 2800000 },
-    // Europa
-    'BOG-MAD': { min: 2500000, max: 3200000 }, 'BOG-BCN': { min: 2650000, max: 3400000 },
-    'BOG-CDG': { min: 2800000, max: 3600000 }, 'BOG-LHR': { min: 3000000, max: 3800000 }
+const firebaseConfig = {
+    apiKey: "TU_API_KEY_AQUI",
+    authDomain: "TU_PROYECTO.firebaseapp.com",
+    projectId: "TU_PROYECTO",
+    storageBucket: "TU_PROYECTO.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "1:123456789:web:abcdef"
 };
 
-// Duraciones reales (minutos)
-const durations = {
-    'BOG-MDE': 64, 'BOG-CLO': 67, 'BOG-CTG': 94, 'BOG-SMR': 95, 'BOG-ADZ': 150,
-    'BOG-LIM': 210, 'BOG-SCL': 360, 'BOG-EZE': 390, 'BOG-GRU': 335,
-    'BOG-MIA': 240, 'BOG-MAD': 591, 'BOG-JFK': 330, 'BOG-LAX': 420
-};
+// Inicializar Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
+// ============================================
+// VARIABLES GLOBALES
+// ============================================
+let currentUser = null;
+let passengers = { adults: 1, children: 0 };
+let passengerCount = 1;
+let currentFlights = { outbound: [], return: [] };
+let selectedOutboundFlight = null;
+let selectedReturnFlight = null;
+let selectedOutboundSeats = [];
+let selectedBaggage = 'light';
+let baggagePrice = 0;
+let currentOrigin = '', currentDestination = '', currentDepartureDate = '', currentReturnDate = '';
+let currentOriginCode = '', currentDestCode = '';
+let currentTripType = 'round';
+let currentCabinSeat = 'Economy';
 const SEAT_PRICES = { economy: 49900, premium: 69900, business: 99900 };
 
-const BAGGAGE_OPTIONS = [
-    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, kg: 0, desc: 'Solo equipaje de mano (10kg)' },
-    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 89900, kg: 23, desc: '1 maleta documentada (23kg)' },
-    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 149900, kg: 46, desc: '2 maletas documentadas (23kg c/u)' },
-    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 249900, kg: 69, desc: '3 maletas documentadas + prioridad' }
+// ============================================
+// LISTA EXTENSA DE AEROPUERTOS
+// ============================================
+const airports = [
+    "Bogotá (BOG)", "Medellín (MDE)", "Cali (CLO)", "Cartagena (CTG)", "Barranquilla (BAQ)",
+    "Santa Marta (SMR)", "San Andrés (ADZ)", "Pereira (PEI)", "Bucaramanga (BGA)", "Cúcuta (CUC)",
+    "Armenia (AXM)", "Manizales (MZL)", "Pasto (PSO)", "Villavicencio (VVC)", "Montería (MTR)",
+    "Sincelejo (CZU)", "Valledupar (VUP)", "Riohacha (RCH)", "Neiva (NVA)", "Ibagué (IBE)",
+    "Yopal (EYP)", "Popayán (PPN)", "Tumaco (TCO)", "Leticia (LET)", "Quibdó (UIB)",
+    "Lima (LIM)", "Santiago (SCL)", "Buenos Aires (EZE)", "São Paulo (GRU)", "Rio de Janeiro (GIG)",
+    "Quito (UIO)", "Guayaquil (GYE)", "Panamá (PTY)", "San José (SJO)", "Ciudad de México (MEX)",
+    "Cancún (CUN)", "Miami (MIA)", "Orlando (MCO)", "New York (JFK)", "Los Angeles (LAX)",
+    "Madrid (MAD)", "Barcelona (BCN)", "París (CDG)", "Londres (LHR)", "Ámsterdam (AMS)"
 ];
+
+const colombianCodes = ['BOG','MDE','CLO','CTG','BAQ','SMR','ADZ','PEI','BGA','CUC','AXM','MZL','PSO','VVC','MTR','CZU','VUP','RCH','NVA','IBE','EYP','PPN','TCO','LET','UIB'];
+
+const durations = {
+    'BOG-MDE': 64, 'BOG-CLO': 67, 'BOG-CTG': 94, 'BOG-SMR': 95, 'BOG-ADZ': 150,
+    'BOG-PEI': 60, 'BOG-BGA': 55, 'BOG-CUC': 70, 'BOG-MZL': 50,
+    'MDE-BOG': 64, 'MDE-CLO': 70, 'MDE-CTG': 80, 'MDE-SMR': 85, 'MDE-ADZ': 120,
+    'CLO-BOG': 67, 'CLO-MDE': 70, 'CLO-CTG': 90,
+    'CTG-BOG': 94, 'CTG-MDE': 80, 'CTG-SMR': 40,
+    'SMR-BOG': 95, 'SMR-MDE': 85, 'SMR-CTG': 40,
+    'ADZ-BOG': 150, 'ADZ-MDE': 120,
+    'BOG-LIM': 210, 'BOG-SCL': 360, 'BOG-EZE': 390, 'BOG-GRU': 335, 'BOG-MIA': 240,
+    'BOG-MAD': 591, 'BOG-JFK': 320, 'BOG-MEX': 300, 'BOG-PTY': 90
+};
+
+function getFlightDuration(originCode, destCode) {
+    const routeKey = `${originCode}-${destCode}`;
+    const reverseKey = `${destCode}-${originCode}`;
+    if (durations[routeKey]) return durations[routeKey];
+    if (durations[reverseKey]) return durations[reverseKey];
+    const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
+    return isNational ? 90 : 300;
+}
 
 function getRandomTime() {
     const h = Math.floor(Math.random() * 24);
@@ -1442,138 +1673,186 @@ function addHours(time, minutesToAdd) {
     return `${String(nh).padStart(2,'0')}:${String(nm).padStart(2,'0')}`;
 }
 
-function getRealPrice(originCode, destCode, isRoundTrip = false) {
-    const routeKey = `${originCode}-${destCode}`;
-    const reverseKey = `${destCode}-${originCode}`;
-    let priceRange = priceMatrix[routeKey] || priceMatrix[reverseKey];
-    
-    if (!priceRange) {
-        if (originCode === 'BOG') return Math.floor(Math.random() * 3000000) + 1500000;
-        if (destCode === 'BOG') return Math.floor(Math.random() * 3000000) + 1500000;
-        return Math.floor(Math.random() * 800000) + 300000;
+function getRealPrice(originCode, destCode, stops = 0) {
+    const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
+    if (isNational) {
+        let base = Math.floor(Math.random() * 300000) + 100000;
+        if (stops === 1) base = base * 0.85;
+        if (stops === 2) base = base * 0.75;
+        return Math.floor(base);
     }
-    
-    let price = priceRange.min + Math.random() * (priceRange.max - priceRange.min);
-    if (isRoundTrip) price = price * 1.8;
-    const variation = Math.floor(Math.random() * 50000) - 25000;
-    price = price + variation;
-    return Math.floor(price);
+    let base = Math.floor(Math.random() * 3000000) + 1000000;
+    if (stops === 1) base = base * 0.85;
+    if (stops === 2) base = base * 0.75;
+    return Math.floor(base);
 }
 
-function generateFlightsForRoute(originCode, destCode, count = 20, isRoundTrip = false) {
+function generateFlightsForRoute(originCode, destCode, count = 20) {
     const flights = [];
-    const routeKey = `${originCode}-${destCode}`;
-    const reverseKey = `${destCode}-${originCode}`;
-    const directDuration = durations[routeKey] || durations[reverseKey] || 180;
+    const directDuration = getFlightDuration(originCode, destCode);
     const directCount = Math.floor(count * 0.6);
     const oneStopCount = Math.floor(count * 0.3);
     const twoStopCount = count - directCount - oneStopCount;
-    const hubCities = ['LIM', 'BOG', 'MIA', 'SCL', 'GRU'];
-    const randomStop = () => hubCities[Math.floor(Math.random() * hubCities.length)];
-    const basePrice = getRealPrice(originCode, destCode, isRoundTrip);
-    
+
+    const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
+    const stopCities = isNational ? [...colombianCodes] : ['LIM','BOG','MIA','SCL','GRU','PTY','MEX'];
+    const availableStops = stopCities.filter(c => c !== originCode && c !== destCode);
+    const randomStop = () => availableStops[Math.floor(Math.random() * availableStops.length)];
+
     for (let i = 0; i < directCount; i++) {
         const hour = getRandomTime();
         const arrival = addHours(hour, directDuration);
-        const variation = Math.floor(Math.random() * 50000) - 25000;
-        let price = basePrice + variation;
-        if (price < basePrice * 0.8) price = basePrice * 0.8;
-        if (price > basePrice * 1.2) price = basePrice * 1.2;
-        
         flights.push({
-            time: `${hour} → ${arrival}`, departureHour: hour,
+            time: `${hour} → ${arrival}`,
+            departureHour: hour,
             flightNumber: `LA${Math.floor(Math.random() * 900) + 100}`,
-            airline: 'LATAM Airlines', price: Math.floor(price),
-            duration: formatDuration(directDuration), stops: 0,
-            badge: 'direct', badgeText: 'DIRECTO'
+            airline: 'LATAM Airlines',
+            price: getRealPrice(originCode, destCode, 0),
+            duration: formatDuration(directDuration),
+            stops: 0,
+            badge: 'direct',
+            badgeText: 'DIRECTO'
         });
     }
-    
+
     for (let i = 0; i < oneStopCount; i++) {
         const hour = getRandomTime();
-        const stopCity = randomStop();
-        const d1 = durations[`${originCode}-${stopCity}`] || 180;
-        const d2 = durations[`${stopCity}-${destCode}`] || 180;
-        const layover = Math.floor(Math.random() * 180) + 90;
+        let stopCity = randomStop();
+        if (!stopCity) stopCity = isNational ? 'BOG' : 'LIM';
+        const d1 = getFlightDuration(originCode, stopCity);
+        const d2 = getFlightDuration(stopCity, destCode);
+        const layover = Math.floor(Math.random() * 180) + 60;
         const total = d1 + d2 + layover;
         const arrival = addHours(hour, total);
-        let price = basePrice * 0.85 + (Math.random() * 30000 - 15000);
-        
         flights.push({
-            time: `${hour} → ${arrival}`, departureHour: hour,
+            time: `${hour} → ${arrival}`,
+            departureHour: hour,
             flightNumber: `LA${Math.floor(Math.random() * 900) + 100}`,
-            airline: 'LATAM Airlines', price: Math.floor(price),
-            duration: formatDuration(total), stops: 1,
+            airline: 'LATAM Airlines',
+            price: getRealPrice(originCode, destCode, 1),
+            duration: formatDuration(total),
+            stops: 1,
             stopDetails: [{ city: stopCity, layover: layover }],
-            badge: '1stop', badgeText: '1 ESCALA'
+            badge: '1stop',
+            badgeText: '1 ESCALA'
         });
     }
-    
+
     for (let i = 0; i < twoStopCount; i++) {
         const hour = getRandomTime();
-        let s1 = randomStop(), s2 = randomStop();
+        let s1 = randomStop();
+        let s2 = randomStop();
+        if (!s1) s1 = isNational ? 'BOG' : 'LIM';
+        if (!s2) s2 = isNational ? 'MDE' : 'MIA';
         while (s2 === s1) s2 = randomStop();
-        const d1 = durations[`${originCode}-${s1}`] || 150;
-        const d2 = durations[`${s1}-${s2}`] || 150;
-        const d3 = durations[`${s2}-${destCode}`] || 150;
+        const d1 = getFlightDuration(originCode, s1);
+        const d2 = getFlightDuration(s1, s2);
+        const d3 = getFlightDuration(s2, destCode);
         const lay1 = Math.floor(Math.random() * 150) + 60;
         const lay2 = Math.floor(Math.random() * 150) + 60;
         const total = d1 + d2 + d3 + lay1 + lay2;
         const arrival = addHours(hour, total);
-        let price = basePrice * 0.75 + (Math.random() * 25000 - 12500);
-        
         flights.push({
-            time: `${hour} → ${arrival}`, departureHour: hour,
+            time: `${hour} → ${arrival}`,
+            departureHour: hour,
             flightNumber: `LA${Math.floor(Math.random() * 900) + 100}`,
-            airline: 'LATAM Airlines', price: Math.floor(price),
-            duration: formatDuration(total), stops: 2,
+            airline: 'LATAM Airlines',
+            price: getRealPrice(originCode, destCode, 2),
+            duration: formatDuration(total),
+            stops: 2,
             stopDetails: [{ city: s1, layover: lay1 }, { city: s2, layover: lay2 }],
-            badge: '2stops', badgeText: '2 ESCALAS'
+            badge: '2stops',
+            badgeText: '2 ESCALAS'
         });
     }
-    
+
     flights.sort((a, b) => a.departureHour.localeCompare(b.departureHour));
     return flights;
 }
 
-// Variables de estado
-let passengers = { adults: 1, children: 0, infants: 0 };
-let passengerCount = 1;
-let currentFlights = { outbound: [], return: [] };
-let selectedOutboundFlight = null;
-let selectedReturnFlight = null;
-let selectedOutboundSeats = [];
-let selectedBaggage = 'light';
-let baggagePrice = 0;
-let currentOrigin = '', currentDestination = '', currentDepartureDate = '', currentReturnDate = '';
-let currentOriginCode = '', currentDestCode = '';
-let currentTripType = 'round';
-let currentCabinSeat = 'Economy';
+// ============================================
+// FUNCIONES DE AUTENTICACIÓN
+// ============================================
+function checkAuthState() {
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById('userNameDisplay').innerHTML = user.email.split('@')[0];
+            document.getElementById('dropdownUserName').innerHTML = user.displayName || user.email.split('@')[0];
+            document.getElementById('dropdownUserEmail').innerHTML = user.email;
+        } else {
+            currentUser = null;
+            document.getElementById('userNameDisplay').innerHTML = 'Iniciar sesión';
+        }
+    });
+}
 
+function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+
+function login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorDiv = document.getElementById('loginError');
+    errorDiv.style.display = 'none';
+    auth.signInWithEmailAndPassword(email, password)
+        .then(() => { closeAuthModal(); })
+        .catch((error) => { errorDiv.textContent = error.message; errorDiv.style.display = 'block'; });
+}
+
+function register() {
+    const name = document.getElementById('registerName').value;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+    const errorDiv = document.getElementById('registerError');
+    errorDiv.style.display = 'none';
+    if (password !== confirmPassword) {
+        errorDiv.textContent = 'Las contraseñas no coinciden';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => userCredential.user.updateProfile({ displayName: name }))
+        .then(() => { closeAuthModal(); })
+        .catch((error) => { errorDiv.textContent = error.message; errorDiv.style.display = 'block'; });
+}
+
+function logout() {
+    auth.signOut().then(() => {
+        currentUser = null;
+        localStorage.removeItem('currentReservation');
+    });
+}
+
+function viewMyReservations() { alert('Funcionalidad en desarrollo'); }
+function viewProfile() { alert('Perfil del usuario: ' + (currentUser?.email || 'No autenticado')); }
+
+// ============================================
+// FUNCIONES DE INTERFAZ
+// ============================================
 function changePassenger(type, delta) {
     let newVal = passengers[type] + delta;
     if (type === 'adults' && newVal >= 1 && newVal <= 9) passengers[type] = newVal;
     else if (type !== 'adults' && newVal >= 0 && newVal <= 9) passengers[type] = newVal;
     document.getElementById(`${type}Count`).textContent = passengers[type];
 }
+
 function applyPassengers() {
     const total = passengers.adults + passengers.children;
     document.getElementById('passengerCount').value = `${total} ${total === 1 ? 'pasajero' : 'pasajeros'}`;
     passengerCount = total;
     closePassengerModal();
-    const extraInfo = document.getElementById('extraPassengersInfo');
-    const extraCount = document.getElementById('extraPassengersCount');
-    if (extraInfo && extraCount && total > 1) {
-        extraCount.textContent = total - 1;
-        extraInfo.style.display = 'block';
-    } else if (extraInfo) extraInfo.style.display = 'none';
+    autoSaveReservation();
 }
+
 function clearPassengers() {
-    passengers = { adults: 1, children: 0, infants: 0 };
+    passengers = { adults: 1, children: 0 };
     document.getElementById('adultsCount').textContent = 1;
     document.getElementById('childrenCount').textContent = 0;
     applyPassengers();
 }
+
 function clearField(fieldId) { document.getElementById(fieldId).value = ''; }
 function openPassengerModal() { document.getElementById('passengerModal').style.display = 'flex'; }
 function closePassengerModal() { document.getElementById('passengerModal').style.display = 'none'; }
@@ -1597,29 +1876,98 @@ function setupAutocomplete(input) {
 
 function generateDestinationsOffers() {
     const offers = [
-        { city: "Bogotá", img: "https://images.pexels.com/photos/3733269/pexels-photo-3733269.jpeg", code: "BOG", price: 69160, original: 129000 },
-        { city: "Medellín", img: "https://images.pexels.com/photos/3785400/pexels-photo-3785400.jpeg", code: "MDE", price: 86910, original: 149000 },
-        { city: "Cartagena", img: "https://images.pexels.com/photos/5793823/pexels-photo-5793823.jpeg", code: "CTG", price: 152500, original: 279000 },
-        { city: "Miami", img: "https://images.pexels.com/photos/346804/pexels-photo-346804.jpeg", code: "MIA", price: 1314000, original: 1800000 }
+        { city: "Bogotá", img: "https://images.pexels.com/photos/2064827/pexels-photo-2064827.jpeg", code: "BOG", price: 69160, original: 129000 },
+        { city: "Medellín", img: "https://images.pexels.com/photos/5849653/pexels-photo-5849653.jpeg", code: "MDE", price: 86910, original: 149000 },
+        { city: "Cartagena", img: "https://images.pexels.com/photos/2303032/pexels-photo-2303032.jpeg", code: "CTG", price: 152500, original: 279000 },
+        { city: "Miami", img: "https://images.pexels.com/photos/317926/pexels-photo-317926.jpeg", code: "MIA", price: 1314000, original: 1800000 }
     ];
     const container = document.getElementById('destinationsOffers');
     container.innerHTML = offers.map(o => `
         <div class="card" onclick="quickSearch('Bogotá (BOG)', '${o.city} (${o.code})')">
-            <img src="${o.img}">
-            <div class="card-body"><h3>${o.city}</h3><div class="price"><span class="original-price">$${o.original.toLocaleString()}</span> Desde $${o.price.toLocaleString()}</div></div>
+            <img src="${o.img}" alt="${o.city}">
+            <div class="card-body">
+                <h3>${o.city}</h3>
+                <div class="price">
+                    <span class="original-price">$${o.original.toLocaleString()}</span>
+                    Desde $${o.price.toLocaleString()}
+                </div>
+            </div>
         </div>
     `).join('');
 }
+
 function quickSearch(origin, destination) {
     document.getElementById('origin').value = origin;
     document.getElementById('destination').value = destination;
     searchFlights();
 }
+
 function goBack() {
     document.getElementById('resultsPage').style.display = 'none';
     document.getElementById('mainPage').style.display = 'block';
+    hideProgressBar();
 }
 
+function resetAndGoHome() {
+    clearAutoSave();
+    document.getElementById('checkoutPage').style.display = 'none';
+    document.getElementById('mainPage').style.display = 'block';
+    hideProgressBar();
+    selectedOutboundFlight = null;
+    selectedReturnFlight = null;
+    selectedOutboundSeats = [];
+}
+
+function updateProgressBar(step) {
+    const progressBar = document.getElementById('progressBar');
+    progressBar.style.display = 'flex';
+    document.querySelectorAll('.progress-step').forEach((el, index) => {
+        const stepNum = index + 1;
+        el.classList.remove('active', 'completed');
+        if (stepNum < step) el.classList.add('completed');
+        else if (stepNum === step) el.classList.add('active');
+    });
+}
+
+function hideProgressBar() { document.getElementById('progressBar').style.display = 'none'; }
+
+function autoSaveReservation() {
+    const reservationData = {
+        origin: currentOrigin ? `${currentOrigin} (${currentOriginCode})` : '',
+        destination: currentDestination ? `${currentDestination} (${currentDestCode})` : '',
+        departureDate: currentDepartureDate,
+        returnDate: currentReturnDate,
+        passengerCount: passengerCount,
+        selectedBaggage: selectedBaggage,
+        baggagePrice: baggagePrice
+    };
+    localStorage.setItem('currentReservation', JSON.stringify(reservationData));
+}
+
+function loadAutoSavedReservation() {
+    const saved = localStorage.getItem('currentReservation');
+    if (saved) {
+        try {
+            const data = JSON.parse(saved);
+            if (data.origin && data.destination) {
+                document.getElementById('origin').value = data.origin;
+                document.getElementById('destination').value = data.destination;
+                document.getElementById('departureDate').value = data.departureDate;
+                document.getElementById('returnDate').value = data.returnDate;
+                passengerCount = data.passengerCount;
+                document.getElementById('passengerCount').value = `${passengerCount} ${passengerCount === 1 ? 'pasajero' : 'pasajeros'}`;
+                selectedBaggage = data.selectedBaggage;
+                baggagePrice = data.baggagePrice;
+            }
+        } catch(e) {}
+    }
+}
+
+function clearAutoSave() { localStorage.removeItem('currentReservation'); }
+
+// ============================================
+// BÚSQUEDA Y RESULTADOS
+// ============================================
 function searchFlights() {
     const origin = document.getElementById('origin').value;
     const destination = document.getElementById('destination').value;
@@ -1632,6 +1980,13 @@ function searchFlights() {
     if (!depDate) { alert('Selecciona fecha de salida'); return; }
     if (tripType !== 'oneway' && !retDate) { alert('Selecciona fecha de regreso'); return; }
     
+    const depDateObj = new Date(depDate);
+    const retDateObj = new Date(retDate);
+    if (tripType !== 'oneway' && retDateObj < depDateObj) {
+        alert('La fecha de regreso no puede ser anterior a la fecha de ida');
+        return;
+    }
+    
     currentOrigin = origin.split('(')[0].trim();
     currentDestination = destination.split('(')[0].trim();
     currentDepartureDate = depDate;
@@ -1639,11 +1994,14 @@ function searchFlights() {
     currentOriginCode = origin.match(/\(([^)]+)\)/)?.[1] || origin.split(' ')[0];
     currentDestCode = destination.match(/\(([^)]+)\)/)?.[1] || destination.split(' ')[0];
     currentTripType = tripType;
-    const isRoundTrip = tripType !== 'oneway';
     
-    currentFlights.outbound = generateFlightsForRoute(currentOriginCode, currentDestCode, 20, isRoundTrip);
-    if (isRoundTrip) currentFlights.return = generateFlightsForRoute(currentDestCode, currentOriginCode, 20, isRoundTrip);
-    else currentFlights.return = [];
+    const isRoundTrip = tripType !== 'oneway';
+    currentFlights.outbound = generateFlightsForRoute(currentOriginCode, currentDestCode, 20);
+    if (isRoundTrip) {
+        currentFlights.return = generateFlightsForRoute(currentDestCode, currentOriginCode, 20);
+    } else {
+        currentFlights.return = [];
+    }
     
     selectedOutboundFlight = null;
     selectedReturnFlight = null;
@@ -1651,6 +2009,8 @@ function searchFlights() {
     displayResultsPage(tripType);
     document.getElementById('mainPage').style.display = 'none';
     document.getElementById('resultsPage').style.display = 'block';
+    updateProgressBar(1);
+    autoSaveReservation();
 }
 
 function displayResultsPage(tripType) {
@@ -1658,7 +2018,6 @@ function displayResultsPage(tripType) {
     const container = document.getElementById('resultsContainer');
     const dateObj = new Date(currentDepartureDate);
     const formattedDate = dateObj.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    
     routeInfo.innerHTML = `<span class="city">${currentOrigin}</span><i class="fa-solid fa-arrow-right"></i><span class="city">${currentDestination}</span><span class="date">${formattedDate}</span>`;
     
     let html = `<div class="trip-section" id="outboundSection"><h3><i class="fa-solid fa-plane-departure"></i> Vuelos de ida (${currentFlights.outbound.length} opciones)</h3>`;
@@ -1692,6 +2051,7 @@ function selectOutboundFlight(index) {
         else card.classList.remove('selected');
     });
     updateContinueButton();
+    autoSaveReservation();
 }
 
 function selectReturnFlight(index) {
@@ -1701,20 +2061,28 @@ function selectReturnFlight(index) {
         else card.classList.remove('selected');
     });
     updateContinueButton();
+    autoSaveReservation();
 }
 
 function updateContinueButton() {
     const btn = document.getElementById('continueBtn');
-    if (currentTripType === 'oneway') btn.disabled = !selectedOutboundFlight;
-    else btn.disabled = !(selectedOutboundFlight && selectedReturnFlight);
+    if (currentTripType === 'oneway') {
+        btn.disabled = !selectedOutboundFlight;
+    } else {
+        btn.disabled = !(selectedOutboundFlight && selectedReturnFlight);
+    }
 }
 
+// Evento para el botón continuar
 document.addEventListener('click', function(e) {
     if (e.target && e.target.id === 'continueBtn' && !e.target.disabled) {
         goToSeatSelection();
     }
 });
 
+// ============================================
+// SELECCIÓN DE ASIENTOS (TODAS LAS FUNCIONES)
+// ============================================
 function goToSeatSelection() {
     const routeInfo = document.getElementById('seatRouteInfo');
     const dateObj = new Date(currentDepartureDate);
@@ -1731,7 +2099,9 @@ function goToSeatSelection() {
     updateSeatSummary();
     document.getElementById('resultsPage').style.display = 'none';
     document.getElementById('seatPage').style.display = 'block';
+    updateProgressBar(2);
     window.scrollTo(0, 0);
+    autoSaveReservation();
 }
 
 function generateSeatMap() {
@@ -1800,8 +2170,10 @@ function generateSeatMap() {
 
 function switchCabinSeat(cabin) {
     currentCabinSeat = cabin;
+    selectedOutboundSeats = [];
     generateSeatMap();
     updateSeatSummary();
+    autoSaveReservation();
 }
 
 function selectSeat(seatId, price, cabinClass, status) {
@@ -1818,6 +2190,7 @@ function selectSeat(seatId, price, cabinClass, status) {
     }
     generateSeatMap();
     updateSeatSummary();
+    autoSaveReservation();
 }
 
 function updateSeatSummary() {
@@ -1831,7 +2204,16 @@ function updateSeatSummary() {
         const price = seatEl ? parseInt(seatEl.dataset.price) : 49900;
         total += price;
         const cabin = seatEl?.dataset.cabin || 'Economy';
-        seatsHtml += `<div class="selected-seat-item"><div><div class="seat-number">Asiento ${seat}</div><div class="seat-type">${cabin}</div></div><div><span>$${price.toLocaleString()}</span><button class="remove-seat" onclick="removeSeat('${seat}')">✕</button></div></div>`;
+        seatsHtml += `<div class="selected-seat-item">
+            <div>
+                <div class="seat-number">Asiento ${seat}</div>
+                <div class="seat-type">${cabin}</div>
+            </div>
+            <div>
+                <span>$${price.toLocaleString()}</span>
+                <button class="remove-seat" onclick="removeSeat('${seat}')">✕</button>
+            </div>
+        </div>`;
     });
     if (selectedOutboundSeats.length === 0) seatsHtml = '<p style="color: rgba(255,255,255,0.5); text-align: center;">No has seleccionado asientos</p>';
     else if (selectedOutboundSeats.length < passengerCount) {
@@ -1848,6 +2230,7 @@ function removeSeat(seatId) {
     if (index !== -1) selectedOutboundSeats.splice(index, 1);
     generateSeatMap();
     updateSeatSummary();
+    autoSaveReservation();
 }
 
 function skipSeats() {
@@ -1862,6 +2245,29 @@ function confirmSeatsAndContinue() {
     }
     goToBaggage();
 }
+
+function goBackFromSeats() {
+    document.getElementById('seatPage').style.display = 'none';
+    document.getElementById('resultsPage').style.display = 'block';
+    updateProgressBar(1);
+}
+
+function goBackFromBaggage() {
+    document.getElementById('baggagePage').style.display = 'none';
+    document.getElementById('seatPage').style.display = 'block';
+    updateProgressBar(2);
+    window.scrollTo(0, 0);
+}
+
+// ============================================
+// SELECCIÓN DE EQUIPAJE
+// ============================================
+const BAGGAGE_OPTIONS = [
+    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, kg: 0, desc: 'Solo equipaje de mano (10kg)' },
+    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 89900, kg: 23, desc: '1 maleta documentada (23kg)' },
+    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 149900, kg: 46, desc: '2 maletas documentadas (23kg c/u)' },
+    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 249900, kg: 69, desc: '3 maletas documentadas + prioridad' }
+];
 
 function goToBaggage() {
     const routeInfo = document.getElementById('baggageRouteInfo');
@@ -1883,7 +2289,9 @@ function goToBaggage() {
     }, 50);
     document.getElementById('seatPage').style.display = 'none';
     document.getElementById('baggagePage').style.display = 'block';
+    updateProgressBar(3);
     window.scrollTo(0, 0);
+    autoSaveReservation();
 }
 
 function selectBaggage(id, price) {
@@ -1892,32 +2300,69 @@ function selectBaggage(id, price) {
     document.querySelectorAll('.baggage-card').forEach(card => card.classList.remove('selected'));
     const selectedCard = document.querySelector(`.baggage-card[data-baggage-id="${id}"]`);
     if (selectedCard) selectedCard.classList.add('selected');
+    autoSaveReservation();
 }
 
 function confirmBaggageAndContinue() {
     goToCheckout();
 }
 
+// ============================================
+// CHECKOUT Y PAGO
+// ============================================
 function goToCheckout() {
     const isRound = currentTripType !== 'oneway';
     let totalFlights = 0;
-    if (isRound && selectedReturnFlight) totalFlights = selectedOutboundFlight.price;
-    else totalFlights = selectedOutboundFlight?.price || 0;
+    if (isRound && selectedReturnFlight) {
+        totalFlights = selectedOutboundFlight.price + selectedReturnFlight.price;
+    } else {
+        totalFlights = selectedOutboundFlight.price;
+    }
     const totalSeats = selectedOutboundSeats.reduce((sum, seat) => {
         const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
         return sum + (seatEl ? parseInt(seatEl.dataset.price) : 49900);
     }, 0);
-    let flightDisplayText;
-    if (passengerCount === 1) flightDisplayText = `$${totalFlights.toLocaleString()}`;
-    else flightDisplayText = `$${totalFlights.toLocaleString()} x ${passengerCount} = <strong>$${(totalFlights * passengerCount).toLocaleString()}</strong>`;
+    
+    const depDateFormatted = new Date(currentDepartureDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const retDateFormatted = new Date(currentReturnDate).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    
+    let flightOutboundDisplay;
+    if (passengerCount === 1) {
+        flightOutboundDisplay = `$${selectedOutboundFlight.price.toLocaleString()}`;
+    } else {
+        flightOutboundDisplay = `$${selectedOutboundFlight.price.toLocaleString()} x ${passengerCount} = <strong>$${(selectedOutboundFlight.price * passengerCount).toLocaleString()}</strong>`;
+    }
+    
+    let returnDisplay = '';
+    if (isRound && selectedReturnFlight) {
+        let returnPriceDisplay;
+        if (passengerCount === 1) {
+            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()}`;
+        } else {
+            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()} x ${passengerCount} = <strong>$${(selectedReturnFlight.price * passengerCount).toLocaleString()}</strong>`;
+        }
+        returnDisplay = `<div class="flight-detail"><div><div class="flight-route">${currentDestination} → ${currentOrigin}</div><div class="flight-time">${selectedReturnFlight.flightNumber} • ${selectedReturnFlight.time}</div><div class="flight-date">${retDateFormatted}</div></div><div class="flight-price">${returnPriceDisplay}</div></div>`;
+    }
+    
     let baggageDisplayText;
-    if (passengerCount === 1) baggageDisplayText = `$${baggagePrice.toLocaleString()}`;
-    else baggageDisplayText = `$${baggagePrice.toLocaleString()} x ${passengerCount} = <strong>$${(baggagePrice * passengerCount).toLocaleString()}</strong>`;
+    if (passengerCount === 1) {
+        baggageDisplayText = `$${baggagePrice.toLocaleString()}`;
+    } else {
+        baggageDisplayText = `$${baggagePrice.toLocaleString()} x ${passengerCount} = <strong>$${(baggagePrice * passengerCount).toLocaleString()}</strong>`;
+    }
     const total = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
     
-    let flightHtml = `<h3><i class="fa-solid fa-plane-departure"></i> Vuelo de ida</h3><div class="flight-detail"><div><div class="flight-route">${currentOrigin} → ${currentDestination}</div><div class="flight-time">${selectedOutboundFlight.flightNumber} • ${selectedOutboundFlight.time}</div></div><div class="flight-price">${flightDisplayText}</div></div>`;
+    let flightHtml = `<h3><i class="fa-solid fa-plane-departure"></i> Vuelo de ida</h3>
+        <div class="flight-detail">
+            <div>
+                <div class="flight-route">${currentOrigin} → ${currentDestination}</div>
+                <div class="flight-time">${selectedOutboundFlight.flightNumber} • ${selectedOutboundFlight.time}</div>
+                <div class="flight-date">${depDateFormatted}</div>
+            </div>
+            <div class="flight-price">${flightOutboundDisplay}</div>
+        </div>`;
     if (isRound && selectedReturnFlight) {
-        flightHtml += `<h3 style="margin-top:16px;"><i class="fa-solid fa-plane-arrival"></i> Vuelo de regreso</h3><div class="flight-detail"><div><div class="flight-route">${currentDestination} → ${currentOrigin}</div><div class="flight-time">${selectedReturnFlight.flightNumber} • ${selectedReturnFlight.time}</div></div><div class="flight-price">Incluido en el precio de ida</div></div>`;
+        flightHtml += `<h3 style="margin-top:16px;"><i class="fa-solid fa-plane-arrival"></i> Vuelo de regreso</h3>${returnDisplay}`;
     }
     if (selectedOutboundSeats.length > 0) {
         flightHtml += `<h3 style="margin-top:16px;"><i class="fa-solid fa-chair"></i> Asientos seleccionados</h3>`;
@@ -1934,14 +2379,46 @@ function goToCheckout() {
     flightHtml += `<h3 style="margin-top:16px;"><i class="fa-solid fa-suitcase"></i> Equipaje</h3><div class="flight-detail"><div>${baggageName} ${passengerCount > 1 ? `x ${passengerCount} pasajeros` : ''}</div><div class="flight-price">${baggageDisplayText}</div></div>`;
     document.getElementById('checkoutFlightSummary').innerHTML = flightHtml;
     document.getElementById('checkoutPriceBreakdown').innerHTML = `
-        <div class="price-row"><span>Vuelo(s)</span><span>$${(totalFlights * passengerCount).toLocaleString()}</span></div>
+        <div class="price-row"><span>Vuelo ida</span><span>$${(selectedOutboundFlight.price * passengerCount).toLocaleString()}</span></div>
+        ${isRound && selectedReturnFlight ? `<div class="price-row"><span>Vuelo regreso</span><span>$${(selectedReturnFlight.price * passengerCount).toLocaleString()}</span></div>` : ''}
         <div class="price-row"><span>Asientos</span><span>$${totalSeats.toLocaleString()}</span></div>
         <div class="price-row"><span>Equipaje</span><span>$${(baggagePrice * passengerCount).toLocaleString()}</span></div>
         <div class="price-row total"><span>Total a pagar</span><span>$${total.toLocaleString()}</span></div>
     `;
+    generateExtraPassengersForm();
     document.getElementById('baggagePage').style.display = 'none';
     document.getElementById('checkoutPage').style.display = 'block';
+    updateProgressBar(4);
     window.scrollTo(0, 0);
+    autoSaveReservation();
+}
+
+function generateExtraPassengersForm() {
+    const container = document.getElementById('extraPassengersFields');
+    if (!container) return;
+    const extraCount = passengerCount - 1;
+    if (extraCount <= 0) {
+        document.getElementById('extraPassengersForm').style.display = 'none';
+        return;
+    }
+    document.getElementById('extraPassengersForm').style.display = 'block';
+    let html = '';
+    for (let i = 1; i <= extraCount; i++) {
+        html += `
+            <div style="border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:16px;">
+                <h4>Pasajero ${i+1}</h4>
+                <div class="form-row">
+                    <div class="form-group"><label>Nombres</label><input type="text" class="extra-name" data-pax="${i}" placeholder="Nombres"></div>
+                    <div class="form-group"><label>Apellidos</label><input type="text" class="extra-lastname" data-pax="${i}" placeholder="Apellidos"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Tipo documento</label><select class="extra-doctype" data-pax="${i}"><option>CC</option><option>CE</option><option>Pasaporte</option></select></div>
+                    <div class="form-group"><label>Número documento</label><input type="text" class="extra-docnum" data-pax="${i}" placeholder="Número documento"></div>
+                </div>
+            </div>
+        `;
+    }
+    container.innerHTML = html;
 }
 
 let selectedMethod = 'card';
@@ -1951,23 +2428,53 @@ function selectPaymentMethod(method) {
     document.querySelector(`.method-option[data-method="${method}"]`).classList.add('selected');
 }
 
-function processPayment() {
+async function processPayment() {
     const doc = document.getElementById('docNumber').value;
     const name = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
     const email = document.getElementById('email').value;
     const phone = document.getElementById('phone').value;
-    if (!doc || !name || !lastName || !email || !phone) { alert('Completa todos los datos del pasajero principal'); return; }
+    
+    if (!doc || !name || !lastName || !email || !phone) {
+        alert('Completa todos los datos del pasajero principal');
+        return;
+    }
+    
+    let extraPassengers = [];
+    if (passengerCount > 1) {
+        const extraNames = document.querySelectorAll('.extra-name');
+        const extraLastnames = document.querySelectorAll('.extra-lastname');
+        const extraDoctypes = document.querySelectorAll('.extra-doctype');
+        const extraDocnums = document.querySelectorAll('.extra-docnum');
+        for (let i = 0; i < passengerCount - 1; i++) {
+            if (!extraNames[i].value || !extraLastnames[i].value || !extraDocnums[i].value) {
+                alert(`Por favor completa los datos del pasajero ${i+2}`);
+                return;
+            }
+            extraPassengers.push({
+                name: extraNames[i].value,
+                lastname: extraLastnames[i].value,
+                docType: extraDoctypes[i].value,
+                docNumber: extraDocnums[i].value
+            });
+        }
+    }
+    
     const isRound = currentTripType !== 'oneway';
     let totalFlights = 0;
-    if (isRound && selectedReturnFlight) totalFlights = selectedOutboundFlight.price;
-    else totalFlights = selectedOutboundFlight?.price || 0;
+    if (isRound && selectedReturnFlight) {
+        totalFlights = selectedOutboundFlight.price + selectedReturnFlight.price;
+    } else {
+        totalFlights = selectedOutboundFlight.price;
+    }
     const totalSeats = selectedOutboundSeats.reduce((sum, seat) => {
         const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
         return sum + (seatEl ? parseInt(seatEl.dataset.price) : 49900);
     }, 0);
     const total = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
+    
     const reservationCode = 'LTM-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+    
     let whatsappMessage = `🛫 *RESERVA LATAM AIRLINES COLOMBIA* 🛬%0A%0A`;
     whatsappMessage += `📋 *CÓDIGO DE RESERVA:* ${reservationCode}%0A%0A`;
     whatsappMessage += `👥 *PASAJEROS:* ${passengerCount} ${passengerCount === 1 ? 'pasajero' : 'pasajeros'}%0A%0A`;
@@ -1976,6 +2483,13 @@ function processPayment() {
     whatsappMessage += `Documento: ${doc}%0A`;
     whatsappMessage += `Email: ${email}%0A`;
     whatsappMessage += `Teléfono: ${phone}%0A%0A`;
+    if (extraPassengers.length > 0) {
+        whatsappMessage += `👥 *PASAJEROS ADICIONALES*%0A`;
+        extraPassengers.forEach((p, idx) => {
+            whatsappMessage += `${idx+2}. ${p.name} ${p.lastname} (${p.docType}: ${p.docNumber})%0A`;
+        });
+        whatsappMessage += `%0A`;
+    }
     whatsappMessage += `✈️ *DETALLES DEL VUELO*%0A`;
     whatsappMessage += `🛫 *IDA:* ${selectedOutboundFlight.flightNumber} - ${selectedOutboundFlight.time}%0A`;
     whatsappMessage += `📍 Ruta: ${currentOrigin} → ${currentDestination}%0A`;
@@ -1999,26 +2513,18 @@ function processPayment() {
         whatsappMessage += `💳 Los datos de tu tarjeta serán procesados de forma segura%0A`;
     }
     whatsappMessage += `%0A🎉 ¡Gracias por viajar con LATAM Airlines Colombia! 🎉`;
+    
     const whatsappUrl = `https://wa.me/573241813748?text=${whatsappMessage}`;
     window.open(whatsappUrl, '_blank');
-    alert(`✅ Reserva generada con éxito!\n\nCódigo: ${reservationCode}\nPasajeros: ${passengerCount}\nTotal: $${total.toLocaleString()}\n\nSerás redirigido a WhatsApp para completar el pago.`);
-    setTimeout(() => {
-        document.getElementById('checkoutPage').style.display = 'none';
-        document.getElementById('mainPage').style.display = 'block';
-        selectedOutboundFlight = null;
-        selectedReturnFlight = null;
-        selectedOutboundSeats = [];
-    }, 1000);
+    
+    alert(`✅ Reserva generada con éxito!\n\nCódigo: ${reservationCode}\nPasajeros: ${passengerCount}\nTotal: $${total.toLocaleString()}\n\nSe ha abierto WhatsApp para completar el pago. Una vez realizado, regresa a esta página.`);
 }
 
-function goBackFromSeats() {
-    document.getElementById('seatPage').style.display = 'none';
-    document.getElementById('resultsPage').style.display = 'block';
-}
-function goBackFromBaggage() {
-    document.getElementById('baggagePage').style.display = 'none';
-    document.getElementById('seatPage').style.display = 'block';
-    window.scrollTo(0, 0);
+function skipSplash() {
+    const splash = document.getElementById('splashScreen');
+    splash.style.animation = 'none';
+    splash.style.opacity = '0';
+    splash.style.visibility = 'hidden';
 }
 
 function setDefaultDates() {
@@ -2029,12 +2535,18 @@ function setDefaultDates() {
     document.getElementById('returnDate').value = next.toISOString().split('T')[0];
 }
 
-// Inicialización
+// ============================================
+// INICIALIZACIÓN
+// ============================================
 setupAutocomplete(document.getElementById('origin'));
 setupAutocomplete(document.getElementById('destination'));
 setDefaultDates();
 generateDestinationsOffers();
 document.getElementById('passengerCount').addEventListener('click', openPassengerModal);
+document.getElementById('userNameDisplay').addEventListener('click', (e) => { if (!currentUser) openAuthModal(); });
+checkAuthState();
+loadAutoSavedReservation();
+
 document.querySelectorAll('input[name="trip"]').forEach(r => {
     r.addEventListener('change', () => {
         const retField = document.getElementById('returnDate').parentElement;
@@ -2043,7 +2555,25 @@ document.querySelectorAll('input[name="trip"]').forEach(r => {
 });
 selectPaymentMethod('card');
 
-// Crear elementos faltantes
+document.querySelectorAll('.auth-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const tabName = tab.getAttribute('data-tab');
+        document.getElementById('loginForm').classList.toggle('active', tabName === 'login');
+        document.getElementById('registerForm').classList.toggle('active', tabName === 'register');
+    });
+});
+
+window.onclick = function(event) {
+    const modal = document.getElementById('passengerModal');
+    const authModal = document.getElementById('authModal');
+    const reservationsModal = document.getElementById('reservationsModal');
+    if (event.target === modal) closePassengerModal();
+    if (event.target === authModal) closeAuthModal();
+    if (event.target === reservationsModal) closeReservationsModal();
+};
+
 if (!document.getElementById('seatMapContainer')) {
     const seatMapDiv = document.createElement('div');
     seatMapDiv.id = 'seatMapContainer';
@@ -2089,17 +2619,11 @@ if (!document.getElementById('seatStats')) {
     const seatHeader = document.querySelector('#seatPage .results-header');
     if (seatHeader) seatHeader.appendChild(seatStatsDiv);
 }
-if (!document.getElementById('extraPassengersInfo')) {
-    const extraInfoDiv = document.createElement('div');
-    extraInfoDiv.id = 'extraPassengersInfo';
-    extraInfoDiv.className = 'extra-passengers-info';
-    extraInfoDiv.style.display = 'none';
-    const passengerForm = document.querySelector('#checkoutPage .passenger-form');
-    if (passengerForm) passengerForm.appendChild(extraInfoDiv);
-}
-if (!document.getElementById('extraPassengersCount')) {
-    const extraInfoDiv = document.getElementById('extraPassengersInfo');
-    if (extraInfoDiv) extraInfoDiv.innerHTML = `<p><i class="fa-solid fa-users"></i> Esta reserva incluye <strong id="extraPassengersCount">0</strong> pasajero(s) adicional(es). Los datos se solicitarán en el siguiente paso.</p>`;
+if (!document.getElementById('extraPassengersFields')) {
+    const extraDiv = document.createElement('div');
+    extraDiv.id = 'extraPassengersFields';
+    const extraForm = document.getElementById('extraPassengersForm');
+    if (extraForm) extraForm.appendChild(extraDiv);
 }
 </script>
 </body>
