@@ -2244,7 +2244,6 @@ async function processPayment() {
     clearAutoSave();
     
     let whatsappMessage = `🛫 *RESERVA LATAM AIRLINES COLOMBIA* 🛬%0A%0A`;
-    whatsappMessage += `📋 *CÓDIGO DE RESERVA:* ${reservationCode}%0A%0A`;
     whatsappMessage += `✈️ *AERONAVE:* ${aircraft.name}%0A`;
     whatsappMessage += `👥 *PASAJEROS:* ${passengerCount} ${passengerCount === 1 ? 'pasajero' : 'pasajeros'}%0A%0A`;
     whatsappMessage += `👤 *DATOS DEL PASAJERO PRINCIPAL*%0A`;
