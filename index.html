@@ -985,11 +985,11 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 6p
 </style>
 </head>
 <body>
-<!-- SPLASH SCREEN con LOGO -->
+<!-- SPLASH SCREEN con LOGO - URL CORREGIDA -->
 <div class="splash-screen" id="splashScreen" onclick="skipSplash()">
     <div class="splash-content">
         <div class="splash-logo-image">
-            <img src="logo-latam-400x400.png" alt="LATAM Airlines Colombia">
+            <img src="https://raw.githubusercontent.com/josjoasese/paginalatam/main/logo-latam-400x400%20(1).png" alt="LATAM Airlines Colombia">
         </div>
     </div>
 </div>
@@ -999,7 +999,7 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 6p
     <header>
         <div class="logo-header">
             <div id="logo-container">
-                <img src="logo-latam-400x400.png" alt="LATAM Logo">
+                <img src="https://raw.githubusercontent.com/josjoasese/paginalatam/main/logo-latam-400x400%20(1).png" alt="LATAM Logo">
             </div>
         </div>
         <nav>
@@ -1168,7 +1168,7 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 6p
     </div>
 </div>
 
-<!-- Página de checkout/pago - SOLO TRANSFERENCIA -->
+<!-- Página de checkout/pago -->
 <div id="checkoutPage" class="checkout-page">
     <div class="checkout-container">
         <div class="checkout-form">
@@ -1239,7 +1239,6 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 6p
 </div>
 
 <script>
-// (El script permanece exactamente igual, sin cambios)
 // ============================================
 // FLOTA DE LATAM AIRLINES
 // ============================================
@@ -1269,7 +1268,7 @@ function getAircraftForRoute(originCode, destCode) {
 }
 
 // ============================================
-// FIREBASE CONFIGURACIÓN
+// FIREBASE CONFIGURACIÓN (ACTUALIZAR CON TUS DATOS)
 // ============================================
 const firebaseConfig = {
     apiKey: "TU_API_KEY_AQUI",
@@ -1280,9 +1279,15 @@ const firebaseConfig = {
     appId: "1:123456789:web:abcdef"
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+// Inicializar Firebase solo si está configurado
+let auth, db;
+try {
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+    db = firebase.firestore();
+} catch(e) {
+    console.log("Firebase no configurado. Las funciones de autenticación estarán limitadas.");
+}
 
 // ============================================
 // VARIABLES GLOBALES
@@ -1303,7 +1308,7 @@ let currentCabinSeat = 'Economy';
 const SEAT_PRICES = { economy: 49900, premium: 69900, business: 99900 };
 
 // ============================================
-// LISTA DE AEROPUERTOS (ampliada)
+// LISTA DE AEROPUERTOS
 // ============================================
 const airports = [
     "Bogotá (BOG)", "Medellín (MDE)", "Cali (CLO)", "Cartagena (CTG)", "Barranquilla (BAQ)",
@@ -1365,6 +1370,7 @@ function getRealPrice(originCode, destCode, stops = 0) {
 }
 
 function formatDateDisplay(dateStr) {
+    if (!dateStr) return '';
     const [year, month, day] = dateStr.split('-');
     const date = new Date(Date.UTC(year, month-1, day));
     return date.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
@@ -1465,23 +1471,27 @@ function generateFlightsForRoute(originCode, destCode, flightDate, count = 20) {
 // FUNCIONES DE AUTENTICACIÓN
 // ============================================
 function checkAuthState() {
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-            currentUser = user;
-            document.getElementById('userNameDisplay').innerHTML = user.email.split('@')[0];
-            document.getElementById('dropdownUserName').innerHTML = user.displayName || user.email.split('@')[0];
-            document.getElementById('dropdownUserEmail').innerHTML = user.email;
-        } else {
-            currentUser = null;
-            document.getElementById('userNameDisplay').innerHTML = 'Iniciar sesión';
-        }
-    });
+    if (auth) {
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('userNameDisplay').innerHTML = user.email.split('@')[0];
+                document.getElementById('dropdownUserName').innerHTML = user.displayName || user.email.split('@')[0];
+                document.getElementById('dropdownUserEmail').innerHTML = user.email;
+            } else {
+                currentUser = null;
+                document.getElementById('userNameDisplay').innerHTML = 'Iniciar sesión';
+            }
+        });
+    }
 }
 
 function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
 function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+function closeReservationsModal() { document.getElementById('reservationsModal').style.display = 'none'; }
 
 function login() {
+    if (!auth) { alert('Firebase no está configurado. Por favor configura tus credenciales de Firebase.'); return; }
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
     const errorDiv = document.getElementById('loginError');
@@ -1492,6 +1502,7 @@ function login() {
 }
 
 function register() {
+    if (!auth) { alert('Firebase no está configurado. Por favor configura tus credenciales de Firebase.'); return; }
     const name = document.getElementById('registerName').value;
     const email = document.getElementById('registerEmail').value;
     const password = document.getElementById('registerPassword').value;
@@ -1510,10 +1521,14 @@ function register() {
 }
 
 function logout() {
-    auth.signOut().then(() => {
+    if (auth) {
+        auth.signOut().then(() => {
+            currentUser = null;
+            localStorage.removeItem('currentReservation');
+        });
+    } else {
         currentUser = null;
-        localStorage.removeItem('currentReservation');
-    });
+    }
 }
 
 function viewMyReservations() { alert('Funcionalidad en desarrollo'); }
@@ -2153,18 +2168,20 @@ async function saveReservationToFirestore(reservationData) {
         localStorage.setItem('offline_reservations', JSON.stringify(offlineReservations));
         return;
     }
-    try {
-        await db.collection('reservations').add({
-            ...reservationData,
-            userId: currentUser.uid,
-            userEmail: currentUser.email,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-    } catch (error) {
-        console.error('Error guardando reserva:', error);
-        let offlineReservations = JSON.parse(localStorage.getItem('offline_reservations') || '[]');
-        offlineReservations.push({ ...reservationData, userId: currentUser?.uid || 'offline', date: new Date().toISOString() });
-        localStorage.setItem('offline_reservations', JSON.stringify(offlineReservations));
+    if (db) {
+        try {
+            await db.collection('reservations').add({
+                ...reservationData,
+                userId: currentUser.uid,
+                userEmail: currentUser.email,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        } catch (error) {
+            console.error('Error guardando reserva:', error);
+            let offlineReservations = JSON.parse(localStorage.getItem('offline_reservations') || '[]');
+            offlineReservations.push({ ...reservationData, userId: currentUser?.uid || 'offline', date: new Date().toISOString() });
+            localStorage.setItem('offline_reservations', JSON.stringify(offlineReservations));
+        }
     }
 }
 
