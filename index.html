@@ -44,7 +44,7 @@ body {
     overflow-x: hidden;
 }
 
-/* HEADER RESPONSIVE - LOGO 4 VECES MÁS GRANDE */
+/* HEADER RESPONSIVE - LOGO */
 header {
     background: rgba(255,255,255,0.98);
     backdrop-filter: blur(10px);
@@ -294,10 +294,10 @@ nav a.active::after {
     color: white;
 }
 
-/* HERO Responsive */
+/* HERO Responsive - Avión con montañas (Unsplash) */
 .hero {
     min-height: 400px;
-    background: linear-gradient(rgba(0,51,160,0.7), rgba(0,36,125,0.8)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05');
+    background: linear-gradient(rgba(0,51,160,0.7), rgba(0,36,125,0.8)), url('https://images.unsplash.com/photo-1542296332-2e4473faf563?w=1600');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -1696,16 +1696,17 @@ function setupAutocomplete(input) {
 }
 
 function generateDestinationsOffers() {
+    // Nuevas imágenes desde GitHub con los nombres actualizados
     const offers = [
-        { city: "Bogotá", img: "https://images.pexels.com/photos/2064827/pexels-photo-2064827.jpeg", code: "BOG", price: 69160, original: 129000 },
-        { city: "Medellín", img: "https://images.pexels.com/photos/5849653/pexels-photo-5849653.jpeg", code: "MDE", price: 86910, original: 149000 },
-        { city: "Cartagena", img: "https://images.pexels.com/photos/2303032/pexels-photo-2303032.jpeg", code: "CTG", price: 152500, original: 279000 },
-        { city: "Miami", img: "https://images.pexels.com/photos/317926/pexels-photo-317926.jpeg", code: "MIA", price: 1314000, original: 1800000 }
+        { city: "Bogotá", img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/alejandro-alfaro-m-cmo76qKvNaU-unsplash.jpg", code: "BOG", price: 69160, original: 129000 },
+        { city: "Medellín", img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/ricardo-gomez-angel-GcHar4P8V_Q-unsplash.jpg", code: "MDE", price: 86910, original: 149000 },
+        { city: "Cartagena", img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/leandro-loureiro-J0suKy48jfk-unsplash.jpg", code: "CTG", price: 152500, original: 279000 },
+        { city: "Miami", img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/shawn-henley-3CQQlwWpn70-unsplash.jpg", code: "MIA", price: 1314000, original: 1800000 }
     ];
     const container = document.getElementById('destinationsOffers');
     container.innerHTML = offers.map(o => `
         <div class="card" onclick="quickSearch('Bogotá (BOG)', '${o.city} (${o.code})')">
-            <img src="${o.img}" alt="${o.city}">
+            <img src="${o.img}" alt="${o.city}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600';">
             <div class="card-body">
                 <h3>${o.city}</h3>
                 <div class="price">
