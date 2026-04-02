@@ -612,8 +612,8 @@ nav a.active::after {
 }
 .continue-button:disabled { background: #ccc; cursor: not-allowed; }
 
-/* SEAT SELECTION - Responsive optimizado para móvil */
-.seat-selection-page { display: none; min-height: 100vh; background: linear-gradient(135deg, #0A1428 0%, #0F1A30 100%); position: relative; overflow-x: hidden; }
+/* SEAT SELECTION - Responsive */
+.seat-selection-page { display: none; min-height: 100vh; background: linear-gradient(135deg, #0A1428 0%, #0F1A30 100%); position: relative; overflow-x: auto; }
 .seat-selection-container {
     max-width: 1300px;
     margin: 16px auto;
@@ -630,7 +630,6 @@ nav a.active::after {
     border-radius: 20px;
     padding: 16px;
     border: 1px solid rgba(255,255,255,0.15);
-    overflow-x: auto;
 }
 .cabin-header {
     text-align: center;
@@ -685,50 +684,49 @@ nav a.active::after {
 }
 .passenger-counter span { color: rgba(255,255,255,0.9); font-size: 12px; }
 .passenger-counter strong { color: #FFD966; font-size: 14px; margin: 0 4px; }
-.seat-map { overflow-x: auto; overflow-y: visible; padding: 5px 0; -webkit-overflow-scrolling: touch; }
-.seat-grid { display: flex; flex-direction: column; gap: 8px; min-width: 500px; }
+.seat-map { overflow-x: auto; padding: 5px 0; }
+.seat-grid { display: flex; flex-direction: column; gap: 8px; min-width: 550px; }
 .seat-row {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: rgba(255,255,255,0.03);
-    padding: 4px 8px;
-    border-radius: 12px;
-    flex-wrap: nowrap;
+    padding: 5px 10px;
+    border-radius: 16px;
+    flex-wrap: wrap;
 }
 .row-number {
-    width: 28px;
-    font-size: 11px;
+    width: 32px;
+    font-size: 12px;
     font-weight: 700;
     color: rgba(255,255,255,0.6);
     text-align: center;
-    flex-shrink: 0;
 }
 .seats {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex: 1;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .seat-group {
     display: flex;
-    gap: 6px;
+    gap: 8px;
     background: rgba(0,0,0,0.2);
-    padding: 3px 6px;
-    border-radius: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
     position: relative;
 }
 .seat {
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     transition: all 0.2s;
     background: linear-gradient(145deg, #2a2a3a, #1e1e2e);
@@ -738,10 +736,10 @@ nav a.active::after {
 .seat.available { background: linear-gradient(145deg, #2e7d32, #1b5e20); border-color: #4caf50; }
 .seat.premium { background: linear-gradient(145deg, #f57c00, #ef6c00); border-color: #ff9800; }
 .seat.business { background: linear-gradient(145deg, #7b1fa2, #6a1b9a); border-color: #9c27b0; }
-.seat.selected { background: linear-gradient(145deg, #0033A0, #00247D); border-color: #fff; box-shadow: 0 0 8px rgba(0,51,160,0.5); }
+.seat.selected { background: linear-gradient(145deg, #0033A0, #00247D); border-color: #fff; box-shadow: 0 0 10px rgba(0,51,160,0.5); }
 .seat.occupied { background: linear-gradient(145deg, #8b0000, #5a0000); border-color: #f44336; cursor: not-allowed; opacity: 0.5; }
 .seat.unavailable { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.1); cursor: not-allowed; opacity: 0.4; }
-.seat-extra { font-size: 6px; margin-top: 2px; }
+.seat-extra { font-size: 7px; margin-top: 2px; }
 .seat-summary {
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(12px);
@@ -768,10 +766,9 @@ nav a.active::after {
     border: none;
     color: #f44336;
     cursor: pointer;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    font-size: 12px;
 }
 .seat-total {
     border-top: 1px solid rgba(255,255,255,0.2);
@@ -798,7 +795,7 @@ nav a.active::after {
 .seat-legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
     margin-top: 16px;
     padding-top: 12px;
@@ -807,14 +804,14 @@ nav a.active::after {
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 9px;
+    gap: 6px;
+    font-size: 10px;
     color: rgba(255,255,255,0.7);
 }
 .legend-color {
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
 }
 
 /* BAGGAGE PAGE */
@@ -872,6 +869,12 @@ nav a.active::after {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 6px;
+}
+.flight-detail .flight-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--latam-blue);
+    text-align: right;
 }
 .form-group { margin-bottom: 12px; }
 .form-group label { display: block; margin-bottom: 4px; font-weight: 500; font-size: 12px; }
@@ -1013,7 +1016,7 @@ footer a:hover { color: var(--latam-blue); }
     100% { opacity: 0; visibility: hidden; }
 }
 
-/* MEDIA QUERIES MÓVIL */
+/* MEDIA QUERIES MÓVIL - Optimización solo para móvil */
 @media (max-width: 768px) {
     .search-grid { grid-template-columns: 1fr; }
     .flight-card { flex-direction: column; text-align: center; }
@@ -1023,15 +1026,48 @@ footer a:hover { color: var(--latam-blue); }
     .checkout-container { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .method-content { padding-left: 12px; }
-    .seat { width: 34px; height: 34px; font-size: 9px; }
-    .seat-extra { font-size: 6px; }
-    .row-number { width: 24px; font-size: 9px; }
-    .seat-group { padding: 2px 4px; gap: 4px; }
-    .seat-grid { min-width: 420px; }
+    /* Optimización móvil para asientos - scroll horizontal */
+    .aircraft-cabin {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .seat-map {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .seat-grid {
+        min-width: 520px;
+    }
+    .seat-row {
+        flex-wrap: nowrap;
+        gap: 6px;
+        padding: 4px 6px;
+    }
+    .row-number {
+        width: 28px;
+        font-size: 10px;
+        flex-shrink: 0;
+    }
+    .seats {
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+    .seat-group {
+        gap: 5px;
+        padding: 3px 6px;
+    }
+    .seat {
+        width: 36px;
+        height: 36px;
+        font-size: 10px;
+    }
+    .seat-extra {
+        font-size: 6px;
+    }
     .progress-step span { display: none; }
     .progress-step { gap: 3px; }
     .step-number { width: 22px; height: 22px; font-size: 10px; }
-    .cabin-tab { padding: 4px 8px; font-size: 10px; }
+    .cabin-tab { padding: 4px 10px; font-size: 10px; }
     .baggage-header { flex-direction: column; text-align: center; }
     .baggage-icon { margin-bottom: 4px; }
     header { flex-direction: column; align-items: stretch; }
@@ -1041,13 +1077,26 @@ footer a:hover { color: var(--latam-blue); }
     .splash-logo-image { width: 260px; }
     .splash-logo-wrapper { padding: 12px 30px; border-radius: 24px; }
     .seat-legend { gap: 8px; }
-    .legend-item { font-size: 8px; }
+    .legend-item { font-size: 9px; }
+    .legend-color { width: 12px; height: 12px; }
 }
 
 @media (max-width: 480px) {
-    .seat { width: 30px; height: 30px; font-size: 8px; }
-    .seat-extra { font-size: 5px; }
-    .row-number { width: 22px; font-size: 8px; }
+    .seat-grid {
+        min-width: 480px;
+    }
+    .seat {
+        width: 32px;
+        height: 32px;
+        font-size: 9px;
+    }
+    .seat-extra {
+        font-size: 5px;
+    }
+    .row-number {
+        width: 24px;
+        font-size: 9px;
+    }
     .cabin-header h3 { font-size: 16px; }
     .destinations-section h2, .services-section h2 { font-size: 20px; }
     .search-box { padding: 12px; }
@@ -1055,8 +1104,7 @@ footer a:hover { color: var(--latam-blue); }
     #logo-container { height: 70px; }
     .splash-logo-image { width: 200px; }
     .splash-logo-wrapper { padding: 10px 20px; border-radius: 20px; }
-    .seat-grid { min-width: 360px; }
-    .seat-group { gap: 3px; }
+    .seat-group { gap: 4px; }
     .seats { gap: 6px; }
 }
 </style>
@@ -1327,9 +1375,9 @@ function getDiscountForRoute(originCode, destCode) {
     const isUSARoute = usaCodes.includes(originCode) || usaCodes.includes(destCode);
     const isColombiaRoute = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
     
-    if (isUSARoute) return 0.25; // 25% descuento USA
-    if (isColombiaRoute) return 0.20; // 20% descuento Colombia
-    return 0.30; // 30% descuento otros internacionales
+    if (isUSARoute) return 0.25;
+    if (isColombiaRoute) return 0.20;
+    return 0.30;
 }
 
 function applyDiscount(originalPrice, originCode, destCode) {
@@ -1697,7 +1745,6 @@ function setupAutocomplete(input) {
 }
 
 function generateDestinationsOffers() {
-    // Nuevas imágenes desde GitHub con los nombres actualizados
     const offers = [
         { city: "Bogotá", img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/alejandro-alfaro-m-cmo76qKvNaU-unsplash.jpg", code: "BOG", price: 69160, original: 129000 },
         { city: "Medellín", img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/ricardo-gomez-angel-GcHar4P8V_Q-unsplash.jpg", code: "MDE", price: 86910, original: 149000 },
@@ -2190,7 +2237,7 @@ function confirmBaggageAndContinue() {
 }
 
 // ============================================
-// CHECKOUT Y PAGO
+// CHECKOUT Y PAGO - Corregido (sin duplicar vuelo de regreso)
 // ============================================
 function goToCheckout() {
     const isRound = currentTripType !== 'oneway';
@@ -2215,17 +2262,6 @@ function goToCheckout() {
         flightOutboundDisplay = `$${selectedOutboundFlight.price.toLocaleString()} x ${passengerCount} = <strong>$${(selectedOutboundFlight.price * passengerCount).toLocaleString()}</strong>`;
     }
     
-    let returnDisplay = '';
-    if (isRound && selectedReturnFlight) {
-        let returnPriceDisplay;
-        if (passengerCount === 1) {
-            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()}`;
-        } else {
-            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()} x ${passengerCount} = <strong>$${(selectedReturnFlight.price * passengerCount).toLocaleString()}</strong>`;
-        }
-        returnDisplay = `<div class="flight-detail"><div><div class="flight-route">${currentDestination} → ${currentOrigin}</div><div class="flight-time">${selectedReturnFlight.flightNumber} • ${selectedReturnFlight.time}</div><div class="flight-date">${retDateFormatted}</div></div><div class="flight-price">${returnPriceDisplay}</div></div>`;
-    }
-    
     let baggageDisplayText;
     if (passengerCount === 1) {
         baggageDisplayText = `$${baggagePrice.toLocaleString()}`;
@@ -2236,6 +2272,7 @@ function goToCheckout() {
     
     const aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
     
+    // Construir HTML del resumen de vuelos - SIN DUPLICAR
     let flightHtml = `<h3><i class="fa-solid fa-plane-departure"></i> Vuelo de ida</h3>
         <div class="flight-detail">
             <div>
@@ -2247,7 +2284,15 @@ function goToCheckout() {
             </div>
             <div class="flight-price">${flightOutboundDisplay}</div>
         </div>`;
+    
+    // Vuelo de regreso - una sola vez, sin duplicar
     if (isRound && selectedReturnFlight) {
+        let returnPriceDisplay;
+        if (passengerCount === 1) {
+            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()}`;
+        } else {
+            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()} x ${passengerCount} = <strong>$${(selectedReturnFlight.price * passengerCount).toLocaleString()}</strong>`;
+        }
         flightHtml += `<h3 style="margin-top:12px;"><i class="fa-solid fa-plane-arrival"></i> Vuelo de regreso</h3>
         <div class="flight-detail">
             <div>
@@ -2256,9 +2301,10 @@ function goToCheckout() {
                 <div class="flight-date">${retDateFormatted}</div>
                 ${selectedReturnFlight.discount > 0 ? `<div class="discount-info" style="font-size: 11px; color: #ff9800;">✨ ${selectedReturnFlight.discount}% de descuento aplicado</div>` : ''}
             </div>
-            <div class="flight-price">${returnDisplay}</div>
+            <div class="flight-price">${returnPriceDisplay}</div>
         </div>`;
     }
+    
     if (selectedOutboundSeats.length > 0) {
         flightHtml += `<h3 style="margin-top:12px;"><i class="fa-solid fa-chair"></i> Asientos seleccionados</h3>`;
         selectedOutboundSeats.forEach(seat => {
