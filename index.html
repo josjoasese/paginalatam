@@ -612,8 +612,8 @@ nav a.active::after {
 }
 .continue-button:disabled { background: #ccc; cursor: not-allowed; }
 
-/* SEAT SELECTION - Responsive */
-.seat-selection-page { display: none; min-height: 100vh; background: linear-gradient(135deg, #0A1428 0%, #0F1A30 100%); position: relative; overflow-x: auto; }
+/* SEAT SELECTION - Responsive optimizado para móvil */
+.seat-selection-page { display: none; min-height: 100vh; background: linear-gradient(135deg, #0A1428 0%, #0F1A30 100%); position: relative; overflow-x: hidden; }
 .seat-selection-container {
     max-width: 1300px;
     margin: 16px auto;
@@ -630,6 +630,7 @@ nav a.active::after {
     border-radius: 20px;
     padding: 16px;
     border: 1px solid rgba(255,255,255,0.15);
+    overflow-x: auto;
 }
 .cabin-header {
     text-align: center;
@@ -684,49 +685,50 @@ nav a.active::after {
 }
 .passenger-counter span { color: rgba(255,255,255,0.9); font-size: 12px; }
 .passenger-counter strong { color: #FFD966; font-size: 14px; margin: 0 4px; }
-.seat-map { overflow-x: auto; padding: 5px 0; }
-.seat-grid { display: flex; flex-direction: column; gap: 8px; min-width: 550px; }
+.seat-map { overflow-x: auto; overflow-y: visible; padding: 5px 0; -webkit-overflow-scrolling: touch; }
+.seat-grid { display: flex; flex-direction: column; gap: 8px; min-width: 500px; }
 .seat-row {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     background: rgba(255,255,255,0.03);
-    padding: 5px 10px;
-    border-radius: 16px;
-    flex-wrap: wrap;
+    padding: 4px 8px;
+    border-radius: 12px;
+    flex-wrap: nowrap;
 }
 .row-number {
-    width: 32px;
-    font-size: 12px;
+    width: 28px;
+    font-size: 11px;
     font-weight: 700;
     color: rgba(255,255,255,0.6);
     text-align: center;
+    flex-shrink: 0;
 }
 .seats {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     flex: 1;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
 }
 .seat-group {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     background: rgba(0,0,0,0.2);
-    padding: 4px 8px;
-    border-radius: 12px;
+    padding: 3px 6px;
+    border-radius: 10px;
     position: relative;
 }
 .seat {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     transition: all 0.2s;
     background: linear-gradient(145deg, #2a2a3a, #1e1e2e);
@@ -736,10 +738,10 @@ nav a.active::after {
 .seat.available { background: linear-gradient(145deg, #2e7d32, #1b5e20); border-color: #4caf50; }
 .seat.premium { background: linear-gradient(145deg, #f57c00, #ef6c00); border-color: #ff9800; }
 .seat.business { background: linear-gradient(145deg, #7b1fa2, #6a1b9a); border-color: #9c27b0; }
-.seat.selected { background: linear-gradient(145deg, #0033A0, #00247D); border-color: #fff; box-shadow: 0 0 10px rgba(0,51,160,0.5); }
+.seat.selected { background: linear-gradient(145deg, #0033A0, #00247D); border-color: #fff; box-shadow: 0 0 8px rgba(0,51,160,0.5); }
 .seat.occupied { background: linear-gradient(145deg, #8b0000, #5a0000); border-color: #f44336; cursor: not-allowed; opacity: 0.5; }
 .seat.unavailable { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.1); cursor: not-allowed; opacity: 0.4; }
-.seat-extra { font-size: 7px; margin-top: 2px; }
+.seat-extra { font-size: 6px; margin-top: 2px; }
 .seat-summary {
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(12px);
@@ -766,9 +768,10 @@ nav a.active::after {
     border: none;
     color: #f44336;
     cursor: pointer;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
+    font-size: 12px;
 }
 .seat-total {
     border-top: 1px solid rgba(255,255,255,0.2);
@@ -795,7 +798,7 @@ nav a.active::after {
 .seat-legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
     margin-top: 16px;
     padding-top: 12px;
@@ -804,14 +807,14 @@ nav a.active::after {
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 10px;
+    gap: 5px;
+    font-size: 9px;
     color: rgba(255,255,255,0.7);
 }
 .legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
 }
 
 /* BAGGAGE PAGE */
@@ -964,7 +967,7 @@ footer a { display: block; color: #aaa; text-decoration: none; margin-bottom: 5p
 footer a:hover { color: var(--latam-blue); }
 .copy { text-align: center; margin-top: 20px; opacity: 0.6; font-size: 10px; }
 
-/* SPLASH SCREEN - Animación flotante (rebote) */
+/* SPLASH SCREEN - Animación única: rápido crece, lento encoge */
 .splash-screen {
     position: fixed;
     top: 0;
@@ -981,15 +984,14 @@ footer a:hover { color: var(--latam-blue); }
 }
 .splash-content {
     text-align: center;
-    animation: scaleInSplash 0.6s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
 }
 .splash-logo-wrapper {
     background: white;
     border-radius: 32px;
-    padding: 30px 40px;
+    padding: 15px 40px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2);
     display: inline-block;
-    animation: floatBounce 1.2s ease-in-out infinite;
+    animation: pulseOnce 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
 }
 .splash-logo-image {
     width: 420px;
@@ -1001,14 +1003,10 @@ footer a:hover { color: var(--latam-blue); }
     height: auto;
     display: block;
 }
-@keyframes scaleInSplash {
+@keyframes pulseOnce {
     0% { transform: scale(0.85); opacity: 0; }
+    30% { transform: scale(1.12); opacity: 1; }
     100% { transform: scale(1); opacity: 1; }
-}
-@keyframes floatBounce {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08); box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
-    100% { transform: scale(1); }
 }
 @keyframes fadeOutSplash {
     0% { opacity: 1; visibility: visible; }
@@ -1020,20 +1018,20 @@ footer a:hover { color: var(--latam-blue); }
     .search-grid { grid-template-columns: 1fr; }
     .flight-card { flex-direction: column; text-align: center; }
     .flight-price { text-align: center; margin-top: 6px; }
-    .seat-selection-container { grid-template-columns: 1fr; }
-    .seat-summary { position: static; margin-top: 16px; }
+    .seat-selection-container { grid-template-columns: 1fr; gap: 12px; }
+    .seat-summary { position: static; margin-top: 12px; }
     .checkout-container { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .method-content { padding-left: 12px; }
-    .seat { width: 36px; height: 36px; font-size: 10px; }
+    .seat { width: 34px; height: 34px; font-size: 9px; }
     .seat-extra { font-size: 6px; }
-    .row-number { width: 28px; font-size: 10px; }
-    .seat-group { padding: 3px 6px; gap: 5px; }
-    .seat-grid { min-width: 450px; }
+    .row-number { width: 24px; font-size: 9px; }
+    .seat-group { padding: 2px 4px; gap: 4px; }
+    .seat-grid { min-width: 420px; }
     .progress-step span { display: none; }
     .progress-step { gap: 3px; }
     .step-number { width: 22px; height: 22px; font-size: 10px; }
-    .cabin-tab { padding: 4px 10px; font-size: 10px; }
+    .cabin-tab { padding: 4px 8px; font-size: 10px; }
     .baggage-header { flex-direction: column; text-align: center; }
     .baggage-icon { margin-bottom: 4px; }
     header { flex-direction: column; align-items: stretch; }
@@ -1041,35 +1039,30 @@ footer a:hover { color: var(--latam-blue); }
     .header-right { justify-content: center; }
     #logo-container { height: 100px; }
     .splash-logo-image { width: 260px; }
-    .splash-logo-wrapper { padding: 20px 25px; }
-    @keyframes floatBounce {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
+    .splash-logo-wrapper { padding: 12px 30px; border-radius: 24px; }
+    .seat-legend { gap: 8px; }
+    .legend-item { font-size: 8px; }
 }
 
 @media (max-width: 480px) {
-    .seat { width: 32px; height: 32px; font-size: 9px; }
+    .seat { width: 30px; height: 30px; font-size: 8px; }
     .seat-extra { font-size: 5px; }
-    .row-number { width: 24px; font-size: 9px; }
+    .row-number { width: 22px; font-size: 8px; }
     .cabin-header h3 { font-size: 16px; }
     .destinations-section h2, .services-section h2 { font-size: 20px; }
     .search-box { padding: 12px; }
     .auth-content { padding: 16px; }
     #logo-container { height: 70px; }
     .splash-logo-image { width: 200px; }
-    .splash-logo-wrapper { padding: 15px 20px; border-radius: 20px; }
-    @keyframes floatBounce {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.03); }
-        100% { transform: scale(1); }
-    }
+    .splash-logo-wrapper { padding: 10px 20px; border-radius: 20px; }
+    .seat-grid { min-width: 360px; }
+    .seat-group { gap: 3px; }
+    .seats { gap: 6px; }
 }
 </style>
 </head>
 <body>
-<!-- SPLASH SCREEN con Animación Flotante -->
+<!-- SPLASH SCREEN con Animación Única -->
 <div class="splash-screen" id="splashScreen" onclick="skipSplash()">
     <div class="splash-content">
         <div class="splash-logo-wrapper">
@@ -1407,7 +1400,15 @@ let currentOrigin = '', currentDestination = '', currentDepartureDate = '', curr
 let currentOriginCode = '', currentDestCode = '';
 let currentTripType = 'round';
 let currentCabinSeat = 'Economy';
-const SEAT_PRICES = { economy: 49900, premium: 69900, business: 99900 };
+// Nuevos precios de asientos
+const SEAT_PRICES = { economy: 45900, premium: 55900, business: 72900 };
+// Nuevos precios de equipaje
+const BAGGAGE_OPTIONS = [
+    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, kg: 0, desc: 'Solo equipaje de mano (10kg)' },
+    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 39900, kg: 23, desc: '1 maleta documentada (23kg)' },
+    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 69900, kg: 46, desc: '2 maletas documentadas (23kg c/u)' },
+    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 106900, kg: 69, desc: '3 maletas documentadas + prioridad' }
+];
 
 // ============================================
 // LISTA DE AEROPUERTOS
@@ -1985,13 +1986,13 @@ function generateSeatMapCompact() {
     if (cabinTabsContainer) {
         let tabsHtml = '';
         if (aircraft.classes.economy) {
-            tabsHtml += `<button class="cabin-tab ${currentCabinSeat === 'Economy' ? 'active' : ''}" onclick="switchCabinSeat('Economy')">Economy ($49,900)</button>`;
+            tabsHtml += `<button class="cabin-tab ${currentCabinSeat === 'Economy' ? 'active' : ''}" onclick="switchCabinSeat('Economy')">Economy ($${SEAT_PRICES.economy.toLocaleString()})</button>`;
         }
         if (aircraft.classes.premium) {
-            tabsHtml += `<button class="cabin-tab ${currentCabinSeat === 'Premium Economy' ? 'active' : ''}" onclick="switchCabinSeat('Premium Economy')">Premium ($69,900)</button>`;
+            tabsHtml += `<button class="cabin-tab ${currentCabinSeat === 'Premium Economy' ? 'active' : ''}" onclick="switchCabinSeat('Premium Economy')">Premium ($${SEAT_PRICES.premium.toLocaleString()})</button>`;
         }
         if (aircraft.classes.business) {
-            tabsHtml += `<button class="cabin-tab ${currentCabinSeat === 'Business' ? 'active' : ''}" onclick="switchCabinSeat('Business')">Business ($99,900)</button>`;
+            tabsHtml += `<button class="cabin-tab ${currentCabinSeat === 'Business' ? 'active' : ''}" onclick="switchCabinSeat('Business')">Business ($${SEAT_PRICES.business.toLocaleString()})</button>`;
         }
         cabinTabsContainer.innerHTML = tabsHtml;
     }
@@ -2020,6 +2021,8 @@ function generateSeatMapCompact() {
             if (status === 'unavailable') html += `<div class="seat unavailable"><div>${letter}</div></div>`;
             else {
                 let seatClass = `seat ${status}`;
+                if (cabinClass === 'Business') seatClass = `seat ${status} business`;
+                else if (cabinClass === 'Premium Economy') seatClass = `seat ${status} premium`;
                 html += `<div class="${seatClass}" data-seat="${seatId}" data-price="${price}" data-cabin="${cabinClass}" onclick="selectSeat('${seatId}', ${price}, '${cabinClass}', '${status}')">`;
                 html += `<div>${letter}</div><div class="seat-extra">$${Math.floor(price/1000)}k</div></div>`;
             }
@@ -2038,6 +2041,8 @@ function generateSeatMapCompact() {
             if (status === 'unavailable') html += `<div class="seat unavailable"><div>${letter}</div></div>`;
             else {
                 let seatClass = `seat ${status}`;
+                if (cabinClass === 'Business') seatClass = `seat ${status} business`;
+                else if (cabinClass === 'Premium Economy') seatClass = `seat ${status} premium`;
                 html += `<div class="${seatClass}" data-seat="${seatId}" data-price="${price}" data-cabin="${cabinClass}" onclick="selectSeat('${seatId}', ${price}, '${cabinClass}', '${status}')">`;
                 html += `<div>${letter}</div><div class="seat-extra">$${Math.floor(price/1000)}k</div></div>`;
             }
@@ -2081,7 +2086,7 @@ function updateSeatSummary() {
     let seatsHtml = '';
     selectedOutboundSeats.forEach(seat => {
         const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
-        const price = seatEl ? parseInt(seatEl.dataset.price) : 49900;
+        const price = seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy;
         total += price;
         const cabin = seatEl?.dataset.cabin || 'Economy';
         seatsHtml += `<div class="selected-seat-item">
@@ -2147,13 +2152,6 @@ function goBackFromBaggage() {
 // ============================================
 // SELECCIÓN DE EQUIPAJE
 // ============================================
-const BAGGAGE_OPTIONS = [
-    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, kg: 0, desc: 'Solo equipaje de mano (10kg)' },
-    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 89900, kg: 23, desc: '1 maleta documentada (23kg)' },
-    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 149900, kg: 46, desc: '2 maletas documentadas (23kg c/u)' },
-    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 249900, kg: 69, desc: '3 maletas documentadas + prioridad' }
-];
-
 function goToBaggage() {
     const routeInfo = document.getElementById('baggageRouteInfo');
     const formattedDate = formatDateDisplay(currentDepartureDate);
@@ -2204,7 +2202,7 @@ function goToCheckout() {
     }
     const totalSeats = selectedOutboundSeats.reduce((sum, seat) => {
         const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
-        return sum + (seatEl ? parseInt(seatEl.dataset.price) : 49900);
+        return sum + (seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy);
     }, 0);
     
     const depDateFormatted = formatDateDisplay(currentDepartureDate);
@@ -2265,7 +2263,7 @@ function goToCheckout() {
         flightHtml += `<h3 style="margin-top:12px;"><i class="fa-solid fa-chair"></i> Asientos seleccionados</h3>`;
         selectedOutboundSeats.forEach(seat => {
             const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
-            const price = seatEl ? parseInt(seatEl.dataset.price) : 49900;
+            const price = seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy;
             const cabin = seatEl?.dataset.cabin || 'Economy';
             flightHtml += `<div class="flight-detail"><div>Asiento ${seat} (${cabin})</div><div class="flight-price">$${price.toLocaleString()}</div></div>`;
         });
@@ -2383,7 +2381,7 @@ async function processPayment() {
     }
     const totalSeats = selectedOutboundSeats.reduce((sum, seat) => {
         const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
-        return sum + (seatEl ? parseInt(seatEl.dataset.price) : 49900);
+        return sum + (seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy);
     }, 0);
     const total = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
     
