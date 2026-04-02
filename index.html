@@ -1538,24 +1538,46 @@ const BAGGAGE_OPTIONS = [
 ];
 
 // ============================================
-// LISTA DE AEROPUERTOS
+// LISTA DE AEROPUERTOS AMPLIADA - TODOS LOS DESTINOS LATAM
 // ============================================
 const airports = [
+    // COLOMBIA (10)
     "Bogotá (BOG)", "Medellín (MDE)", "Cali (CLO)", "Cartagena (CTG)", "Barranquilla (BAQ)",
     "Santa Marta (SMR)", "San Andrés (ADZ)", "Pereira (PEI)", "Bucaramanga (BGA)", "Cúcuta (CUC)",
-    "Lima (LIM)", "Santiago (SCL)", "Buenos Aires (EZE)", "São Paulo (GRU)", "Miami (MIA)",
-    "Madrid (MAD)", "New York (JFK)", "Ciudad de México (MEX)", "Panamá (PTY)", "Quito (UIO)",
-    "Guayaquil (GYE)", "La Paz (LPB)", "Montevideo (MVD)", "Asunción (ASU)", "Caracas (CCS)",
-    "Toronto (YYZ)", "Los Ángeles (LAX)", "Orlando (MCO)", "Cancún (CUN)", "Punta Cana (PUJ)"
+    // PERÚ (6)
+    "Lima (LIM)", "Cusco (CUZ)", "Arequipa (AQP)", "Iquitos (IQT)", "Piura (PIU)", "Trujillo (TRU)",
+    // CHILE (7)
+    "Santiago (SCL)", "Antofagasta (ANF)", "Concepción (CCP)", "Puerto Montt (PMC)", "Temuco (ZCO)", "La Serena (LSC)", "Iquique (IQQ)",
+    // ARGENTINA (7)
+    "Buenos Aires (EZE)", "Buenos Aires (AEP)", "Córdoba (COR)", "Mendoza (MDZ)", "Bariloche (BRC)", "Ushuaia (USH)", "Iguazú (IGR)",
+    // BRASIL (14)
+    "São Paulo (GRU)", "São Paulo (CGH)", "Brasília (BSB)", "Rio de Janeiro (GIG)", "Rio de Janeiro (SDU)", 
+    "Belo Horizonte (CNF)", "Porto Alegre (POA)", "Florianópolis (FLN)", "Curitiba (CWB)", "Recife (REC)",
+    "Salvador (SSA)", "Fortaleza (FOR)", "Belém (BEL)", "Manaus (MAO)",
+    // ECUADOR (4)
+    "Quito (UIO)", "Guayaquil (GYE)", "Cuenca (CUE)", "Manta (MEC)",
+    // ESTADOS UNIDOS (8)
+    "Miami (MIA)", "Nueva York (JFK)", "Los Ángeles (LAX)", "Orlando (MCO)", "Chicago (ORD)", 
+    "Atlanta (ATL)", "Dallas (DFW)", "Houston (IAH)",
+    // EUROPA (5)
+    "Madrid (MAD)", "Barcelona (BCN)", "Frankfurt (FRA)", "París (CDG)", "Londres (LHR)",
+    // RESTO DE SUDAMÉRICA (11)
+    "Montevideo (MVD)", "Asunción (ASU)", "La Paz (LPB)", "Santa Cruz (VVI)", "Caracas (CCS)",
+    "Panamá (PTY)", "Ciudad de México (MEX)", "Cancún (CUN)", "Punta Cana (PUJ)", "San José (SJO)",
+    "San Salvador (SAL)", "Ciudad de Guatemala (GUA)"
 ];
 
+// Tiempos de vuelo ampliados para rutas LATAM
 const durations = {
+    // Colombia rutas nacionales
     'BOG-MDE': 64, 'BOG-CLO': 67, 'BOG-CTG': 94, 'BOG-SMR': 95, 'BOG-ADZ': 150,
     'MDE-BOG': 64, 'MDE-CLO': 70, 'MDE-CTG': 80, 'MDE-SMR': 85, 'MDE-ADZ': 120,
-    'CLO-BOG': 67, 'CLO-MDE': 70, 'CLO-CTG': 90,
-    'CTG-BOG': 94, 'CTG-MDE': 80, 'CTG-SMR': 40,
+    'CLO-BOG': 67, 'CLO-MDE': 70, 'CLO-CTG': 90, 'CTG-BOG': 94, 'CTG-MDE': 80, 'CTG-SMR': 40,
+    // Rutas internacionales principales
     'BOG-LIM': 210, 'BOG-SCL': 360, 'BOG-EZE': 390, 'BOG-GRU': 335, 'BOG-MIA': 240,
-    'BOG-MAD': 591, 'BOG-JFK': 320, 'BOG-MEX': 300, 'BOG-PTY': 90
+    'BOG-MAD': 591, 'BOG-JFK': 320, 'BOG-MEX': 300, 'BOG-PTY': 90,
+    'LIM-GRU': 285, 'LIM-SCL': 210, 'LIM-EZE': 255, 'LIM-MIA': 330,
+    'SCL-GRU': 220, 'SCL-EZE': 135, 'SCL-MIA': 480, 'GRU-MIA': 540, 'GRU-JFK': 600
 };
 
 function getFlightDuration(originCode, destCode) {
@@ -1563,8 +1585,12 @@ function getFlightDuration(originCode, destCode) {
     const reverseKey = `${destCode}-${originCode}`;
     if (durations[routeKey]) return durations[routeKey];
     if (durations[reverseKey]) return durations[reverseKey];
+    // Estimación basada en tipo de ruta
     const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
-    return isNational ? 90 : 300;
+    const isInternational = !colombianCodes.includes(originCode) || !colombianCodes.includes(destCode);
+    if (isNational) return 90;
+    if (isInternational) return 300;
+    return 180;
 }
 
 function formatDuration(minutes) {
@@ -1630,7 +1656,8 @@ function generateFlightsForRoute(originCode, destCode, flightDate, count = 20) {
     const twoStopCount = count - directCount - oneStopCount;
 
     const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
-    const stopCities = isNational ? [...colombianCodes] : ['LIM','BOG','MIA','SCL','GRU','PTY','MEX'];
+    // Ciudades de escala ampliadas con más destinos LATAM
+    const stopCities = isNational ? [...colombianCodes] : ['BOG', 'LIM', 'SCL', 'GRU', 'MIA', 'PTY', 'MEX', 'EZE', 'MAD'];
     const availableStops = stopCities.filter(c => c !== originCode && c !== destCode);
     const randomStop = () => availableStops[Math.floor(Math.random() * availableStops.length)];
     
