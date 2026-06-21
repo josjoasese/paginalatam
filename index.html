@@ -219,7 +219,7 @@ body {
     transition: var(--transition-fast);
 }
 .search-tab.active {
-    background: var(--latam-blue);  /* CAMBIADO: antes era rojo */
+    background: var(--latam-blue);
     color: white;
 }
 
@@ -295,7 +295,7 @@ body {
     background: var(--latam-blue-bg);
 }
 .search-btn-latam {
-    background: var(--latam-blue);  /* CAMBIADO: antes era rojo */
+    background: var(--latam-blue);
     color: white;
     border: none;
     padding: 14px 40px;
@@ -881,7 +881,7 @@ body {
 .seat-selection-page {
     display: none;
     min-height: 100vh;
-    background: var(--bg-light);  /* Fondo claro */
+    background: var(--bg-light);
 }
 .seat-selection-container {
     max-width: 1400px;
@@ -1970,6 +1970,9 @@ body {
 // ============================================
 // CONFIGURACIÓN Y CONSTANTES
 // ============================================
+// Base URL para imágenes desde GitHub
+const IMG_BASE = 'https://raw.githubusercontent.com/josjoasese/paginalatam/main/';
+
 const usaCodes = ['MIA', 'JFK', 'LAX', 'MCO', 'ORD', 'ATL', 'DFW', 'IAH'];
 const colombianCodes = ['BOG', 'MDE', 'CLO', 'CTG', 'BAQ', 'SMR', 'ADZ', 'PEI', 'BGA', 'CUC'];
 
@@ -2930,18 +2933,18 @@ function skipSplash() {
 // ============================================
 function generateDestinationsOffers() {
     const destinations = [
-        { city: "Bogotá", code: "BOG", price: 69160, original: 129000, discount: 46, img: "https://images.unsplash.com/photo-1534180477870-5c52f6d2c4a9?w=400" },
-        { city: "Medellín", code: "MDE", price: 86910, original: 149000, discount: 42, img: "https://images.unsplash.com/photo-1582652616399-0c0dd9b3e2d7?w=400" },
-        { city: "Cartagena", code: "CTG", price: 152500, original: 279000, discount: 45, img: "https://images.unsplash.com/photo-1555881400-9b6e0b7a7a2f?w=400" },
-        { city: "Santa Marta", code: "SMR", price: 189900, original: 320000, discount: 41, img: "https://images.unsplash.com/photo-1591193460978-2f7b3b2c6f3c?w=400" },
-        { city: "San Andrés", code: "ADZ", price: 425000, original: 680000, discount: 38, img: "https://images.unsplash.com/photo-1542051841856-5f900f0e2513?w=400" },
-        { city: "Cali", code: "CLO", price: 129900, original: 210000, discount: 38, img: "https://images.unsplash.com/photo-1580463675027-3ab3a8d6e1e8?w=400" },
-        { city: "Miami", code: "MIA", price: 1314000, original: 1800000, discount: 27, img: "https://images.unsplash.com/photo-1533106418989-8d6d8d0f0b1f?w=400" },
-        { city: "Nueva York", code: "JFK", price: 1450000, original: 2100000, discount: 31, img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400" },
-        { city: "Madrid", code: "MAD", price: 1876270, original: 2500000, discount: 25, img: "https://images.unsplash.com/photo-1539037116277-4db208fa9f4d?w=400" },
-        { city: "Lima", code: "LIM", price: 890000, original: 1410000, discount: 37, img: "https://images.unsplash.com/photo-1533903345306-15d1c30952d1?w=400" },
-        { city: "Santiago", code: "SCL", price: 1200000, original: 1734000, discount: 31, img: "https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=400" },
-        { city: "São Paulo", code: "GRU", price: 1150000, original: 1712000, discount: 33, img: "https://images.unsplash.com/photo-1543459176-4426dfd8b0d0?w=400" }
+        { city: "Bogotá", code: "BOG", price: 69160, original: 129000, discount: 46, img: IMG_BASE + 'destino-bogota.png' },
+        { city: "Medellín", code: "MDE", price: 86910, original: 149000, discount: 42, img: IMG_BASE + 'destino-medellin.jfif' },
+        { city: "Cartagena", code: "CTG", price: 152500, original: 279000, discount: 45, img: IMG_BASE + 'destino-cartagena.jfif' },
+        { city: "Santa Marta", code: "SMR", price: 189900, original: 320000, discount: 41, img: IMG_BASE + 'destino-santamarta.jfif' },
+        { city: "San Andrés", code: "ADZ", price: 425000, original: 680000, discount: 38, img: IMG_BASE + 'destino-sanandres.jfif' },
+        { city: "Cali", code: "CLO", price: 129900, original: 210000, discount: 38, img: IMG_BASE + 'destino-cali.jfif' },
+        { city: "Miami", code: "MIA", price: 1314000, original: 1800000, discount: 27, img: IMG_BASE + 'destino-miami.jfif' },
+        { city: "Nueva York", code: "JFK", price: 1450000, original: 2100000, discount: 31, img: IMG_BASE + 'destino-nuevayork.jfif' },
+        { city: "Madrid", code: "MAD", price: 1876270, original: 2500000, discount: 25, img: IMG_BASE + 'destino-madrid.jfif' },
+        { city: "Lima", code: "LIM", price: 890000, original: 1410000, discount: 37, img: IMG_BASE + 'destino-lima.jfif' },
+        { city: "Santiago", code: "SCL", price: 1200000, original: 1734000, discount: 31, img: IMG_BASE + 'destino-santiago.jfif' },
+        { city: "São Paulo", code: "GRU", price: 1150000, original: 1712000, discount: 33, img: IMG_BASE + 'destino-saopaulo.jfif' }
     ];
     document.getElementById('destinationsOffers').innerHTML = destinations.map(d => `
         <div class="destino-card" onclick="quickSearch('Bogotá (BOG)','${d.city} (${d.code})')">
@@ -2953,10 +2956,10 @@ function generateDestinationsOffers() {
 
 function generatePaquetes() {
     const paquetes = [
-        { name: "Cartagena 4 días", price: 450000, original: 680000, img: "https://images.unsplash.com/photo-1555881400-9b6e0b7a7a2f?w=400" },
-        { name: "San Andrés 5 días", price: 890000, original: 1200000, img: "https://images.unsplash.com/photo-1542051841856-5f900f0e2513?w=400" },
-        { name: "Miami 7 días", price: 2100000, original: 2800000, img: "https://images.unsplash.com/photo-1533106418989-8d6d8d0f0b1f?w=400" },
-        { name: "Medellín 3 días", price: 320000, original: 480000, img: "https://images.unsplash.com/photo-1582652616399-0c0dd9b3e2d7?w=400" }
+        { name: "Cartagena 4 días", price: 450000, original: 680000, img: IMG_BASE + 'paquete-cartagena.jfif' },
+        { name: "San Andrés 5 días", price: 890000, original: 1200000, img: IMG_BASE + 'paquete-sanandres.jfif' },
+        { name: "Miami 7 días", price: 2100000, original: 2800000, img: IMG_BASE + 'paquete-miami.jfif' },
+        { name: "Medellín 3 días", price: 320000, original: 480000, img: IMG_BASE + 'paquete-medellin.jfif' }
     ];
     document.getElementById('paquetesGrid').innerHTML = paquetes.map(p => `
         <div class="paquete-card">
@@ -2968,10 +2971,10 @@ function generatePaquetes() {
 
 function generateExperiencias() {
     const experiencias = [
-        { name: "Tour Ciudad Amurallada", price: 120000, img: "https://images.unsplash.com/photo-1555881400-9b6e0b7a7a2f?w=400" },
-        { name: "Avistamiento de ballenas", price: 250000, img: "https://images.unsplash.com/photo-1542051841856-5f900f0e2513?w=400" },
-        { name: "City Tour Medellín", price: 89000, img: "https://images.unsplash.com/photo-1582652616399-0c0dd9b3e2d7?w=400" },
-        { name: "Caminata del Cóndor", price: 180000, img: "https://images.unsplash.com/photo-1533903345306-15d1c30952d1?w=400" }
+        { name: "Tour Ciudad Amurallada", price: 120000, img: IMG_BASE + 'experiencia-cartagena.jfif' },
+        { name: "Avistamiento de ballenas", price: 250000, img: IMG_BASE + 'experiencia-ballenas.jfif' },
+        { name: "City Tour Medellín", price: 89000, img: IMG_BASE + 'experiencia-medellin.jfif' },
+        { name: "Caminata del Cóndor", price: 180000, img: IMG_BASE + 'experiencia-condor.jfif' }
     ];
     document.getElementById('experienciasGrid').innerHTML = experiencias.map(e => `
         <div class="experiencia-card">
