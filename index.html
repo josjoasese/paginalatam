@@ -6,6 +6,7 @@
 <title>LATAM Airlines - Vuelos baratos, ofertas y destinos</title>
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/josjoasese/paginalatam/main/logonav.png">
 <meta name="description" content="Encuentra vuelos baratos a Colombia, Chile, Perú, Argentina, Brasil, Estados Unidos y Europa. Reserva tus vuelos en LATAM Airlines, la aerolínea líder de Sudamérica.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -51,7 +52,7 @@
 }
 
 body {
-    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Lato', sans-serif;
     background: var(--white);
     color: var(--dark);
     line-height: 1.5;
@@ -177,141 +178,335 @@ body {
     background: linear-gradient(rgba(0,51,160,0.82), rgba(0,36,125,0.88)), url('https://raw.githubusercontent.com/josjoasese/paginalatam/main/Latam_Banner-01.png');
     background-size: cover;
     background-position: center 30%;
-    padding: 60px 40px 80px;
+    padding: 20px 16px 40px;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .hero-content {
-    max-width: 1200px;
+    max-width: 480px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    z-index: 2;
 }
 .hero-latam h1 {
     color: white;
-    font-size: 48px;
+    font-size: 32px;
     font-weight: 800;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     letter-spacing: -0.5px;
 }
 .hero-latam p {
-    color: rgba(255,255,255,0.9);
-    font-size: 18px;
-    margin-bottom: 32px;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    margin-bottom: 24px;
 }
 
-/* Search Tabs */
+/* ============================================
+   BUSCADOR LATAM - REPLICA EXACTA
+   ============================================ */
+
+/* Tarjeta principal */
+.search-box-latam {
+    background: #FFFFFF;
+    width: 92%;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 28px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.03);
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    border: none;
+    margin-bottom: 0;
+}
+
+/* Encabezado con flex */
+.search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0;
+}
+
+/* Título */
+.search-title {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 33px;
+    font-weight: 500;
+    line-height: 1.12;
+    color: #464646;
+    letter-spacing: -0.3px;
+    margin-bottom: 14px;
+}
+
+/* Botón circular superior derecho */
+.search-close-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #E04C84;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 10;
+}
+.search-close-btn:hover {
+    transform: rotate(90deg);
+    box-shadow: 0 4px 16px rgba(224, 76, 132, 0.2);
+}
+.search-close-btn i {
+    font-size: 24px;
+    color: #E04C84;
+}
+
+/* Fila de pestañas - apoyadas sobre el cuadro */
 .search-tabs {
     display: flex;
-    gap: 4px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 60px;
-    padding: 4px;
-    width: fit-content;
-    margin: 0 auto 24px;
-    backdrop-filter: blur(8px);
-}
-.search-tab {
-    padding: 10px 28px;
-    border: none;
-    background: transparent;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 60px;
-    transition: var(--transition-fast);
-}
-.search-tab.active {
-    background: var(--latam-blue);
-    color: white;
+    gap: 8px;
+    align-items: center;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 2;
 }
 
-/* Search Box */
-.search-box-latam {
+/* Botones tipo píldora - pestañas */
+.tab-btn {
+    height: 42px;
+    border-radius: 20px;
+    padding: 0 18px;
+    font-size: 16px;
+    font-weight: 500;
     background: white;
-    border-radius: 64px;
-    padding: 6px 8px 6px 28px;
-    box-shadow: var(--shadow-xl);
+    border: 2px solid #D7D7D7;
+    color: #444444;
+    cursor: pointer;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    transition: all 0.2s ease;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    white-space: nowrap;
 }
-.trip-selector {
+.tab-btn:hover {
+    border-color: #C7C7C7;
+    background: #f8f8f8;
+}
+.tab-btn.active {
+    border: 2px solid #8D99F0;
+    color: #6675E8;
+    font-weight: 600;
+    background: #FFFFFF;
+    padding-left: 16px;
+    padding-right: 18px;
+}
+.tab-btn.active i {
+    color: #6675E8;
+    font-size: 14px;
+}
+.tab-btn i {
+    font-size: 14px;
+    color: #444444;
+}
+
+/* Contenedor Origen-Destino - prácticamente pegado a las pestañas */
+.origin-dest-container {
+    background: white;
+    border: 1.5px solid #BDBDBD;
+    border-radius: 14px;
+    position: relative;
+    overflow: visible;
+    width: 100%;
+    margin-top: 0px;
+    height: 220px;
+}
+
+/* Sección superior - Desde */
+.origin-section {
+    padding-top: 22px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 18px;
+}
+.origin-section .section-label {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #404040;
+    margin-bottom: 16px;
+    display: block;
+}
+.origin-section .input-placeholder {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #B6B6B6;
+    background: none;
+    border: none;
+    width: 100%;
+    padding: 0;
+    outline: none;
+}
+.origin-section .input-placeholder:focus {
+    color: #404040;
+}
+.origin-section .input-placeholder::placeholder {
+    color: #B6B6B6;
+    font-weight: 400;
+}
+
+/* Línea divisoria */
+.divider-line {
+    height: 1px;
+    background: #D8D8D8;
+    width: 100%;
+}
+
+/* Sección inferior - Hacia */
+.dest-section {
+    padding-top: 22px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 18px;
+}
+.dest-section .section-label {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #404040;
+    margin-bottom: 16px;
+    display: block;
+}
+.dest-section .input-placeholder {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #B6B6B6;
+    background: none;
+    border: none;
+    width: 100%;
+    padding: 0;
+    outline: none;
+}
+.dest-section .input-placeholder:focus {
+    color: #404040;
+}
+.dest-section .input-placeholder::placeholder {
+    color: #B6B6B6;
+    font-weight: 400;
+}
+
+/* Botón de intercambio (swap) - SOBRESALE DEL BORDE DERECHO */
+.swap-btn {
+    position: absolute;
+    top: 50%;
+    right: -21px;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 2px solid #E04C84;
     display: flex;
-    gap: 16px;
-    padding-right: 20px;
-    border-right: 1px solid var(--latam-gray-lighter);
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+.swap-btn:hover {
+    background: #f8f8f8;
+    transform: translateY(-50%) scale(1.05);
+}
+.swap-btn i {
+    font-size: 20px;
+    color: #E04C84;
+}
+
+/* ============================================
+   BUSCADOR OVERLAY
+   ============================================ */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 9998;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.search-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.search-box-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    padding: 16px;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.search-box-wrapper.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+}
+
+.search-box-wrapper .search-box-latam {
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 10px 30px rgba(0,0,0,0.08);
+    max-width: 480px;
+    width: 100%;
+}
+
+/* ============================================
+   FIN BUSCADOR
+   ============================================ */
+
+/* Trip selector original (oculto pero funcional) */
+.trip-selector {
+    display: none;
 }
 .trip-selector label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--latam-gray);
-    padding: 8px 12px;
-    border-radius: var(--radius-full);
-    transition: var(--transition-fast);
-}
-.trip-selector label:has(input:checked) {
-    color: var(--latam-blue);
-    background: var(--latam-blue-bg);
+    display: none;
 }
 .trip-selector input[type="radio"] {
-    accent-color: var(--latam-blue);
-    width: 16px;
-    height: 16px;
+    display: none;
 }
-.search-fields {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-.search-field {
-    flex: 1;
-    min-width: 140px;
-    position: relative;
-}
-.search-field i {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--latam-gray-light);
-    font-size: 14px;
-}
-.search-field input {
-    width: 100%;
-    padding: 14px 14px 14px 42px;
-    border: none;
-    background: transparent;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: var(--radius-full);
-    transition: var(--transition-fast);
-}
-.search-field input:focus {
-    outline: none;
-    background: var(--latam-blue-bg);
-}
-.search-btn-latam {
-    background: var(--latam-blue);
-    color: white;
-    border: none;
-    padding: 14px 40px;
-    border-radius: var(--radius-full);
-    font-weight: 800;
-    font-size: 14px;
-    cursor: pointer;
-    white-space: nowrap;
-    letter-spacing: 0.5px;
-    transition: var(--transition-fast);
-}
-.search-btn-latam:hover {
-    background: var(--latam-blue-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,51,160,0.4);
-}
+
+/* ============================================
+   FIN BUSCADOR
+   ============================================ */
 
 /* Promo Banner */
 .promo-banner {
@@ -877,7 +1072,7 @@ body {
     transform: none;
 }
 
-/* ========== SELECCIÓN DE ASIENTOS EN MODO CLARO ========== */
+/* ========== SELECCIÓN DE ASIENTOS ========== */
 .seat-selection-page {
     display: none;
     min-height: 100vh;
@@ -1497,33 +1692,78 @@ body {
     .faq-section,
     .newsletter-section,
     .footer-latam {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 16px;
+        padding-right: 16px;
     }
     .hero-latam h1 {
-        font-size: 32px;
+        font-size: 28px;
     }
     .search-box-latam {
-        flex-direction: column;
-        border-radius: var(--radius-xl);
-        padding: 20px;
+        width: 92%;
+        padding-top: 16px;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-bottom: 22px;
+        border-radius: 14px;
     }
-    .trip-selector {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 16px;
-        width: 100%;
-        justify-content: center;
+    .search-title {
+        font-size: 28px;
+        margin-bottom: 12px;
     }
-    .search-fields {
-        flex-direction: column;
-        width: 100%;
+    .search-close-btn {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 12px;
     }
-    .search-field {
-        width: 100%;
+    .search-close-btn i {
+        font-size: 20px;
     }
-    .search-btn-latam {
-        width: 100%;
+    .tab-btn {
+        height: 36px;
+        padding: 0 14px;
+        font-size: 14px;
+        border-radius: 16px;
+    }
+    .tab-btn.active {
+        padding-left: 12px;
+        padding-right: 14px;
+    }
+    .origin-section {
+        padding-top: 18px;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-bottom: 14px;
+    }
+    .dest-section {
+        padding-top: 18px;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-bottom: 14px;
+    }
+    .origin-section .section-label,
+    .dest-section .section-label {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+    .origin-section .input-placeholder,
+    .dest-section .input-placeholder {
+        font-size: 19px;
+    }
+    .swap-btn {
+        width: 36px;
+        height: 36px;
+        right: -14px;
+    }
+    .swap-btn i {
+        font-size: 16px;
+    }
+    .search-tabs {
+        gap: 6px;
+        margin-top: 10px;
+        margin-bottom: 2px;
+    }
+    .origin-dest-container {
+        height: 190px;
     }
     .seat-selection-container {
         grid-template-columns: 1fr;
@@ -1535,6 +1775,63 @@ body {
         width: 40px;
         height: 40px;
         font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-title {
+        font-size: 24px;
+    }
+    .search-close-btn {
+        width: 36px;
+        height: 36px;
+    }
+    .search-close-btn i {
+        font-size: 18px;
+    }
+    .tab-btn {
+        height: 32px;
+        padding: 0 12px;
+        font-size: 12px;
+        border-radius: 14px;
+    }
+    .tab-btn.active {
+        padding-left: 10px;
+        padding-right: 12px;
+    }
+    .origin-section .input-placeholder,
+    .dest-section .input-placeholder {
+        font-size: 17px;
+    }
+    .search-box-latam {
+        padding-top: 14px;
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-bottom: 18px;
+        border-radius: 12px;
+    }
+    .origin-section {
+        padding-top: 14px;
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-bottom: 10px;
+    }
+    .dest-section {
+        padding-top: 14px;
+        padding-left: 14px;
+        padding-right: 14px;
+        padding-bottom: 10px;
+    }
+    .swap-btn {
+        width: 32px;
+        height: 32px;
+        right: -12px;
+    }
+    .swap-btn i {
+        font-size: 14px;
+    }
+    .origin-dest-container {
+        height: 170px;
     }
 }
 </style>
@@ -1597,30 +1894,77 @@ body {
     <!-- HERO SECTION -->
     <section class="hero-latam">
         <div class="hero-content">
-            <h1>Vuela con LATAM</h1>
-            <p>Descubre nuestros destinos y las mejores ofertas para ti</p>
-            <div class="search-tabs">
-                <button class="search-tab active" onclick="switchSearchTab('flights', this)">Vuelos</button>
-                <button class="search-tab" onclick="switchSearchTab('hotels', this)">Hoteles</button>
-                <button class="search-tab" onclick="switchSearchTab('packages', this)">Paquetes</button>
-                <button class="search-tab" onclick="switchSearchTab('cars', this)">Autos</button>
-            </div>
-            <div class="search-box-latam">
-                <div class="trip-selector">
-                    <label><input type="radio" name="trip" value="round" checked> Ida y vuelta</label>
-                    <label><input type="radio" name="trip" value="oneway"> Solo ida</label>
-                    <label><input type="radio" name="trip" value="multi"> Multidestino</label>
+            
+            <!-- BUSCADOR LATAM - REPLICA EXACTA -->
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <div class="search-box-latam" id="searchBox">
+                    <!-- Encabezado con título y botón -->
+                    <div class="search-header">
+                        <div class="search-title">¿A dónde quieres ir?</div>
+                        <button class="search-close-btn" onclick="closeSearchModal()">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+
+                    <!-- Pestañas - Forman parte del mismo componente -->
+                    <div class="search-tabs" id="tripTabs">
+                        <button class="tab-btn active" data-trip="round" onclick="selectTrip('round', this)">
+                            <i class="fa-solid fa-check"></i> Ida y vuelta
+                        </button>
+                        <button class="tab-btn" data-trip="oneway" onclick="selectTrip('oneway', this)">
+                            Solo ida
+                        </button>
+                        <button class="tab-btn" data-trip="multi" onclick="selectTrip('multi', this)">
+                            Multidestino
+                        </button>
+                    </div>
+
+                    <!-- Contenedor Origen-Destino -->
+                    <div class="origin-dest-container">
+                        <!-- Sección Desde -->
+                        <div class="origin-section">
+                            <span class="section-label">Desde</span>
+                            <input type="text" 
+                                   class="input-placeholder" 
+                                   id="origin" 
+                                   placeholder="Ingresa un origen" 
+                                   autocomplete="off"
+                                   onclick="openSearchModal()">
+                        </div>
+
+                        <!-- Línea divisoria -->
+                        <div class="divider-line"></div>
+
+                        <!-- Sección Hacia -->
+                        <div class="dest-section">
+                            <span class="section-label">Hacia</span>
+                            <input type="text" 
+                                   class="input-placeholder" 
+                                   id="destination" 
+                                   placeholder="Ingresa un destino" 
+                                   autocomplete="off"
+                                   onclick="openSearchModal()">
+                        </div>
+
+                        <!-- Botón de intercambio - SOBRESALE DEL BORDE DERECHO -->
+                        <button class="swap-btn" onclick="swapOriginDest()">
+                            <i class="fa-solid fa-arrow-up-arrow-down"></i>
+                        </button>
+                    </div>
+
+                    <!-- Campos ocultos para mantener funcionalidad -->
+                    <input type="hidden" id="departureDate">
+                    <input type="hidden" id="returnDate">
+                    <input type="hidden" id="passengerCount" value="1 pasajero">
+                    <input type="hidden" id="promoCode">
+
+                    <!-- Botón de búsqueda oculto que activa la función -->
+                    <button class="search-btn-latam" onclick="searchFlights()" style="display: none;">Buscar</button>
                 </div>
-                <div class="search-fields">
-                    <div class="search-field"><i class="fa-solid fa-plane-departure"></i><input id="origin" placeholder="¿De dónde viajas?" autocomplete="off"></div>
-                    <div class="search-field"><i class="fa-solid fa-plane-arrival"></i><input id="destination" placeholder="¿A dónde viajas?" autocomplete="off"></div>
-                    <div class="search-field"><i class="fa-solid fa-calendar"></i><input type="date" id="departureDate"></div>
-                    <div class="search-field"><i class="fa-solid fa-calendar"></i><input type="date" id="returnDate"></div>
-                    <div class="search-field"><i class="fa-solid fa-user"></i><input id="passengerCount" placeholder="1 pasajero" readonly></div>
-                    <div class="search-field"><i class="fa-solid fa-tag"></i><input id="promoCode" placeholder="Código promocional"></div>
-                </div>
-                <button class="search-btn-latam" onclick="searchFlights()">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
+
+            <!-- OVERLAY SIN BLUR -->
+            <div class="search-overlay" id="searchOverlay"></div>
         </div>
     </section>
 
@@ -1968,11 +2312,78 @@ body {
 
 <script>
 // ============================================
+// FUNCIONES DEL BUSCADOR LATAM
+// ============================================
+
+// Función para abrir el overlay (sin blur)
+function openSearchModal() {
+    const overlay = document.getElementById('searchOverlay');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Función para cerrar el overlay
+function closeSearchModal() {
+    const overlay = document.getElementById('searchOverlay');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Función para seleccionar tipo de viaje (pestañas)
+function selectTrip(type, btn) {
+    // Actualizar estado visual de las pestañas
+    document.querySelectorAll('.tab-btn').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Actualizar el radio button correspondiente
+    document.querySelectorAll('input[name="trip"]').forEach(r => {
+        if (r.value === type) {
+            r.checked = true;
+        }
+    });
+    
+    // Mostrar/ocultar fecha de regreso según el tipo
+    if (type === 'oneway') {
+        document.getElementById('returnDate').style.display = 'none';
+        document.getElementById('returnDate').parentElement.style.display = 'none';
+    } else {
+        document.getElementById('returnDate').style.display = 'block';
+        document.getElementById('returnDate').parentElement.style.display = 'block';
+    }
+}
+
+// Función para intercambiar origen y destino
+function swapOriginDest() {
+    const origin = document.getElementById('origin');
+    const dest = document.getElementById('destination');
+    const temp = origin.value;
+    origin.value = dest.value;
+    dest.value = temp;
+}
+
+// Cerrar overlay al hacer clic fuera
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('searchOverlay');
+    overlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeSearchModal();
+        }
+    });
+    
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeSearchModal();
+        }
+    });
+    
+    // Auto-completar fechas
+    setDefaultDates();
+});
+
+// ============================================
 // CONFIGURACIÓN Y CONSTANTES
 // ============================================
-// Base URL para imágenes desde GitHub
-const IMG_BASE = 'https://raw.githubusercontent.com/josjoasese/paginalatam/main/';
-
 const usaCodes = ['MIA', 'JFK', 'LAX', 'MCO', 'ORD', 'ATL', 'DFW', 'IAH'];
 const colombianCodes = ['BOG', 'MDE', 'CLO', 'CTG', 'BAQ', 'SMR', 'ADZ', 'PEI', 'BGA', 'CUC'];
 
@@ -2401,6 +2812,8 @@ function setDefaultDates() {
     next.setDate(t.getDate() + 7);
     document.getElementById('departureDate').value = tom.toISOString().split('T')[0];
     document.getElementById('returnDate').value = next.toISOString().split('T')[0];
+    // Mostrar la fecha de regreso por defecto (ida y vuelta)
+    document.getElementById('returnDate').style.display = 'block';
 }
 
 // ============================================
@@ -2933,18 +3346,18 @@ function skipSplash() {
 // ============================================
 function generateDestinationsOffers() {
     const destinations = [
-        { city: "Bogotá", code: "BOG", price: 69160, original: 129000, discount: 46, img: IMG_BASE + 'destino-bogota.png' },
-        { city: "Medellín", code: "MDE", price: 86910, original: 149000, discount: 42, img: IMG_BASE + 'destino-medellin.jfif' },
-        { city: "Cartagena", code: "CTG", price: 152500, original: 279000, discount: 45, img: IMG_BASE + 'destino-cartagena.jfif' },
-        { city: "Santa Marta", code: "SMR", price: 189900, original: 320000, discount: 41, img: IMG_BASE + 'destino-santamarta.jfif' },
-        { city: "San Andrés", code: "ADZ", price: 425000, original: 680000, discount: 38, img: IMG_BASE + 'destino-sanandres.jfif' },
-        { city: "Cali", code: "CLO", price: 129900, original: 210000, discount: 38, img: IMG_BASE + 'destino-cali.jfif' },
-        { city: "Miami", code: "MIA", price: 1314000, original: 1800000, discount: 27, img: IMG_BASE + 'destino-miami.jfif' },
-        { city: "Nueva York", code: "JFK", price: 1450000, original: 2100000, discount: 31, img: IMG_BASE + 'destino-nuevayork.jfif' },
-        { city: "Madrid", code: "MAD", price: 1876270, original: 2500000, discount: 25, img: IMG_BASE + 'destino-madrid.jfif' },
-        { city: "Lima", code: "LIM", price: 890000, original: 1410000, discount: 37, img: IMG_BASE + 'destino-lima.jfif' },
-        { city: "Santiago", code: "SCL", price: 1200000, original: 1734000, discount: 31, img: IMG_BASE + 'destino-santiago.jfif' },
-        { city: "São Paulo", code: "GRU", price: 1150000, original: 1712000, discount: 33, img: IMG_BASE + 'destino-saopaulo.jfif' }
+        { city: "Bogotá", code: "BOG", price: 69160, original: 129000, discount: 46, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Bogota.jpg" },
+        { city: "Medellín", code: "MDE", price: 86910, original: 149000, discount: 42, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Medellin.jfif" },
+        { city: "Cartagena", code: "CTG", price: 152500, original: 279000, discount: 45, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Cartagena.jfif" },
+        { city: "Santa Marta", code: "SMR", price: 189900, original: 320000, discount: 41, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-SantaMarta.jfif" },
+        { city: "San Andrés", code: "ADZ", price: 425000, original: 680000, discount: 38, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-SanAndres.jfif" },
+        { city: "Cali", code: "CLO", price: 129900, original: 210000, discount: 38, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Cali.jfif" },
+        { city: "Miami", code: "MIA", price: 1314000, original: 1800000, discount: 27, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Miami.jfif" },
+        { city: "Nueva York", code: "JFK", price: 1450000, original: 2100000, discount: 31, img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400" },
+        { city: "Madrid", code: "MAD", price: 1876270, original: 2500000, discount: 25, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Madrid.jfif" },
+        { city: "Lima", code: "LIM", price: 890000, original: 1410000, discount: 37, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Lima.jfif" },
+        { city: "Santiago", code: "SCL", price: 1200000, original: 1734000, discount: 31, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Santiago.jfif" },
+        { city: "São Paulo", code: "GRU", price: 1150000, original: 1712000, discount: 33, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-SaoPaulo.jfif" }
     ];
     document.getElementById('destinationsOffers').innerHTML = destinations.map(d => `
         <div class="destino-card" onclick="quickSearch('Bogotá (BOG)','${d.city} (${d.code})')">
@@ -2956,10 +3369,10 @@ function generateDestinationsOffers() {
 
 function generatePaquetes() {
     const paquetes = [
-        { name: "Cartagena 4 días", price: 450000, original: 680000, img: IMG_BASE + 'paquete-cartagena.jfif' },
-        { name: "San Andrés 5 días", price: 890000, original: 1200000, img: IMG_BASE + 'paquete-sanandres.jfif' },
-        { name: "Miami 7 días", price: 2100000, original: 2800000, img: IMG_BASE + 'paquete-miami.jfif' },
-        { name: "Medellín 3 días", price: 320000, original: 480000, img: IMG_BASE + 'paquete-medellin.jfif' }
+        { name: "Cartagena 4 días", price: 450000, original: 680000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-Cartagena.jfif" },
+        { name: "San Andrés 5 días", price: 890000, original: 1200000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-SanAndres.jfif" },
+        { name: "Miami 7 días", price: 2100000, original: 2800000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-Miami.jfif" },
+        { name: "Medellín 3 días", price: 320000, original: 480000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-Medellin.jfif" }
     ];
     document.getElementById('paquetesGrid').innerHTML = paquetes.map(p => `
         <div class="paquete-card">
@@ -2971,10 +3384,10 @@ function generatePaquetes() {
 
 function generateExperiencias() {
     const experiencias = [
-        { name: "Tour Ciudad Amurallada", price: 120000, img: IMG_BASE + 'experiencia-cartagena.jfif' },
-        { name: "Avistamiento de ballenas", price: 250000, img: IMG_BASE + 'experiencia-ballenas.jfif' },
-        { name: "City Tour Medellín", price: 89000, img: IMG_BASE + 'experiencia-medellin.jfif' },
-        { name: "Caminata del Cóndor", price: 180000, img: IMG_BASE + 'experiencia-condor.jfif' }
+        { name: "Tour Ciudad Amurallada", price: 120000, img: "https://images.unsplash.com/photo-1555881400-9b6e0b7a7a2f?w=400" },
+        { name: "Avistamiento de ballenas", price: 250000, img: "https://images.unsplash.com/photo-1542051841856-5f900f0e2513?w=400" },
+        { name: "City Tour Medellín", price: 89000, img: "https://images.unsplash.com/photo-1582652616399-0c0dd9b3e2d7?w=400" },
+        { name: "Caminata del Cóndor", price: 180000, img: "https://images.unsplash.com/photo-1533903345306-15d1c30952d1?w=400" }
     ];
     document.getElementById('experienciasGrid').innerHTML = experiencias.map(e => `
         <div class="experiencia-card">
