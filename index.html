@@ -60,7 +60,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Top Bar */
 .top-bar {
     background: var(--latam-blue-darker);
     color: white;
@@ -81,7 +80,6 @@ body {
     opacity: 0.8;
 }
 
-/* Main Header */
 .main-header {
     background: white;
     padding: 12px 40px;
@@ -173,7 +171,6 @@ body {
     box-shadow: 0 4px 12px rgba(0,51,160,0.3);
 }
 
-/* Hero Section */
 .hero-latam {
     background: linear-gradient(rgba(0,51,160,0.82), rgba(0,36,125,0.88)), url('https://raw.githubusercontent.com/josjoasese/paginalatam/main/Latam_Banner-01.png');
     background-size: cover;
@@ -206,11 +203,6 @@ body {
     margin-bottom: 24px;
 }
 
-/* ============================================
-   BUSCADOR LATAM - REPLICA EXACTA
-   ============================================ */
-
-/* Tarjeta principal */
 .search-box-latam {
     background: #FFFFFF;
     width: 92%;
@@ -224,20 +216,15 @@ body {
     border-radius: 16px;
     box-shadow: 0 2px 8px rgba(0,0,0,.03);
     position: relative;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     border: none;
-    margin-bottom: 0;
 }
 
-/* Encabezado con flex */
 .search-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0;
 }
 
-/* Título */
 .search-title {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 33px;
@@ -248,7 +235,6 @@ body {
     margin-bottom: 14px;
 }
 
-/* Botón circular superior derecho */
 .search-close-btn {
     width: 48px;
     height: 48px;
@@ -260,33 +246,26 @@ body {
     align-items: center;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0,0,0,.04);
-    transition: all 0.3s ease;
     flex-shrink: 0;
     margin-bottom: 14px;
-    position: relative;
-    z-index: 10;
+    transition: transform 0.3s ease;
 }
 .search-close-btn:hover {
     transform: rotate(90deg);
-    box-shadow: 0 4px 16px rgba(224, 76, 132, 0.2);
 }
 .search-close-btn i {
     font-size: 24px;
     color: #E04C84;
 }
 
-/* Fila de pestañas - apoyadas sobre el cuadro */
 .search-tabs {
     display: flex;
     gap: 8px;
     align-items: center;
     margin-top: 14px;
     margin-bottom: 4px;
-    position: relative;
-    z-index: 2;
 }
 
-/* Botones tipo píldora - pestañas */
 .tab-btn {
     height: 42px;
     border-radius: 20px;
@@ -314,18 +293,15 @@ body {
     font-weight: 600;
     background: #FFFFFF;
     padding-left: 16px;
-    padding-right: 18px;
 }
 .tab-btn.active i {
     color: #6675E8;
-    font-size: 14px;
 }
 .tab-btn i {
     font-size: 14px;
     color: #444444;
 }
 
-/* Contenedor Origen-Destino - prácticamente pegado a las pestañas */
 .origin-dest-container {
     background: white;
     border: 1.5px solid #BDBDBD;
@@ -337,12 +313,12 @@ body {
     height: 220px;
 }
 
-/* Sección superior - Desde */
 .origin-section {
     padding-top: 22px;
     padding-left: 22px;
     padding-right: 22px;
     padding-bottom: 18px;
+    position: relative;
 }
 .origin-section .section-label {
     font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -368,22 +344,20 @@ body {
 }
 .origin-section .input-placeholder::placeholder {
     color: #B6B6B6;
-    font-weight: 400;
 }
 
-/* Línea divisoria */
 .divider-line {
     height: 1px;
     background: #D8D8D8;
     width: 100%;
 }
 
-/* Sección inferior - Hacia */
 .dest-section {
     padding-top: 22px;
     padding-left: 22px;
     padding-right: 22px;
     padding-bottom: 18px;
+    position: relative;
 }
 .dest-section .section-label {
     font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -409,10 +383,8 @@ body {
 }
 .dest-section .input-placeholder::placeholder {
     color: #B6B6B6;
-    font-weight: 400;
 }
 
-/* Botón de intercambio (swap) - SOBRESALE DEL BORDE DERECHO */
 .swap-btn {
     position: absolute;
     top: 50%;
@@ -428,11 +400,10 @@ body {
     align-items: center;
     box-shadow: 0 2px 8px rgba(0,0,0,.08);
     cursor: pointer;
-    transition: all 0.3s ease;
     z-index: 5;
+    transition: transform 0.3s ease;
 }
 .swap-btn:hover {
-    background: #f8f8f8;
     transform: translateY(-50%) scale(1.05);
 }
 .swap-btn i {
@@ -440,9 +411,48 @@ body {
     color: #E04C84;
 }
 
-/* ============================================
-   BUSCADOR OVERLAY
-   ============================================ */
+.search-btn-latam {
+    background: var(--latam-blue);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+.search-btn-latam:hover {
+    background: var(--latam-blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,51,160,0.3);
+}
+
+.search-dates {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+.search-dates input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: #333;
+    background: white;
+    transition: border 0.3s ease;
+}
+.search-dates input:focus {
+    outline: none;
+    border-color: var(--latam-blue);
+    box-shadow: 0 0 0 3px rgba(0,51,160,0.1);
+}
+
 .search-overlay {
     position: fixed;
     top: 0;
@@ -452,63 +462,37 @@ body {
     background: transparent;
     z-index: 9998;
     display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 .search-overlay.active {
     display: block;
-    opacity: 1;
 }
 
-.search-box-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
+/* AUTOCOMPLETE CORREGIDO */
+.autocomplete {
+    position: absolute;
+    top: 62px;
     left: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     width: 100%;
-    height: 100%;
-    z-index: 9999;
-    padding: 16px;
-    pointer-events: none;
-    opacity: 0;
-    transform: scale(0.95);
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    border: 1px solid #eee;
+}
+.autocomplete div {
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: #333;
+}
+.autocomplete div:hover {
+    background: var(--latam-blue-bg);
 }
 
-.search-box-wrapper.active {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: all;
-}
-
-.search-box-wrapper .search-box-latam {
-    box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 10px 30px rgba(0,0,0,0.08);
-    max-width: 480px;
-    width: 100%;
-}
-
-/* ============================================
-   FIN BUSCADOR
-   ============================================ */
-
-/* Trip selector original (oculto pero funcional) */
-.trip-selector {
-    display: none;
-}
-.trip-selector label {
-    display: none;
-}
-.trip-selector input[type="radio"] {
-    display: none;
-}
-
-/* ============================================
-   FIN BUSCADOR
-   ============================================ */
-
-/* Promo Banner */
 .promo-banner {
     background: linear-gradient(135deg, #FF6B35, #F7931E);
     padding: 14px 40px;
@@ -524,7 +508,6 @@ body {
     font-weight: 600;
 }
 
-/* Offer Countdown */
 .offer-countdown {
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     padding: 40px;
@@ -548,7 +531,6 @@ body {
     font-weight: 800;
 }
 
-/* Sections */
 .section {
     padding: 64px 40px;
 }
@@ -575,7 +557,6 @@ body {
     opacity: 0.8;
 }
 
-/* Grids */
 .destinos-grid,
 .paquetes-grid,
 .experiencias-grid {
@@ -598,7 +579,6 @@ body {
     }
 }
 
-/* Cards */
 .destino-card,
 .paquete-card,
 .experiencia-card {
@@ -672,7 +652,6 @@ body {
     font-weight: 500;
 }
 
-/* LATAM Pass Section */
 .latampass-section {
     background: linear-gradient(135deg, var(--latam-blue) 0%, var(--latam-blue-darker) 100%);
     padding: 80px 40px;
@@ -740,7 +719,6 @@ body {
     box-shadow: 0 12px 28px rgba(0,0,0,0.2);
 }
 
-/* Beneficios Grid */
 .beneficios-ruta {
     background: var(--bg-light);
     padding: 64px 40px;
@@ -751,7 +729,6 @@ body {
     gap: 32px;
 }
 
-/* Noticias Grid */
 .noticias-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -764,7 +741,6 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
-/* App Section */
 .app-section {
     background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
     padding: 80px 40px;
@@ -781,7 +757,6 @@ body {
     height: 50px;
 }
 
-/* Aliados Grid */
 .aliados-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -802,7 +777,6 @@ body {
     color: var(--latam-gray);
 }
 
-/* FAQ Section */
 .faq-section {
     background: var(--white);
     padding: 64px 40px;
@@ -832,7 +806,6 @@ body {
     display: block;
 }
 
-/* Newsletter Section */
 .newsletter-section {
     background: var(--latam-blue-light);
     padding: 64px 40px;
@@ -867,7 +840,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* Footer */
 .footer-latam {
     background: #0A1128;
     color: white;
@@ -915,7 +887,6 @@ body {
     color: #888;
 }
 
-/* Progress Bar */
 .progress-bar {
     background: white;
     padding: 16px 40px;
@@ -963,7 +934,6 @@ body {
     color: white;
 }
 
-/* Results Pages */
 .results-page {
     display: none;
     min-height: 100vh;
@@ -1072,7 +1042,6 @@ body {
     transform: none;
 }
 
-/* ========== SELECCIÓN DE ASIENTOS ========== */
 .seat-selection-page {
     display: none;
     min-height: 100vh;
@@ -1343,7 +1312,6 @@ body {
     border-radius: 4px;
 }
 
-/* Baggage Page */
 .baggage-page {
     display: none;
     min-height: 100vh;
@@ -1389,7 +1357,6 @@ body {
     transform: scale(1.02);
 }
 
-/* Checkout Page */
 .checkout-page {
     display: none;
     min-height: 100vh;
@@ -1487,7 +1454,6 @@ body {
     color: var(--latam-blue);
 }
 
-/* Modals */
 .auth-modal {
     position: fixed;
     top: 0;
@@ -1621,27 +1587,29 @@ body {
 }
 .autocomplete {
     position: absolute;
-    top: 52px;
+    top: 62px;
+    left: 0;
     background: white;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-lg);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     width: 100%;
-    max-height: 220px;
+    max-height: 200px;
     overflow-y: auto;
     z-index: 100;
-    border: 1px solid var(--border);
+    border: 1px solid #eee;
 }
 .autocomplete div {
     padding: 12px 18px;
     cursor: pointer;
-    font-size: 13px;
-    transition: var(--transition-fast);
+    font-size: 14px;
+    transition: background 0.2s;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: #333;
 }
 .autocomplete div:hover {
     background: var(--latam-blue-bg);
 }
 
-/* Splash Screen */
 .splash-screen {
     position: fixed;
     top: 0;
@@ -1681,7 +1649,6 @@ body {
     }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .top-bar,
     .main-header,
@@ -1724,10 +1691,6 @@ body {
         font-size: 14px;
         border-radius: 16px;
     }
-    .tab-btn.active {
-        padding-left: 12px;
-        padding-right: 14px;
-    }
     .origin-section {
         padding-top: 18px;
         padding-left: 18px;
@@ -1765,6 +1728,14 @@ body {
     .origin-dest-container {
         height: 190px;
     }
+    .search-btn-latam {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    .search-dates {
+        flex-direction: column;
+        gap: 8px;
+    }
     .seat-selection-container {
         grid-template-columns: 1fr;
     }
@@ -1794,10 +1765,6 @@ body {
         padding: 0 12px;
         font-size: 12px;
         border-radius: 14px;
-    }
-    .tab-btn.active {
-        padding-left: 10px;
-        padding-right: 12px;
     }
     .origin-section .input-placeholder,
     .dest-section .input-placeholder {
@@ -1833,11 +1800,14 @@ body {
     .origin-dest-container {
         height: 170px;
     }
+    .search-btn-latam {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
 }
 </style>
 </head>
 <body>
-
 <!-- SPLASH SCREEN -->
 <div class="splash-screen" id="splashScreen" onclick="skipSplash()">
     <div style="text-align:center;">
@@ -1895,10 +1865,10 @@ body {
     <section class="hero-latam">
         <div class="hero-content">
             
-            <!-- BUSCADOR LATAM - REPLICA EXACTA -->
+            <!-- BUSCADOR -->
             <div style="display: flex; justify-content: center; width: 100%;">
                 <div class="search-box-latam" id="searchBox">
-                    <!-- Encabezado con título y botón -->
+                    <!-- Encabezado -->
                     <div class="search-header">
                         <div class="search-title">¿A dónde quieres ir?</div>
                         <button class="search-close-btn" onclick="closeSearchModal()">
@@ -1906,7 +1876,7 @@ body {
                         </button>
                     </div>
 
-                    <!-- Pestañas - Forman parte del mismo componente -->
+                    <!-- Pestañas -->
                     <div class="search-tabs" id="tripTabs">
                         <button class="tab-btn active" data-trip="round" onclick="selectTrip('round', this)">
                             <i class="fa-solid fa-check"></i> Ida y vuelta
@@ -1921,7 +1891,7 @@ body {
 
                     <!-- Contenedor Origen-Destino -->
                     <div class="origin-dest-container">
-                        <!-- Sección Desde -->
+                        <!-- Desde -->
                         <div class="origin-section">
                             <span class="section-label">Desde</span>
                             <input type="text" 
@@ -1932,10 +1902,9 @@ body {
                                    onclick="openSearchModal()">
                         </div>
 
-                        <!-- Línea divisoria -->
                         <div class="divider-line"></div>
 
-                        <!-- Sección Hacia -->
+                        <!-- Hacia -->
                         <div class="dest-section">
                             <span class="section-label">Hacia</span>
                             <input type="text" 
@@ -1946,24 +1915,30 @@ body {
                                    onclick="openSearchModal()">
                         </div>
 
-                        <!-- Botón de intercambio - SOBRESALE DEL BORDE DERECHO -->
+                        <!-- Botón intercambio -->
                         <button class="swap-btn" onclick="swapOriginDest()">
                             <i class="fa-solid fa-arrow-up-arrow-down"></i>
                         </button>
                     </div>
 
-                    <!-- Campos ocultos para mantener funcionalidad -->
-                    <input type="hidden" id="departureDate">
-                    <input type="hidden" id="returnDate">
+                    <!-- Fechas -->
+                    <div class="search-dates">
+                        <input type="date" id="departureDate">
+                        <input type="date" id="returnDate">
+                    </div>
+
+                    <!-- BOTÓN DE BÚSQUEDA -->
+                    <button class="search-btn-latam" onclick="searchFlights()">
+                        <i class="fa-solid fa-magnifying-glass"></i> Buscar vuelos
+                    </button>
+
+                    <!-- Campos ocultos -->
                     <input type="hidden" id="passengerCount" value="1 pasajero">
                     <input type="hidden" id="promoCode">
-
-                    <!-- Botón de búsqueda oculto que activa la función -->
-                    <button class="search-btn-latam" onclick="searchFlights()" style="display: none;">Buscar</button>
                 </div>
             </div>
 
-            <!-- OVERLAY SIN BLUR -->
+            <!-- OVERLAY -->
             <div class="search-overlay" id="searchOverlay"></div>
         </div>
     </section>
@@ -2312,47 +2287,38 @@ body {
 
 <script>
 // ============================================
-// FUNCIONES DEL BUSCADOR LATAM
+// FUNCIONES DEL BUSCADOR
 // ============================================
 
-// Función para abrir el overlay (sin blur)
 function openSearchModal() {
     const overlay = document.getElementById('searchOverlay');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-// Función para cerrar el overlay
 function closeSearchModal() {
     const overlay = document.getElementById('searchOverlay');
     overlay.classList.remove('active');
     document.body.style.overflow = '';
 }
 
-// Función para seleccionar tipo de viaje (pestañas)
 function selectTrip(type, btn) {
-    // Actualizar estado visual de las pestañas
     document.querySelectorAll('.tab-btn').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
     
-    // Actualizar el radio button correspondiente
     document.querySelectorAll('input[name="trip"]').forEach(r => {
         if (r.value === type) {
             r.checked = true;
         }
     });
     
-    // Mostrar/ocultar fecha de regreso según el tipo
     if (type === 'oneway') {
         document.getElementById('returnDate').style.display = 'none';
-        document.getElementById('returnDate').parentElement.style.display = 'none';
     } else {
         document.getElementById('returnDate').style.display = 'block';
-        document.getElementById('returnDate').parentElement.style.display = 'block';
     }
 }
 
-// Función para intercambiar origen y destino
 function swapOriginDest() {
     const origin = document.getElementById('origin');
     const dest = document.getElementById('destination');
@@ -2361,25 +2327,214 @@ function swapOriginDest() {
     dest.value = temp;
 }
 
-// Cerrar overlay al hacer clic fuera
-document.addEventListener('DOMContentLoaded', function() {
-    const overlay = document.getElementById('searchOverlay');
-    overlay.addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeSearchModal();
+// ============================================
+// AUTOCOMPLETE - CORREGIDO DEFINITIVAMENTE
+// ============================================
+function setupAutocomplete(input) {
+    let list;
+    let isSelecting = false;
+    let timeoutId = null;
+    
+    input.addEventListener('input', function() {
+        // Si estamos seleccionando, no hacer nada y salir inmediatamente
+        if (isSelecting) {
+            return;
+        }
+        
+        // Limpiar timeout anterior
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+        }
+        
+        // Eliminar lista anterior
+        if (list) {
+            list.remove();
+            list = null;
+        }
+        
+        const val = this.value.toLowerCase().trim();
+        if (!val || val.length < 1) return;
+        
+        // Crear nueva lista después de un pequeño delay
+        timeoutId = setTimeout(() => {
+            list = document.createElement('div');
+            list.className = 'autocomplete';
+            input.parentNode.appendChild(list);
+            
+            const filtered = airports.filter(a => a.toLowerCase().includes(val));
+            filtered.slice(0, 8).forEach(a => {
+                const item = document.createElement('div');
+                item.textContent = a;
+                // Usar mousedown para evitar que el evento blur se dispare antes
+                item.addEventListener('mousedown', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Marcar que estamos seleccionando
+                    isSelecting = true;
+                    
+                    // Establecer el valor
+                    input.value = a;
+                    
+                    // Forzar evento de cambio
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                    
+                    // Cerrar el autocomplete
+                    if (list) {
+                        list.remove();
+                        list = null;
+                    }
+                    
+                    // Resetear el flag después de que el evento input termine
+                    setTimeout(() => {
+                        isSelecting = false;
+                    }, 200);
+                    
+                    // Quitar el foco
+                    input.blur();
+                });
+                list.appendChild(item);
+            });
+            timeoutId = null;
+        }, 150);
+    });
+    
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', function(e) {
+        if (list && e.target !== input && !list.contains(e.target)) {
+            list.remove();
+            list = null;
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
         }
     });
     
-    // Cerrar con tecla ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeSearchModal();
+    // Cerrar con Escape
+    input.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && list) {
+            list.remove();
+            list = null;
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
         }
     });
+}
+
+// ============================================
+// BÚSQUEDA DE VUELOS
+// ============================================
+function searchFlights() {
+    let origin = document.getElementById('origin').value;
+    let dest = document.getElementById('destination').value;
+    let dep = document.getElementById('departureDate').value;
+    let ret = document.getElementById('returnDate').value;
     
-    // Auto-completar fechas
-    setDefaultDates();
-});
+    let activeTab = document.querySelector('.tab-btn.active');
+    let trip = activeTab ? activeTab.dataset.trip : 'round';
+    
+    if (!origin || !dest) {
+        alert('Por favor ingresa origen y destino');
+        return;
+    }
+    if (origin === dest) {
+        alert('Origen y destino no pueden ser iguales');
+        return;
+    }
+    if (!dep) {
+        alert('Selecciona fecha de salida');
+        return;
+    }
+    if (trip !== 'oneway' && !ret) {
+        alert('Selecciona fecha de regreso');
+        return;
+    }
+    if (trip !== 'oneway') {
+        let depObj = new Date(dep);
+        let retObj = new Date(ret);
+        if (retObj < depObj) {
+            alert('La fecha de regreso no puede ser anterior a la ida');
+            return;
+        }
+    }
+    
+    currentOrigin = origin.replace(/\([^)]*\)/, '').trim();
+    currentDestination = dest.replace(/\([^)]*\)/, '').trim();
+    currentDepartureDate = dep;
+    currentReturnDate = ret || '';
+    
+    const originCodeMatch = origin.match(/\(([^)]+)\)/);
+    const destCodeMatch = dest.match(/\(([^)]+)\)/);
+    
+    if (originCodeMatch) {
+        currentOriginCode = originCodeMatch[1];
+    } else {
+        const found = airports.find(a => a.toLowerCase().includes(origin.toLowerCase()));
+        if (found) {
+            const codeMatch = found.match(/\(([^)]+)\)/);
+            currentOriginCode = codeMatch ? codeMatch[1] : origin.substring(0, 3).toUpperCase();
+        } else {
+            currentOriginCode = origin.substring(0, 3).toUpperCase();
+        }
+    }
+    
+    if (destCodeMatch) {
+        currentDestCode = destCodeMatch[1];
+    } else {
+        const found = airports.find(a => a.toLowerCase().includes(dest.toLowerCase()));
+        if (found) {
+            const codeMatch = found.match(/\(([^)]+)\)/);
+            currentDestCode = codeMatch ? codeMatch[1] : dest.substring(0, 3).toUpperCase();
+        } else {
+            currentDestCode = dest.substring(0, 3).toUpperCase();
+        }
+    }
+    
+    currentTripType = trip;
+    
+    currentFlights.outbound = generateFlightsWithPersistence(currentOriginCode, currentDestCode, dep, 20, true);
+    if (trip !== 'oneway' && ret) {
+        currentFlights.return = generateFlightsWithPersistence(currentDestCode, currentOriginCode, ret, 20, false);
+    } else {
+        currentFlights.return = [];
+    }
+    
+    selectedOutboundFlight = null;
+    selectedReturnFlight = null;
+    pendingOutboundIndex = null;
+    pendingReturnIndex = null;
+    
+    displayOutboundResults();
+    document.getElementById('mainPage').style.display = 'none';
+    document.getElementById('resultsPageOutbound').style.display = 'block';
+    updateProgressBar(1);
+    autoSave();
+    window.scrollTo(0, 0);
+}
+
+function quickSearch(originValue, destinationValue) {
+    document.getElementById('origin').value = originValue;
+    document.getElementById('destination').value = destinationValue;
+    
+    if (!document.getElementById('departureDate').value) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('departureDate').value = tomorrow.toISOString().split('T')[0];
+    }
+    if (!document.getElementById('returnDate').value) {
+        const nextWeek = new Date();
+        nextWeek.setDate(nextWeek.getDate() + 7);
+        document.getElementById('returnDate').value = nextWeek.toISOString().split('T')[0];
+    }
+    
+    setTimeout(() => {
+        searchFlights();
+    }, 150);
+}
 
 // ============================================
 // CONFIGURACIÓN Y CONSTANTES
@@ -2786,24 +2941,6 @@ function register() {
     auth.createUserWithEmailAndPassword(email, pass).then((uc) => uc.user.updateProfile({ displayName: name })).then(() => closeAuthModal()).catch(e => alert(e.message));
 }
 
-function setupAutocomplete(input) {
-    let list;
-    input.addEventListener('input', () => {
-        if (list) list.remove();
-        list = document.createElement('div');
-        list.className = 'autocomplete';
-        input.parentNode.appendChild(list);
-        let val = input.value.toLowerCase();
-        airports.filter(a => a.toLowerCase().includes(val)).slice(0, 12).forEach(a => {
-            let item = document.createElement('div');
-            item.textContent = a;
-            item.onclick = () => { input.value = a; list.remove(); };
-            list.appendChild(item);
-        });
-    });
-    document.addEventListener('click', e => { if (e.target !== input && list) list.remove(); });
-}
-
 function setDefaultDates() {
     let t = new Date();
     let tom = new Date(t);
@@ -2812,43 +2949,11 @@ function setDefaultDates() {
     next.setDate(t.getDate() + 7);
     document.getElementById('departureDate').value = tom.toISOString().split('T')[0];
     document.getElementById('returnDate').value = next.toISOString().split('T')[0];
-    // Mostrar la fecha de regreso por defecto (ida y vuelta)
-    document.getElementById('returnDate').style.display = 'block';
 }
 
 // ============================================
-// BÚSQUEDA DE VUELOS
+// DISPLAY DE RESULTADOS
 // ============================================
-function searchFlights() {
-    let origin = document.getElementById('origin').value, dest = document.getElementById('destination').value, dep = document.getElementById('departureDate').value, ret = document.getElementById('returnDate').value, trip = document.querySelector('input[name="trip"]:checked').value;
-    if (!origin || !dest) { alert('Ingresa origen y destino'); return; }
-    if (origin === dest) { alert('Origen y destino no pueden ser iguales'); return; }
-    if (!dep) { alert('Selecciona fecha de salida'); return; }
-    if (trip !== 'oneway' && !ret) { alert('Selecciona fecha de regreso'); return; }
-    let depObj = new Date(dep), retObj = new Date(ret);
-    if (trip !== 'oneway' && retObj < depObj) { alert('La fecha de regreso no puede ser anterior a la ida'); return; }
-    currentOrigin = origin.split('(')[0].trim();
-    currentDestination = dest.split('(')[0].trim();
-    currentDepartureDate = dep;
-    currentReturnDate = ret;
-    currentOriginCode = origin.match(/\(([^)]+)\)/)?.[1] || origin.split(' ')[0];
-    currentDestCode = dest.match(/\(([^)]+)\)/)?.[1] || dest.split(' ')[0];
-    currentTripType = trip;
-    currentFlights.outbound = generateFlightsWithPersistence(currentOriginCode, currentDestCode, dep, 20, true);
-    if (trip !== 'oneway') currentFlights.return = generateFlightsWithPersistence(currentDestCode, currentOriginCode, ret, 20, false);
-    else currentFlights.return = [];
-    selectedOutboundFlight = null;
-    selectedReturnFlight = null;
-    pendingOutboundIndex = null;
-    pendingReturnIndex = null;
-    displayOutboundResults();
-    document.getElementById('mainPage').style.display = 'none';
-    document.getElementById('resultsPageOutbound').style.display = 'block';
-    updateProgressBar(1);
-    autoSave();
-    window.scrollTo(0, 0);
-}
-
 function displayOutboundResults() {
     let routeInfo = document.getElementById('routeInfoOutbound');
     let container = document.getElementById('resultsContainerOutbound');
@@ -3433,17 +3538,6 @@ function toggleFaq(element) {
     element.classList.toggle('active');
 }
 
-function switchSearchTab(tab, btn) {
-    document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-}
-
-function quickSearch(origin, destination) {
-    document.getElementById('origin').value = origin;
-    document.getElementById('destination').value = destination;
-    searchFlights();
-}
-
 function subscribeNewsletter() {
     const email = document.getElementById('newsletterEmail').value;
     if (email) {
@@ -3462,24 +3556,28 @@ function checkAuthState() {
 }
 
 // ============================================
-// INICIALIZACIÓN
+// Event listeners
 // ============================================
-setupAutocomplete(document.getElementById('origin'));
-setupAutocomplete(document.getElementById('destination'));
-setDefaultDates();
-generateDestinationsOffers();
-generatePaquetes();
-generateExperiencias();
-generateNoticias();
-startCountdown();
-document.getElementById('passengerCount').addEventListener('click', openPassengerModal);
-document.getElementById('userNameDisplay').addEventListener('click', () => { if (!currentUser) openAuthModal(); });
-checkAuthState();
-loadAutoSave();
+document.addEventListener('DOMContentLoaded', function() {
+    const overlay = document.getElementById('searchOverlay');
+    overlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeSearchModal();
+        }
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeSearchModal();
+        }
+    });
+    
+    setDefaultDates();
+});
 
 document.querySelectorAll('input[name="trip"]').forEach(r => {
     r.addEventListener('change', () => {
-        document.getElementById('returnDate').parentElement.style.display = r.value === 'oneway' ? 'none' : 'block';
+        document.getElementById('returnDate').style.display = r.value === 'oneway' ? 'none' : 'block';
     });
 });
 
@@ -3498,6 +3596,21 @@ window.onclick = function (e) {
     if (e.target === document.getElementById('authModal')) closeAuthModal();
     if (e.target === document.getElementById('confirmationModal')) closeConfirmationModal();
 };
+
+// ============================================
+// INICIALIZACIÓN
+// ============================================
+setupAutocomplete(document.getElementById('origin'));
+setupAutocomplete(document.getElementById('destination'));
+generateDestinationsOffers();
+generatePaquetes();
+generateExperiencias();
+generateNoticias();
+startCountdown();
+document.getElementById('passengerCount').addEventListener('click', openPassengerModal);
+document.getElementById('userNameDisplay').addEventListener('click', () => { if (!currentUser) openAuthModal(); });
+checkAuthState();
+loadAutoSave();
 </script>
 </body>
 </html>
