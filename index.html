@@ -204,7 +204,7 @@ body {
 }
 
 .search-box-latam {
-    background: #FFFFFF;
+    background: #0A1628;
     width: 92%;
     max-width: 480px;
     margin-left: auto;
@@ -214,7 +214,7 @@ body {
     padding-right: 22px;
     padding-bottom: 28px;
     border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.03);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     position: relative;
     border: none;
 }
@@ -230,7 +230,7 @@ body {
     font-size: 33px;
     font-weight: 500;
     line-height: 1.12;
-    color: #464646;
+    color: #FFFFFF;
     letter-spacing: -0.3px;
     margin-bottom: 14px;
 }
@@ -239,8 +239,8 @@ body {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: white;
-    border: 2px solid #E04C84;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.3);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -252,10 +252,11 @@ body {
 }
 .search-close-btn:hover {
     transform: rotate(90deg);
+    background: rgba(255,255,255,0.2);
 }
 .search-close-btn i {
     font-size: 24px;
-    color: #E04C84;
+    color: #FFFFFF;
 }
 
 .search-tabs {
@@ -272,9 +273,9 @@ body {
     padding: 0 18px;
     font-size: 16px;
     font-weight: 500;
-    background: white;
-    border: 2px solid #D7D7D7;
-    color: #444444;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
     cursor: pointer;
     font-family: 'Inter', 'Segoe UI', sans-serif;
     transition: all 0.2s ease;
@@ -284,27 +285,28 @@ body {
     white-space: nowrap;
 }
 .tab-btn:hover {
-    border-color: #C7C7C7;
-    background: #f8f8f8;
+    border-color: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.12);
+    color: #FFFFFF;
 }
 .tab-btn.active {
     border: 2px solid #8D99F0;
-    color: #6675E8;
+    color: #FFFFFF;
     font-weight: 600;
-    background: #FFFFFF;
+    background: rgba(255,255,255,0.12);
     padding-left: 16px;
 }
 .tab-btn.active i {
-    color: #6675E8;
+    color: #8D99F0;
 }
 .tab-btn i {
     font-size: 14px;
-    color: #444444;
+    color: rgba(255,255,255,0.6);
 }
 
 .origin-dest-container {
-    background: white;
-    border: 1.5px solid #BDBDBD;
+    background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.15);
     border-radius: 14px;
     position: relative;
     overflow: visible;
@@ -324,7 +326,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: #404040;
+    color: rgba(255,255,255,0.8);
     margin-bottom: 16px;
     display: block;
 }
@@ -332,7 +334,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 24px;
     font-weight: 400;
-    color: #B6B6B6;
+    color: rgba(255,255,255,0.5);
     background: none;
     border: none;
     width: 100%;
@@ -340,15 +342,15 @@ body {
     outline: none;
 }
 .origin-section .input-placeholder:focus {
-    color: #404040;
+    color: #FFFFFF;
 }
 .origin-section .input-placeholder::placeholder {
-    color: #B6B6B6;
+    color: rgba(255,255,255,0.35);
 }
 
 .divider-line {
     height: 1px;
-    background: #D8D8D8;
+    background: rgba(255,255,255,0.1);
     width: 100%;
 }
 
@@ -363,7 +365,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: #404040;
+    color: rgba(255,255,255,0.8);
     margin-bottom: 16px;
     display: block;
 }
@@ -371,7 +373,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 24px;
     font-weight: 400;
-    color: #B6B6B6;
+    color: rgba(255,255,255,0.5);
     background: none;
     border: none;
     width: 100%;
@@ -379,10 +381,10 @@ body {
     outline: none;
 }
 .dest-section .input-placeholder:focus {
-    color: #404040;
+    color: #FFFFFF;
 }
 .dest-section .input-placeholder::placeholder {
-    color: #B6B6B6;
+    color: rgba(255,255,255,0.35);
 }
 
 .swap-btn {
@@ -390,25 +392,38 @@ body {
     top: 50%;
     right: -21px;
     transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: #FFFFFF;
-    border: 2px solid #E04C84;
+    background: #E84C8C;
+    border: 2px solid #E84C8C;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    box-shadow: 0 4px 12px rgba(232, 76, 140, 0.4);
     cursor: pointer;
     z-index: 5;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 0;
 }
 .swap-btn:hover {
-    transform: translateY(-50%) scale(1.05);
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 6px 20px rgba(232, 76, 140, 0.5);
+}
+.swap-btn:active {
+    transform: translateY(-50%) scale(0.95);
 }
 .swap-btn i {
-    font-size: 20px;
-    color: #E04C84;
+    font-size: 14px;
+    color: #FFFFFF;
+    line-height: 1.2;
+}
+.swap-btn i:first-child {
+    margin-bottom: 2px;
+}
+.swap-btn i:last-child {
+    margin-top: 2px;
 }
 
 .search-btn-latam {
@@ -439,18 +454,21 @@ body {
 .search-dates input {
     flex: 1;
     padding: 10px 14px;
-    border: 1.5px solid #ddd;
+    border: 1.5px solid rgba(255,255,255,0.15);
     border-radius: 8px;
     font-size: 14px;
     font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: #333;
-    background: white;
+    color: #FFFFFF;
+    background: rgba(255,255,255,0.05);
     transition: border 0.3s ease;
 }
 .search-dates input:focus {
     outline: none;
     border-color: var(--latam-blue);
-    box-shadow: 0 0 0 3px rgba(0,51,160,0.1);
+    box-shadow: 0 0 0 3px rgba(0,51,160,0.2);
+}
+.search-dates input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 .search-overlay {
@@ -467,30 +485,58 @@ body {
     display: block;
 }
 
-/* AUTOCOMPLETE CORREGIDO */
-.autocomplete {
+/* AUTOCOMPLETE - ESTILO LATAM */
+.autocomplete-container {
     position: absolute;
     top: 62px;
     left: 0;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     width: 100%;
-    max-height: 200px;
+    background: #1a2744;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    max-height: 250px;
     overflow-y: auto;
-    z-index: 100;
-    border: 1px solid #eee;
+    z-index: 9999;
+    border: 1px solid rgba(255,255,255,0.08);
+    display: none;
 }
-.autocomplete div {
-    padding: 12px 18px;
+.autocomplete-container.active {
+    display: block;
+}
+.autocomplete-item {
+    padding: 14px 20px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background 0.2s;
+    font-size: 15px;
     font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: #333;
+    color: rgba(255,255,255,0.85);
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.autocomplete div:hover {
-    background: var(--latam-blue-bg);
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+.autocomplete-item:hover {
+    background: rgba(255,255,255,0.08);
+}
+.autocomplete-item .airport-code {
+    font-weight: 700;
+    color: #8D99F0;
+    font-size: 13px;
+    min-width: 40px;
+}
+.autocomplete-item .airport-name {
+    flex: 1;
+}
+.autocomplete-item .airport-city {
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+}
+.autocomplete-item .highlight {
+    font-weight: 700;
+    color: #8D99F0;
 }
 
 .promo-banner {
@@ -1585,30 +1631,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-.autocomplete {
-    position: absolute;
-    top: 62px;
-    left: 0;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 100;
-    border: 1px solid #eee;
-}
-.autocomplete div {
-    padding: 12px 18px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.2s;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: #333;
-}
-.autocomplete div:hover {
-    background: var(--latam-blue-bg);
-}
 
 .splash-screen {
     position: fixed;
@@ -1713,12 +1735,12 @@ body {
         font-size: 19px;
     }
     .swap-btn {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         right: -14px;
     }
     .swap-btn i {
-        font-size: 16px;
+        font-size: 12px;
     }
     .search-tabs {
         gap: 6px;
@@ -1795,7 +1817,7 @@ body {
         right: -12px;
     }
     .swap-btn i {
-        font-size: 14px;
+        font-size: 10px;
     }
     .origin-dest-container {
         height: 170px;
@@ -1900,6 +1922,7 @@ body {
                                    placeholder="Ingresa un origen" 
                                    autocomplete="off"
                                    onclick="openSearchModal()">
+                            <div class="autocomplete-container" id="originAutocomplete"></div>
                         </div>
 
                         <div class="divider-line"></div>
@@ -1913,11 +1936,13 @@ body {
                                    placeholder="Ingresa un destino" 
                                    autocomplete="off"
                                    onclick="openSearchModal()">
+                            <div class="autocomplete-container" id="destAutocomplete"></div>
                         </div>
 
-                        <!-- Botón intercambio -->
-                        <button class="swap-btn" onclick="swapOriginDest()">
-                            <i class="fa-solid fa-arrow-up-arrow-down"></i>
+                        <!-- Botón intercambio con flechas ↑↓ -->
+                        <button class="swap-btn" onclick="swapOriginDest()" title="Intercambiar origen y destino">
+                            <i class="fa-solid fa-chevron-up"></i>
+                            <i class="fa-solid fa-chevron-down"></i>
                         </button>
                     </div>
 
@@ -1927,8 +1952,8 @@ body {
                         <input type="date" id="returnDate">
                     </div>
 
-                    <!-- BOTÓN DE BÚSQUEDA -->
-                    <button class="search-btn-latam" onclick="searchFlights()">
+                    <!-- BOTÓN DE BÚSQUEDA - CON ID PARA MEJOR MANEJO -->
+                    <button class="search-btn-latam" id="searchButton">
                         <i class="fa-solid fa-magnifying-glass"></i> Buscar vuelos
                     </button>
 
@@ -2287,30 +2312,339 @@ body {
 
 <script>
 // ============================================
+// TODAS LAS FUNCIONES DEFINIDAS EN EL ÁMBITO GLOBAL
+// ============================================
+
+// ============================================
+// VARIABLES GLOBALES
+// ============================================
+var currentUser = null;
+var passengers = { adults: 1, children: 0 };
+var passengerCount = 1;
+var currentFlights = { outbound: [], return: [] };
+var selectedOutboundFlight = null;
+var selectedReturnFlight = null;
+var selectedOutboundSeats = [];
+var selectedBaggage = 'light';
+var baggagePrice = 0;
+var currentOrigin = '', currentDestination = '', currentDepartureDate = '', currentReturnDate = '';
+var currentOriginCode = '', currentDestCode = '', currentTripType = 'round';
+var currentCabinSeat = 'Economy';
+var lastReservationData = null;
+var pendingOutboundIndex = null;
+var pendingReturnIndex = null;
+
+// ============================================
+// CONFIGURACIÓN Y CONSTANTES
+// ============================================
+var usaCodes = ['MIA', 'JFK', 'LAX', 'MCO', 'ORD', 'ATL', 'DFW', 'IAH'];
+var colombianCodes = ['BOG', 'MDE', 'CLO', 'CTG', 'BAQ', 'SMR', 'ADZ', 'PEI', 'BGA', 'CUC'];
+
+var latamFleet = {
+    shortHaul: [
+        { name: "Airbus A320neo", icon: "fa-plane", rows: 29, classes: { economy: true, premium: false, business: false } },
+        { name: "Airbus A321neo", icon: "fa-plane", rows: 37, classes: { economy: true, premium: true, business: false } }
+    ],
+    longHaul: [
+        { name: "Boeing 787-8 Dreamliner", icon: "fa-plane", rows: 41, classes: { economy: true, premium: true, business: true } },
+        { name: "Boeing 787-9 Dreamliner", icon: "fa-plane", rows: 50, classes: { economy: true, premium: true, business: true } }
+    ]
+};
+
+var baseFares = {
+    'BOG-MDE': 146510, 'BOG-CLO': 189943, 'BOG-CTG': 226000, 'BOG-SMR': 252000,
+    'BOG-ADZ': 545000, 'BOG-BAQ': 199907, 'BOG-PEI': 401000, 'BOG-CUC': 549000,
+    'MDE-BOG': 146510, 'MDE-CTG': 350000, 'MDE-ADZ': 600000,
+    'CLO-BOG': 189943, 'CLO-CTG': 450000,
+    'CTG-BOG': 226000, 'CTG-ADZ': 550000,
+    'BOG-LIM': 1410000, 'BOG-PTY': 950000, 'BOG-UIO': 1217000,
+    'BOG-SCL': 1734000, 'BOG-EZE': 1900000, 'BOG-GRU': 1712000,
+    'BOG-MIA': 1314000, 'BOG-JFK': 1800000, 'BOG-MEX': 1700000,
+    'BOG-CCS': 850000, 'BOG-MAD': 1876270, 'BOG-CDG': 2100000, 'BOG-LHR': 2300000,
+    'CLO-GIG': 1883910, 'LAX-COR': 1300000,
+};
+
+var routeDurations = {
+    'BOG-MDE': 64, 'BOG-CLO': 67, 'BOG-CTG': 94, 'BOG-SMR': 95, 'BOG-ADZ': 150,
+    'MDE-BOG': 64, 'MDE-CLO': 70, 'MDE-CTG': 80, 'MDE-SMR': 85, 'MDE-ADZ': 120,
+    'CLO-BOG': 67, 'CLO-MDE': 70, 'CLO-CTG': 90,
+    'CTG-BOG': 94, 'CTG-MDE': 80, 'CTG-SMR': 40,
+    'BOG-LIM': 210, 'BOG-SCL': 360, 'BOG-EZE': 390, 'BOG-GRU': 335, 'BOG-MIA': 240,
+    'BOG-MAD': 591, 'BOG-JFK': 320, 'BOG-MEX': 300, 'BOG-PTY': 90,
+    'BOG-UIO': 60, 'BOG-CCS': 75, 'BOG-CDG': 660, 'BOG-LHR': 680,
+    'LIM-GRU': 285, 'LIM-SCL': 210, 'LIM-EZE': 255, 'LIM-MIA': 330,
+    'SCL-GRU': 220, 'SCL-EZE': 135, 'SCL-MIA': 480, 'GRU-MIA': 540, 'GRU-JFK': 600,
+    'CLO-GIG': 450, 'LAX-COR': 720,
+};
+
+var SEAT_PRICES = { economy: 45900, premium: 55900, business: 72900 };
+var BAGGAGE_OPTIONS = [
+    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, desc: 'Solo equipaje de mano (10kg)' },
+    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 39900, desc: '1 maleta documentada (23kg)' },
+    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 69900, desc: '2 maletas documentadas (23kg c/u)' },
+    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 106900, desc: '3 maletas documentadas + prioridad' }
+];
+
+var airports = [
+    "Bogotá (BOG)", "Medellín (MDE)", "Cali (CLO)", "Cartagena (CTG)", "Barranquilla (BAQ)",
+    "Santa Marta (SMR)", "San Andrés (ADZ)", "Pereira (PEI)", "Bucaramanga (BGA)", "Cúcuta (CUC)",
+    "Lima (LIM)", "Cusco (CUZ)", "Santiago (SCL)", "Buenos Aires (EZE)", "São Paulo (GRU)",
+    "Quito (UIO)", "Guayaquil (GYE)", "Miami (MIA)", "Nueva York (JFK)", "Los Ángeles (LAX)",
+    "Madrid (MAD)", "Barcelona (BCN)", "París (CDG)", "Londres (LHR)", "Ciudad de México (MEX)",
+    "Panamá (PTY)", "Montevideo (MVD)", "Asunción (ASU)", "Caracas (CCS)", "Rio de Janeiro (GIG)"
+];
+
+// Firebase Config
+var firebaseConfig = {
+    apiKey: "TU_API_KEY_AQUI",
+    authDomain: "TU_PROYECTO.firebaseapp.com",
+    projectId: "TU_PROYECTO",
+    storageBucket: "TU_PROYECTO.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "1:123456789:web:abcdef"
+};
+var auth, db;
+try {
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+    db = firebase.firestore();
+} catch (e) {
+    console.log("Firebase no configurado");
+}
+
+// ============================================
+// FUNCIONES DE UTILIDAD
+// ============================================
+function formatDuration(m) {
+    var h = Math.floor(m / 60);
+    var min = m % 60;
+    if (h === 0) return min + ' min';
+    if (min === 0) return h + 'h';
+    return h + 'h ' + min + 'min';
+}
+
+function addHours(time, min) {
+    var parts = time.split(':').map(Number);
+    var total = parts[0] * 60 + parts[1] + min;
+    var nh = Math.floor(total / 60) % 24;
+    var nm = total % 60;
+    return String(nh).padStart(2, '0') + ':' + String(nm).padStart(2, '0');
+}
+
+function getRandomTime() {
+    var h = Math.floor(Math.random() * 16) + 6;
+    var m = Math.floor(Math.random() * 60);
+    return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+}
+
+function formatDateDisplay(d) {
+    if (!d) return '';
+    var parts = d.split('-');
+    return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+
+function getDiscountForRoute(originCode, destCode) {
+    var isUSARoute = usaCodes.indexOf(originCode) !== -1 || usaCodes.indexOf(destCode) !== -1;
+    var isColombiaRoute = colombianCodes.indexOf(originCode) !== -1 && colombianCodes.indexOf(destCode) !== -1;
+    if (isUSARoute) return 0.25;
+    if (isColombiaRoute) return 0.20;
+    return 0.30;
+}
+
+function applyDiscount(originalPrice, originCode, destCode) {
+    var discount = getDiscountForRoute(originCode, destCode);
+    var discountedPrice = Math.floor(originalPrice * (1 - discount));
+    return { originalPrice: originalPrice, discountedPrice: discountedPrice, discount: discount * 100 };
+}
+
+function getAircraftForRoute(originCode, destCode) {
+    var isNational = colombianCodes.indexOf(originCode) !== -1 && colombianCodes.indexOf(destCode) !== -1;
+    if (!isNational) return latamFleet.longHaul[1];
+    var highDemandRoutes = ['BOG-MDE', 'BOG-CLO', 'BOG-CTG', 'MDE-BOG', 'CLO-BOG'];
+    var routeKey = originCode + '-' + destCode;
+    if (highDemandRoutes.indexOf(routeKey) !== -1 || highDemandRoutes.indexOf(destCode + '-' + originCode) !== -1) {
+        return latamFleet.shortHaul[1];
+    }
+    return latamFleet.shortHaul[0];
+}
+
+function getFlightDuration(originCode, destCode) {
+    var routeKey = originCode + '-' + destCode;
+    var reverseKey = destCode + '-' + originCode;
+    if (routeDurations[routeKey]) return routeDurations[routeKey];
+    if (routeDurations[reverseKey]) return routeDurations[reverseKey];
+    var isNational = colombianCodes.indexOf(originCode) !== -1 && colombianCodes.indexOf(destCode) !== -1;
+    return isNational ? 90 : 300;
+}
+
+function getRandomPriceInRange(basePrice, minMultiplier, maxMultiplier) {
+    if (minMultiplier === undefined) minMultiplier = 1.0;
+    if (maxMultiplier === undefined) maxMultiplier = 1.6;
+    var min = Math.floor(basePrice * minMultiplier);
+    var max = Math.floor(basePrice * maxMultiplier);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRealPrice(originCode, destCode, stops, basePriceOverride) {
+    if (stops === undefined) stops = 0;
+    var routeKey = originCode + '-' + destCode;
+    var reverseKey = destCode + '-' + originCode;
+    var basePrice = basePriceOverride || baseFares[routeKey] || baseFares[reverseKey];
+    
+    if (!basePrice) {
+        var isNational = colombianCodes.indexOf(originCode) !== -1 && colombianCodes.indexOf(destCode) !== -1;
+        if (isNational) {
+            basePrice = Math.floor(Math.random() * 300000) + 250000;
+        } else {
+            basePrice = Math.floor(Math.random() * 2000000) + 1500000;
+        }
+    }
+    
+    var finalPrice = basePrice;
+    if (stops === 1) {
+        var discountFactor = 0.7 + Math.random() * 0.15;
+        finalPrice = Math.floor(basePrice * discountFactor);
+    } else if (stops === 2) {
+        var discountFactor = 0.6 + Math.random() * 0.15;
+        finalPrice = Math.floor(basePrice * discountFactor);
+    } else {
+        finalPrice = getRandomPriceInRange(basePrice, 1.0, 1.6);
+    }
+    return finalPrice;
+}
+
+function generateFlightsWithPersistence(o, d, date, count, isOut) {
+    if (isOut === undefined) isOut = true;
+    var key = 'flights_' + o + '_' + d + '_' + date + '_' + (isOut ? 'out' : 'ret');
+    var saved = sessionStorage.getItem(key);
+    if (saved) return JSON.parse(saved);
+    var flights = generateFlightsForRoute(o, d, date, count);
+    sessionStorage.setItem(key, JSON.stringify(flights));
+    return flights;
+}
+
+function generateFlightsForRoute(originCode, destCode, flightDate, count) {
+    if (count === undefined) count = 20;
+    var flights = [];
+    var directDur = getFlightDuration(originCode, destCode);
+    var directCount = Math.floor(count * 0.6);
+    var oneStopCount = Math.floor(count * 0.3);
+    var twoStopCount = count - directCount - oneStopCount;
+    var isNational = colombianCodes.indexOf(originCode) !== -1 && colombianCodes.indexOf(destCode) !== -1;
+    var stopCities = isNational ? colombianCodes.slice() : ['BOG', 'LIM', 'SCL', 'GRU', 'MIA', 'PTY', 'MEX', 'EZE', 'MAD'];
+    var available = stopCities.filter(function(c) { return c !== originCode && c !== destCode; });
+    var randomStop = function() { return available[Math.floor(Math.random() * available.length)]; };
+    var formatted = formatDateDisplay(flightDate);
+    
+    var routeKey = originCode + '-' + destCode;
+    var reverseKey = destCode + '-' + originCode;
+    var baseRoutePrice = baseFares[routeKey] || baseFares[reverseKey];
+    
+    for (var i = 0; i < directCount; i++) {
+        var hour = getRandomTime();
+        var arrival = addHours(hour, directDur);
+        var original = getRealPrice(originCode, destCode, 0, baseRoutePrice);
+        var discountResult = applyDiscount(original, originCode, destCode);
+        flights.push({
+            time: hour + ' → ' + arrival,
+            departureHour: hour,
+            flightNumber: 'LA' + (Math.floor(Math.random() * 900) + 100),
+            airline: 'LATAM Airlines',
+            originalPrice: original,
+            price: discountResult.discountedPrice,
+            discount: discountResult.discount,
+            duration: formatDuration(directDur),
+            stops: 0,
+            badge: 'direct',
+            badgeText: 'DIRECTO',
+            date: formatted,
+            rawDate: flightDate
+        });
+    }
+    
+    for (var i = 0; i < oneStopCount; i++) {
+        var hour = getRandomTime();
+        var stopCity = randomStop() || (isNational ? 'BOG' : 'LIM');
+        var d1 = getFlightDuration(originCode, stopCity);
+        var d2 = getFlightDuration(stopCity, destCode);
+        var layover = Math.floor(Math.random() * 180) + 60;
+        var total = d1 + d2 + layover;
+        var arrival = addHours(hour, total);
+        var original = getRealPrice(originCode, destCode, 1, baseRoutePrice);
+        var discountResult = applyDiscount(original, originCode, destCode);
+        flights.push({
+            time: hour + ' → ' + arrival,
+            departureHour: hour,
+            flightNumber: 'LA' + (Math.floor(Math.random() * 900) + 100),
+            airline: 'LATAM Airlines',
+            originalPrice: original,
+            price: discountResult.discountedPrice,
+            discount: discountResult.discount,
+            duration: formatDuration(total),
+            stops: 1,
+            stopDetails: [{ city: stopCity, layover: layover }],
+            badge: '1stop',
+            badgeText: '1 ESCALA',
+            date: formatted,
+            rawDate: flightDate
+        });
+    }
+    
+    for (var i = 0; i < twoStopCount; i++) {
+        var hour = getRandomTime();
+        var s1 = randomStop() || 'BOG';
+        var s2 = randomStop() || 'MIA';
+        while (s2 === s1) s2 = randomStop();
+        var d1 = getFlightDuration(originCode, s1);
+        var d2 = getFlightDuration(s1, s2);
+        var d3 = getFlightDuration(s2, destCode);
+        var lay1 = Math.floor(Math.random() * 150) + 60;
+        var lay2 = Math.floor(Math.random() * 150) + 60;
+        var total = d1 + d2 + d3 + lay1 + lay2;
+        var arrival = addHours(hour, total);
+        var original = getRealPrice(originCode, destCode, 2, baseRoutePrice);
+        var discountResult = applyDiscount(original, originCode, destCode);
+        flights.push({
+            time: hour + ' → ' + arrival,
+            departureHour: hour,
+            flightNumber: 'LA' + (Math.floor(Math.random() * 900) + 100),
+            airline: 'LATAM Airlines',
+            originalPrice: original,
+            price: discountResult.discountedPrice,
+            discount: discountResult.discount,
+            duration: formatDuration(total),
+            stops: 2,
+            stopDetails: [{ city: s1, layover: lay1 }, { city: s2, layover: lay2 }],
+            badge: '2stops',
+            badgeText: '2 ESCALAS',
+            date: formatted,
+            rawDate: flightDate
+        });
+    }
+    flights.sort(function(a, b) { return a.departureHour.localeCompare(b.departureHour); });
+    return flights;
+}
+
+// ============================================
 // FUNCIONES DEL BUSCADOR
 // ============================================
 
 function openSearchModal() {
-    const overlay = document.getElementById('searchOverlay');
+    var overlay = document.getElementById('searchOverlay');
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 function closeSearchModal() {
-    const overlay = document.getElementById('searchOverlay');
+    var overlay = document.getElementById('searchOverlay');
     overlay.classList.remove('active');
     document.body.style.overflow = '';
 }
 
 function selectTrip(type, btn) {
-    document.querySelectorAll('.tab-btn').forEach(p => p.classList.remove('active'));
+    var tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(function(p) { p.classList.remove('active'); });
     btn.classList.add('active');
-    
-    document.querySelectorAll('input[name="trip"]').forEach(r => {
-        if (r.value === type) {
-            r.checked = true;
-        }
-    });
     
     if (type === 'oneway') {
         document.getElementById('returnDate').style.display = 'none';
@@ -2320,123 +2654,190 @@ function selectTrip(type, btn) {
 }
 
 function swapOriginDest() {
-    const origin = document.getElementById('origin');
-    const dest = document.getElementById('destination');
-    const temp = origin.value;
+    var origin = document.getElementById('origin');
+    var dest = document.getElementById('destination');
+    var temp = origin.value;
     origin.value = dest.value;
     dest.value = temp;
 }
 
 // ============================================
-// AUTOCOMPLETE - CORREGIDO DEFINITIVAMENTE
+// AUTOCOMPLETE - ESTILO LATAM OFICIAL
 // ============================================
-function setupAutocomplete(input) {
-    let list;
-    let isSelecting = false;
-    let timeoutId = null;
+function setupAutocomplete(inputId, containerId) {
+    var input = document.getElementById(inputId);
+    var container = document.getElementById(containerId);
+    
+    if (!input || !container) return;
+    
+    var isSelecting = false;
+    var timeoutId = null;
+    
+    input.addEventListener('focus', function() {
+        if (this.value.trim().length > 0) {
+            triggerSearch(this.value);
+        }
+    });
     
     input.addEventListener('input', function() {
-        // Si estamos seleccionando, no hacer nada y salir inmediatamente
-        if (isSelecting) {
-            return;
-        }
+        if (isSelecting) return;
         
-        // Limpiar timeout anterior
         if (timeoutId) {
             clearTimeout(timeoutId);
             timeoutId = null;
         }
         
-        // Eliminar lista anterior
-        if (list) {
-            list.remove();
-            list = null;
+        var val = this.value.trim();
+        if (val.length < 1) {
+            container.classList.remove('active');
+            return;
         }
         
-        const val = this.value.toLowerCase().trim();
-        if (!val || val.length < 1) return;
-        
-        // Crear nueva lista después de un pequeño delay
-        timeoutId = setTimeout(() => {
-            list = document.createElement('div');
-            list.className = 'autocomplete';
-            input.parentNode.appendChild(list);
-            
-            const filtered = airports.filter(a => a.toLowerCase().includes(val));
-            filtered.slice(0, 8).forEach(a => {
-                const item = document.createElement('div');
-                item.textContent = a;
-                // Usar mousedown para evitar que el evento blur se dispare antes
-                item.addEventListener('mousedown', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    // Marcar que estamos seleccionando
-                    isSelecting = true;
-                    
-                    // Establecer el valor
-                    input.value = a;
-                    
-                    // Forzar evento de cambio
-                    input.dispatchEvent(new Event('change', { bubbles: true }));
-                    
-                    // Cerrar el autocomplete
-                    if (list) {
-                        list.remove();
-                        list = null;
-                    }
-                    
-                    // Resetear el flag después de que el evento input termine
-                    setTimeout(() => {
-                        isSelecting = false;
-                    }, 200);
-                    
-                    // Quitar el foco
-                    input.blur();
-                });
-                list.appendChild(item);
-            });
+        timeoutId = setTimeout(function() {
+            triggerSearch(val);
             timeoutId = null;
         }, 150);
     });
     
-    // Cerrar al hacer clic fuera
-    document.addEventListener('click', function(e) {
-        if (list && e.target !== input && !list.contains(e.target)) {
-            list.remove();
-            list = null;
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-                timeoutId = null;
+    function triggerSearch(query) {
+        var filtered = airports.filter(function(a) {
+            return a.toLowerCase().includes(query.toLowerCase());
+        });
+        
+        container.innerHTML = '';
+        
+        if (filtered.length === 0) {
+            container.classList.remove('active');
+            return;
+        }
+        
+        filtered.slice(0, 8).forEach(function(airport) {
+            var item = document.createElement('div');
+            item.className = 'autocomplete-item';
+            
+            var match = airport.match(/^([^(]+)\s*\(([^)]+)\)$/);
+            var city = match ? match[1].trim() : airport;
+            var code = match ? match[2] : '';
+            
+            var lowerQuery = query.toLowerCase();
+            var lowerCity = city.toLowerCase();
+            var index = lowerCity.indexOf(lowerQuery);
+            
+            var nameHtml = city;
+            if (index !== -1) {
+                var before = city.substring(0, index);
+                var highlight = city.substring(index, index + query.length);
+                var after = city.substring(index + query.length);
+                nameHtml = before + '<span class="highlight">' + highlight + '</span>' + after;
             }
+            
+            item.innerHTML = 
+                '<span class="airport-code">' + code + '</span>' +
+                '<span class="airport-name">' + nameHtml + '</span>' +
+                '<span class="airport-city">' + code + '</span>';
+            
+            item.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                isSelecting = true;
+                input.value = airport;
+                container.classList.remove('active');
+                
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                var overlay = document.getElementById('searchOverlay');
+                if (overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                
+                setTimeout(function() {
+                    isSelecting = false;
+                }, 300);
+            });
+            
+            container.appendChild(item);
+        });
+        
+        container.classList.add('active');
+    }
+    
+    document.addEventListener('click', function(e) {
+        if (!container.contains(e.target) && e.target !== input) {
+            container.classList.remove('active');
         }
     });
     
-    // Cerrar con Escape
     input.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && list) {
-            list.remove();
-            list = null;
-            if (timeoutId) {
-                clearTimeout(timeoutId);
-                timeoutId = null;
+        if (e.key === 'Escape') {
+            container.classList.remove('active');
+            input.blur();
+        }
+        if (e.key === 'Enter' && container.classList.contains('active') && container.children.length > 0) {
+            e.preventDefault();
+            var firstItem = container.children[0];
+            if (firstItem) {
+                var airportText = firstItem.textContent.trim();
+                input.value = airportText;
+                container.classList.remove('active');
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+                
+                var overlay = document.getElementById('searchOverlay');
+                if (overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             }
+        }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            var items = container.children;
+            if (items.length === 0) return;
+            
+            var currentIndex = -1;
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].classList.contains('active')) {
+                    currentIndex = i;
+                    items[i].classList.remove('active');
+                }
+            }
+            
+            if (e.key === 'ArrowDown') {
+                currentIndex = (currentIndex + 1) % items.length;
+            } else {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+            }
+            
+            items[currentIndex].classList.add('active');
+            items[currentIndex].scrollIntoView({ block: 'nearest' });
+        }
+    });
+    
+    container.addEventListener('mouseenter', function() {
+        var items = this.children;
+        for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove('active');
         }
     });
 }
 
 // ============================================
-// BÚSQUEDA DE VUELOS
+// BÚSQUEDA DE VUELOS - FUNCIÓN PRINCIPAL
 // ============================================
 function searchFlights() {
-    let origin = document.getElementById('origin').value;
-    let dest = document.getElementById('destination').value;
-    let dep = document.getElementById('departureDate').value;
-    let ret = document.getElementById('returnDate').value;
+    console.log('🔍 Buscando vuelos...');
     
-    let activeTab = document.querySelector('.tab-btn.active');
-    let trip = activeTab ? activeTab.dataset.trip : 'round';
+    var origin = document.getElementById('origin').value;
+    var dest = document.getElementById('destination').value;
+    var dep = document.getElementById('departureDate').value;
+    var ret = document.getElementById('returnDate').value;
     
+    var activeTab = document.querySelector('.tab-btn.active');
+    var trip = activeTab ? activeTab.dataset.trip : 'round';
+    
+    // Validaciones
     if (!origin || !dest) {
         alert('Por favor ingresa origen y destino');
         return;
@@ -2454,28 +2855,30 @@ function searchFlights() {
         return;
     }
     if (trip !== 'oneway') {
-        let depObj = new Date(dep);
-        let retObj = new Date(ret);
+        var depObj = new Date(dep);
+        var retObj = new Date(ret);
         if (retObj < depObj) {
             alert('La fecha de regreso no puede ser anterior a la ida');
             return;
         }
     }
     
+    // Extraer nombre de ciudad y código
     currentOrigin = origin.replace(/\([^)]*\)/, '').trim();
     currentDestination = dest.replace(/\([^)]*\)/, '').trim();
     currentDepartureDate = dep;
     currentReturnDate = ret || '';
     
-    const originCodeMatch = origin.match(/\(([^)]+)\)/);
-    const destCodeMatch = dest.match(/\(([^)]+)\)/);
+    // Extraer códigos
+    var originCodeMatch = origin.match(/\(([^)]+)\)/);
+    var destCodeMatch = dest.match(/\(([^)]+)\)/);
     
     if (originCodeMatch) {
         currentOriginCode = originCodeMatch[1];
     } else {
-        const found = airports.find(a => a.toLowerCase().includes(origin.toLowerCase()));
+        var found = airports.find(function(a) { return a.toLowerCase().includes(origin.toLowerCase()); });
         if (found) {
-            const codeMatch = found.match(/\(([^)]+)\)/);
+            var codeMatch = found.match(/\(([^)]+)\)/);
             currentOriginCode = codeMatch ? codeMatch[1] : origin.substring(0, 3).toUpperCase();
         } else {
             currentOriginCode = origin.substring(0, 3).toUpperCase();
@@ -2485,9 +2888,9 @@ function searchFlights() {
     if (destCodeMatch) {
         currentDestCode = destCodeMatch[1];
     } else {
-        const found = airports.find(a => a.toLowerCase().includes(dest.toLowerCase()));
+        var found = airports.find(function(a) { return a.toLowerCase().includes(dest.toLowerCase()); });
         if (found) {
-            const codeMatch = found.match(/\(([^)]+)\)/);
+            var codeMatch = found.match(/\(([^)]+)\)/);
             currentDestCode = codeMatch ? codeMatch[1] : dest.substring(0, 3).toUpperCase();
         } else {
             currentDestCode = dest.substring(0, 3).toUpperCase();
@@ -2496,6 +2899,7 @@ function searchFlights() {
     
     currentTripType = trip;
     
+    // Generar vuelos
     currentFlights.outbound = generateFlightsWithPersistence(currentOriginCode, currentDestCode, dep, 20, true);
     if (trip !== 'oneway' && ret) {
         currentFlights.return = generateFlightsWithPersistence(currentDestCode, currentOriginCode, ret, 20, false);
@@ -2508,12 +2912,15 @@ function searchFlights() {
     pendingOutboundIndex = null;
     pendingReturnIndex = null;
     
+    // Mostrar resultados
     displayOutboundResults();
     document.getElementById('mainPage').style.display = 'none';
     document.getElementById('resultsPageOutbound').style.display = 'block';
     updateProgressBar(1);
     autoSave();
     window.scrollTo(0, 0);
+    
+    console.log('✅ Vuelos encontrados:', currentFlights.outbound.length);
 }
 
 function quickSearch(originValue, destinationValue) {
@@ -2521,309 +2928,19 @@ function quickSearch(originValue, destinationValue) {
     document.getElementById('destination').value = destinationValue;
     
     if (!document.getElementById('departureDate').value) {
-        const tomorrow = new Date();
+        var tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         document.getElementById('departureDate').value = tomorrow.toISOString().split('T')[0];
     }
     if (!document.getElementById('returnDate').value) {
-        const nextWeek = new Date();
+        var nextWeek = new Date();
         nextWeek.setDate(nextWeek.getDate() + 7);
         document.getElementById('returnDate').value = nextWeek.toISOString().split('T')[0];
     }
     
-    setTimeout(() => {
+    setTimeout(function() {
         searchFlights();
     }, 150);
-}
-
-// ============================================
-// CONFIGURACIÓN Y CONSTANTES
-// ============================================
-const usaCodes = ['MIA', 'JFK', 'LAX', 'MCO', 'ORD', 'ATL', 'DFW', 'IAH'];
-const colombianCodes = ['BOG', 'MDE', 'CLO', 'CTG', 'BAQ', 'SMR', 'ADZ', 'PEI', 'BGA', 'CUC'];
-
-const latamFleet = {
-    shortHaul: [
-        { name: "Airbus A320neo", icon: "fa-plane", rows: 29, classes: { economy: true, premium: false, business: false } },
-        { name: "Airbus A321neo", icon: "fa-plane", rows: 37, classes: { economy: true, premium: true, business: false } }
-    ],
-    longHaul: [
-        { name: "Boeing 787-8 Dreamliner", icon: "fa-plane", rows: 41, classes: { economy: true, premium: true, business: true } },
-        { name: "Boeing 787-9 Dreamliner", icon: "fa-plane", rows: 50, classes: { economy: true, premium: true, business: true } }
-    ]
-};
-
-const baseFares = {
-    'BOG-MDE': 146510, 'BOG-CLO': 189943, 'BOG-CTG': 226000, 'BOG-SMR': 252000,
-    'BOG-ADZ': 545000, 'BOG-BAQ': 199907, 'BOG-PEI': 401000, 'BOG-CUC': 549000,
-    'MDE-BOG': 146510, 'MDE-CTG': 350000, 'MDE-ADZ': 600000,
-    'CLO-BOG': 189943, 'CLO-CTG': 450000,
-    'CTG-BOG': 226000, 'CTG-ADZ': 550000,
-    'BOG-LIM': 1410000, 'BOG-PTY': 950000, 'BOG-UIO': 1217000,
-    'BOG-SCL': 1734000, 'BOG-EZE': 1900000, 'BOG-GRU': 1712000,
-    'BOG-MIA': 1314000, 'BOG-JFK': 1800000, 'BOG-MEX': 1700000,
-    'BOG-CCS': 850000, 'BOG-MAD': 1876270, 'BOG-CDG': 2100000, 'BOG-LHR': 2300000,
-    'CLO-GIG': 1883910, 'LAX-COR': 1300000,
-};
-
-const routeDurations = {
-    'BOG-MDE': 64, 'BOG-CLO': 67, 'BOG-CTG': 94, 'BOG-SMR': 95, 'BOG-ADZ': 150,
-    'MDE-BOG': 64, 'MDE-CLO': 70, 'MDE-CTG': 80, 'MDE-SMR': 85, 'MDE-ADZ': 120,
-    'CLO-BOG': 67, 'CLO-MDE': 70, 'CLO-CTG': 90,
-    'CTG-BOG': 94, 'CTG-MDE': 80, 'CTG-SMR': 40,
-    'BOG-LIM': 210, 'BOG-SCL': 360, 'BOG-EZE': 390, 'BOG-GRU': 335, 'BOG-MIA': 240,
-    'BOG-MAD': 591, 'BOG-JFK': 320, 'BOG-MEX': 300, 'BOG-PTY': 90,
-    'BOG-UIO': 60, 'BOG-CCS': 75, 'BOG-CDG': 660, 'BOG-LHR': 680,
-    'LIM-GRU': 285, 'LIM-SCL': 210, 'LIM-EZE': 255, 'LIM-MIA': 330,
-    'SCL-GRU': 220, 'SCL-EZE': 135, 'SCL-MIA': 480, 'GRU-MIA': 540, 'GRU-JFK': 600,
-    'CLO-GIG': 450, 'LAX-COR': 720,
-};
-
-const SEAT_PRICES = { economy: 45900, premium: 55900, business: 72900 };
-const BAGGAGE_OPTIONS = [
-    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, desc: 'Solo equipaje de mano (10kg)' },
-    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 39900, desc: '1 maleta documentada (23kg)' },
-    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 69900, desc: '2 maletas documentadas (23kg c/u)' },
-    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 106900, desc: '3 maletas documentadas + prioridad' }
-];
-
-const airports = [
-    "Bogotá (BOG)", "Medellín (MDE)", "Cali (CLO)", "Cartagena (CTG)", "Barranquilla (BAQ)",
-    "Santa Marta (SMR)", "San Andrés (ADZ)", "Pereira (PEI)", "Bucaramanga (BGA)", "Cúcuta (CUC)",
-    "Lima (LIM)", "Cusco (CUZ)", "Santiago (SCL)", "Buenos Aires (EZE)", "São Paulo (GRU)",
-    "Quito (UIO)", "Guayaquil (GYE)", "Miami (MIA)", "Nueva York (JFK)", "Los Ángeles (LAX)",
-    "Madrid (MAD)", "Barcelona (BCN)", "París (CDG)", "Londres (LHR)", "Ciudad de México (MEX)",
-    "Panamá (PTY)", "Montevideo (MVD)", "Asunción (ASU)", "Caracas (CCS)", "Rio de Janeiro (GIG)"
-];
-
-// Firebase Config
-const firebaseConfig = {
-    apiKey: "TU_API_KEY_AQUI",
-    authDomain: "TU_PROYECTO.firebaseapp.com",
-    projectId: "TU_PROYECTO",
-    storageBucket: "TU_PROYECTO.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdef"
-};
-let auth, db;
-try {
-    firebase.initializeApp(firebaseConfig);
-    auth = firebase.auth();
-    db = firebase.firestore();
-} catch (e) {
-    console.log("Firebase no configurado");
-}
-
-// ============================================
-// VARIABLES GLOBALES
-// ============================================
-let currentUser = null;
-let passengers = { adults: 1, children: 0 };
-let passengerCount = 1;
-let currentFlights = { outbound: [], return: [] };
-let selectedOutboundFlight = null;
-let selectedReturnFlight = null;
-let selectedOutboundSeats = [];
-let selectedBaggage = 'light';
-let baggagePrice = 0;
-let currentOrigin = '', currentDestination = '', currentDepartureDate = '', currentReturnDate = '';
-let currentOriginCode = '', currentDestCode = '', currentTripType = 'round';
-let currentCabinSeat = 'Economy';
-let lastReservationData = null;
-let pendingOutboundIndex = null;
-let pendingReturnIndex = null;
-
-// ============================================
-// FUNCIONES DE UTILIDAD
-// ============================================
-function formatDuration(m) {
-    let h = Math.floor(m / 60);
-    let min = m % 60;
-    if (h === 0) return `${min} min`;
-    if (min === 0) return `${h}h`;
-    return `${h}h ${min}min`;
-}
-
-function addHours(time, min) {
-    let [h, m] = time.split(':').map(Number);
-    let total = h * 60 + m + min;
-    let nh = Math.floor(total / 60) % 24;
-    let nm = total % 60;
-    return `${String(nh).padStart(2, '0')}:${String(nm).padStart(2, '0')}`;
-}
-
-function getRandomTime() {
-    let h = Math.floor(Math.random() * 16) + 6;
-    let m = Math.floor(Math.random() * 60);
-    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-}
-
-function formatDateDisplay(d) {
-    if (!d) return '';
-    let [y, m, day] = d.split('-');
-    return new Date(Date.UTC(y, m - 1, day)).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-}
-
-function getDiscountForRoute(originCode, destCode) {
-    const isUSARoute = usaCodes.includes(originCode) || usaCodes.includes(destCode);
-    const isColombiaRoute = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
-    if (isUSARoute) return 0.25;
-    if (isColombiaRoute) return 0.20;
-    return 0.30;
-}
-
-function applyDiscount(originalPrice, originCode, destCode) {
-    const discount = getDiscountForRoute(originCode, destCode);
-    const discountedPrice = Math.floor(originalPrice * (1 - discount));
-    return { originalPrice, discountedPrice, discount: discount * 100 };
-}
-
-function getAircraftForRoute(originCode, destCode) {
-    const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
-    if (!isNational) return latamFleet.longHaul[1];
-    const highDemandRoutes = ['BOG-MDE', 'BOG-CLO', 'BOG-CTG', 'MDE-BOG', 'CLO-BOG'];
-    const routeKey = `${originCode}-${destCode}`;
-    if (highDemandRoutes.includes(routeKey) || highDemandRoutes.includes(`${destCode}-${originCode}`)) {
-        return latamFleet.shortHaul[1];
-    }
-    return latamFleet.shortHaul[0];
-}
-
-function getFlightDuration(originCode, destCode) {
-    const routeKey = `${originCode}-${destCode}`;
-    const reverseKey = `${destCode}-${originCode}`;
-    if (routeDurations[routeKey]) return routeDurations[routeKey];
-    if (routeDurations[reverseKey]) return routeDurations[reverseKey];
-    const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
-    return isNational ? 90 : 300;
-}
-
-function getRandomPriceInRange(basePrice, minMultiplier = 1.0, maxMultiplier = 1.6) {
-    const min = Math.floor(basePrice * minMultiplier);
-    const max = Math.floor(basePrice * maxMultiplier);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRealPrice(originCode, destCode, stops = 0, basePriceOverride = null) {
-    const routeKey = `${originCode}-${destCode}`;
-    const reverseKey = `${destCode}-${originCode}`;
-    let basePrice = basePriceOverride || baseFares[routeKey] || baseFares[reverseKey];
-    
-    if (!basePrice) {
-        const isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
-        if (isNational) {
-            basePrice = Math.floor(Math.random() * 300000) + 250000;
-        } else {
-            basePrice = Math.floor(Math.random() * 2000000) + 1500000;
-        }
-    }
-    
-    let finalPrice = basePrice;
-    if (stops === 1) {
-        const discountFactor = 0.7 + Math.random() * 0.15;
-        finalPrice = Math.floor(basePrice * discountFactor);
-    } else if (stops === 2) {
-        const discountFactor = 0.6 + Math.random() * 0.15;
-        finalPrice = Math.floor(basePrice * discountFactor);
-    } else {
-        finalPrice = getRandomPriceInRange(basePrice, 1.0, 1.6);
-    }
-    return finalPrice;
-}
-
-function generateFlightsWithPersistence(o, d, date, count, isOut = true) {
-    let key = `flights_${o}_${d}_${date}_${isOut ? 'out' : 'ret'}`;
-    let saved = sessionStorage.getItem(key);
-    if (saved) return JSON.parse(saved);
-    let flights = generateFlightsForRoute(o, d, date, count);
-    sessionStorage.setItem(key, JSON.stringify(flights));
-    return flights;
-}
-
-function generateFlightsForRoute(originCode, destCode, flightDate, count = 20) {
-    let flights = [];
-    let directDur = getFlightDuration(originCode, destCode);
-    let directCount = Math.floor(count * 0.6);
-    let oneStopCount = Math.floor(count * 0.3);
-    let twoStopCount = count - directCount - oneStopCount;
-    let isNational = colombianCodes.includes(originCode) && colombianCodes.includes(destCode);
-    let stopCities = isNational ? [...colombianCodes] : ['BOG', 'LIM', 'SCL', 'GRU', 'MIA', 'PTY', 'MEX', 'EZE', 'MAD'];
-    let available = stopCities.filter(c => c !== originCode && c !== destCode);
-    let randomStop = () => available[Math.floor(Math.random() * available.length)];
-    let formatted = formatDateDisplay(flightDate);
-    
-    const routeKey = `${originCode}-${destCode}`;
-    const reverseKey = `${destCode}-${originCode}`;
-    const baseRoutePrice = baseFares[routeKey] || baseFares[reverseKey];
-    
-    for (let i = 0; i < directCount; i++) {
-        let hour = getRandomTime(), arrival = addHours(hour, directDur);
-        let original = getRealPrice(originCode, destCode, 0, baseRoutePrice);
-        let { discountedPrice, discount } = applyDiscount(original, originCode, destCode);
-        flights.push({
-            time: `${hour} → ${arrival}`, departureHour: hour,
-            flightNumber: `LA${Math.floor(Math.random() * 900) + 100}`,
-            airline: 'LATAM Airlines',
-            originalPrice: original,
-            price: discountedPrice,
-            discount,
-            duration: formatDuration(directDur),
-            stops: 0,
-            badge: 'direct',
-            badgeText: 'DIRECTO',
-            date: formatted,
-            rawDate: flightDate
-        });
-    }
-    
-    for (let i = 0; i < oneStopCount; i++) {
-        let hour = getRandomTime(), stopCity = randomStop() || (isNational ? 'BOG' : 'LIM');
-        let d1 = getFlightDuration(originCode, stopCity), d2 = getFlightDuration(stopCity, destCode);
-        let layover = Math.floor(Math.random() * 180) + 60, total = d1 + d2 + layover, arrival = addHours(hour, total);
-        let original = getRealPrice(originCode, destCode, 1, baseRoutePrice);
-        let { discountedPrice, discount } = applyDiscount(original, originCode, destCode);
-        flights.push({
-            time: `${hour} → ${arrival}`, departureHour: hour,
-            flightNumber: `LA${Math.floor(Math.random() * 900) + 100}`,
-            airline: 'LATAM Airlines',
-            originalPrice: original,
-            price: discountedPrice,
-            discount,
-            duration: formatDuration(total),
-            stops: 1,
-            stopDetails: [{ city: stopCity, layover }],
-            badge: '1stop',
-            badgeText: '1 ESCALA',
-            date: formatted,
-            rawDate: flightDate
-        });
-    }
-    
-    for (let i = 0; i < twoStopCount; i++) {
-        let hour = getRandomTime(), s1 = randomStop() || 'BOG', s2 = randomStop() || 'MIA';
-        while (s2 === s1) s2 = randomStop();
-        let d1 = getFlightDuration(originCode, s1), d2 = getFlightDuration(s1, s2), d3 = getFlightDuration(s2, destCode);
-        let lay1 = Math.floor(Math.random() * 150) + 60, lay2 = Math.floor(Math.random() * 150) + 60, total = d1 + d2 + d3 + lay1 + lay2, arrival = addHours(hour, total);
-        let original = getRealPrice(originCode, destCode, 2, baseRoutePrice);
-        let { discountedPrice, discount } = applyDiscount(original, originCode, destCode);
-        flights.push({
-            time: `${hour} → ${arrival}`, departureHour: hour,
-            flightNumber: `LA${Math.floor(Math.random() * 900) + 100}`,
-            airline: 'LATAM Airlines',
-            originalPrice: original,
-            price: discountedPrice,
-            discount,
-            duration: formatDuration(total),
-            stops: 2,
-            stopDetails: [{ city: s1, layover: lay1 }, { city: s2, layover: lay2 }],
-            badge: '2stops',
-            badgeText: '2 ESCALAS',
-            date: formatted,
-            rawDate: flightDate
-        });
-    }
-    flights.sort((a, b) => a.departureHour.localeCompare(b.departureHour));
-    return flights;
 }
 
 // ============================================
@@ -2868,10 +2985,11 @@ function resetAndGoHome() {
 }
 
 function updateProgressBar(step) {
-    let bar = document.getElementById('progressBar');
+    var bar = document.getElementById('progressBar');
     bar.style.display = 'flex';
-    document.querySelectorAll('.progress-step').forEach((el, i) => {
-        let n = i + 1;
+    var steps = document.querySelectorAll('.progress-step');
+    steps.forEach(function(el, i) {
+        var n = i + 1;
         el.classList.remove('active', 'completed');
         if (n < step) el.classList.add('completed');
         else if (n === step) el.classList.add('active');
@@ -2880,29 +2998,29 @@ function updateProgressBar(step) {
 function hideProgressBar() { document.getElementById('progressBar').style.display = 'none'; }
 
 function autoSave() {
-    let data = {
-        origin: currentOrigin ? `${currentOrigin} (${currentOriginCode})` : '',
-        destination: currentDestination ? `${currentDestination} (${currentDestCode})` : '',
+    var data = {
+        origin: currentOrigin ? currentOrigin + ' (' + currentOriginCode + ')' : '',
+        destination: currentDestination ? currentDestination + ' (' + currentDestCode + ')' : '',
         departureDate: currentDepartureDate,
         returnDate: currentReturnDate,
-        passengerCount,
-        selectedBaggage,
-        baggagePrice
+        passengerCount: passengerCount,
+        selectedBaggage: selectedBaggage,
+        baggagePrice: baggagePrice
     };
     localStorage.setItem('currentReservation', JSON.stringify(data));
 }
 function loadAutoSave() {
-    let saved = localStorage.getItem('currentReservation');
+    var saved = localStorage.getItem('currentReservation');
     if (saved) {
         try {
-            let d = JSON.parse(saved);
+            var d = JSON.parse(saved);
             if (d.origin && d.destination) {
                 document.getElementById('origin').value = d.origin;
                 document.getElementById('destination').value = d.destination;
                 document.getElementById('departureDate').value = d.departureDate;
                 document.getElementById('returnDate').value = d.returnDate;
                 passengerCount = d.passengerCount;
-                document.getElementById('passengerCount').value = `${passengerCount} ${passengerCount === 1 ? 'pasajero' : 'pasajeros'}`;
+                document.getElementById('passengerCount').value = passengerCount + ' ' + (passengerCount === 1 ? 'pasajero' : 'pasajeros');
                 selectedBaggage = d.selectedBaggage;
                 baggagePrice = d.baggagePrice;
             }
@@ -2912,14 +3030,14 @@ function loadAutoSave() {
 function clearAutoSave() { localStorage.removeItem('currentReservation'); }
 
 function changePassenger(t, d) {
-    let n = passengers[t] + d;
+    var n = passengers[t] + d;
     if (t === 'adults' && n >= 1 && n <= 9) passengers[t] = n;
     else if (t !== 'adults' && n >= 0 && n <= 9) passengers[t] = n;
-    document.getElementById(`${t}Count`).textContent = passengers[t];
+    document.getElementById(t + 'Count').textContent = passengers[t];
 }
 function applyPassengers() {
-    let total = passengers.adults + passengers.children;
-    document.getElementById('passengerCount').value = `${total} ${total === 1 ? 'pasajero' : 'pasajeros'}`;
+    var total = passengers.adults + passengers.children;
+    document.getElementById('passengerCount').value = total + ' ' + (total === 1 ? 'pasajero' : 'pasajeros');
     passengerCount = total;
     closePassengerModal();
     autoSave();
@@ -2931,21 +3049,25 @@ function closeAuthModal() { document.getElementById('authModal').style.display =
 
 function login() {
     if (!auth) { alert('Firebase no configurado'); return; }
-    let email = document.getElementById('loginEmail').value, pass = document.getElementById('loginPassword').value;
-    auth.signInWithEmailAndPassword(email, pass).then(() => closeAuthModal()).catch(e => { document.getElementById('loginError').textContent = e.message; document.getElementById('loginError').style.display = 'block'; });
+    var email = document.getElementById('loginEmail').value;
+    var pass = document.getElementById('loginPassword').value;
+    auth.signInWithEmailAndPassword(email, pass).then(function() { closeAuthModal(); }).catch(function(e) { document.getElementById('loginError').textContent = e.message; document.getElementById('loginError').style.display = 'block'; });
 }
 function register() {
     if (!auth) { alert('Firebase no configurado'); return; }
-    let name = document.getElementById('registerName').value, email = document.getElementById('registerEmail').value, pass = document.getElementById('registerPassword').value, conf = document.getElementById('registerConfirmPassword').value;
+    var name = document.getElementById('registerName').value;
+    var email = document.getElementById('registerEmail').value;
+    var pass = document.getElementById('registerPassword').value;
+    var conf = document.getElementById('registerConfirmPassword').value;
     if (pass !== conf) { alert('Contraseñas no coinciden'); return; }
-    auth.createUserWithEmailAndPassword(email, pass).then((uc) => uc.user.updateProfile({ displayName: name })).then(() => closeAuthModal()).catch(e => alert(e.message));
+    auth.createUserWithEmailAndPassword(email, pass).then(function(uc) { return uc.user.updateProfile({ displayName: name }); }).then(function() { closeAuthModal(); }).catch(function(e) { alert(e.message); });
 }
 
 function setDefaultDates() {
-    let t = new Date();
-    let tom = new Date(t);
+    var t = new Date();
+    var tom = new Date(t);
     tom.setDate(t.getDate() + 1);
-    let next = new Date(t);
+    var next = new Date(t);
     next.setDate(t.getDate() + 7);
     document.getElementById('departureDate').value = tom.toISOString().split('T')[0];
     document.getElementById('returnDate').value = next.toISOString().split('T')[0];
@@ -2955,40 +3077,41 @@ function setDefaultDates() {
 // DISPLAY DE RESULTADOS
 // ============================================
 function displayOutboundResults() {
-    let routeInfo = document.getElementById('routeInfoOutbound');
-    let container = document.getElementById('resultsContainerOutbound');
-    let formatted = formatDateDisplay(currentDepartureDate);
-    routeInfo.innerHTML = `<span class="city">${currentOrigin}</span><i class="fa-solid fa-arrow-right"></i><span class="city">${currentDestination}</span><span class="date">${formatted}</span>`;
-    let aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
-    let html = `<div class="trip-section"><h3>🛫 Vuelo de IDA - ${formatted}</h3>`;
-    currentFlights.outbound.forEach((f, i) => {
-        let stopHtml = f.stops === 1 ? `<div class="stop-detail">🛑 Escala en ${f.stopDetails[0].city} (${f.stopDetails[0].layover} min)</div>` : (f.stops === 2 ? `<div class="stop-detail">🛑 Escalas en ${f.stopDetails[0].city} y ${f.stopDetails[1].city}</div>` : '');
-        html += `<div class="flight-card" data-outbound-index="${i}" onclick="selectOutboundCard(${i})">
-            <div class="flight-info">
-                <div>
-                    <div class="flight-time">✈️ ${f.flightNumber} — ${f.time}</div>
-                    <div class="flight-route-detail">⏱️ Duración: ${f.duration}</div>
-                    <div class="flight-stops"><span class="badge-${f.badge}">${f.badgeText}</span>${stopHtml}</div>
-                    <div class="aircraft-info"><i class="fa-solid ${aircraft.icon}"></i> ${aircraft.name}</div>
-                </div>
-                <div class="flight-price">${f.discount > 0 ? `<span class="original-price-flight">$${f.originalPrice.toLocaleString()}</span><span class="discount-badge">-${f.discount}%</span><br>` : ''}<strong>$${f.price.toLocaleString()}</strong><div class="price-per-person">por pasajero</div></div>
-            </div>
-            <button class="continue-button" id="confirmOutboundBtn_${i}" onclick="confirmOutboundFlight(${i})" disabled>Seleccionar este vuelo</button>
-        </div>`;
+    var routeInfo = document.getElementById('routeInfoOutbound');
+    var container = document.getElementById('resultsContainerOutbound');
+    var formatted = formatDateDisplay(currentDepartureDate);
+    routeInfo.innerHTML = '<span class="city">' + currentOrigin + '</span><i class="fa-solid fa-arrow-right"></i><span class="city">' + currentDestination + '</span><span class="date">' + formatted + '</span>';
+    var aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
+    var html = '<div class="trip-section"><h3>🛫 Vuelo de IDA - ' + formatted + '</h3>';
+    currentFlights.outbound.forEach(function(f, i) {
+        var stopHtml = f.stops === 1 ? '<div class="stop-detail">🛑 Escala en ' + f.stopDetails[0].city + ' (' + f.stopDetails[0].layover + ' min)</div>' : (f.stops === 2 ? '<div class="stop-detail">🛑 Escalas en ' + f.stopDetails[0].city + ' y ' + f.stopDetails[1].city + '</div>' : '');
+        html += '<div class="flight-card" data-outbound-index="' + i + '" onclick="selectOutboundCard(' + i + ')">' +
+            '<div class="flight-info">' +
+                '<div>' +
+                    '<div class="flight-time">✈️ ' + f.flightNumber + ' — ' + f.time + '</div>' +
+                    '<div class="flight-route-detail">⏱️ Duración: ' + f.duration + '</div>' +
+                    '<div class="flight-stops"><span class="badge-' + f.badge + '">' + f.badgeText + '</span>' + stopHtml + '</div>' +
+                    '<div class="aircraft-info"><i class="fa-solid ' + aircraft.icon + '"></i> ' + aircraft.name + '</div>' +
+                '</div>' +
+                '<div class="flight-price">' + (f.discount > 0 ? '<span class="original-price-flight">$' + f.originalPrice.toLocaleString() + '</span><span class="discount-badge">-' + f.discount + '%</span><br>' : '') + '<strong>$' + f.price.toLocaleString() + '</strong><div class="price-per-person">por pasajero</div></div>' +
+            '</div>' +
+            '<button class="continue-button" id="confirmOutboundBtn_' + i + '" onclick="confirmOutboundFlight(' + i + ')" disabled>Seleccionar este vuelo</button>' +
+        '</div>';
     });
-    html += `</div>`;
+    html += '</div>';
     container.innerHTML = html;
-    document.getElementById('resultsStatsOutbound').textContent = `${currentFlights.outbound.length} opciones de ida`;
+    document.getElementById('resultsStatsOutbound').textContent = currentFlights.outbound.length + ' opciones de ida';
 }
 
 function selectOutboundCard(i) {
-    document.querySelectorAll('#resultsContainerOutbound .flight-card').forEach((card, idx) => {
+    var cards = document.querySelectorAll('#resultsContainerOutbound .flight-card');
+    cards.forEach(function(card, idx) {
         if (idx === i) {
             card.classList.add('selected');
         } else {
             card.classList.remove('selected');
         }
-        let btn = card.querySelector('.continue-button');
+        var btn = card.querySelector('.continue-button');
         if (btn) btn.disabled = (idx !== i);
     });
     pendingOutboundIndex = i;
@@ -3009,39 +3132,40 @@ function confirmOutboundFlight(i) {
 }
 
 function displayReturnResults() {
-    let routeInfo = document.getElementById('routeInfoReturn');
-    let container = document.getElementById('resultsContainerReturn');
-    let formatted = formatDateDisplay(currentReturnDate);
-    routeInfo.innerHTML = `<span class="city">${currentDestination}</span><i class="fa-solid fa-arrow-right"></i><span class="city">${currentOrigin}</span><span class="date">${formatted}</span>`;
-    let aircraft = getAircraftForRoute(currentDestCode, currentOriginCode);
-    let html = `<div class="trip-section"><h3>🛬 Vuelo de REGRESO - ${formatted}</h3>`;
-    currentFlights.return.forEach((f, i) => {
-        let stopHtml = f.stops === 1 ? `<div class="stop-detail">🛑 Escala en ${f.stopDetails[0].city} (${f.stopDetails[0].layover} min)</div>` : (f.stops === 2 ? `<div class="stop-detail">🛑 Escalas en ${f.stopDetails[0].city} y ${f.stopDetails[1].city}</div>` : '');
-        html += `<div class="flight-card" data-return-index="${i}" onclick="selectReturnCard(${i})">
-            <div class="flight-info">
-                <div>
-                    <div class="flight-time">✈️ ${f.flightNumber} — ${f.time}</div>
-                    <div class="flight-route-detail">⏱️ Duración: ${f.duration}</div>
-                    <div class="flight-stops"><span class="badge-${f.badge}">${f.badgeText}</span>${stopHtml}</div>
-                    <div class="aircraft-info"><i class="fa-solid ${aircraft.icon}"></i> ${aircraft.name}</div>
-                </div>
-                <div class="flight-price">${f.discount > 0 ? `<span class="original-price-flight">$${f.originalPrice.toLocaleString()}</span><span class="discount-badge">-${f.discount}%</span><br>` : ''}<strong>$${f.price.toLocaleString()}</strong><div class="price-per-person">por pasajero</div></div>
-            </div>
-            <button class="continue-button" id="confirmReturnBtn_${i}" onclick="confirmReturnFlight(${i})" disabled>Seleccionar este vuelo</button>
-        </div>`;
+    var routeInfo = document.getElementById('routeInfoReturn');
+    var container = document.getElementById('resultsContainerReturn');
+    var formatted = formatDateDisplay(currentReturnDate);
+    routeInfo.innerHTML = '<span class="city">' + currentDestination + '</span><i class="fa-solid fa-arrow-right"></i><span class="city">' + currentOrigin + '</span><span class="date">' + formatted + '</span>';
+    var aircraft = getAircraftForRoute(currentDestCode, currentOriginCode);
+    var html = '<div class="trip-section"><h3>🛬 Vuelo de REGRESO - ' + formatted + '</h3>';
+    currentFlights.return.forEach(function(f, i) {
+        var stopHtml = f.stops === 1 ? '<div class="stop-detail">🛑 Escala en ' + f.stopDetails[0].city + ' (' + f.stopDetails[0].layover + ' min)</div>' : (f.stops === 2 ? '<div class="stop-detail">🛑 Escalas en ' + f.stopDetails[0].city + ' y ' + f.stopDetails[1].city + '</div>' : '');
+        html += '<div class="flight-card" data-return-index="' + i + '" onclick="selectReturnCard(' + i + ')">' +
+            '<div class="flight-info">' +
+                '<div>' +
+                    '<div class="flight-time">✈️ ' + f.flightNumber + ' — ' + f.time + '</div>' +
+                    '<div class="flight-route-detail">⏱️ Duración: ' + f.duration + '</div>' +
+                    '<div class="flight-stops"><span class="badge-' + f.badge + '">' + f.badgeText + '</span>' + stopHtml + '</div>' +
+                    '<div class="aircraft-info"><i class="fa-solid ' + aircraft.icon + '"></i> ' + aircraft.name + '</div>' +
+                '</div>' +
+                '<div class="flight-price">' + (f.discount > 0 ? '<span class="original-price-flight">$' + f.originalPrice.toLocaleString() + '</span><span class="discount-badge">-' + f.discount + '%</span><br>' : '') + '<strong>$' + f.price.toLocaleString() + '</strong><div class="price-per-person">por pasajero</div></div>' +
+            '</div>' +
+            '<button class="continue-button" id="confirmReturnBtn_' + i + '" onclick="confirmReturnFlight(' + i + ')" disabled>Seleccionar este vuelo</button>' +
+        '</div>';
     });
-    html += `</div>`;
+    html += '</div>';
     container.innerHTML = html;
 }
 
 function selectReturnCard(i) {
-    document.querySelectorAll('#resultsContainerReturn .flight-card').forEach((card, idx) => {
+    var cards = document.querySelectorAll('#resultsContainerReturn .flight-card');
+    cards.forEach(function(card, idx) {
         if (idx === i) {
             card.classList.add('selected');
         } else {
             card.classList.remove('selected');
         }
-        let btn = card.querySelector('.continue-button');
+        var btn = card.querySelector('.continue-button');
         if (btn) btn.disabled = (idx !== i);
     });
     pendingReturnIndex = i;
@@ -3058,14 +3182,14 @@ function confirmReturnFlight(i) {
 // SELECCIÓN DE ASIENTOS
 // ============================================
 function goToSeatSelection() {
-    let routeInfo = document.getElementById('seatRouteInfo');
-    routeInfo.innerHTML = `<span class="city">${currentOrigin}</span><i class="fa-solid fa-arrow-right"></i><span class="city">${currentDestination}</span><span class="date">${formatDateDisplay(currentDepartureDate)}</span>`;
-    let aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
+    var routeInfo = document.getElementById('seatRouteInfo');
+    routeInfo.innerHTML = '<span class="city">' + currentOrigin + '</span><i class="fa-solid fa-arrow-right"></i><span class="city">' + currentDestination + '</span><span class="date">' + formatDateDisplay(currentDepartureDate) + '</span>';
+    var aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
     document.getElementById('aircraftName').textContent = aircraft.name;
-    document.getElementById('aircraftIcon').className = `fa-solid ${aircraft.icon}`;
+    document.getElementById('aircraftIcon').className = 'fa-solid ' + aircraft.icon;
     document.getElementById('seatPassengerCount').textContent = passengerCount;
     document.getElementById('seatMaxPassengers').textContent = passengerCount;
-    document.getElementById('seatStats').innerHTML = `👥 ${passengerCount} pasajero${passengerCount !== 1 ? 's' : ''} • ✈️ ${aircraft.name}`;
+    document.getElementById('seatStats').innerHTML = '👥 ' + passengerCount + ' pasajero' + (passengerCount !== 1 ? 's' : '') + ' • ✈️ ' + aircraft.name;
     selectedOutboundSeats = [];
     currentCabinSeat = 'Economy';
     generateSeatMapCompact();
@@ -3079,59 +3203,68 @@ function goToSeatSelection() {
 }
 
 function generateSeatMapCompact() {
-    let letters = ['A', 'B', 'C', 'D', 'E', 'F'];
-    let container = document.getElementById('seatMapContainer');
+    var letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    var container = document.getElementById('seatMapContainer');
     if (!container) return;
-    let aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
-    let rows = aircraft.rows || 30;
-    let tabsDiv = document.getElementById('cabinTabs');
+    var aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
+    var rows = aircraft.rows || 30;
+    var tabsDiv = document.getElementById('cabinTabs');
     if (tabsDiv) {
-        let tabs = '';
-        if (aircraft.classes.economy) tabs += `<button class="cabin-tab ${currentCabinSeat === 'Economy' ? 'active' : ''}" onclick="switchCabinSeat('Economy')">Economy ($${SEAT_PRICES.economy.toLocaleString()})</button>`;
-        if (aircraft.classes.premium) tabs += `<button class="cabin-tab ${currentCabinSeat === 'Premium Economy' ? 'active' : ''}" onclick="switchCabinSeat('Premium Economy')">Premium ($${SEAT_PRICES.premium.toLocaleString()})</button>`;
-        if (aircraft.classes.business) tabs += `<button class="cabin-tab ${currentCabinSeat === 'Business' ? 'active' : ''}" onclick="switchCabinSeat('Business')">Business ($${SEAT_PRICES.business.toLocaleString()})</button>`;
+        var tabs = '';
+        if (aircraft.classes.economy) tabs += '<button class="cabin-tab ' + (currentCabinSeat === 'Economy' ? 'active' : '') + '" onclick="switchCabinSeat(\'Economy\')">Economy ($' + SEAT_PRICES.economy.toLocaleString() + ')</button>';
+        if (aircraft.classes.premium) tabs += '<button class="cabin-tab ' + (currentCabinSeat === 'Premium Economy' ? 'active' : '') + '" onclick="switchCabinSeat(\'Premium Economy\')">Premium ($' + SEAT_PRICES.premium.toLocaleString() + ')</button>';
+        if (aircraft.classes.business) tabs += '<button class="cabin-tab ' + (currentCabinSeat === 'Business' ? 'active' : '') + '" onclick="switchCabinSeat(\'Business\')">Business ($' + SEAT_PRICES.business.toLocaleString() + ')</button>';
         tabsDiv.innerHTML = tabs;
     }
-    let rowsToShow = [];
+    var rowsToShow = [];
     if (currentCabinSeat === 'Business') rowsToShow = [1, 2, 3, 4, 5];
     else if (currentCabinSeat === 'Premium Economy') rowsToShow = [6, 7, 8, 9, 10, 11, 12];
-    else rowsToShow = Array.from({ length: rows - 12 }, (_, i) => i + 13);
-    rowsToShow = rowsToShow.filter(r => r <= rows);
-    let html = `<div class="seat-grid">`;
-    for (let row of rowsToShow) {
-        html += `<div class="seat-row"><div class="row-number">${row}</div><div class="seats"><div class="seat-group">`;
-        for (let i = 0; i < 3; i++) {
-            let letter = letters[i], seatId = `${row}${letter}`, status = 'available', price = SEAT_PRICES.economy, cabinClass = 'Economy';
+    else rowsToShow = Array.from({ length: rows - 12 }, function(_, i) { return i + 13; });
+    rowsToShow = rowsToShow.filter(function(r) { return r <= rows; });
+    var html = '<div class="seat-grid">';
+    for (var ri = 0; ri < rowsToShow.length; ri++) {
+        var row = rowsToShow[ri];
+        html += '<div class="seat-row"><div class="row-number">' + row + '</div><div class="seats"><div class="seat-group">';
+        for (var i = 0; i < 3; i++) {
+            var letter = letters[i];
+            var seatId = row + letter;
+            var status = 'available';
+            var price = SEAT_PRICES.economy;
+            var cabinClass = 'Economy';
             if (row <= 5) { price = SEAT_PRICES.business; cabinClass = 'Business'; if (currentCabinSeat !== 'Business') status = 'unavailable'; }
             else if (row <= 12) { price = SEAT_PRICES.premium; cabinClass = 'Premium Economy'; if (currentCabinSeat !== 'Premium Economy') status = 'unavailable'; }
-            if (selectedOutboundSeats.includes(seatId)) status = 'selected';
-            if (['3A', '3B', '8C', '8D', '15A', '15B', '20C', '22D'].includes(seatId)) status = 'occupied';
-            if (status === 'unavailable') html += `<div class="seat unavailable"><div>${letter}</div></div>`;
+            if (selectedOutboundSeats.indexOf(seatId) !== -1) status = 'selected';
+            if (['3A', '3B', '8C', '8D', '15A', '15B', '20C', '22D'].indexOf(seatId) !== -1) status = 'occupied';
+            if (status === 'unavailable') html += '<div class="seat unavailable"><div>' + letter + '</div></div>';
             else {
-                let seatClass = `seat ${status}`;
-                if (cabinClass === 'Business') seatClass = `seat ${status} business`;
-                else if (cabinClass === 'Premium Economy') seatClass = `seat ${status} premium`;
-                html += `<div class="${seatClass}" data-seat="${seatId}" data-price="${price}" data-cabin="${cabinClass}" onclick="selectSeat('${seatId}',${price},'${cabinClass}','${status}')"><div>${letter}</div><div class="seat-extra">$${Math.floor(price / 1000)}k</div></div>`;
+                var seatClass = 'seat ' + status;
+                if (cabinClass === 'Business') seatClass = 'seat ' + status + ' business';
+                else if (cabinClass === 'Premium Economy') seatClass = 'seat ' + status + ' premium';
+                html += '<div class="' + seatClass + '" data-seat="' + seatId + '" data-price="' + price + '" data-cabin="' + cabinClass + '" onclick="selectSeat(\'' + seatId + '\',' + price + ',\'' + cabinClass + '\',\'' + status + '\')"><div>' + letter + '</div><div class="seat-extra">$' + Math.floor(price / 1000) + 'k</div></div>';
             }
         }
-        html += `</div><div class="seat-group">`;
-        for (let i = 3; i < 6; i++) {
-            let letter = letters[i], seatId = `${row}${letter}`, status = 'available', price = SEAT_PRICES.economy, cabinClass = 'Economy';
+        html += '</div><div class="seat-group">';
+        for (var i = 3; i < 6; i++) {
+            var letter = letters[i];
+            var seatId = row + letter;
+            var status = 'available';
+            var price = SEAT_PRICES.economy;
+            var cabinClass = 'Economy';
             if (row <= 5) { price = SEAT_PRICES.business; cabinClass = 'Business'; if (currentCabinSeat !== 'Business') status = 'unavailable'; }
             else if (row <= 12) { price = SEAT_PRICES.premium; cabinClass = 'Premium Economy'; if (currentCabinSeat !== 'Premium Economy') status = 'unavailable'; }
-            if (selectedOutboundSeats.includes(seatId)) status = 'selected';
-            if (['3A', '3B', '8C', '8D', '15A', '15B', '20C', '22D'].includes(seatId)) status = 'occupied';
-            if (status === 'unavailable') html += `<div class="seat unavailable"><div>${letter}</div></div>`;
+            if (selectedOutboundSeats.indexOf(seatId) !== -1) status = 'selected';
+            if (['3A', '3B', '8C', '8D', '15A', '15B', '20C', '22D'].indexOf(seatId) !== -1) status = 'occupied';
+            if (status === 'unavailable') html += '<div class="seat unavailable"><div>' + letter + '</div></div>';
             else {
-                let seatClass = `seat ${status}`;
-                if (cabinClass === 'Business') seatClass = `seat ${status} business`;
-                else if (cabinClass === 'Premium Economy') seatClass = `seat ${status} premium`;
-                html += `<div class="${seatClass}" data-seat="${seatId}" data-price="${price}" data-cabin="${cabinClass}" onclick="selectSeat('${seatId}',${price},'${cabinClass}','${status}')"><div>${letter}</div><div class="seat-extra">$${Math.floor(price / 1000)}k</div></div>`;
+                var seatClass = 'seat ' + status;
+                if (cabinClass === 'Business') seatClass = 'seat ' + status + ' business';
+                else if (cabinClass === 'Premium Economy') seatClass = 'seat ' + status + ' premium';
+                html += '<div class="' + seatClass + '" data-seat="' + seatId + '" data-price="' + price + '" data-cabin="' + cabinClass + '" onclick="selectSeat(\'' + seatId + '\',' + price + ',\'' + cabinClass + '\',\'' + status + '\')"><div>' + letter + '</div><div class="seat-extra">$' + Math.floor(price / 1000) + 'k</div></div>';
             }
         }
-        html += `</div></div></div>`;
+        html += '</div></div></div>';
     }
-    html += `</div>`;
+    html += '</div>';
     container.innerHTML = html;
 }
 
@@ -3146,10 +3279,10 @@ function switchCabinSeat(cabin) {
 function selectSeat(id, price, cabin, status) {
     if (status === 'occupied') { alert('Asiento ocupado'); return; }
     if (status === 'unavailable') { alert('No disponible'); return; }
-    let idx = selectedOutboundSeats.indexOf(id);
+    var idx = selectedOutboundSeats.indexOf(id);
     if (idx !== -1) selectedOutboundSeats.splice(idx, 1);
     else {
-        if (selectedOutboundSeats.length >= passengerCount) { alert(`Solo ${passengerCount} asiento${passengerCount > 1 ? 's' : ''}`); return; }
+        if (selectedOutboundSeats.length >= passengerCount) { alert('Solo ' + passengerCount + ' asiento' + (passengerCount > 1 ? 's' : '')); return; }
         selectedOutboundSeats.push(id);
     }
     generateSeatMapCompact();
@@ -3158,25 +3291,26 @@ function selectSeat(id, price, cabin, status) {
 }
 
 function updateSeatSummary() {
-    let div = document.getElementById('selectedSeatsList');
-    let totalSpan = document.getElementById('seatTotalPrice');
+    var div = document.getElementById('selectedSeatsList');
+    var totalSpan = document.getElementById('seatTotalPrice');
     if (!div) return;
-    let total = 0, html = '';
-    selectedOutboundSeats.forEach(seat => {
-        let el = document.querySelector(`.seat[data-seat="${seat}"]`);
-        let price = el ? parseInt(el.dataset.price) : SEAT_PRICES.economy;
+    var total = 0;
+    var html = '';
+    selectedOutboundSeats.forEach(function(seat) {
+        var el = document.querySelector('.seat[data-seat="' + seat + '"]');
+        var price = el ? parseInt(el.dataset.price) : SEAT_PRICES.economy;
         total += price;
-        let cabin = el?.dataset.cabin || 'Economy';
-        html += `<div class="selected-seat-item"><div><div class="seat-number">Asiento ${seat}</div><div class="seat-type">${cabin}</div></div><div><span>$${price.toLocaleString()}</span><button class="remove-seat" onclick="removeSeat('${seat}')">✕</button></div></div>`;
+        var cabin = el ? el.dataset.cabin : 'Economy';
+        html += '<div class="selected-seat-item"><div><div class="seat-number">Asiento ' + seat + '</div><div class="seat-type">' + cabin + '</div></div><div><span>$' + price.toLocaleString() + '</span><button class="remove-seat" onclick="removeSeat(\'' + seat + '\')">✕</button></div></div>';
     });
     if (selectedOutboundSeats.length === 0) html = '<p style="color:rgba(255,255,255,0.5); text-align:center;">No has seleccionado asientos</p>';
-    else if (selectedOutboundSeats.length < passengerCount) html += `<div style="margin-top:10px; padding:8px; background:rgba(255,193,7,0.2); border-radius:12px; text-align:center; color:#FFC107; font-size:11px;"><i class="fa-solid fa-info-circle"></i> Te faltan ${passengerCount - selectedOutboundSeats.length} asiento${passengerCount - selectedOutboundSeats.length !== 1 ? 's' : ''}</div>`;
+    else if (selectedOutboundSeats.length < passengerCount) html += '<div style="margin-top:10px; padding:8px; background:rgba(255,193,7,0.2); border-radius:12px; text-align:center; color:#FFC107; font-size:11px;"><i class="fa-solid fa-info-circle"></i> Te faltan ' + (passengerCount - selectedOutboundSeats.length) + ' asiento' + (passengerCount - selectedOutboundSeats.length !== 1 ? 's' : '') + '</div>';
     div.innerHTML = html;
-    if (totalSpan) totalSpan.textContent = `$${total.toLocaleString()}`;
+    if (totalSpan) totalSpan.textContent = '$' + total.toLocaleString();
 }
 
 function removeSeat(id) {
-    let idx = selectedOutboundSeats.indexOf(id);
+    var idx = selectedOutboundSeats.indexOf(id);
     if (idx !== -1) selectedOutboundSeats.splice(idx, 1);
     generateSeatMapCompact();
     updateSeatSummary();
@@ -3189,7 +3323,7 @@ function skipSeats() {
 }
 
 function confirmSeatsAndContinue() {
-    if (selectedOutboundSeats.length < passengerCount) { alert(`Selecciona ${passengerCount} asiento${passengerCount > 1 ? 's' : ''}`); return; }
+    if (selectedOutboundSeats.length < passengerCount) { alert('Selecciona ' + passengerCount + ' asiento' + (passengerCount > 1 ? 's' : '')); return; }
     goToBaggage();
 }
 
@@ -3197,11 +3331,13 @@ function confirmSeatsAndContinue() {
 // EQUIPAJE
 // ============================================
 function goToBaggage() {
-    let route = document.getElementById('baggageRouteInfo');
-    if (route) route.innerHTML = `<span class="city">${currentOrigin}</span><i class="fa-solid fa-arrow-right"></i><span class="city">${currentDestination}</span><span class="date">${formatDateDisplay(currentDepartureDate)}</span>`;
-    let container = document.getElementById('baggageOptions');
-    if (container) container.innerHTML = BAGGAGE_OPTIONS.map(o => `<div class="baggage-card" data-baggage-id="${o.id}" onclick="selectBaggage('${o.id}',${o.price})"><div class="baggage-header" style="display:flex; gap:12px; align-items:center; margin-bottom:10px;"><i class="fa-solid ${o.icon}" style="font-size:28px; color:var(--latam-blue);"></i><div><div class="baggage-title" style="font-weight:700; font-size:16px;">${o.name}</div><div class="baggage-price" style="font-weight:800; color:var(--latam-blue);">$${o.price.toLocaleString()}</div></div></div><div class="baggage-desc" style="font-size:12px; color:var(--latam-gray);">${o.desc}</div></div>`).join('');
-    setTimeout(() => { let def = document.querySelector(`.baggage-card[data-baggage-id="${selectedBaggage}"]`); if (def) def.classList.add('selected'); }, 50);
+    var route = document.getElementById('baggageRouteInfo');
+    if (route) route.innerHTML = '<span class="city">' + currentOrigin + '</span><i class="fa-solid fa-arrow-right"></i><span class="city">' + currentDestination + '</span><span class="date">' + formatDateDisplay(currentDepartureDate) + '</span>';
+    var container = document.getElementById('baggageOptions');
+    if (container) container.innerHTML = BAGGAGE_OPTIONS.map(function(o) {
+        return '<div class="baggage-card" data-baggage-id="' + o.id + '" onclick="selectBaggage(\'' + o.id + '\',' + o.price + ')"><div class="baggage-header" style="display:flex; gap:12px; align-items:center; margin-bottom:10px;"><i class="fa-solid ' + o.icon + '" style="font-size:28px; color:var(--latam-blue);"></i><div><div class="baggage-title" style="font-weight:700; font-size:16px;">' + o.name + '</div><div class="baggage-price" style="font-weight:800; color:var(--latam-blue);">$' + o.price.toLocaleString() + '</div></div></div><div class="baggage-desc" style="font-size:12px; color:var(--latam-gray);">' + o.desc + '</div></div>';
+    }).join('');
+    setTimeout(function() { var def = document.querySelector('.baggage-card[data-baggage-id="' + selectedBaggage + '"]'); if (def) def.classList.add('selected'); }, 50);
     document.getElementById('seatPage').style.display = 'none';
     document.getElementById('baggagePage').style.display = 'block';
     updateProgressBar(3);
@@ -3212,8 +3348,8 @@ function goToBaggage() {
 function selectBaggage(id, price) {
     selectedBaggage = id;
     baggagePrice = price;
-    document.querySelectorAll('.baggage-card').forEach(c => c.classList.remove('selected'));
-    let sel = document.querySelector(`.baggage-card[data-baggage-id="${id}"]`);
+    document.querySelectorAll('.baggage-card').forEach(function(c) { return c.classList.remove('selected'); });
+    var sel = document.querySelector('.baggage-card[data-baggage-id="' + id + '"]');
     if (sel) sel.classList.add('selected');
     autoSave();
 }
@@ -3224,96 +3360,95 @@ function confirmBaggageAndContinue() { goToCheckout(); }
 // CHECKOUT
 // ============================================
 function goToCheckout() {
-    const isRound = currentTripType !== 'oneway';
-    let totalFlights = 0;
+    var isRound = currentTripType !== 'oneway';
+    var totalFlights = 0;
     if (isRound && selectedReturnFlight) {
         totalFlights = selectedOutboundFlight.price + selectedReturnFlight.price;
     } else {
         totalFlights = selectedOutboundFlight.price;
     }
-    const totalSeats = selectedOutboundSeats.reduce((sum, seat) => {
-        const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
+    var totalSeats = selectedOutboundSeats.reduce(function(sum, seat) {
+        var seatEl = document.querySelector('.seat[data-seat="' + seat + '"]');
         return sum + (seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy);
     }, 0);
     
-    const depDateFormatted = formatDateDisplay(currentDepartureDate);
-    const retDateFormatted = formatDateDisplay(currentReturnDate);
+    var depDateFormatted = formatDateDisplay(currentDepartureDate);
+    var retDateFormatted = formatDateDisplay(currentReturnDate);
     
-    let flightOutboundDisplay;
+    var flightOutboundDisplay;
     if (passengerCount === 1) {
-        flightOutboundDisplay = `$${selectedOutboundFlight.price.toLocaleString()}`;
+        flightOutboundDisplay = '$' + selectedOutboundFlight.price.toLocaleString();
     } else {
-        flightOutboundDisplay = `$${selectedOutboundFlight.price.toLocaleString()} x ${passengerCount} = <strong>$${(selectedOutboundFlight.price * passengerCount).toLocaleString()}</strong>`;
+        flightOutboundDisplay = '$' + selectedOutboundFlight.price.toLocaleString() + ' x ' + passengerCount + ' = <strong>$' + (selectedOutboundFlight.price * passengerCount).toLocaleString() + '</strong>';
     }
     
-    let returnDisplay = '';
+    var returnDisplay = '';
     if (isRound && selectedReturnFlight) {
-        let returnPriceDisplay;
+        var returnPriceDisplay;
         if (passengerCount === 1) {
-            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()}`;
+            returnPriceDisplay = '$' + selectedReturnFlight.price.toLocaleString();
         } else {
-            returnPriceDisplay = `$${selectedReturnFlight.price.toLocaleString()} x ${passengerCount} = <strong>$${(selectedReturnFlight.price * passengerCount).toLocaleString()}</strong>`;
+            returnPriceDisplay = '$' + selectedReturnFlight.price.toLocaleString() + ' x ' + passengerCount + ' = <strong>$' + (selectedReturnFlight.price * passengerCount).toLocaleString() + '</strong>';
         }
-        returnDisplay = `<div class="flight-detail">
-            <div>
-                <div class="flight-route">${currentDestination} → ${currentOrigin}</div>
-                <div class="flight-time">${selectedReturnFlight.flightNumber} • ${selectedReturnFlight.time}</div>
-                <div class="flight-date">${retDateFormatted}</div>
-                ${selectedReturnFlight.discount > 0 ? `<div class="discount-info" style="font-size: 11px; color: #ff9800;">✨ ${selectedReturnFlight.discount}% de descuento aplicado</div>` : ''}
-            </div>
-            <div class="flight-price">${returnPriceDisplay}</div>
-        </div>`;
+        returnDisplay = '<div class="flight-detail">' +
+            '<div>' +
+                '<div class="flight-route">' + currentDestination + ' → ' + currentOrigin + '</div>' +
+                '<div class="flight-time">' + selectedReturnFlight.flightNumber + ' • ' + selectedReturnFlight.time + '</div>' +
+                '<div class="flight-date">' + retDateFormatted + '</div>' +
+                (selectedReturnFlight.discount > 0 ? '<div class="discount-info" style="font-size: 11px; color: #ff9800;">✨ ' + selectedReturnFlight.discount + '% de descuento aplicado</div>' : '') +
+            '</div>' +
+            '<div class="flight-price">' + returnPriceDisplay + '</div>' +
+        '</div>';
     }
     
-    let baggageDisplayText;
+    var baggageDisplayText;
     if (passengerCount === 1) {
-        baggageDisplayText = `$${baggagePrice.toLocaleString()}`;
+        baggageDisplayText = '$' + baggagePrice.toLocaleString();
     } else {
-        baggageDisplayText = `$${baggagePrice.toLocaleString()} x ${passengerCount} = <strong>$${(baggagePrice * passengerCount).toLocaleString()}</strong>`;
+        baggageDisplayText = '$' + baggagePrice.toLocaleString() + ' x ' + passengerCount + ' = <strong>$' + (baggagePrice * passengerCount).toLocaleString() + '</strong>';
     }
-    const total = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
+    var total = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
     
-    const aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
+    var aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
     
-    let flightHtml = `<h3 style="margin-bottom:16px;"><i class="fa-solid fa-plane-departure"></i> Vuelo de ida</h3>
-        <div class="flight-detail">
-            <div>
-                <div class="flight-route">${currentOrigin} → ${currentDestination}</div>
-                <div class="flight-time">${selectedOutboundFlight.flightNumber} • ${selectedOutboundFlight.time}</div>
-                <div class="flight-date">${depDateFormatted}</div>
-                ${selectedOutboundFlight.discount > 0 ? `<div class="discount-info" style="font-size: 11px; color: #ff9800; margin-top:6px;">✨ ${selectedOutboundFlight.discount}% de descuento aplicado</div>` : ''}
-                <div class="aircraft-info" style="margin-top: 8px; font-size: 11px;"><i class="fa-solid ${aircraft.icon}"></i> ${aircraft.name}</div>
-            </div>
-            <div class="flight-price">${flightOutboundDisplay}</div>
-        </div>`;
+    var flightHtml = '<h3 style="margin-bottom:16px;"><i class="fa-solid fa-plane-departure"></i> Vuelo de ida</h3>' +
+        '<div class="flight-detail">' +
+            '<div>' +
+                '<div class="flight-route">' + currentOrigin + ' → ' + currentDestination + '</div>' +
+                '<div class="flight-time">' + selectedOutboundFlight.flightNumber + ' • ' + selectedOutboundFlight.time + '</div>' +
+                '<div class="flight-date">' + depDateFormatted + '</div>' +
+                (selectedOutboundFlight.discount > 0 ? '<div class="discount-info" style="font-size: 11px; color: #ff9800; margin-top:6px;">✨ ' + selectedOutboundFlight.discount + '% de descuento aplicado</div>' : '') +
+                '<div class="aircraft-info" style="margin-top: 8px; font-size: 11px;"><i class="fa-solid ' + aircraft.icon + '"></i> ' + aircraft.name + '</div>' +
+            '</div>' +
+            '<div class="flight-price">' + flightOutboundDisplay + '</div>' +
+        '</div>';
     
     if (isRound && selectedReturnFlight) {
-        flightHtml += `<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-plane-arrival"></i> Vuelo de regreso</h3>${returnDisplay}`;
+        flightHtml += '<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-plane-arrival"></i> Vuelo de regreso</h3>' + returnDisplay;
     }
     
     if (selectedOutboundSeats.length > 0) {
-        flightHtml += `<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-chair"></i> Asientos seleccionados</h3>`;
-        selectedOutboundSeats.forEach(seat => {
-            const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
-            const price = seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy;
-            const cabin = seatEl?.dataset.cabin || 'Economy';
-            flightHtml += `<div class="flight-detail"><div>Asiento ${seat} (${cabin})</div><div class="flight-price">$${price.toLocaleString()}</div></div>`;
+        flightHtml += '<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-chair"></i> Asientos seleccionados</h3>';
+        selectedOutboundSeats.forEach(function(seat) {
+            var seatEl = document.querySelector('.seat[data-seat="' + seat + '"]');
+            var price = seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy;
+            var cabin = seatEl ? seatEl.dataset.cabin : 'Economy';
+            flightHtml += '<div class="flight-detail"><div>Asiento ' + seat + ' (' + cabin + ')</div><div class="flight-price">$' + price.toLocaleString() + '</div></div>';
         });
     } else {
-        flightHtml += `<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-chair"></i> Asientos</h3><div class="flight-detail"><div>No seleccionaste asientos</div><div class="flight-price">$0</div></div>`;
+        flightHtml += '<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-chair"></i> Asientos</h3><div class="flight-detail"><div>No seleccionaste asientos</div><div class="flight-price">$0</div></div>';
     }
-    const baggageName = BAGGAGE_OPTIONS.find(o => o.id === selectedBaggage)?.name || 'Ligero';
-    flightHtml += `<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-suitcase"></i> Equipaje</h3><div class="flight-detail"><div>${baggageName} ${passengerCount > 1 ? `x ${passengerCount} pasajeros` : ''}</div><div class="flight-price">${baggageDisplayText}</div></div>`;
+    var baggageName = BAGGAGE_OPTIONS.find(function(o) { return o.id === selectedBaggage; }).name || 'Ligero';
+    flightHtml += '<h3 style="margin-top:20px; margin-bottom:16px;"><i class="fa-solid fa-suitcase"></i> Equipaje</h3><div class="flight-detail"><div>' + baggageName + (passengerCount > 1 ? ' x ' + passengerCount + ' pasajeros' : '') + '</div><div class="flight-price">' + baggageDisplayText + '</div></div>';
     
     document.getElementById('checkoutFlightSummary').innerHTML = flightHtml;
     
-    document.getElementById('checkoutPriceBreakdown').innerHTML = `
-        <div class="price-row"><span>Vuelo ida</span><span>$${(selectedOutboundFlight.price * passengerCount).toLocaleString()}</span></div>
-        ${isRound && selectedReturnFlight ? `<div class="price-row"><span>Vuelo regreso</span><span>$${(selectedReturnFlight.price * passengerCount).toLocaleString()}</span></div>` : ''}
-        <div class="price-row"><span>Asientos</span><span>$${totalSeats.toLocaleString()}</span></div>
-        <div class="price-row"><span>Equipaje</span><span>$${(baggagePrice * passengerCount).toLocaleString()}</span></div>
-        <div class="price-row total"><span>Total a pagar</span><span>$${total.toLocaleString()}</span></div>
-    `;
+    document.getElementById('checkoutPriceBreakdown').innerHTML = 
+        '<div class="price-row"><span>Vuelo ida</span><span>$' + (selectedOutboundFlight.price * passengerCount).toLocaleString() + '</span></div>' +
+        (isRound && selectedReturnFlight ? '<div class="price-row"><span>Vuelo regreso</span><span>$' + (selectedReturnFlight.price * passengerCount).toLocaleString() + '</span></div>' : '') +
+        '<div class="price-row"><span>Asientos</span><span>$' + totalSeats.toLocaleString() + '</span></div>' +
+        '<div class="price-row"><span>Equipaje</span><span>$' + (baggagePrice * passengerCount).toLocaleString() + '</span></div>' +
+        '<div class="price-row total"><span>Total a pagar</span><span>$' + total.toLocaleString() + '</span></div>';
     
     generateExtraPassengersForm();
     document.getElementById('baggagePage').style.display = 'none';
@@ -3324,37 +3459,37 @@ function goToCheckout() {
 }
 
 function generateExtraPassengersForm() {
-    let container = document.getElementById('extraPassengersFields');
+    var container = document.getElementById('extraPassengersFields');
     if (!container) return;
-    let extra = passengerCount - 1;
+    var extra = passengerCount - 1;
     if (extra <= 0) { document.getElementById('extraPassengersForm').style.display = 'none'; return; }
     document.getElementById('extraPassengersForm').style.display = 'block';
-    let html = '';
-    for (let i = 1; i <= extra; i++) {
-        html += `<div style="border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:16px;"><h4 style="font-size:14px; margin-bottom:12px;">Pasajero ${i + 1}</h4><div class="form-row"><div class="form-group"><label>Nombres</label><input type="text" class="extra-name" data-pax="${i}" placeholder="Nombres"></div><div class="form-group"><label>Apellidos</label><input type="text" class="extra-lastname" data-pax="${i}" placeholder="Apellidos"></div></div><div class="form-row"><div class="form-group"><label>Tipo documento</label><select class="extra-doctype" data-pax="${i}"><option>CC</option><option>CE</option><option>Pasaporte</option></select></div><div class="form-group"><label>Número</label><input type="text" class="extra-docnum" data-pax="${i}" placeholder="Número"></div></div></div>`;
+    var html = '';
+    for (var i = 1; i <= extra; i++) {
+        html += '<div style="border:1px solid var(--border); border-radius:16px; padding:16px; margin-bottom:16px;"><h4 style="font-size:14px; margin-bottom:12px;">Pasajero ' + (i + 1) + '</h4><div class="form-row"><div class="form-group"><label>Nombres</label><input type="text" class="extra-name" data-pax="' + i + '" placeholder="Nombres"></div><div class="form-group"><label>Apellidos</label><input type="text" class="extra-lastname" data-pax="' + i + '" placeholder="Apellidos"></div></div><div class="form-row"><div class="form-group"><label>Tipo documento</label><select class="extra-doctype" data-pax="' + i + '"><option>CC</option><option>CE</option><option>Pasaporte</option></select></div><div class="form-group"><label>Número</label><input type="text" class="extra-docnum" data-pax="' + i + '" placeholder="Número"></div></div></div>';
     }
     container.innerHTML = html;
 }
 
 function generateQRCode(text, elId) {
-    let el = document.getElementById(elId);
+    var el = document.getElementById(elId);
     if (!el) return;
     el.innerHTML = '';
     try {
-        new QRCode(el, { text, width: 160, height: 160, colorDark: "#0033A0", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M });
+        new QRCode(el, { text: text, width: 160, height: 160, colorDark: "#0033A0", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M });
     } catch (e) {
-        el.innerHTML = `<div class="qr-code-placeholder">Código: ${text.substring(0, 20)}...</div>`;
+        el.innerHTML = '<div class="qr-code-placeholder">Código: ' + text.substring(0, 20) + '...</div>';
     }
 }
 
 function showConfirmationModal(data, code, total, name, last) {
-    lastReservationData = { ...data, reservationCode: code, total, passengerName: `${name} ${last}`, email: document.getElementById('email').value, phone: document.getElementById('phone').value, aeronave: data.aeronave };
+    lastReservationData = { reservationCode: code, total: total, passengerName: name + ' ' + last, email: document.getElementById('email').value, phone: document.getElementById('phone').value, aeronave: data.aeronave };
     document.getElementById('confirmCode').textContent = code;
-    document.getElementById('confirmPassenger').textContent = `${name} ${last}`;
-    document.getElementById('confirmRoute').textContent = `${currentOrigin} → ${currentDestination}`;
+    document.getElementById('confirmPassenger').textContent = name + ' ' + last;
+    document.getElementById('confirmRoute').textContent = currentOrigin + ' → ' + currentDestination;
     document.getElementById('confirmDate').textContent = formatDateDisplay(currentDepartureDate);
-    document.getElementById('confirmTotal').textContent = `$${total.toLocaleString()}`;
-    let qrText = `LATAM RESERVA\nCódigo: ${code}\nPasajero: ${name} ${last}\nRuta: ${currentOrigin} → ${currentDestination}\nFecha: ${formatDateDisplay(currentDepartureDate)}\nTotal: $${total.toLocaleString()}\nVuelo: ${selectedOutboundFlight.flightNumber}`;
+    document.getElementById('confirmTotal').textContent = '$' + total.toLocaleString();
+    var qrText = 'LATAM RESERVA\nCódigo: ' + code + '\nPasajero: ' + name + ' ' + last + '\nRuta: ' + currentOrigin + ' → ' + currentDestination + '\nFecha: ' + formatDateDisplay(currentDepartureDate) + '\nTotal: $' + total.toLocaleString() + '\nVuelo: ' + selectedOutboundFlight.flightNumber;
     generateQRCode(encodeURIComponent(qrText), 'qrCode');
     document.getElementById('confirmationModal').style.display = 'flex';
 }
@@ -3363,84 +3498,90 @@ function closeConfirmationModal() { document.getElementById('confirmationModal')
 function sendWhatsAppFromModal() {
     if (!lastReservationData) return;
     
-    const isRound = currentTripType !== 'oneway';
-    let totalFlights = 0;
+    var isRound = currentTripType !== 'oneway';
+    var totalFlights = 0;
     if (isRound && selectedReturnFlight) {
         totalFlights = selectedOutboundFlight.price + selectedReturnFlight.price;
     } else {
         totalFlights = selectedOutboundFlight.price;
     }
-    const totalSeats = selectedOutboundSeats.reduce((sum, seat) => {
-        const seatEl = document.querySelector(`.seat[data-seat="${seat}"]`);
+    var totalSeats = selectedOutboundSeats.reduce(function(sum, seat) {
+        var seatEl = document.querySelector('.seat[data-seat="' + seat + '"]');
         return sum + (seatEl ? parseInt(seatEl.dataset.price) : SEAT_PRICES.economy);
     }, 0);
-    const totalCorrecto = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
+    var totalCorrecto = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
     
-    let msg = `🛫 *RESERVA LATAM AIRLINES COLOMBIA* 🛬%0A%0A`;
-    msg += `✈️ *AERONAVE:* ${lastReservationData.aeronave || 'Boeing 787-9 Dreamliner'}%0A`;
-    msg += `👥 *PASAJEROS:* ${passengerCount} ${passengerCount === 1 ? 'pasajero' : 'pasajeros'}%0A%0A`;
-    msg += `👤 *DATOS DEL PASAJERO PRINCIPAL*%0A`;
-    msg += `Nombre: ${lastReservationData.passengerName}%0A`;
-    msg += `Email: ${lastReservationData.email || 'No registrado'}%0A`;
-    msg += `Teléfono: ${lastReservationData.phone || 'No registrado'}%0A%0A`;
-    msg += `✈️ *DETALLES DEL VUELO*%0A`;
-    msg += `🛫 *IDA:* ${selectedOutboundFlight.flightNumber} - ${selectedOutboundFlight.time}%0A`;
-    msg += `📍 Ruta: ${currentOrigin} → ${currentDestination}%0A`;
-    msg += `📅 Fecha: ${formatDateDisplay(currentDepartureDate)}%0A`;
-    if (selectedOutboundFlight.discount > 0) msg += `🎉 *DESCUENTO APLICADO:* ${selectedOutboundFlight.discount}% en vuelo de ida%0A`;
+    var msg = '🛫 *RESERVA LATAM AIRLINES COLOMBIA* 🛬%0A%0A';
+    msg += '✈️ *AERONAVE:* ' + (lastReservationData.aeronave || 'Boeing 787-9 Dreamliner') + '%0A';
+    msg += '👥 *PASAJEROS:* ' + passengerCount + ' ' + (passengerCount === 1 ? 'pasajero' : 'pasajeros') + '%0A%0A';
+    msg += '👤 *DATOS DEL PASAJERO PRINCIPAL*%0A';
+    msg += 'Nombre: ' + lastReservationData.passengerName + '%0A';
+    msg += 'Email: ' + (lastReservationData.email || 'No registrado') + '%0A';
+    msg += 'Teléfono: ' + (lastReservationData.phone || 'No registrado') + '%0A%0A';
+    msg += '✈️ *DETALLES DEL VUELO*%0A';
+    msg += '🛫 *IDA:* ' + selectedOutboundFlight.flightNumber + ' - ' + selectedOutboundFlight.time + '%0A';
+    msg += '📍 Ruta: ' + currentOrigin + ' → ' + currentDestination + '%0A';
+    msg += '📅 Fecha: ' + formatDateDisplay(currentDepartureDate) + '%0A';
+    if (selectedOutboundFlight.discount > 0) msg += '🎉 *DESCUENTO APLICADO:* ' + selectedOutboundFlight.discount + '% en vuelo de ida%0A';
     if (currentTripType !== 'oneway' && selectedReturnFlight) {
-        msg += `%0A🛬 *REGRESO:* ${selectedReturnFlight.flightNumber} - ${selectedReturnFlight.time}%0A`;
-        msg += `📍 Ruta: ${currentDestination} → ${currentOrigin}%0A`;
-        msg += `📅 Fecha: ${formatDateDisplay(currentReturnDate)}%0A`;
-        if (selectedReturnFlight.discount > 0) msg += `🎉 *DESCUENTO APLICADO:* ${selectedReturnFlight.discount}% en vuelo de regreso%0A`;
+        msg += '%0A🛬 *REGRESO:* ' + selectedReturnFlight.flightNumber + ' - ' + selectedReturnFlight.time + '%0A';
+        msg += '📍 Ruta: ' + currentDestination + ' → ' + currentOrigin + '%0A';
+        msg += '📅 Fecha: ' + formatDateDisplay(currentReturnDate) + '%0A';
+        if (selectedReturnFlight.discount > 0) msg += '🎉 *DESCUENTO APLICADO:* ' + selectedReturnFlight.discount + '% en vuelo de regreso%0A';
     }
-    msg += `%0A💺 *ASIENTOS:* ${selectedOutboundSeats.join(', ') || 'No seleccionados'}%0A`;
-    msg += `🧳 *EQUIPAJE:* ${BAGGAGE_OPTIONS.find(o => o.id === selectedBaggage)?.name || 'Ligero'}${passengerCount > 1 ? ` x ${passengerCount}` : ''}%0A`;
-    msg += `💰 *TOTAL A PAGAR:* $${totalCorrecto.toLocaleString()} COP%0A%0A`;
-    msg += `💳 *MÉTODO DE PAGO:* Transferencia bancaria%0A%0A`;
-    msg += `📲 *PARA ACTIVAR TU RESERVA:*%0A`;
-    msg += `Un asesor se pondrá en contacto contigo para completar el pago.%0A%0A`;
-    msg += `🎉 ¡Gracias por elegir LATAM Airlines Colombia! 🎉`;
+    msg += '%0A💺 *ASIENTOS:* ' + (selectedOutboundSeats.join(', ') || 'No seleccionados') + '%0A';
+    msg += '🧳 *EQUIPAJE:* ' + (BAGGAGE_OPTIONS.find(function(o) { return o.id === selectedBaggage; }).name || 'Ligero') + (passengerCount > 1 ? ' x ' + passengerCount : '') + '%0A';
+    msg += '💰 *TOTAL A PAGAR:* $' + totalCorrecto.toLocaleString() + ' COP%0A%0A';
+    msg += '💳 *MÉTODO DE PAGO:* Transferencia bancaria%0A%0A';
+    msg += '📲 *PARA ACTIVAR TU RESERVA:*%0A';
+    msg += 'Un asesor se pondrá en contacto contigo para completar el pago.%0A%0A';
+    msg += '🎉 ¡Gracias por elegir LATAM Airlines Colombia! 🎉';
     
-    window.open(`https://wa.me/573002996016?text=${msg}`, '_blank');
+    window.open('https://wa.me/573002996016?text=' + msg, '_blank');
 }
 
 async function saveReservationToFirestore(data) {
     if (!currentUser) {
-        let off = JSON.parse(localStorage.getItem('offline_reservations') || '[]');
-        off.push({ ...data, userId: 'offline', date: new Date().toISOString() });
+        var off = JSON.parse(localStorage.getItem('offline_reservations') || '[]');
+        off.push(data);
         localStorage.setItem('offline_reservations', JSON.stringify(off));
         return;
     }
     if (db) {
         try {
-            await db.collection('reservations').add({ ...data, userId: currentUser.uid, userEmail: currentUser.email, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+            await db.collection('reservations').add(data);
         } catch (e) { console.error(e); }
     }
 }
 
 async function processPayment() {
-    let doc = document.getElementById('docNumber').value, name = document.getElementById('firstName').value, last = document.getElementById('lastName').value, email = document.getElementById('email').value, phone = document.getElementById('phone').value;
+    var doc = document.getElementById('docNumber').value;
+    var name = document.getElementById('firstName').value;
+    var last = document.getElementById('lastName').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
     if (!doc || !name || !last || !email || !phone) { alert('Completa los datos del pasajero principal'); return; }
-    let extra = [];
+    var extra = [];
     if (passengerCount > 1) {
-        let names = document.querySelectorAll('.extra-name'), lasts = document.querySelectorAll('.extra-lastname'), nums = document.querySelectorAll('.extra-docnum');
-        for (let i = 0; i < passengerCount - 1; i++) { if (!names[i].value || !lasts[i].value || !nums[i].value) { alert(`Completa datos del pasajero ${i + 2}`); return; } extra.push({ name: names[i].value, lastname: lasts[i].value, docNumber: nums[i].value }); }
+        var names = document.querySelectorAll('.extra-name');
+        var lasts = document.querySelectorAll('.extra-lastname');
+        var nums = document.querySelectorAll('.extra-docnum');
+        for (var i = 0; i < passengerCount - 1; i++) { if (!names[i].value || !lasts[i].value || !nums[i].value) { alert('Completa datos del pasajero ' + (i + 2)); return; } extra.push({ name: names[i].value, lastname: lasts[i].value, docNumber: nums[i].value }); }
     }
-    let isRound = currentTripType !== 'oneway';
-    let totalFlights = isRound && selectedReturnFlight ? selectedOutboundFlight.price + selectedReturnFlight.price : selectedOutboundFlight.price;
-    let totalSeats = selectedOutboundSeats.reduce((s, seat) => s + (document.querySelector(`.seat[data-seat="${seat}"]`)?.dataset.price || SEAT_PRICES.economy), 0);
-    let total = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
-    let code = 'LTM-' + Math.random().toString(36).substring(2, 10).toUpperCase();
-    let aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
-    let reserva = { codigo: code, fecha: new Date().toISOString(), origen: currentOrigin, destino: currentDestination, fecha_ida: currentDepartureDate, fecha_regreso: currentReturnDate, vuelo_ida: `${selectedOutboundFlight.flightNumber} - ${selectedOutboundFlight.time}`, vuelo_regreso: selectedReturnFlight ? `${selectedReturnFlight.flightNumber} - ${selectedReturnFlight.time}` : 'Solo ida', asientos: selectedOutboundSeats.join(', ') || 'No seleccionados', equipaje: BAGGAGE_OPTIONS.find(o => o.id === selectedBaggage)?.name, total: total.toLocaleString(), total_numeric: total, descuento_ida: selectedOutboundFlight.discount, descuento_regreso: selectedReturnFlight?.discount || 0, metodo_pago: 'Transferencia bancaria', flightNumber: selectedOutboundFlight.flightNumber, aeronave: aircraft.name, pasajero_principal: { nombre: name, apellido: last, documento: doc, email, telefono: phone }, pasajeros_adicionales: extra };
+    var isRound = currentTripType !== 'oneway';
+    var totalFlights = isRound && selectedReturnFlight ? selectedOutboundFlight.price + selectedReturnFlight.price : selectedOutboundFlight.price;
+    var totalSeats = selectedOutboundSeats.reduce(function(s, seat) { return s + (document.querySelector('.seat[data-seat="' + seat + '"]') ? parseInt(document.querySelector('.seat[data-seat="' + seat + '"]').dataset.price) : SEAT_PRICES.economy); }, 0);
+    var total = (totalFlights * passengerCount) + totalSeats + (baggagePrice * passengerCount);
+    var code = 'LTM-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+    var aircraft = getAircraftForRoute(currentOriginCode, currentDestCode);
+    var reserva = { codigo: code, fecha: new Date().toISOString(), origen: currentOrigin, destino: currentDestination, fecha_ida: currentDepartureDate, fecha_regreso: currentReturnDate, vuelo_ida: selectedOutboundFlight.flightNumber + ' - ' + selectedOutboundFlight.time, vuelo_regreso: selectedReturnFlight ? selectedReturnFlight.flightNumber + ' - ' + selectedReturnFlight.time : 'Solo ida', asientos: selectedOutboundSeats.join(', ') || 'No seleccionados', equipaje: BAGGAGE_OPTIONS.find(function(o) { return o.id === selectedBaggage; }).name, total: total.toLocaleString(), total_numeric: total, descuento_ida: selectedOutboundFlight.discount, descuento_regreso: selectedReturnFlight ? selectedReturnFlight.discount : 0, metodo_pago: 'Transferencia bancaria', flightNumber: selectedOutboundFlight.flightNumber, aeronave: aircraft.name, pasajero_principal: { nombre: name, apellido: last, documento: doc, email: email, telefono: phone }, pasajeros_adicionales: extra };
     await saveReservationToFirestore(reserva);
     clearAutoSave();
     showConfirmationModal(reserva, code, total, name, last);
 }
 
 function skipSplash() {
-    let splash = document.getElementById('splashScreen');
+    var splash = document.getElementById('splashScreen');
     splash.style.animation = 'none';
     splash.style.opacity = '0';
     splash.style.visibility = 'hidden';
@@ -3450,7 +3591,7 @@ function skipSplash() {
 // FUNCIONES DE SECCIONES VISUALES
 // ============================================
 function generateDestinationsOffers() {
-    const destinations = [
+    var destinations = [
         { city: "Bogotá", code: "BOG", price: 69160, original: 129000, discount: 46, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Bogota.jpg" },
         { city: "Medellín", code: "MDE", price: 86910, original: 149000, discount: 42, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Medellin.jfif" },
         { city: "Cartagena", code: "CTG", price: 152500, original: 279000, discount: 45, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Cartagena.jfif" },
@@ -3464,69 +3605,69 @@ function generateDestinationsOffers() {
         { city: "Santiago", code: "SCL", price: 1200000, original: 1734000, discount: 31, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Santiago.jfif" },
         { city: "São Paulo", code: "GRU", price: 1150000, original: 1712000, discount: 33, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-SaoPaulo.jfif" }
     ];
-    document.getElementById('destinationsOffers').innerHTML = destinations.map(d => `
-        <div class="destino-card" onclick="quickSearch('Bogotá (BOG)','${d.city} (${d.code})')">
-            <div class="destino-img"><div class="destino-badge">-${d.discount}%</div><img src="${d.img}" alt="${d.city}"></div>
-            <div class="destino-info"><h3>${d.city}</h3><div class="destino-precio"><span class="destino-original">$${d.original.toLocaleString()}</span> $${d.price.toLocaleString()}</div></div>
-        </div>
-    `).join('');
+    document.getElementById('destinationsOffers').innerHTML = destinations.map(function(d) {
+        return '<div class="destino-card" onclick="quickSearch(\'Bogotá (BOG)\',\'' + d.city + ' (' + d.code + ')\')">' +
+            '<div class="destino-img"><div class="destino-badge">-' + d.discount + '%</div><img src="' + d.img + '" alt="' + d.city + '"></div>' +
+            '<div class="destino-info"><h3>' + d.city + '</h3><div class="destino-precio"><span class="destino-original">$' + d.original.toLocaleString() + '</span> $' + d.price.toLocaleString() + '</div></div>' +
+        '</div>';
+    }).join('');
 }
 
 function generatePaquetes() {
-    const paquetes = [
+    var paquetes = [
         { name: "Cartagena 4 días", price: 450000, original: 680000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-Cartagena.jfif" },
         { name: "San Andrés 5 días", price: 890000, original: 1200000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-SanAndres.jfif" },
         { name: "Miami 7 días", price: 2100000, original: 2800000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-Miami.jfif" },
         { name: "Medellín 3 días", price: 320000, original: 480000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/paquete-Medellin.jfif" }
     ];
-    document.getElementById('paquetesGrid').innerHTML = paquetes.map(p => `
-        <div class="paquete-card">
-            <div class="paquete-img"><img src="${p.img}" alt="${p.name}"></div>
-            <div class="paquete-info"><h3>${p.name}</h3><div class="paquete-precio"><span class="destino-original">$${p.original.toLocaleString()}</span> $${p.price.toLocaleString()}</div></div>
-        </div>
-    `).join('');
+    document.getElementById('paquetesGrid').innerHTML = paquetes.map(function(p) {
+        return '<div class="paquete-card">' +
+            '<div class="paquete-img"><img src="' + p.img + '" alt="' + p.name + '"></div>' +
+            '<div class="paquete-info"><h3>' + p.name + '</h3><div class="paquete-precio"><span class="destino-original">$' + p.original.toLocaleString() + '</span> $' + p.price.toLocaleString() + '</div></div>' +
+        '</div>';
+    }).join('');
 }
 
 function generateExperiencias() {
-    const experiencias = [
+    var experiencias = [
         { name: "Tour Ciudad Amurallada", price: 120000, img: "https://images.unsplash.com/photo-1555881400-9b6e0b7a7a2f?w=400" },
         { name: "Avistamiento de ballenas", price: 250000, img: "https://images.unsplash.com/photo-1542051841856-5f900f0e2513?w=400" },
         { name: "City Tour Medellín", price: 89000, img: "https://images.unsplash.com/photo-1582652616399-0c0dd9b3e2d7?w=400" },
         { name: "Caminata del Cóndor", price: 180000, img: "https://images.unsplash.com/photo-1533903345306-15d1c30952d1?w=400" }
     ];
-    document.getElementById('experienciasGrid').innerHTML = experiencias.map(e => `
-        <div class="experiencia-card">
-            <div class="experiencia-img"><img src="${e.img}" alt="${e.name}"></div>
-            <div class="experiencia-info"><h3>${e.name}</h3><div class="destino-precio">$${e.price.toLocaleString()}</div></div>
-        </div>
-    `).join('');
+    document.getElementById('experienciasGrid').innerHTML = experiencias.map(function(e) {
+        return '<div class="experiencia-card">' +
+            '<div class="experiencia-img"><img src="' + e.img + '" alt="' + e.name + '"></div>' +
+            '<div class="experiencia-info"><h3>' + e.name + '</h3><div class="destino-precio">$' + e.price.toLocaleString() + '</div></div>' +
+        '</div>';
+    }).join('');
 }
 
 function generateNoticias() {
-    const noticias = [
+    var noticias = [
         { title: "Nueva ruta Bogotá - París", date: "15 Mar 2026", img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400" },
         { title: "LATAM renueva su flota de aviones", date: "10 Mar 2026", img: "https://images.unsplash.com/photo-1542296332-2e4473faf563?w=400" },
         { title: "Beneficios exclusivos LATAM Pass", date: "5 Mar 2026", img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400" }
     ];
-    document.getElementById('noticiasGrid').innerHTML = noticias.map(n => `
-        <div class="noticia-card">
-            <div class="destino-img"><img src="${n.img}" alt="${n.title}"></div>
-            <div class="destino-info"><p style="color: var(--latam-gray-light); font-size: 12px;">${n.date}</p><h3 style="font-size: 16px;">${n.title}</h3></div>
-        </div>
-    `).join('');
+    document.getElementById('noticiasGrid').innerHTML = noticias.map(function(n) {
+        return '<div class="noticia-card">' +
+            '<div class="destino-img"><img src="' + n.img + '" alt="' + n.title + '"></div>' +
+            '<div class="destino-info"><p style="color: var(--latam-gray-light); font-size: 12px;">' + n.date + '</p><h3 style="font-size: 16px;">' + n.title + '</h3></div>' +
+        '</div>';
+    }).join('');
 }
 
 function startCountdown() {
-    const targetDate = new Date();
+    var targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 5);
     targetDate.setHours(23, 59, 59);
-    setInterval(() => {
-        const now = new Date();
-        const diff = targetDate - now;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (86400000)) / 3600000);
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
+    setInterval(function() {
+        var now = new Date();
+        var diff = targetDate - now;
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (86400000)) / 3600000);
+        var minutes = Math.floor((diff % 3600000) / 60000);
+        var seconds = Math.floor((diff % 60000) / 1000);
         document.getElementById('days').textContent = String(days).padStart(2, '0');
         document.getElementById('hours').textContent = String(hours).padStart(2, '0');
         document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
@@ -3539,9 +3680,9 @@ function toggleFaq(element) {
 }
 
 function subscribeNewsletter() {
-    const email = document.getElementById('newsletterEmail').value;
+    var email = document.getElementById('newsletterEmail').value;
     if (email) {
-        alert(`¡Gracias por suscribirte! Recibirás ofertas en ${email}`);
+        alert('¡Gracias por suscribirte! Recibirás ofertas en ' + email);
         document.getElementById('newsletterEmail').value = '';
     } else {
         alert('Por favor ingresa un correo válido');
@@ -3549,17 +3690,17 @@ function subscribeNewsletter() {
 }
 
 function checkAuthState() {
-    if (auth) auth.onAuthStateChanged((user) => {
+    if (auth) auth.onAuthStateChanged(function(user) {
         currentUser = user;
         document.getElementById('userNameDisplay').innerHTML = user ? user.email.split('@')[0] : 'Iniciar sesión';
     });
 }
 
 // ============================================
-// Event listeners
+// EVENT LISTENERS - ASIGNAR CLICK AL BOTÓN
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
-    const overlay = document.getElementById('searchOverlay');
+    var overlay = document.getElementById('searchOverlay');
     overlay.addEventListener('click', function(e) {
         if (e.target === this) {
             closeSearchModal();
@@ -3573,25 +3714,51 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     setDefaultDates();
+    
+    setupAutocomplete('origin', 'originAutocomplete');
+    setupAutocomplete('destination', 'destAutocomplete');
+    
+    // ASIGNAR EVENTO CLICK AL BOTÓN DE BÚSQUEDA
+    var searchBtn = document.getElementById('searchButton');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            searchFlights();
+        });
+        console.log('✅ Botón de búsqueda configurado correctamente');
+    } else {
+        console.error('❌ No se encontró el botón de búsqueda');
+    }
+    
+    console.log('✅ LATAM Airlines - Página cargada correctamente');
 });
 
-document.querySelectorAll('input[name="trip"]').forEach(r => {
-    r.addEventListener('change', () => {
+// También asignar el evento por si el DOM ya está cargado
+var searchBtn = document.getElementById('searchButton');
+if (searchBtn) {
+    searchBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        searchFlights();
+    });
+}
+
+document.querySelectorAll('input[name="trip"]').forEach(function(r) {
+    r.addEventListener('change', function() {
         document.getElementById('returnDate').style.display = r.value === 'oneway' ? 'none' : 'block';
     });
 });
 
-document.querySelectorAll('.auth-tab').forEach(t => {
-    t.addEventListener('click', () => {
-        document.querySelectorAll('.auth-tab').forEach(tt => tt.classList.remove('active'));
+document.querySelectorAll('.auth-tab').forEach(function(t) {
+    t.addEventListener('click', function() {
+        document.querySelectorAll('.auth-tab').forEach(function(tt) { tt.classList.remove('active'); });
         t.classList.add('active');
-        let tab = t.getAttribute('data-tab');
+        var tab = t.getAttribute('data-tab');
         document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
         document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
     });
 });
 
-window.onclick = function (e) {
+window.onclick = function(e) {
     if (e.target === document.getElementById('passengerModal')) closePassengerModal();
     if (e.target === document.getElementById('authModal')) closeAuthModal();
     if (e.target === document.getElementById('confirmationModal')) closeConfirmationModal();
@@ -3600,15 +3767,13 @@ window.onclick = function (e) {
 // ============================================
 // INICIALIZACIÓN
 // ============================================
-setupAutocomplete(document.getElementById('origin'));
-setupAutocomplete(document.getElementById('destination'));
 generateDestinationsOffers();
 generatePaquetes();
 generateExperiencias();
 generateNoticias();
 startCountdown();
 document.getElementById('passengerCount').addEventListener('click', openPassengerModal);
-document.getElementById('userNameDisplay').addEventListener('click', () => { if (!currentUser) openAuthModal(); });
+document.getElementById('userNameDisplay').addEventListener('click', function() { if (!currentUser) openAuthModal(); });
 checkAuthState();
 loadAutoSave();
 </script>
