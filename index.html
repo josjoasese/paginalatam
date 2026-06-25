@@ -183,7 +183,7 @@ body {
     justify-content: center;
 }
 .hero-content {
-    max-width: 480px;
+    max-width: 820px;
     margin: 0 auto;
     text-align: left;
     width: 100%;
@@ -204,16 +204,13 @@ body {
 }
 
 .search-box-latam {
-    background: #0A1628;
-    width: 92%;
-    max-width: 480px;
+    background: #0033A0;
+    width: 100%;
+    max-width: 820px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 20px;
-    padding-left: 22px;
-    padding-right: 22px;
-    padding-bottom: 28px;
-    border-radius: 16px;
+    padding: 28px 32px 32px 32px;
+    border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     position: relative;
     border: none;
@@ -261,64 +258,73 @@ body {
 
 .search-tabs {
     display: flex;
-    gap: 8px;
-    align-items: center;
+    gap: 4px;
+    align-items: flex-end;
     margin-top: 14px;
-    margin-bottom: 4px;
+    margin-bottom: 0px;
 }
 
 .tab-btn {
-    height: 42px;
-    border-radius: 20px;
-    padding: 0 18px;
-    font-size: 16px;
-    font-weight: 500;
-    background: rgba(255,255,255,0.08);
-    border: 2px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.7);
+    height: 52px;
+    border-radius: 0;
+    padding: 0 24px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #FFFFFF;
+    border: none;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    color: #333333;
     cursor: pointer;
     font-family: 'Inter', 'Segoe UI', sans-serif;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     white-space: nowrap;
+    position: relative;
+    min-width: 120px;
+    justify-content: center;
 }
 .tab-btn:hover {
-    border-color: rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.12);
-    color: #FFFFFF;
+    background: #f0f0f0;
 }
 .tab-btn.active {
-    border: 2px solid #8D99F0;
+    background: #0033A0;
     color: #FFFFFF;
     font-weight: 600;
-    background: rgba(255,255,255,0.12);
-    padding-left: 16px;
 }
 .tab-btn.active i {
-    color: #8D99F0;
+    color: #FFFFFF;
 }
 .tab-btn i {
     font-size: 14px;
-    color: rgba(255,255,255,0.6);
+    color: #999;
+    display: none;
+}
+.tab-btn.active i {
+    display: inline-block;
+}
+.tab-btn:not(.active) i {
+    display: none;
 }
 
 .origin-dest-container {
-    background: rgba(255,255,255,0.05);
-    border: 1.5px solid rgba(255,255,255,0.15);
-    border-radius: 14px;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 0 0 8px 8px;
     position: relative;
     overflow: visible;
     width: 100%;
     margin-top: 0px;
     height: 220px;
+    border-top: 2px solid #0033A0;
 }
 
 .origin-section {
     padding-top: 22px;
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 24px;
+    padding-right: 24px;
     padding-bottom: 18px;
     position: relative;
 }
@@ -326,7 +332,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: rgba(255,255,255,0.8);
+    color: #555;
     margin-bottom: 16px;
     display: block;
 }
@@ -334,7 +340,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 24px;
     font-weight: 400;
-    color: rgba(255,255,255,0.5);
+    color: #B6B6B6;
     background: none;
     border: none;
     width: 100%;
@@ -342,22 +348,22 @@ body {
     outline: none;
 }
 .origin-section .input-placeholder:focus {
-    color: #FFFFFF;
+    color: #333;
 }
 .origin-section .input-placeholder::placeholder {
-    color: rgba(255,255,255,0.35);
+    color: #B6B6B6;
 }
 
 .divider-line {
     height: 1px;
-    background: rgba(255,255,255,0.1);
+    background: #E0E0E0;
     width: 100%;
 }
 
 .dest-section {
     padding-top: 22px;
-    padding-left: 22px;
-    padding-right: 22px;
+    padding-left: 24px;
+    padding-right: 24px;
     padding-bottom: 18px;
     position: relative;
 }
@@ -365,7 +371,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: rgba(255,255,255,0.8);
+    color: #555;
     margin-bottom: 16px;
     display: block;
 }
@@ -373,7 +379,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     font-size: 24px;
     font-weight: 400;
-    color: rgba(255,255,255,0.5);
+    color: #B6B6B6;
     background: none;
     border: none;
     width: 100%;
@@ -381,10 +387,10 @@ body {
     outline: none;
 }
 .dest-section .input-placeholder:focus {
-    color: #FFFFFF;
+    color: #333;
 }
 .dest-section .input-placeholder::placeholder {
-    color: rgba(255,255,255,0.35);
+    color: #B6B6B6;
 }
 
 .swap-btn {
@@ -427,13 +433,13 @@ body {
 }
 
 .search-btn-latam {
-    background: var(--latam-blue);
+    background: #00247D;
     color: white;
     border: none;
-    padding: 14px 40px;
+    padding: 16px 40px;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
     width: 100%;
     margin-top: 16px;
@@ -441,7 +447,7 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 .search-btn-latam:hover {
-    background: var(--latam-blue-dark);
+    background: #001A5E;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0,51,160,0.3);
 }
@@ -453,22 +459,18 @@ body {
 }
 .search-dates input {
     flex: 1;
-    padding: 10px 14px;
-    border: 1.5px solid rgba(255,255,255,0.15);
-    border-radius: 8px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 6px;
     font-size: 14px;
     font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: #FFFFFF;
-    background: rgba(255,255,255,0.05);
+    color: #333;
+    background: #FFFFFF;
     transition: border 0.3s ease;
 }
 .search-dates input:focus {
     outline: none;
-    border-color: var(--latam-blue);
-    box-shadow: 0 0 0 3px rgba(0,51,160,0.2);
-}
-.search-dates input::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+    box-shadow: 0 0 0 2px rgba(0,51,160,0.3);
 }
 
 .search-overlay {
@@ -491,13 +493,13 @@ body {
     top: 62px;
     left: 0;
     width: 100%;
-    background: #1a2744;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     max-height: 250px;
     overflow-y: auto;
     z-index: 9999;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid #e0e0e0;
     display: none;
 }
 .autocomplete-container.active {
@@ -508,22 +510,22 @@ body {
     cursor: pointer;
     font-size: 15px;
     font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: rgba(255,255,255,0.85);
+    color: #333;
     transition: background 0.15s ease;
     display: flex;
     align-items: center;
     gap: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid #f0f0f0;
 }
 .autocomplete-item:last-child {
     border-bottom: none;
 }
 .autocomplete-item:hover {
-    background: rgba(255,255,255,0.08);
+    background: #E8F0FE;
 }
 .autocomplete-item .airport-code {
     font-weight: 700;
-    color: #8D99F0;
+    color: #0033A0;
     font-size: 13px;
     min-width: 40px;
 }
@@ -531,12 +533,12 @@ body {
     flex: 1;
 }
 .autocomplete-item .airport-city {
-    color: rgba(255,255,255,0.4);
+    color: #999;
     font-size: 13px;
 }
 .autocomplete-item .highlight {
     font-weight: 700;
-    color: #8D99F0;
+    color: #0033A0;
 }
 
 .promo-banner {
@@ -1688,12 +1690,9 @@ body {
         font-size: 28px;
     }
     .search-box-latam {
-        width: 92%;
-        padding-top: 16px;
-        padding-left: 18px;
-        padding-right: 18px;
-        padding-bottom: 22px;
-        border-radius: 14px;
+        width: 100%;
+        padding: 16px 16px 20px 16px;
+        border-radius: 6px;
     }
     .search-title {
         font-size: 28px;
@@ -1708,10 +1707,11 @@ body {
         font-size: 20px;
     }
     .tab-btn {
-        height: 36px;
-        padding: 0 14px;
-        font-size: 14px;
-        border-radius: 16px;
+        height: 44px;
+        padding: 0 16px;
+        font-size: 13px;
+        min-width: 80px;
+        border-radius: 4px 4px 0 0;
     }
     .origin-section {
         padding-top: 18px;
@@ -1743,9 +1743,9 @@ body {
         font-size: 12px;
     }
     .search-tabs {
-        gap: 6px;
+        gap: 3px;
         margin-top: 10px;
-        margin-bottom: 2px;
+        margin-bottom: 0px;
     }
     .origin-dest-container {
         height: 190px;
@@ -1783,21 +1783,19 @@ body {
         font-size: 18px;
     }
     .tab-btn {
-        height: 32px;
+        height: 38px;
         padding: 0 12px;
         font-size: 12px;
-        border-radius: 14px;
+        min-width: 60px;
+        border-radius: 3px 3px 0 0;
     }
     .origin-section .input-placeholder,
     .dest-section .input-placeholder {
         font-size: 17px;
     }
     .search-box-latam {
-        padding-top: 14px;
-        padding-left: 14px;
-        padding-right: 14px;
-        padding-bottom: 18px;
-        border-radius: 12px;
+        padding: 12px 12px 16px 12px;
+        border-radius: 4px;
     }
     .origin-section {
         padding-top: 14px;
@@ -1904,10 +1902,10 @@ body {
                             <i class="fa-solid fa-check"></i> Ida y vuelta
                         </button>
                         <button class="tab-btn" data-trip="oneway" onclick="selectTrip('oneway', this)">
-                            Solo ida
+                            <i class="fa-solid fa-check"></i> Solo ida
                         </button>
                         <button class="tab-btn" data-trip="multi" onclick="selectTrip('multi', this)">
-                            Multidestino
+                            <i class="fa-solid fa-check"></i> Multidestino
                         </button>
                     </div>
 
@@ -1952,7 +1950,7 @@ body {
                         <input type="date" id="returnDate">
                     </div>
 
-                    <!-- BOTÓN DE BÚSQUEDA - CON ID PARA MEJOR MANEJO -->
+                    <!-- BOTÓN DE BÚSQUEDA -->
                     <button class="search-btn-latam" id="searchButton">
                         <i class="fa-solid fa-magnifying-glass"></i> Buscar vuelos
                     </button>
@@ -2643,7 +2641,9 @@ function closeSearchModal() {
 
 function selectTrip(type, btn) {
     var tabs = document.querySelectorAll('.tab-btn');
-    tabs.forEach(function(p) { p.classList.remove('active'); });
+    tabs.forEach(function(p) { 
+        p.classList.remove('active');
+    });
     btn.classList.add('active');
     
     if (type === 'oneway') {
@@ -3697,7 +3697,7 @@ function checkAuthState() {
 }
 
 // ============================================
-// EVENT LISTENERS - ASIGNAR CLICK AL BOTÓN
+// EVENT LISTENERS
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     var overlay = document.getElementById('searchOverlay');
@@ -3718,7 +3718,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setupAutocomplete('origin', 'originAutocomplete');
     setupAutocomplete('destination', 'destAutocomplete');
     
-    // ASIGNAR EVENTO CLICK AL BOTÓN DE BÚSQUEDA
+    // Asignar evento click al botón de búsqueda
     var searchBtn = document.getElementById('searchButton');
     if (searchBtn) {
         searchBtn.addEventListener('click', function(e) {
@@ -3726,8 +3726,6 @@ document.addEventListener('DOMContentLoaded', function() {
             searchFlights();
         });
         console.log('✅ Botón de búsqueda configurado correctamente');
-    } else {
-        console.error('❌ No se encontró el botón de búsqueda');
     }
     
     console.log('✅ LATAM Airlines - Página cargada correctamente');
