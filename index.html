@@ -14,9 +14,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <style>
-/* ============================================
-   TODOS TUS ESTILOS EXISTENTES AQUÍ (COMPLETOS)
-   ============================================ */
 * {
     margin: 0;
     padding: 0;
@@ -2642,11 +2639,24 @@ textarea {
                         </button>
                     </div>
 
+                    <!-- FECHAS -->
                     <div class="search-dates">
                         <input type="date" id="departureDate">
                         <input type="date" id="returnDate">
                     </div>
 
+                    <!-- PASAJEROS - CORREGIDO -->
+                    <div class="passenger-field" onclick="openPassengerModal()">
+                        <div class="passenger-left">
+                            <span class="passenger-label">Pasajeros</span>
+                            <span class="passenger-value" id="passengerDisplay">1 pasajero</span>
+                        </div>
+                        <div class="passenger-arrow">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <!-- BOTÓN DE BÚSQUEDA -->
                     <button class="search-btn-latam" id="searchButton">
                         <i class="fa-solid fa-magnifying-glass"></i> Buscar vuelos
                     </button>
@@ -2825,7 +2835,7 @@ textarea {
         </div>
         <div class="footer-bottom">
             <p>© 2026 LATAM Airlines Group S.A. Todos los derechos reservados.</p>
-            <p style="margin-top: 8px;">Línea de atención al cliente en Colombia: 01-8000-953-333 | WhatsApp: +57 3003028549</p>
+            <p style="margin-top: 8px;">Línea de atención al cliente en Colombia: 01-8000-953-333 | WhatsApp: +57 300 2996016</p>
             <p style="margin-top: 4px;">Sitio oficial LATAM Airlines - La aerolínea líder de Sudamérica</p>
         </div>
     </footer>
@@ -2962,18 +2972,35 @@ textarea {
     </div>
 </div>
 
+<!-- ============================================
+   MODAL DE PASAJEROS - CORREGIDO
+   ============================================ -->
 <div id="passengerModal" class="passenger-modal">
-    <div style="background:white; padding:28px; border-radius:28px; width:360px;">
+    <div style="background:white; padding:28px; border-radius:28px; width:360px; max-width:92%;">
         <h3 style="margin-bottom:20px;">Pasajeros</h3>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding:8px 0;">
-            <div><div style="font-weight:700;">Adultos</div><div style="font-size:10px; color:var(--latam-gray-light);">Mayores 12 años</div></div>
-            <div><button onclick="changePassenger('adults',-1)" style="width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700;">-</button><span id="adultsCount" style="margin:0 20px; font-weight:700;">1</span><button onclick="changePassenger('adults',1)" style="width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700;">+</button></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding:6px 0;">
+            <div>
+                <div style="font-weight:700;">Adultos</div>
+                <div style="font-size:10px; color:var(--latam-gray-light);">Mayores 12 años</div>
+            </div>
+            <div style="display:flex; align-items:center;">
+                <button onclick="changePassenger('adults',-1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">-</button>
+                <span id="adultsCount" style="margin:0 16px; font-weight:700; min-width:24px; text-align:center;">1</span>
+                <button onclick="changePassenger('adults',1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">+</button>
+            </div>
         </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding:8px 0;">
-            <div><div style="font-weight:700;">Niños</div><div style="font-size:10px; color:var(--latam-gray-light);">2-11 años</div></div>
-            <div><button onclick="changePassenger('children',-1)" style="width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700;">-</button><span id="childrenCount" style="margin:0 20px; font-weight:700;">0</span><button onclick="changePassenger('children',1)" style="width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700;">+</button></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding:6px 0;">
+            <div>
+                <div style="font-weight:700;">Niños</div>
+                <div style="font-size:10px; color:var(--latam-gray-light);">2-11 años</div>
+            </div>
+            <div style="display:flex; align-items:center;">
+                <button onclick="changePassenger('children',-1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">-</button>
+                <span id="childrenCount" style="margin:0 16px; font-weight:700; min-width:24px; text-align:center;">0</span>
+                <button onclick="changePassenger('children',1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">+</button>
+            </div>
         </div>
-        <div style="display:flex; gap:14px; margin-top:20px;">
+        <div style="display:flex; gap:12px; margin-top:16px;">
             <button onclick="closePassengerModal()" style="flex:1; padding:12px; border:1px solid var(--border); border-radius:40px; background:white; cursor:pointer; font-weight:600;">Cancelar</button>
             <button onclick="applyPassengers()" style="flex:1; padding:12px; border:none; border-radius:40px; background:#0033A0; color:white; font-weight:700; cursor:pointer;">Aplicar</button>
         </div>
@@ -3004,7 +3031,6 @@ textarea {
                 </h4>
                 
                 <div style="text-align: center; margin: 12px 0;">
-                    <!-- Imagen clickeable para ampliar -->
                     <img src="https://raw.githubusercontent.com/josjoasese/paginalatam/main/qrpago.jpeg" 
                          alt="Datos de pago" 
                          style="max-width: 100%; max-height: 280px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); cursor: pointer; transition: transform 0.2s ease;"
@@ -3012,12 +3038,10 @@ textarea {
                          onclick="openImageZoom(this)"
                          onerror="this.style.display='none'; document.getElementById('paymentFallback').style.display='block';">
                     
-                    <!-- Texto indicando que se puede hacer clic -->
                     <p style="font-size: 11px; color: var(--latam-gray-light); margin-top: 6px;">
                         <i class="fa-solid fa-arrows-alt"></i> Haz clic en la imagen para ampliarla
                     </p>
                     
-                    <!-- Fallback: mostrar datos en texto si la imagen no carga -->
                     <div id="paymentFallback" style="display: none; text-align: left; padding: 12px; background: white; border-radius: 8px;">
                         <p><strong>🏦 Bancolombia</strong></p>
                         <p>📌 Cuenta: 123-456789-0</p>
@@ -3056,11 +3080,9 @@ function openImageZoom(imgElement) {
     var overlay = document.getElementById('imageZoomOverlay');
     var zoomedImg = document.getElementById('zoomedImage');
     
-    // Usar la misma imagen que se clickeó
     zoomedImg.src = imgElement.src;
     zoomedImg.alt = imgElement.alt || 'Imagen ampliada';
     
-    // Mostrar el overlay
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -3071,16 +3093,11 @@ function closeImageZoom() {
     document.body.style.overflow = '';
 }
 
-// Cerrar con tecla ESC
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeImageZoom();
     }
 });
-
-// ============================================
-// TODAS LAS DEMÁS FUNCIONES EXISTENTES
-// ============================================
 
 // ============================================
 // VARIABLES GLOBALES
@@ -3100,6 +3117,66 @@ var currentCabinSeat = 'Economy';
 var lastReservationData = null;
 var pendingOutboundIndex = null;
 var pendingReturnIndex = null;
+
+// ============================================
+// ESTADO DE PASAJEROS - SINCRONIZADO CON EL BUSCADOR
+// ============================================
+var passengerState = {
+    adults: 1,
+    children: 0
+};
+
+// ============================================
+// FUNCIONES DE PASAJEROS - CORREGIDAS
+// ============================================
+
+function updatePassengerDisplay() {
+    var total = passengerState.adults + passengerState.children;
+    var display = document.getElementById('passengerDisplay');
+    if (display) {
+        display.textContent = total + (total === 1 ? ' pasajero' : ' pasajeros');
+    }
+    var hiddenInput = document.getElementById('passengerCount');
+    if (hiddenInput) {
+        hiddenInput.value = total + ' ' + (total === 1 ? 'pasajero' : 'pasajeros');
+    }
+    passengerCount = total;
+    // También actualizar la variable passengers para compatibilidad
+    passengers.adults = passengerState.adults;
+    passengers.children = passengerState.children;
+}
+
+function openPassengerModal() {
+    var modal = document.getElementById('passengerModal');
+    if (modal) {
+        document.getElementById('adultsCount').textContent = passengerState.adults;
+        document.getElementById('childrenCount').textContent = passengerState.children;
+        modal.style.display = 'flex';
+    }
+}
+
+function closePassengerModal() {
+    var modal = document.getElementById('passengerModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function changePassenger(type, delta) {
+    if (type === 'adults') {
+        passengerState.adults = Math.max(1, Math.min(9, passengerState.adults + delta));
+        document.getElementById('adultsCount').textContent = passengerState.adults;
+    } else {
+        passengerState.children = Math.max(0, Math.min(9, passengerState.children + delta));
+        document.getElementById('childrenCount').textContent = passengerState.children;
+    }
+}
+
+function applyPassengers() {
+    updatePassengerDisplay();
+    closePassengerModal();
+    autoSave();
+}
 
 // ============================================
 // CONFIGURACIÓN Y CONSTANTES
@@ -3784,6 +3861,9 @@ function loadAutoSave() {
                 document.getElementById('departureDate').value = d.departureDate;
                 document.getElementById('returnDate').value = d.returnDate;
                 passengerCount = d.passengerCount;
+                passengerState.adults = Math.min(d.passengerCount, 9);
+                passengerState.children = 0;
+                document.getElementById('passengerDisplay').textContent = passengerCount + ' ' + (passengerCount === 1 ? 'pasajero' : 'pasajeros');
                 document.getElementById('passengerCount').value = passengerCount + ' ' + (passengerCount === 1 ? 'pasajero' : 'pasajeros');
                 selectedBaggage = d.selectedBaggage;
                 baggagePrice = d.baggagePrice;
@@ -3792,50 +3872,6 @@ function loadAutoSave() {
     }
 }
 function clearAutoSave() { localStorage.removeItem('currentReservation'); }
-
-function changePassenger(t, d) {
-    var n = passengers[t] + d;
-    if (t === 'adults' && n >= 1 && n <= 9) passengers[t] = n;
-    else if (t !== 'adults' && n >= 0 && n <= 9) passengers[t] = n;
-    document.getElementById(t + 'Count').textContent = passengers[t];
-}
-function applyPassengers() {
-    var total = passengers.adults + passengers.children;
-    document.getElementById('passengerCount').value = total + ' ' + (total === 1 ? 'pasajero' : 'pasajeros');
-    passengerCount = total;
-    closePassengerModal();
-    autoSave();
-}
-function openPassengerModal() { document.getElementById('passengerModal').style.display = 'flex'; }
-function closePassengerModal() { document.getElementById('passengerModal').style.display = 'none'; }
-function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
-function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
-
-function login() {
-    if (!auth) { alert('Firebase no configurado'); return; }
-    var email = document.getElementById('loginEmail').value;
-    var pass = document.getElementById('loginPassword').value;
-    auth.signInWithEmailAndPassword(email, pass).then(function() { closeAuthModal(); }).catch(function(e) { document.getElementById('loginError').textContent = e.message; document.getElementById('loginError').style.display = 'block'; });
-}
-function register() {
-    if (!auth) { alert('Firebase no configurado'); return; }
-    var name = document.getElementById('registerName').value;
-    var email = document.getElementById('registerEmail').value;
-    var pass = document.getElementById('registerPassword').value;
-    var conf = document.getElementById('registerConfirmPassword').value;
-    if (pass !== conf) { alert('Contraseñas no coinciden'); return; }
-    auth.createUserWithEmailAndPassword(email, pass).then(function(uc) { return uc.user.updateProfile({ displayName: name }); }).then(function() { closeAuthModal(); }).catch(function(e) { alert(e.message); });
-}
-
-function setDefaultDates() {
-    var t = new Date();
-    var tom = new Date(t);
-    tom.setDate(t.getDate() + 1);
-    var next = new Date(t);
-    next.setDate(t.getDate() + 7);
-    document.getElementById('departureDate').value = tom.toISOString().split('T')[0];
-    document.getElementById('returnDate').value = next.toISOString().split('T')[0];
-}
 
 // ============================================
 // DISPLAY DE RESULTADOS
@@ -4264,11 +4300,9 @@ function showConfirmationModal(data, code, total, name, last) {
     document.getElementById('confirmTotal').textContent = '$' + total.toLocaleString();
     document.getElementById('confirmTotalPayment').textContent = '$' + total.toLocaleString();
     
-    // Generar QR para la reserva (opcional - se mantiene por compatibilidad)
     var qrText = 'LATAM RESERVA\nCódigo: ' + code + '\nPasajero: ' + name + ' ' + last + '\nRuta: ' + currentOrigin + ' → ' + currentDestination + '\nFecha: ' + formatDateDisplay(currentDepartureDate) + '\nTotal: $' + total.toLocaleString() + '\nVuelo: ' + selectedOutboundFlight.flightNumber;
     generateQRCode(encodeURIComponent(qrText), 'qrCode');
     
-    // Verificar si la imagen de pago carga correctamente
     var paymentImg = document.getElementById('paymentImage');
     if (paymentImg) {
         paymentImg.onerror = function() {
@@ -4376,7 +4410,7 @@ function skipSplash() {
 }
 
 // ============================================
-// FUNCIONES DE SECCIONES VISUALES - CON IMÁGENES ACTUALIZADAS
+// FUNCIONES DE SECCIONES VISUALES
 // ============================================
 function generateDestinationsOffers() {
     var destinations = [
@@ -4477,6 +4511,26 @@ function subscribeNewsletter() {
     }
 }
 
+function openAuthModal() { document.getElementById('authModal').style.display = 'flex'; }
+function closeAuthModal() { document.getElementById('authModal').style.display = 'none'; }
+
+function login() {
+    if (!auth) { alert('Firebase no configurado'); return; }
+    var email = document.getElementById('loginEmail').value;
+    var pass = document.getElementById('loginPassword').value;
+    auth.signInWithEmailAndPassword(email, pass).then(function() { closeAuthModal(); }).catch(function(e) { document.getElementById('loginError').textContent = e.message; document.getElementById('loginError').style.display = 'block'; });
+}
+
+function register() {
+    if (!auth) { alert('Firebase no configurado'); return; }
+    var name = document.getElementById('registerName').value;
+    var email = document.getElementById('registerEmail').value;
+    var pass = document.getElementById('registerPassword').value;
+    var conf = document.getElementById('registerConfirmPassword').value;
+    if (pass !== conf) { alert('Contraseñas no coinciden'); return; }
+    auth.createUserWithEmailAndPassword(email, pass).then(function(uc) { return uc.user.updateProfile({ displayName: name }); }).then(function() { closeAuthModal(); }).catch(function(e) { alert(e.message); });
+}
+
 function checkAuthState() {
     if (auth) auth.onAuthStateChanged(function(user) {
         currentUser = user;
@@ -4556,7 +4610,11 @@ generatePaquetes();
 generateExperiencias();
 generateNoticias();
 startCountdown();
-document.getElementById('passengerCount').addEventListener('click', openPassengerModal);
+// Inicializar display de pasajeros
+updatePassengerDisplay();
+document.getElementById('passengerCount').addEventListener('click', function() {
+    // Este es el input oculto, no hacer nada
+});
 document.getElementById('userNameDisplay').addEventListener('click', function() { if (!currentUser) openAuthModal(); });
 checkAuthState();
 loadAutoSave();
