@@ -14,6 +14,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <style>
+/* ============================================
+   TODOS TUS ESTILOS EXISTENTES AQUÍ (COMPLETOS)
+   ============================================ */
 * {
     margin: 0;
     padding: 0;
@@ -1642,7 +1645,7 @@ body {
 }
 
 /* ============================================
-   SPLASH SCREEN - CORREGIDO PARA MÓVILES
+   SPLASH SCREEN
    ============================================ */
 .splash-screen {
     position: fixed;
@@ -1707,6 +1710,77 @@ body {
     100% {
         opacity: 0;
         visibility: hidden;
+    }
+}
+
+/* ============================================
+   ESTILOS PARA EL ZOOM DE IMAGEN (LIGHTBOX)
+   ============================================ */
+.image-zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+    z-index: 99999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 20px;
+    animation: fadeInZoom 0.3s ease;
+}
+
+.image-zoom-overlay.active {
+    display: flex;
+}
+
+.image-zoom-overlay img {
+    max-width: 95%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.3s ease;
+    object-fit: contain;
+}
+
+.image-zoom-overlay .close-zoom {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    z-index: 100000;
+}
+
+.image-zoom-overlay .close-zoom:hover {
+    transform: rotate(90deg);
+}
+
+@keyframes fadeInZoom {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
@@ -2205,6 +2279,17 @@ body {
         padding: 20px 16px;
         width: 92%;
     }
+
+    /* Zoom de imagen en móvil */
+    .image-zoom-overlay img {
+        max-width: 98%;
+        max-height: 80vh;
+    }
+    .image-zoom-overlay .close-zoom {
+        top: 15px;
+        right: 20px;
+        font-size: 32px;
+    }
 }
 
 /* Móviles pequeños (menos de 480px) */
@@ -2402,6 +2487,16 @@ body {
     .progress-step {
         flex-shrink: 0;
         white-space: nowrap;
+    }
+
+    /* Zoom de imagen en móvil pequeño */
+    .image-zoom-overlay img {
+        max-height: 70vh;
+    }
+    .image-zoom-overlay .close-zoom {
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
     }
 }
 
@@ -2886,7 +2981,7 @@ textarea {
 </div>
 
 <!-- ============================================
-   CONFIRMACIÓN MODAL - CON IMAGEN QRPAGO.JPEG
+   CONFIRMACIÓN MODAL - CON IMAGEN QRPAGO.JPEG Y ZOOM
    ============================================ -->
 <div id="confirmationModal" class="confirmation-modal">
     <div class="confirmation-content">
@@ -2902,18 +2997,25 @@ textarea {
             <div class="resume-item"><span><i class="fa-solid fa-calendar"></i> Fecha de ida</span><span id="confirmDate">---</span></div>
             <div class="resume-item"><span><i class="fa-solid fa-money-bill"></i> Total a pagar</span><span id="confirmTotal">$0</span></div>
             
-            <!-- IMAGEN DE PAGO - QRPAGO.JPEG -->
+            <!-- IMAGEN DE PAGO - QRPAGO.JPEG CON ZOOM AL HACER CLIC -->
             <div class="qr-container" style="background: #f0f4fa; border: 2px solid #0033A0; padding: 20px; margin-top: 16px;">
                 <h4 style="color: #0033A0; text-align: center; margin-bottom: 12px;">
                     <i class="fa-solid fa-credit-card"></i> Datos para el pago
                 </h4>
                 
                 <div style="text-align: center; margin: 12px 0;">
+                    <!-- Imagen clickeable para ampliar -->
                     <img src="https://raw.githubusercontent.com/josjoasese/paginalatam/main/qrpago.jpeg" 
                          alt="Datos de pago" 
-                         style="max-width: 100%; max-height: 280px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);"
+                         style="max-width: 100%; max-height: 280px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); cursor: pointer; transition: transform 0.2s ease;"
                          id="paymentImage"
+                         onclick="openImageZoom(this)"
                          onerror="this.style.display='none'; document.getElementById('paymentFallback').style.display='block';">
+                    
+                    <!-- Texto indicando que se puede hacer clic -->
+                    <p style="font-size: 11px; color: var(--latam-gray-light); margin-top: 6px;">
+                        <i class="fa-solid fa-arrows-alt"></i> Haz clic en la imagen para ampliarla
+                    </p>
                     
                     <!-- Fallback: mostrar datos en texto si la imagen no carga -->
                     <div id="paymentFallback" style="display: none; text-align: left; padding: 12px; background: white; border-radius: 8px;">
@@ -2938,9 +3040,46 @@ textarea {
     </div>
 </div>
 
+<!-- ============================================
+   OVERLAY PARA ZOOM DE IMAGEN (LIGHTBOX)
+   ============================================ -->
+<div class="image-zoom-overlay" id="imageZoomOverlay" onclick="closeImageZoom()">
+    <button class="close-zoom" onclick="closeImageZoom()">✕</button>
+    <img src="" alt="Imagen ampliada" id="zoomedImage">
+</div>
+
 <script>
 // ============================================
-// TODAS LAS FUNCIONES
+// FUNCIÓN PARA ABRIR EL ZOOM DE IMAGEN
+// ============================================
+function openImageZoom(imgElement) {
+    var overlay = document.getElementById('imageZoomOverlay');
+    var zoomedImg = document.getElementById('zoomedImage');
+    
+    // Usar la misma imagen que se clickeó
+    zoomedImg.src = imgElement.src;
+    zoomedImg.alt = imgElement.alt || 'Imagen ampliada';
+    
+    // Mostrar el overlay
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageZoom() {
+    var overlay = document.getElementById('imageZoomOverlay');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Cerrar con tecla ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeImageZoom();
+    }
+});
+
+// ============================================
+// TODAS LAS DEMÁS FUNCIONES EXISTENTES
 // ============================================
 
 // ============================================
