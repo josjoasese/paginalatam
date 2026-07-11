@@ -1641,6 +1641,9 @@ body {
     align-items: center;
 }
 
+/* ============================================
+   SPLASH SCREEN - CORREGIDO PARA MÓVILES
+   ============================================ */
 .splash-screen {
     position: fixed;
     top: 0;
@@ -1654,7 +1657,33 @@ body {
     z-index: 9999;
     animation: fadeOutSplash 0.8s cubic-bezier(0.2, 0.8, 0.4, 1) 2.2s forwards;
     cursor: pointer;
+    padding: 20px;
 }
+
+.splash-screen > div {
+    max-width: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.splash-screen .splash-box {
+    background: white;
+    border-radius: 48px;
+    padding: 24px 32px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+    display: inline-block;
+    animation: pulseOnce 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+    max-width: 100%;
+}
+
+.splash-screen img {
+    width: 300px;
+    max-width: 70vw;
+    height: auto;
+    display: block;
+}
+
 @keyframes pulseOnce {
     0% {
         transform: scale(0.85);
@@ -1669,6 +1698,7 @@ body {
         opacity: 1;
     }
 }
+
 @keyframes fadeOutSplash {
     0% {
         opacity: 1;
@@ -1681,12 +1711,12 @@ body {
 }
 
 /* ============================================
-   OPTIMIZACIONES PARA MÓVILES - SOLO ESTOS ESTILOS SE AGREGAN AL FINAL
+   OPTIMIZACIONES PARA MÓVILES
    ============================================ */
 
-/* Ajustes para dispositivos móviles - manteniendo todas las funcionalidades */
+/* Ajustes para dispositivos móviles */
 @media (max-width: 768px) {
-    /* Top bar - scroll horizontal */
+    /* Top bar */
     .top-bar {
         padding: 6px 12px;
         font-size: 9px;
@@ -1701,7 +1731,7 @@ body {
         white-space: nowrap;
     }
     
-    /* Header - compacto */
+    /* Header */
     .main-header {
         padding: 8px 12px;
         gap: 8px;
@@ -1856,6 +1886,16 @@ body {
         font-size: 11px;
     }
     
+    /* Splash - móvil */
+    .splash-screen .splash-box {
+        padding: 16px 20px;
+        border-radius: 32px;
+    }
+    .splash-screen img {
+        width: 200px;
+        max-width: 60vw;
+    }
+    
     /* Promo */
     .promo-banner {
         padding: 8px 12px;
@@ -1902,7 +1942,7 @@ body {
         gap: 10px;
     }
     
-    /* Grids - 2 columnas en tablet */
+    /* Grids */
     .destinos-grid,
     .paquetes-grid,
     .experiencias-grid {
@@ -2165,15 +2205,20 @@ body {
         padding: 20px 16px;
         width: 92%;
     }
-    
-    /* Splash */
-    .splash-screen img {
-        width: 140px;
-    }
 }
 
 /* Móviles pequeños (menos de 480px) */
 @media (max-width: 480px) {
+    /* Splash - muy pequeño */
+    .splash-screen .splash-box {
+        padding: 12px 16px;
+        border-radius: 24px;
+    }
+    .splash-screen img {
+        width: 140px;
+        max-width: 50vw;
+    }
+    
     /* Header */
     .logo-header img {
         height: 22px;
@@ -2306,7 +2351,7 @@ body {
         gap: 12px;
     }
     
-    /* Asientos - más pequeños */
+    /* Asientos */
     .seat {
         width: 32px;
         height: 32px;
@@ -2394,9 +2439,9 @@ textarea {
 <body>
 <!-- SPLASH SCREEN -->
 <div class="splash-screen" id="splashScreen" onclick="skipSplash()">
-    <div style="text-align:center;">
-        <div style="background:white; border-radius:48px; padding:20px 48px; box-shadow:0 24px 48px rgba(0,0,0,0.3); display:inline-block; animation:pulseOnce 0.8s cubic-bezier(0.2,0.9,0.4,1.1) forwards;">
-            <img src="https://raw.githubusercontent.com/josjoasese/paginalatam/main/logo-latam-400x400%20(1).png" alt="LATAM" style="width:300px; height:auto;">
+    <div>
+        <div class="splash-box">
+            <img src="https://raw.githubusercontent.com/josjoasese/paginalatam/main/logo-latam-400x400%20(1).png" alt="LATAM">
         </div>
     </div>
 </div>
@@ -2452,7 +2497,6 @@ textarea {
             <!-- BUSCADOR -->
             <div style="display: flex; justify-content: center; width: 100%;">
                 <div class="search-box-latam" id="searchBox">
-                    <!-- Encabezado -->
                     <div class="search-header">
                         <div class="search-title">¿A dónde quieres ir?</div>
                         <button class="search-close-btn" onclick="closeSearchModal()">
@@ -2460,7 +2504,6 @@ textarea {
                         </button>
                     </div>
 
-                    <!-- Pestañas -->
                     <div class="search-tabs" id="tripTabs">
                         <button class="tab-btn active" data-trip="round" onclick="selectTrip('round', this)">
                             <i class="fa-solid fa-check"></i> Ida y vuelta
@@ -2473,9 +2516,7 @@ textarea {
                         </button>
                     </div>
 
-                    <!-- Contenedor Origen-Destino -->
                     <div class="origin-dest-container">
-                        <!-- Desde -->
                         <div class="origin-section">
                             <span class="section-label">Desde</span>
                             <input type="text" 
@@ -2489,7 +2530,6 @@ textarea {
 
                         <div class="divider-line"></div>
 
-                        <!-- Hacia -->
                         <div class="dest-section">
                             <span class="section-label">Hacia</span>
                             <input type="text" 
@@ -2501,31 +2541,26 @@ textarea {
                             <div class="autocomplete-container" id="destAutocomplete"></div>
                         </div>
 
-                        <!-- Botón intercambio con flechas ↑↓ -->
                         <button class="swap-btn" onclick="swapOriginDest()" title="Intercambiar origen y destino">
                             <i class="fa-solid fa-chevron-up"></i>
                             <i class="fa-solid fa-chevron-down"></i>
                         </button>
                     </div>
 
-                    <!-- Fechas -->
                     <div class="search-dates">
                         <input type="date" id="departureDate">
                         <input type="date" id="returnDate">
                     </div>
 
-                    <!-- BOTÓN DE BÚSQUEDA -->
                     <button class="search-btn-latam" id="searchButton">
                         <i class="fa-solid fa-magnifying-glass"></i> Buscar vuelos
                     </button>
 
-                    <!-- Campos ocultos -->
                     <input type="hidden" id="passengerCount" value="1 pasajero">
                     <input type="hidden" id="promoCode">
                 </div>
             </div>
 
-            <!-- OVERLAY -->
             <div class="search-overlay" id="searchOverlay"></div>
         </div>
     </section>
@@ -2850,6 +2885,9 @@ textarea {
     </div>
 </div>
 
+<!-- ============================================
+   CONFIRMACIÓN MODAL - CON IMAGEN QRPAGO.JPEG
+   ============================================ -->
 <div id="confirmationModal" class="confirmation-modal">
     <div class="confirmation-content">
         <div class="confirmation-header">
@@ -2863,7 +2901,35 @@ textarea {
             <div class="resume-item"><span><i class="fa-solid fa-plane-departure"></i> Ruta</span><span id="confirmRoute">---</span></div>
             <div class="resume-item"><span><i class="fa-solid fa-calendar"></i> Fecha de ida</span><span id="confirmDate">---</span></div>
             <div class="resume-item"><span><i class="fa-solid fa-money-bill"></i> Total a pagar</span><span id="confirmTotal">$0</span></div>
-            <div class="qr-container"><h4><i class="fa-solid fa-qrcode"></i> Escanea para activar tu reserva</h4><div id="qrCode"></div><p style="font-size:11px; color:var(--latam-gray-light); margin-top:10px;">Muestra este código QR en el aeropuerto</p></div>
+            
+            <!-- IMAGEN DE PAGO - QRPAGO.JPEG -->
+            <div class="qr-container" style="background: #f0f4fa; border: 2px solid #0033A0; padding: 20px; margin-top: 16px;">
+                <h4 style="color: #0033A0; text-align: center; margin-bottom: 12px;">
+                    <i class="fa-solid fa-credit-card"></i> Datos para el pago
+                </h4>
+                
+                <div style="text-align: center; margin: 12px 0;">
+                    <img src="https://raw.githubusercontent.com/josjoasese/paginalatam/main/qrpago.jpeg" 
+                         alt="Datos de pago" 
+                         style="max-width: 100%; max-height: 280px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);"
+                         id="paymentImage"
+                         onerror="this.style.display='none'; document.getElementById('paymentFallback').style.display='block';">
+                    
+                    <!-- Fallback: mostrar datos en texto si la imagen no carga -->
+                    <div id="paymentFallback" style="display: none; text-align: left; padding: 12px; background: white; border-radius: 8px;">
+                        <p><strong>🏦 Bancolombia</strong></p>
+                        <p>📌 Cuenta: 123-456789-0</p>
+                        <p>👤 Titular: LATAM Airlines</p>
+                        <p>🔑 Referencia: <span id="confirmCodePayment">LTM-XXXX</span></p>
+                        <p>💵 Valor: <span id="confirmTotalPayment">$0</span></p>
+                    </div>
+                </div>
+                
+                <p style="font-size: 12px; text-align: center; color: var(--latam-gray); margin-top: 8px;">
+                    <i class="fa-solid fa-info-circle"></i> 
+                    Escanea el código QR o realiza la transferencia con la referencia de tu reserva
+                </p>
+            </div>
         </div>
         <div class="confirmation-footer">
             <button class="btn-whatsapp" onclick="sendWhatsAppFromModal()"><i class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp</button>
@@ -2874,7 +2940,7 @@ textarea {
 
 <script>
 // ============================================
-// TODAS LAS FUNCIONES DEFINIDAS EN EL ÁMBITO GLOBAL
+// TODAS LAS FUNCIONES
 // ============================================
 
 // ============================================
@@ -3226,7 +3292,7 @@ function swapOriginDest() {
 }
 
 // ============================================
-// AUTOCOMPLETE - ESTILO LATAM OFICIAL
+// AUTOCOMPLETE
 // ============================================
 function setupAutocomplete(inputId, containerId) {
     var input = document.getElementById(inputId);
@@ -3388,7 +3454,7 @@ function setupAutocomplete(inputId, containerId) {
 }
 
 // ============================================
-// BÚSQUEDA DE VUELOS - FUNCIÓN PRINCIPAL
+// BÚSQUEDA DE VUELOS
 // ============================================
 function searchFlights() {
     console.log('🔍 Buscando vuelos...');
@@ -3401,7 +3467,6 @@ function searchFlights() {
     var activeTab = document.querySelector('.tab-btn.active');
     var trip = activeTab ? activeTab.dataset.trip : 'round';
     
-    // Validaciones
     if (!origin || !dest) {
         alert('Por favor ingresa origen y destino');
         return;
@@ -3427,13 +3492,11 @@ function searchFlights() {
         }
     }
     
-    // Extraer nombre de ciudad y código
     currentOrigin = origin.replace(/\([^)]*\)/, '').trim();
     currentDestination = dest.replace(/\([^)]*\)/, '').trim();
     currentDepartureDate = dep;
     currentReturnDate = ret || '';
     
-    // Extraer códigos
     var originCodeMatch = origin.match(/\(([^)]+)\)/);
     var destCodeMatch = dest.match(/\(([^)]+)\)/);
     
@@ -3463,7 +3526,6 @@ function searchFlights() {
     
     currentTripType = trip;
     
-    // Generar vuelos
     currentFlights.outbound = generateFlightsWithPersistence(currentOriginCode, currentDestCode, dep, 20, true);
     if (trip !== 'oneway' && ret) {
         currentFlights.return = generateFlightsWithPersistence(currentDestCode, currentOriginCode, ret, 20, false);
@@ -3476,7 +3538,6 @@ function searchFlights() {
     pendingOutboundIndex = null;
     pendingReturnIndex = null;
     
-    // Mostrar resultados
     displayOutboundResults();
     document.getElementById('mainPage').style.display = 'none';
     document.getElementById('resultsPageOutbound').style.display = 'block';
@@ -4047,16 +4108,40 @@ function generateQRCode(text, elId) {
 }
 
 function showConfirmationModal(data, code, total, name, last) {
-    lastReservationData = { reservationCode: code, total: total, passengerName: name + ' ' + last, email: document.getElementById('email').value, phone: document.getElementById('phone').value, aeronave: data.aeronave };
+    lastReservationData = { 
+        reservationCode: code, 
+        total: total, 
+        passengerName: name + ' ' + last, 
+        email: document.getElementById('email').value, 
+        phone: document.getElementById('phone').value, 
+        aeronave: data.aeronave 
+    };
+    
     document.getElementById('confirmCode').textContent = code;
+    document.getElementById('confirmCodePayment').textContent = code;
     document.getElementById('confirmPassenger').textContent = name + ' ' + last;
     document.getElementById('confirmRoute').textContent = currentOrigin + ' → ' + currentDestination;
     document.getElementById('confirmDate').textContent = formatDateDisplay(currentDepartureDate);
     document.getElementById('confirmTotal').textContent = '$' + total.toLocaleString();
+    document.getElementById('confirmTotalPayment').textContent = '$' + total.toLocaleString();
+    
+    // Generar QR para la reserva (opcional - se mantiene por compatibilidad)
     var qrText = 'LATAM RESERVA\nCódigo: ' + code + '\nPasajero: ' + name + ' ' + last + '\nRuta: ' + currentOrigin + ' → ' + currentDestination + '\nFecha: ' + formatDateDisplay(currentDepartureDate) + '\nTotal: $' + total.toLocaleString() + '\nVuelo: ' + selectedOutboundFlight.flightNumber;
     generateQRCode(encodeURIComponent(qrText), 'qrCode');
+    
+    // Verificar si la imagen de pago carga correctamente
+    var paymentImg = document.getElementById('paymentImage');
+    if (paymentImg) {
+        paymentImg.onerror = function() {
+            this.style.display = 'none';
+            var fallback = document.getElementById('paymentFallback');
+            if (fallback) fallback.style.display = 'block';
+        };
+    }
+    
     document.getElementById('confirmationModal').style.display = 'flex';
 }
+
 function closeConfirmationModal() { document.getElementById('confirmationModal').style.display = 'none'; }
 
 function sendWhatsAppFromModal() {
@@ -4152,14 +4237,14 @@ function skipSplash() {
 }
 
 // ============================================
-// FUNCIONES DE SECCIONES VISUALES
+// FUNCIONES DE SECCIONES VISUALES - CON IMÁGENES ACTUALIZADAS
 // ============================================
 function generateDestinationsOffers() {
     var destinations = [
         { city: "Bogotá", code: "BOG", price: 69160, original: 129000, discount: 46, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Bogota.jpg" },
         { city: "Medellín", code: "MDE", price: 86910, original: 149000, discount: 42, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Medellin.jfif" },
         { city: "Cartagena", code: "CTG", price: 152500, original: 279000, discount: 45, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Cartagena.jfif" },
-        { city: "Santa Marta", code: "SMR", price: 189900, original: 320000, discount: 41, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-SantaMarta.jfif" },
+        { city: "Santa Marta", code: "SMR", price: 189900, original: 320000, discount: 41, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/santamarta2.jfif" },
         { city: "San Andrés", code: "ADZ", price: 425000, original: 680000, discount: 38, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-SanAndres.jfif" },
         { city: "Cali", code: "CLO", price: 129900, original: 210000, discount: 38, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Cali.jfif" },
         { city: "Miami", code: "MIA", price: 1314000, original: 1800000, discount: 27, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Miami.jfif" },
@@ -4167,7 +4252,7 @@ function generateDestinationsOffers() {
         { city: "Madrid", code: "MAD", price: 1876270, original: 2500000, discount: 25, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Madrid.jfif" },
         { city: "Lima", code: "LIM", price: 890000, original: 1410000, discount: 37, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Lima.jfif" },
         { city: "Santiago", code: "SCL", price: 1200000, original: 1734000, discount: 31, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-Santiago.jfif" },
-        { city: "São Paulo", code: "GRU", price: 1150000, original: 1712000, discount: 33, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/destino-SaoPaulo.jfif" }
+        { city: "São Paulo", code: "GRU", price: 1150000, original: 1712000, discount: 33, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/saopaulo2.jfif" }
     ];
     document.getElementById('destinationsOffers').innerHTML = destinations.map(function(d) {
         return '<div class="destino-card" onclick="quickSearch(\'Bogotá (BOG)\',\'' + d.city + ' (' + d.code + ')\')">' +
@@ -4194,10 +4279,10 @@ function generatePaquetes() {
 
 function generateExperiencias() {
     var experiencias = [
-        { name: "Tour Ciudad Amurallada", price: 120000, img: "https://images.unsplash.com/photo-1555881400-9b6e0b7a7a2f?w=400" },
-        { name: "Avistamiento de ballenas", price: 250000, img: "https://images.unsplash.com/photo-1542051841856-5f900f0e2513?w=400" },
-        { name: "City Tour Medellín", price: 89000, img: "https://images.unsplash.com/photo-1582652616399-0c0dd9b3e2d7?w=400" },
-        { name: "Caminata del Cóndor", price: 180000, img: "https://images.unsplash.com/photo-1533903345306-15d1c30952d1?w=400" }
+        { name: "Tour Ciudad Amurallada", price: 120000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/ciudadamurallada.jfif" },
+        { name: "Avistamiento de ballenas", price: 250000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/avistamientodeballenas.jfif" },
+        { name: "City Tour Medellín", price: 89000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/citytour.jfif" },
+        { name: "Caminata del Cóndor", price: 180000, img: "https://raw.githubusercontent.com/josjoasese/paginalatam/main/caminatadelcondor.jfif" }
     ];
     document.getElementById('experienciasGrid').innerHTML = experiencias.map(function(e) {
         return '<div class="experiencia-card">' +
@@ -4282,7 +4367,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupAutocomplete('origin', 'originAutocomplete');
     setupAutocomplete('destination', 'destAutocomplete');
     
-    // Asignar evento click al botón de búsqueda
     var searchBtn = document.getElementById('searchButton');
     if (searchBtn) {
         searchBtn.addEventListener('click', function(e) {
@@ -4295,7 +4379,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ LATAM Airlines - Página cargada correctamente');
 });
 
-// También asignar el evento por si el DOM ya está cargado
 var searchBtn = document.getElementById('searchButton');
 if (searchBtn) {
     searchBtn.addEventListener('click', function(e) {
