@@ -14,6 +14,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <style>
+/* ============================================
+   TODOS TUS ESTILOS AQUÍ (COMPLETOS)
+   ============================================ */
 * {
     margin: 0;
     padding: 0;
@@ -2143,7 +2146,6 @@ body {
         font-size: 11px;
     }
     
-    /* Campos de fecha y pasajeros - responsive */
     .search-field-row {
         grid-template-columns: 1fr 1fr;
     }
@@ -2614,7 +2616,6 @@ body {
         font-size: 9px;
     }
     
-    /* Campos de fecha y pasajeros - móvil pequeño */
     .search-field-row {
         grid-template-columns: 1fr 1fr;
     }
@@ -2876,9 +2877,7 @@ textarea {
                         </button>
                     </div>
 
-                    <!-- ============================================
-                         FECHAS Y PASAJEROS - ESTILO UNIFICADO
-                         ============================================ -->
+                    <!-- FECHAS Y PASAJEROS - ESTILO UNIFICADO -->
                     <div class="search-fields-container">
                         <div class="search-field-row">
                             <!-- Fecha Ida -->
@@ -2893,7 +2892,7 @@ textarea {
                                 <input type="date" class="search-field-value date-input" id="returnDate">
                             </div>
                             
-                            <!-- Pasajeros - CON EL MISMO ESTILO QUE LAS FECHAS -->
+                            <!-- Pasajeros -->
                             <div class="search-field-item" onclick="openPassengerModal()">
                                 <span class="search-field-label">Pasajeros</span>
                                 <span class="search-field-value" id="passengerDisplay">1 pasajero</span>
@@ -3221,7 +3220,7 @@ textarea {
 </div>
 
 <!-- ============================================
-   MODAL DE PASAJEROS - ESTILO LATAM
+   MODAL DE PASAJEROS
    ============================================ -->
 <div id="passengerModal" class="passenger-modal">
     <div class="passenger-modal-content">
@@ -3260,7 +3259,7 @@ textarea {
 </div>
 
 <!-- ============================================
-   CONFIRMACIÓN MODAL
+   CONFIRMACIÓN MODAL - CON QRPAY
    ============================================ -->
 <div id="confirmationModal" class="confirmation-modal">
     <div class="confirmation-content">
@@ -3370,6 +3369,141 @@ var pendingOutboundIndex = null;
 var pendingReturnIndex = null;
 
 // ============================================
+// CONFIGURACIÓN DE PRECIOS - ACTUALIZADA
+// ============================================
+
+var usaCodes = ['MIA', 'JFK', 'LAX', 'MCO', 'ORD', 'ATL', 'DFW', 'IAH'];
+var colombianCodes = ['BOG', 'MDE', 'CLO', 'CTG', 'BAQ', 'SMR', 'ADZ', 'PEI', 'BGA', 'CUC'];
+
+var latamFleet = {
+    shortHaul: [
+        { name: "Airbus A320neo", icon: "fa-plane", rows: 29, classes: { economy: true, premium: false, business: false } },
+        { name: "Airbus A321neo", icon: "fa-plane", rows: 37, classes: { economy: true, premium: true, business: false } }
+    ],
+    longHaul: [
+        { name: "Boeing 787-8 Dreamliner", icon: "fa-plane", rows: 41, classes: { economy: true, premium: true, business: true } },
+        { name: "Boeing 787-9 Dreamliner", icon: "fa-plane", rows: 50, classes: { economy: true, premium: true, business: true } }
+    ]
+};
+
+// ========================================
+// PRECIOS ACTUALIZADOS
+// ========================================
+var baseFares = {
+    // ========================================
+    // RUTAS NACIONALES - PRECIOS AJUSTADOS
+    // ========================================
+    
+    // Bogotá - Principales destinos
+    'BOG-MDE': 212500,    // ~170.000 después del descuento
+    'BOG-CLO': 212500,    // ~170.000 después del descuento
+    'BOG-CTG': 290000,    // ~232.000 después del descuento
+    'BOG-SMR': 290000,    // ~232.000 después del descuento
+    'BOG-ADZ': 680000,    // ~544.000 después del descuento
+    'BOG-BAQ': 250000,    // ~200.000 después del descuento
+    'BOG-PEI': 275000,    // ~220.000 después del descuento
+    'BOG-CUC': 300000,    // ~240.000 después del descuento
+    
+    // Medellín - Principales destinos
+    'MDE-BOG': 212500,    // ~170.000 después del descuento
+    'MDE-CTG': 312500,    // ~250.000 después del descuento
+    'MDE-ADZ': 650000,    // ~520.000 después del descuento
+    'MDE-SMR': 300000,    // ~240.000 después del descuento
+    'MDE-CLO': 237500,    // ~190.000 después del descuento
+    
+    // Cali - Principales destinos
+    'CLO-BOG': 212500,    // ~170.000 después del descuento
+    'CLO-CTG': 325000,    // ~260.000 después del descuento
+    'CLO-MDE': 237500,    // ~190.000 después del descuento
+    
+    // Cartagena
+    'CTG-BOG': 290000,    // ~232.000 después del descuento
+    'CTG-MDE': 312500,    // ~250.000 después del descuento
+    'CTG-ADZ': 475000,    // ~380.000 después del descuento
+    'CTG-SMR': 200000,    // ~160.000 después del descuento
+    
+    // ========================================
+    // RUTAS INTERNACIONALES
+    // ========================================
+    'BOG-LIM': 1410000,
+    'BOG-PTY': 950000,
+    'BOG-UIO': 1217000,
+    'BOG-SCL': 1734000,
+    'BOG-EZE': 1900000,
+    'BOG-GRU': 1712000,
+    'BOG-MIA': 1314000,
+    'BOG-JFK': 1800000,
+    'BOG-MEX': 1700000,
+    'BOG-CCS': 850000,
+    'BOG-MAD': 1876270,
+    'BOG-CDG': 2100000,
+    'BOG-LHR': 2300000,
+    'CLO-GIG': 1883910,
+    'LAX-COR': 1300000,
+};
+
+var routeDurations = {
+    'BOG-MDE': 64, 'BOG-CLO': 67, 'BOG-CTG': 94, 'BOG-SMR': 95, 'BOG-ADZ': 150,
+    'MDE-BOG': 64, 'MDE-CLO': 70, 'MDE-CTG': 80, 'MDE-SMR': 85, 'MDE-ADZ': 120,
+    'CLO-BOG': 67, 'CLO-MDE': 70, 'CLO-CTG': 90,
+    'CTG-BOG': 94, 'CTG-MDE': 80, 'CTG-SMR': 40,
+    'BOG-LIM': 210, 'BOG-SCL': 360, 'BOG-EZE': 390, 'BOG-GRU': 335, 'BOG-MIA': 240,
+    'BOG-MAD': 591, 'BOG-JFK': 320, 'BOG-MEX': 300, 'BOG-PTY': 90,
+    'BOG-UIO': 60, 'BOG-CCS': 75, 'BOG-CDG': 660, 'BOG-LHR': 680,
+    'LIM-GRU': 285, 'LIM-SCL': 210, 'LIM-EZE': 255, 'LIM-MIA': 330,
+    'SCL-GRU': 220, 'SCL-EZE': 135, 'SCL-MIA': 480, 'GRU-MIA': 540, 'GRU-JFK': 600,
+    'CLO-GIG': 450, 'LAX-COR': 720,
+};
+
+var SEAT_PRICES = { economy: 45900, premium: 55900, business: 72900 };
+var BAGGAGE_OPTIONS = [
+    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, desc: 'Solo equipaje de mano (10kg)' },
+    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 39900, desc: '1 maleta documentada (23kg)' },
+    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 69900, desc: '2 maletas documentadas (23kg c/u)' },
+    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 106900, desc: '3 maletas documentadas + prioridad' }
+];
+
+var airports = [
+    "Bogotá (BOG)", "Medellín (MDE)", "Cali (CLO)", "Cartagena (CTG)", "Barranquilla (BAQ)",
+    "Santa Marta (SMR)", "San Andrés (ADZ)", "Pereira (PEI)", "Bucaramanga (BGA)", "Cúcuta (CUC)",
+    "Lima (LIM)", "Cusco (CUZ)", "Santiago (SCL)", "Buenos Aires (EZE)", "São Paulo (GRU)",
+    "Quito (UIO)", "Guayaquil (GYE)", "Miami (MIA)", "Nueva York (JFK)", "Los Ángeles (LAX)",
+    "Madrid (MAD)", "Barcelona (BCN)", "París (CDG)", "Londres (LHR)", "Ciudad de México (MEX)",
+    "Panamá (PTY)", "Montevideo (MVD)", "Asunción (ASU)", "Caracas (CCS)", "Rio de Janeiro (GIG)"
+];
+
+// ========================================
+// DESCUENTOS ACTUALIZADOS
+// ========================================
+function getDiscountForRoute(originCode, destCode) {
+    var isUSARoute = usaCodes.indexOf(originCode) !== -1 || usaCodes.indexOf(destCode) !== -1;
+    var isColombiaRoute = colombianCodes.indexOf(originCode) !== -1 && colombianCodes.indexOf(destCode) !== -1;
+    
+    // Descuento del 20% para rutas nacionales
+    if (isColombiaRoute) return 0.20;
+    if (isUSARoute) return 0.15;
+    return 0.25;
+}
+
+// Firebase Config
+var firebaseConfig = {
+    apiKey: "TU_API_KEY_AQUI",
+    authDomain: "TU_PROYECTO.firebaseapp.com",
+    projectId: "TU_PROYECTO",
+    storageBucket: "TU_PROYECTO.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "1:123456789:web:abcdef"
+};
+var auth, db;
+try {
+    firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+    db = firebase.firestore();
+} catch (e) {
+    console.log("Firebase no configurado");
+}
+
+// ============================================
 // ESTADO DE PASAJEROS
 // ============================================
 var passengerState = {
@@ -3429,84 +3563,6 @@ function applyPassengers() {
 }
 
 // ============================================
-// CONFIGURACIÓN Y CONSTANTES
-// ============================================
-var usaCodes = ['MIA', 'JFK', 'LAX', 'MCO', 'ORD', 'ATL', 'DFW', 'IAH'];
-var colombianCodes = ['BOG', 'MDE', 'CLO', 'CTG', 'BAQ', 'SMR', 'ADZ', 'PEI', 'BGA', 'CUC'];
-
-var latamFleet = {
-    shortHaul: [
-        { name: "Airbus A320neo", icon: "fa-plane", rows: 29, classes: { economy: true, premium: false, business: false } },
-        { name: "Airbus A321neo", icon: "fa-plane", rows: 37, classes: { economy: true, premium: true, business: false } }
-    ],
-    longHaul: [
-        { name: "Boeing 787-8 Dreamliner", icon: "fa-plane", rows: 41, classes: { economy: true, premium: true, business: true } },
-        { name: "Boeing 787-9 Dreamliner", icon: "fa-plane", rows: 50, classes: { economy: true, premium: true, business: true } }
-    ]
-};
-
-var baseFares = {
-    'BOG-MDE': 146510, 'BOG-CLO': 189943, 'BOG-CTG': 226000, 'BOG-SMR': 252000,
-    'BOG-ADZ': 545000, 'BOG-BAQ': 199907, 'BOG-PEI': 401000, 'BOG-CUC': 549000,
-    'MDE-BOG': 146510, 'MDE-CTG': 350000, 'MDE-ADZ': 600000,
-    'CLO-BOG': 189943, 'CLO-CTG': 450000,
-    'CTG-BOG': 226000, 'CTG-ADZ': 550000,
-    'BOG-LIM': 1410000, 'BOG-PTY': 950000, 'BOG-UIO': 1217000,
-    'BOG-SCL': 1734000, 'BOG-EZE': 1900000, 'BOG-GRU': 1712000,
-    'BOG-MIA': 1314000, 'BOG-JFK': 1800000, 'BOG-MEX': 1700000,
-    'BOG-CCS': 850000, 'BOG-MAD': 1876270, 'BOG-CDG': 2100000, 'BOG-LHR': 2300000,
-    'CLO-GIG': 1883910, 'LAX-COR': 1300000,
-};
-
-var routeDurations = {
-    'BOG-MDE': 64, 'BOG-CLO': 67, 'BOG-CTG': 94, 'BOG-SMR': 95, 'BOG-ADZ': 150,
-    'MDE-BOG': 64, 'MDE-CLO': 70, 'MDE-CTG': 80, 'MDE-SMR': 85, 'MDE-ADZ': 120,
-    'CLO-BOG': 67, 'CLO-MDE': 70, 'CLO-CTG': 90,
-    'CTG-BOG': 94, 'CTG-MDE': 80, 'CTG-SMR': 40,
-    'BOG-LIM': 210, 'BOG-SCL': 360, 'BOG-EZE': 390, 'BOG-GRU': 335, 'BOG-MIA': 240,
-    'BOG-MAD': 591, 'BOG-JFK': 320, 'BOG-MEX': 300, 'BOG-PTY': 90,
-    'BOG-UIO': 60, 'BOG-CCS': 75, 'BOG-CDG': 660, 'BOG-LHR': 680,
-    'LIM-GRU': 285, 'LIM-SCL': 210, 'LIM-EZE': 255, 'LIM-MIA': 330,
-    'SCL-GRU': 220, 'SCL-EZE': 135, 'SCL-MIA': 480, 'GRU-MIA': 540, 'GRU-JFK': 600,
-    'CLO-GIG': 450, 'LAX-COR': 720,
-};
-
-var SEAT_PRICES = { economy: 45900, premium: 55900, business: 72900 };
-var BAGGAGE_OPTIONS = [
-    { id: 'light', name: 'Ligero', icon: 'fa-bag-shopping', price: 0, desc: 'Solo equipaje de mano (10kg)' },
-    { id: 'standard', name: 'Estándar', icon: 'fa-suitcase', price: 39900, desc: '1 maleta documentada (23kg)' },
-    { id: 'plus', name: 'Plus', icon: 'fa-suitcase-rolling', price: 69900, desc: '2 maletas documentadas (23kg c/u)' },
-    { id: 'premium', name: 'Premium', icon: 'fa-crown', price: 106900, desc: '3 maletas documentadas + prioridad' }
-];
-
-var airports = [
-    "Bogotá (BOG)", "Medellín (MDE)", "Cali (CLO)", "Cartagena (CTG)", "Barranquilla (BAQ)",
-    "Santa Marta (SMR)", "San Andrés (ADZ)", "Pereira (PEI)", "Bucaramanga (BGA)", "Cúcuta (CUC)",
-    "Lima (LIM)", "Cusco (CUZ)", "Santiago (SCL)", "Buenos Aires (EZE)", "São Paulo (GRU)",
-    "Quito (UIO)", "Guayaquil (GYE)", "Miami (MIA)", "Nueva York (JFK)", "Los Ángeles (LAX)",
-    "Madrid (MAD)", "Barcelona (BCN)", "París (CDG)", "Londres (LHR)", "Ciudad de México (MEX)",
-    "Panamá (PTY)", "Montevideo (MVD)", "Asunción (ASU)", "Caracas (CCS)", "Rio de Janeiro (GIG)"
-];
-
-// Firebase Config
-var firebaseConfig = {
-    apiKey: "TU_API_KEY_AQUI",
-    authDomain: "TU_PROYECTO.firebaseapp.com",
-    projectId: "TU_PROYECTO",
-    storageBucket: "TU_PROYECTO.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "1:123456789:web:abcdef"
-};
-var auth, db;
-try {
-    firebase.initializeApp(firebaseConfig);
-    auth = firebase.auth();
-    db = firebase.firestore();
-} catch (e) {
-    console.log("Firebase no configurado");
-}
-
-// ============================================
 // FUNCIONES DE UTILIDAD
 // ============================================
 function formatDuration(m) {
@@ -3535,14 +3591,6 @@ function formatDateDisplay(d) {
     if (!d) return '';
     var parts = d.split('-');
     return new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-}
-
-function getDiscountForRoute(originCode, destCode) {
-    var isUSARoute = usaCodes.indexOf(originCode) !== -1 || usaCodes.indexOf(destCode) !== -1;
-    var isColombiaRoute = colombianCodes.indexOf(originCode) !== -1 && colombianCodes.indexOf(destCode) !== -1;
-    if (isUSARoute) return 0.25;
-    if (isColombiaRoute) return 0.20;
-    return 0.30;
 }
 
 function applyDiscount(originalPrice, originCode, destCode) {
@@ -4610,7 +4658,7 @@ function sendWhatsAppFromModal() {
     msg += 'Un asesor se pondrá en contacto contigo para completar el pago.%0A%0A';
     msg += '🎉 ¡Gracias por elegir LATAM Airlines Colombia! 🎉';
     
-    window.open('https://wa.me/573003028549?text=' + msg, '_blank');
+    window.open('https://wa.me/573002996016?text=' + msg, '_blank');
 }
 
 async function saveReservationToFirestore(data) {
