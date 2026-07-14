@@ -459,42 +459,110 @@ body {
     box-shadow: 0 6px 20px rgba(0,51,160,0.3);
 }
 
-.search-dates {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-}
-.search-dates input {
-    flex: 1;
-    padding: 12px 16px;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: #333;
+/* ============================================
+   SECCIÓN DE FECHAS Y PASAJEROS - ESTILO UNIFICADO
+   ============================================ */
+.search-fields-container {
     background: #FFFFFF;
-    transition: border 0.3s ease;
-}
-.search-dates input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0,51,160,0.3);
+    border-radius: 0 0 8px 8px;
+    margin-top: 0;
+    overflow: hidden;
 }
 
-.search-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    z-index: 9998;
-    display: none;
+.search-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid #E8ECF0;
 }
-.search-overlay.active {
+
+.search-field-item {
+    padding: 12px 16px 14px 16px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.search-field-item:hover {
+    background: #FAFBFC;
+}
+
+.search-field-item:not(:last-child) {
+    border-right: 1px solid #E8ECF0;
+}
+
+.search-field-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6B6B80;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
     display: block;
+    margin-bottom: 2px;
 }
 
-/* AUTOCOMPLETE - ESTILO LATAM */
+.search-field-value {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1A1A2E;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding: 2px 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-field-value::placeholder {
+    color: #B8B8C8;
+    font-weight: 300;
+}
+
+.search-field-value:focus {
+    color: #0033A0;
+}
+
+.search-field-value.date-input {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1A1A2E;
+    background: transparent;
+    border: none;
+    width: 100%;
+    padding: 2px 0;
+    outline: none;
+    cursor: pointer;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.search-field-value.date-input::-webkit-calendar-picker-indicator {
+    opacity: 0.5;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.search-field-value.date-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.search-field-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #B8B8C8;
+    font-size: 14px;
+}
+
+/* ============================================
+   AUTOCOMPLETE - ESTILO LATAM
+   ============================================ */
 .autocomplete-container {
     position: absolute;
     top: 62px;
@@ -1627,18 +1695,177 @@ body {
     border: 1px solid var(--border);
     color: var(--latam-gray);
 }
+
+/* ============================================
+   MODAL DE PASAJEROS - ESTILO LATAM
+   ============================================ */
 .passenger-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(5px);
-    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
     display: none;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+}
+
+.passenger-modal-content {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    width: 400px;
+    max-width: 100%;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+    animation: modalSlideUp 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.passenger-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1A2E;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-modal-subtitle {
+    font-size: 14px;
+    color: #6C6C8A;
+    margin-bottom: 24px;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #E8ECEF;
+}
+
+.passenger-option:last-child {
+    border-bottom: none;
+}
+
+.passenger-option-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.passenger-option-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1A1A2E;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-option-desc {
+    font-size: 12px;
+    color: #6C6C8A;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-option-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.passenger-option-controls button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid #D8DCE4;
+    background: #FFFFFF;
+    font-size: 18px;
+    font-weight: 400;
+    color: #1A1A2E;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-option-controls button:hover {
+    background: #F0F2F5;
+    border-color: #0033A0;
+    color: #0033A0;
+}
+
+.passenger-option-controls button:active {
+    transform: scale(0.92);
+}
+
+.passenger-option-controls .count {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1A1A2E;
+    min-width: 32px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #E8ECEF;
+}
+
+.passenger-modal-actions .btn-cancel {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    background: #F0F2F5;
+    border: none;
+    color: #4A4A6A;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-modal-actions .btn-cancel:hover {
+    background: #E4E7EC;
+}
+
+.passenger-modal-actions .btn-apply {
+    flex: 2;
+    padding: 14px;
+    border-radius: 12px;
+    background: #0033A0;
+    border: none;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.passenger-modal-actions .btn-apply:hover {
+    background: #00247D;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 51, 160, 0.3);
 }
 
 /* ============================================
@@ -1784,10 +2011,7 @@ body {
 /* ============================================
    OPTIMIZACIONES PARA MÓVILES
    ============================================ */
-
-/* Ajustes para dispositivos móviles */
 @media (max-width: 768px) {
-    /* Top bar */
     .top-bar {
         padding: 6px 12px;
         font-size: 9px;
@@ -1802,7 +2026,6 @@ body {
         white-space: nowrap;
     }
     
-    /* Header */
     .main-header {
         padding: 8px 12px;
         gap: 8px;
@@ -1839,7 +2062,6 @@ body {
         white-space: nowrap;
     }
     
-    /* Hero */
     .hero-latam {
         padding: 12px 8px 20px;
         min-height: auto;
@@ -1852,7 +2074,6 @@ body {
         margin-bottom: 12px;
     }
     
-    /* Buscador */
     .search-box-latam {
         padding: 14px 14px 18px 14px;
         border-radius: 6px;
@@ -1921,22 +2142,32 @@ body {
     .swap-btn i {
         font-size: 11px;
     }
-    .search-dates {
-        flex-direction: column;
-        gap: 6px;
+    
+    /* Campos de fecha y pasajeros - responsive */
+    .search-field-row {
+        grid-template-columns: 1fr 1fr;
     }
-    .search-dates input {
-        padding: 10px 14px;
-        font-size: 14px;
-        width: 100%;
+    .search-field-item:last-child {
+        border-right: none;
+        border-top: 1px solid #E8ECF0;
+        grid-column: 1 / -1;
     }
-    .search-btn-latam {
-        padding: 12px 20px;
+    .search-field-item {
+        padding: 10px 14px 12px 14px;
+        min-height: 60px;
+    }
+    .search-field-label {
+        font-size: 11px;
+    }
+    .search-field-value,
+    .search-field-value.date-input {
         font-size: 14px;
-        margin-top: 12px;
+    }
+    .search-field-arrow {
+        right: 10px;
+        font-size: 12px;
     }
     
-    /* Autocomplete */
     .autocomplete-container {
         top: 54px;
         max-height: 200px;
@@ -1957,7 +2188,6 @@ body {
         font-size: 11px;
     }
     
-    /* Splash - móvil */
     .splash-screen .splash-box {
         padding: 16px 20px;
         border-radius: 32px;
@@ -1967,13 +2197,11 @@ body {
         max-width: 60vw;
     }
     
-    /* Promo */
     .promo-banner {
         padding: 8px 12px;
         font-size: 11px;
     }
     
-    /* Countdown */
     .offer-countdown {
         padding: 24px 12px;
     }
@@ -1998,7 +2226,6 @@ body {
         font-size: 10px;
     }
     
-    /* Secciones */
     .section {
         padding: 32px 12px;
     }
@@ -2013,7 +2240,6 @@ body {
         gap: 10px;
     }
     
-    /* Grids */
     .destinos-grid,
     .paquetes-grid,
     .experiencias-grid {
@@ -2043,7 +2269,6 @@ body {
         font-size: 11px;
     }
     
-    /* Latam Pass */
     .latampass-section {
         padding: 40px 12px;
     }
@@ -2073,7 +2298,6 @@ body {
         margin-top: 32px;
     }
     
-    /* Beneficios */
     .beneficios-ruta {
         padding: 32px 12px;
     }
@@ -2082,13 +2306,11 @@ body {
         gap: 12px;
     }
     
-    /* Noticias */
     .noticias-grid {
         grid-template-columns: 1fr 1fr;
         gap: 12px;
     }
     
-    /* App */
     .app-section {
         padding: 40px 12px;
     }
@@ -2105,7 +2327,6 @@ body {
         height: 40px;
     }
     
-    /* Aliados */
     .aliados-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 16px;
@@ -2114,7 +2335,6 @@ body {
         font-size: 32px;
     }
     
-    /* FAQ */
     .faq-section {
         padding: 32px 12px;
     }
@@ -2125,7 +2345,6 @@ body {
         font-size: 13px;
     }
     
-    /* Newsletter */
     .newsletter-section {
         padding: 32px 12px;
     }
@@ -2147,7 +2366,6 @@ body {
         font-size: 14px;
     }
     
-    /* Footer */
     .footer-latam {
         padding: 32px 12px 20px;
     }
@@ -2169,7 +2387,6 @@ body {
         font-size: 9px;
     }
     
-    /* Progress Bar */
     .progress-bar {
         padding: 8px 10px;
         gap: 12px;
@@ -2184,7 +2401,6 @@ body {
         font-size: 10px;
     }
     
-    /* Resultados */
     .results-header {
         padding: 12px 14px;
     }
@@ -2207,7 +2423,6 @@ body {
         font-size: 12px;
     }
     
-    /* Asientos */
     .seat-selection-container {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -2241,7 +2456,6 @@ body {
         min-width: 400px;
     }
     
-    /* Checkout */
     .checkout-container {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -2264,7 +2478,6 @@ body {
         font-size: 14px;
     }
     
-    /* Modales */
     .auth-content {
         padding: 24px 18px;
         width: 95%;
@@ -2272,12 +2485,36 @@ body {
     .confirmation-content {
         max-width: 95%;
     }
-    .passenger-modal>div {
+    
+    .passenger-modal-content {
         padding: 20px 16px;
         width: 92%;
+        border-radius: 16px;
+    }
+    .passenger-modal-title {
+        font-size: 18px;
+    }
+    .passenger-option {
+        padding: 12px 0;
+    }
+    .passenger-option-name {
+        font-size: 14px;
+    }
+    .passenger-option-controls button {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    .passenger-option-controls .count {
+        font-size: 16px;
+        min-width: 28px;
+    }
+    .passenger-modal-actions .btn-cancel,
+    .passenger-modal-actions .btn-apply {
+        padding: 12px;
+        font-size: 14px;
     }
 
-    /* Zoom de imagen en móvil */
     .image-zoom-overlay img {
         max-width: 98%;
         max-height: 80vh;
@@ -2289,9 +2526,7 @@ body {
     }
 }
 
-/* Móviles pequeños (menos de 480px) */
 @media (max-width: 480px) {
-    /* Splash - muy pequeño */
     .splash-screen .splash-box {
         padding: 12px 16px;
         border-radius: 24px;
@@ -2301,7 +2536,6 @@ body {
         max-width: 50vw;
     }
     
-    /* Header */
     .logo-header img {
         height: 22px;
     }
@@ -2317,7 +2551,6 @@ body {
         padding: 3px 10px;
     }
     
-    /* Hero */
     .hero-latam h1 {
         font-size: 20px;
     }
@@ -2325,7 +2558,6 @@ body {
         font-size: 12px;
     }
     
-    /* Buscador */
     .search-box-latam {
         padding: 10px 10px 14px 10px;
         border-radius: 4px;
@@ -2381,16 +2613,27 @@ body {
     .swap-btn i {
         font-size: 9px;
     }
-    .search-dates input {
-        padding: 8px 12px;
+    
+    /* Campos de fecha y pasajeros - móvil pequeño */
+    .search-field-row {
+        grid-template-columns: 1fr 1fr;
+    }
+    .search-field-item {
+        padding: 8px 10px 10px 10px;
+        min-height: 50px;
+    }
+    .search-field-label {
+        font-size: 10px;
+    }
+    .search-field-value,
+    .search-field-value.date-input {
         font-size: 13px;
     }
-    .search-btn-latam {
-        padding: 10px 14px;
-        font-size: 13px;
+    .search-field-arrow {
+        right: 8px;
+        font-size: 10px;
     }
     
-    /* Autocomplete */
     .autocomplete-container {
         top: 46px;
         max-height: 160px;
@@ -2409,7 +2652,6 @@ body {
         font-size: 12px;
     }
     
-    /* Grids - 1 columna */
     .destinos-grid,
     .paquetes-grid,
     .experiencias-grid {
@@ -2433,7 +2675,6 @@ body {
         gap: 12px;
     }
     
-    /* Asientos */
     .seat {
         width: 32px;
         height: 32px;
@@ -2464,7 +2705,6 @@ body {
         padding: 6px 10px;
     }
     
-    /* Progress */
     .progress-step {
         font-size: 8px;
         gap: 4px;
@@ -2486,7 +2726,6 @@ body {
         white-space: nowrap;
     }
 
-    /* Zoom de imagen en móvil pequeño */
     .image-zoom-overlay img {
         max-height: 70vh;
     }
@@ -2497,7 +2736,6 @@ body {
     }
 }
 
-/* Touch optimizations */
 button,
 a,
 .clickable {
@@ -2511,7 +2749,6 @@ textarea {
     font-size: 16px !important;
 }
 
-/* Scrollbar personalizado */
 ::-webkit-scrollbar {
     width: 4px;
     height: 4px;
@@ -2639,20 +2876,31 @@ textarea {
                         </button>
                     </div>
 
-                    <!-- FECHAS -->
-                    <div class="search-dates">
-                        <input type="date" id="departureDate">
-                        <input type="date" id="returnDate">
-                    </div>
-
-                    <!-- PASAJEROS - CORREGIDO -->
-                    <div class="passenger-field" onclick="openPassengerModal()">
-                        <div class="passenger-left">
-                            <span class="passenger-label">Pasajeros</span>
-                            <span class="passenger-value" id="passengerDisplay">1 pasajero</span>
-                        </div>
-                        <div class="passenger-arrow">
-                            <i class="fa-solid fa-chevron-down"></i>
+                    <!-- ============================================
+                         FECHAS Y PASAJEROS - ESTILO UNIFICADO
+                         ============================================ -->
+                    <div class="search-fields-container">
+                        <div class="search-field-row">
+                            <!-- Fecha Ida -->
+                            <div class="search-field-item">
+                                <span class="search-field-label">Ida</span>
+                                <input type="date" class="search-field-value date-input" id="departureDate">
+                            </div>
+                            
+                            <!-- Fecha Regreso -->
+                            <div class="search-field-item" id="returnDateField">
+                                <span class="search-field-label">Regreso</span>
+                                <input type="date" class="search-field-value date-input" id="returnDate">
+                            </div>
+                            
+                            <!-- Pasajeros - CON EL MISMO ESTILO QUE LAS FECHAS -->
+                            <div class="search-field-item" onclick="openPassengerModal()">
+                                <span class="search-field-label">Pasajeros</span>
+                                <span class="search-field-value" id="passengerDisplay">1 pasajero</span>
+                                <div class="search-field-arrow">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -2973,42 +3221,46 @@ textarea {
 </div>
 
 <!-- ============================================
-   MODAL DE PASAJEROS - CORREGIDO
+   MODAL DE PASAJEROS - ESTILO LATAM
    ============================================ -->
 <div id="passengerModal" class="passenger-modal">
-    <div style="background:white; padding:28px; border-radius:28px; width:360px; max-width:92%;">
-        <h3 style="margin-bottom:20px;">Pasajeros</h3>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding:6px 0;">
-            <div>
-                <div style="font-weight:700;">Adultos</div>
-                <div style="font-size:10px; color:var(--latam-gray-light);">Mayores 12 años</div>
+    <div class="passenger-modal-content">
+        <div class="passenger-modal-title">Selecciona pasajeros</div>
+        <div class="passenger-modal-subtitle">Elige la cantidad de pasajeros para tu viaje</div>
+
+        <div class="passenger-option">
+            <div class="passenger-option-info">
+                <span class="passenger-option-name">Adultos</span>
+                <span class="passenger-option-desc">Mayores de 12 años</span>
             </div>
-            <div style="display:flex; align-items:center;">
-                <button onclick="changePassenger('adults',-1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">-</button>
-                <span id="adultsCount" style="margin:0 16px; font-weight:700; min-width:24px; text-align:center;">1</span>
-                <button onclick="changePassenger('adults',1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">+</button>
-            </div>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding:6px 0;">
-            <div>
-                <div style="font-weight:700;">Niños</div>
-                <div style="font-size:10px; color:var(--latam-gray-light);">2-11 años</div>
-            </div>
-            <div style="display:flex; align-items:center;">
-                <button onclick="changePassenger('children',-1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">-</button>
-                <span id="childrenCount" style="margin:0 16px; font-weight:700; min-width:24px; text-align:center;">0</span>
-                <button onclick="changePassenger('children',1)" style="width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:white; cursor:pointer; font-weight:700; font-size:18px;">+</button>
+            <div class="passenger-option-controls">
+                <button onclick="changePassenger('adults', -1)">−</button>
+                <span class="count" id="adultsCount">1</span>
+                <button onclick="changePassenger('adults', 1)">+</button>
             </div>
         </div>
-        <div style="display:flex; gap:12px; margin-top:16px;">
-            <button onclick="closePassengerModal()" style="flex:1; padding:12px; border:1px solid var(--border); border-radius:40px; background:white; cursor:pointer; font-weight:600;">Cancelar</button>
-            <button onclick="applyPassengers()" style="flex:1; padding:12px; border:none; border-radius:40px; background:#0033A0; color:white; font-weight:700; cursor:pointer;">Aplicar</button>
+
+        <div class="passenger-option">
+            <div class="passenger-option-info">
+                <span class="passenger-option-name">Niños</span>
+                <span class="passenger-option-desc">2 a 11 años</span>
+            </div>
+            <div class="passenger-option-controls">
+                <button onclick="changePassenger('children', -1)">−</button>
+                <span class="count" id="childrenCount">0</span>
+                <button onclick="changePassenger('children', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="passenger-modal-actions">
+            <button class="btn-cancel" onclick="closePassengerModal()">Cancelar</button>
+            <button class="btn-apply" onclick="applyPassengers()">Aplicar</button>
         </div>
     </div>
 </div>
 
 <!-- ============================================
-   CONFIRMACIÓN MODAL - CON IMAGEN QRPAGO.JPEG Y ZOOM
+   CONFIRMACIÓN MODAL
    ============================================ -->
 <div id="confirmationModal" class="confirmation-modal">
     <div class="confirmation-content">
@@ -3024,7 +3276,6 @@ textarea {
             <div class="resume-item"><span><i class="fa-solid fa-calendar"></i> Fecha de ida</span><span id="confirmDate">---</span></div>
             <div class="resume-item"><span><i class="fa-solid fa-money-bill"></i> Total a pagar</span><span id="confirmTotal">$0</span></div>
             
-            <!-- IMAGEN DE PAGO - QRPAGO.JPEG CON ZOOM AL HACER CLIC -->
             <div class="qr-container" style="background: #f0f4fa; border: 2px solid #0033A0; padding: 20px; margin-top: 16px;">
                 <h4 style="color: #0033A0; text-align: center; margin-bottom: 12px;">
                     <i class="fa-solid fa-credit-card"></i> Datos para el pago
@@ -3065,7 +3316,7 @@ textarea {
 </div>
 
 <!-- ============================================
-   OVERLAY PARA ZOOM DE IMAGEN (LIGHTBOX)
+   OVERLAY PARA ZOOM DE IMAGEN
    ============================================ -->
 <div class="image-zoom-overlay" id="imageZoomOverlay" onclick="closeImageZoom()">
     <button class="close-zoom" onclick="closeImageZoom()">✕</button>
@@ -3119,7 +3370,7 @@ var pendingOutboundIndex = null;
 var pendingReturnIndex = null;
 
 // ============================================
-// ESTADO DE PASAJEROS - SINCRONIZADO CON EL BUSCADOR
+// ESTADO DE PASAJEROS
 // ============================================
 var passengerState = {
     adults: 1,
@@ -3127,7 +3378,7 @@ var passengerState = {
 };
 
 // ============================================
-// FUNCIONES DE PASAJEROS - CORREGIDAS
+// FUNCIONES DE PASAJEROS
 // ============================================
 
 function updatePassengerDisplay() {
@@ -3141,7 +3392,6 @@ function updatePassengerDisplay() {
         hiddenInput.value = total + ' ' + (total === 1 ? 'pasajero' : 'pasajeros');
     }
     passengerCount = total;
-    // También actualizar la variable passengers para compatibilidad
     passengers.adults = passengerState.adults;
     passengers.children = passengerState.children;
 }
@@ -3493,9 +3743,9 @@ function selectTrip(type, btn) {
     btn.classList.add('active');
     
     if (type === 'oneway') {
-        document.getElementById('returnDate').style.display = 'none';
+        document.getElementById('returnDateField').style.display = 'none';
     } else {
-        document.getElementById('returnDate').style.display = 'block';
+        document.getElementById('returnDateField').style.display = 'block';
     }
 }
 
@@ -3850,6 +4100,7 @@ function autoSave() {
     };
     localStorage.setItem('currentReservation', JSON.stringify(data));
 }
+
 function loadAutoSave() {
     var saved = localStorage.getItem('currentReservation');
     if (saved) {
@@ -4410,7 +4661,7 @@ function skipSplash() {
 }
 
 // ============================================
-// FUNCIONES DE SECCIONES VISUALES
+// FUNCIONES DE SECCIONES VISUALES - CON IMÁGENES ACTUALIZADAS
 // ============================================
 function generateDestinationsOffers() {
     var destinations = [
@@ -4580,12 +4831,6 @@ if (searchBtn) {
     });
 }
 
-document.querySelectorAll('input[name="trip"]').forEach(function(r) {
-    r.addEventListener('change', function() {
-        document.getElementById('returnDate').style.display = r.value === 'oneway' ? 'none' : 'block';
-    });
-});
-
 document.querySelectorAll('.auth-tab').forEach(function(t) {
     t.addEventListener('click', function() {
         document.querySelectorAll('.auth-tab').forEach(function(tt) { tt.classList.remove('active'); });
@@ -4605,17 +4850,22 @@ window.onclick = function(e) {
 // ============================================
 // INICIALIZACIÓN
 // ============================================
+function setDefaultDates() {
+    var t = new Date();
+    var tom = new Date(t);
+    tom.setDate(t.getDate() + 1);
+    var next = new Date(t);
+    next.setDate(t.getDate() + 7);
+    document.getElementById('departureDate').value = tom.toISOString().split('T')[0];
+    document.getElementById('returnDate').value = next.toISOString().split('T')[0];
+}
+
 generateDestinationsOffers();
 generatePaquetes();
 generateExperiencias();
 generateNoticias();
 startCountdown();
-// Inicializar display de pasajeros
 updatePassengerDisplay();
-document.getElementById('passengerCount').addEventListener('click', function() {
-    // Este es el input oculto, no hacer nada
-});
-document.getElementById('userNameDisplay').addEventListener('click', function() { if (!currentUser) openAuthModal(); });
 checkAuthState();
 loadAutoSave();
 </script>
